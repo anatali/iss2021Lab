@@ -199,17 +199,30 @@ div.imagedesc{
 <div class="body"> 
 <h2>Introduction</h2>
 
+ For an introduction, from the <a href="https://docs.gradle.org/current/userguide/userguide.html" target="web">Gradle User Manual</a>,
  
+ read <a href="https://docs.gradle.org/current/userguide/what_is_gradle.html" target="web">What is Gradle?</a>
+and 
+<a href="https://docs.gradle.org/current/userguide/build_lifecycle.html#build_lifecycle" target="web">Build Lifecycle</a>.
 
-<h2>Gradle</h2>
-From <a href="https://docs.gradle.org/current/userguide/what_is_gradle.html" target="web">Gradle User Manual</a>
+
+<h3>A short overview</h3>
+
+
+
 <ol>
 <li>a build essentially configures a set of tasks and wires them together — based on their dependencies — to create that DAG. 
 <br/>
 Once the task graph has been created, Gradle determines which tasks need to be run in which order and then proceeds to execute them.</li>
 
 <li>Gradle evaluates and executes build scripts in three phases (that form Gradle’s Build Lifecycle): 
-Initialization, Configuration, Execution</li>
+<k>Initialization, Configuration, Execution</k></li>
+<li>
+<div class="remark">
+Well-designed build scripts describe <k>what</k> steps are needed to build the software, 
+not <k>how</k> those steps should do the work. That’s a job for custom task types and plugins.
+</div>
+</li> 
 <li>Gradle provides several mechanisms that allow you to extend it: 
 <ul>
 <li><a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Custom task types</a>
@@ -218,22 +231,18 @@ Initialization, Configuration, Execution</li>
 <li>Custom task actions</li>
 <li>Extra properties</li>
 </ul>
-<li>
-<div class="remark">
-well-designed build scripts describe <k>what</k> steps are needed to build the software, 
-not <k>how</k> those steps should do the work. That’s a job for custom task types and plugins.
-</div>
-</li> 
+
 
 </li>
 
-<li><a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a></li>
+<li>See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> 
 
-<li><a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">The Java Application Plugin</a></li>
+and <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a>
+</li>
 
 </ol>
 
-<h2></h2>
+<h2>Hands on Gradle</h2>
 From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">Building Java Applications Sample</a>.<br/><br/>
 <ol>
 <li>
@@ -291,7 +300,7 @@ Look at the generated directory <a href="../app/build/" target="web">app/build/<
  
 </ol>
 
-<h3>About build, project, tasks</h3>
+<h3>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h3>
 From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
 <ol>
 
@@ -299,15 +308,19 @@ From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.htm
 <li>A <ks>project</ks> does not necessarily represent a thing to be built.  
 It might represent a thing to be done, such as deploying your application to staging or production environments.<br/>
 Each project is made up of one or more tasks.</li>
-<li>A <ks>task</ks> represents some atomic piece of work which a build performs. <br>
+<li>A 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web"><ks>Task</ks></a>
+represents some atomic piece of work which a build performs. <br>
 Gradle tasks are the equivalent to <a href="https://en.wikipedia.org/wiki/Apache_Ant" target="web"> Ant targets</a>, 
 but they are much more powerful.</li>
+<li>A Task is made up of a sequence of <ks>Action</ks> objects. </li>
 <li>
 Example: add a task in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 and execute it.
+
 <pre>
 tasks.register("hello") {
-    doLast {
+    doLast {	<kc>//a shortcut to define an action</kc>
         println("Hello world from added Task!")
     }
 }
@@ -323,7 +336,28 @@ Hello world from added Task!
 Hello world from added Task!
 </pre>
 </li>
-<li>Gradle’s build scripts are code: they give you the full power of Groovy and Kotlin.<br/>
+
+<li>
+<div class="remark">
+The build script executes when Gradle is invoked; it <k>configures</k> tasks and
+dependencies.
+A task is actually <k>executed later</k>,  when it is invoked.
+</div>
+
+<pre>
+tasks.register("notgood"){
+    println("Message shown during the configuration phase: no task action defined ")
+}
+
+<k>gradlew notgood</k>	
+Message shown during the configuration phase: no task action defined
+
+<k>gradlew tasks --all</k>	
+</pre>
+</li>
+
+
+<li>Gradle’s <ks>build scripts are code</ks>: they give you the full power of Groovy and Kotlin.<br/>
 Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 <pre>
 tasks.register("count") {
@@ -339,6 +373,8 @@ tasks.register("count") {
 
 </li>
 
+
+
 <li>
 You can declare tasks that <ks>depend on other tasks</ks>.
 Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
@@ -352,7 +388,6 @@ tasks.register("welcome") {	<kc>//can be declared before <tt>hello</tt> and <tt>
 }
 
 <k>gradlew -q welcome</k>
-
 0 1 2 3
 Hello world from added Task!
 You are welcome
@@ -360,12 +395,142 @@ You are welcome
 
 </li>
 
-<li>Gradle has a configuration phase and an execution phase.
-After the configuration phase, Gradle knows all tasks that should be executed.</li>
+<li>You can <ks>create tasks dynamically</ks>.
+
+<pre>
+repeat(4) { counter ->
+    tasks.register("task$counter") {
+        doLast {
+            println("I'm task number $counter")
+        }
+    }
+}
+
+<k>gradlew -q task1</k>
+I'm task number 1
+</pre>
+
+<li>You can <ks>access/modify created tasks</ks> via API.
+
+<pre>
+tasks.named("task0") { 	<kc>//Accessing a task via API - adding a dependency</kc>
+	dependsOn("task3", "task2") }
+
+<k>gradlew -q task0</k>
+I'm task number 2
+I'm task number 3
+I'm task number 0
+</pre>
+</li>
+
+<li>Gradle has a <ks>configuration phase</ks> and an <ks>execution</ks> phase.
+After the configuration phase, Gradle knows all tasks that should be executed.<br/>
+Delaying the actual execution allows for a more fine grained configuration.
+This will be especially useful when modifying existing behavior</li>
+
+<pre>
+val t0 = tasks.named("task0")
+
+t0{	<kc>//Accessing a task via API - adding behaviour</kc>
+    doFirst {
+        println("Configured later, but executed as first in task named ${t0.name}")
+    }
+}
+t0{ <kc>//Accessing a task via API - adding behaviour</kc>
+    doLast {
+        println("Another last of task named ${t0.name}")
+    }
+}
+
+<k>gradlew -q task0</k>
+I'm task number 2
+I'm task number 3
+Configured later, but executed as first in task named task0
+I'm task number 0
+Another last of task named task0
+</pre>
+
+
+</li>
+
+<li>In some cases it is useful to <ks>control the order</ks> in which 2 tasks will execute, without introducing an explicit dependency between those tasks.
+<br/>
+There are two ordering rules available: <kc>must run after</kc> and <kc>should run after</kc>.
+See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:ordering_tasks" target="web">Ordering tasks</a>
+
+
+<pre>
+tasks.named("task2") { mustRunAfter(tasks.named("task3")) }
+
+<k>gradlew -q task0</k>
+I'm task number 3
+I'm task number 2
+Configured later, but executed as first in task named task0
+I'm task number 0
+Another last of task named task0
+</pre>
+</li>
+<li>Gradle allows you to define one or more <ks>default tasks</ks> that are executed if no other tasks are specified. 
+
+<pre>
+defaultTasks( "hello" )		//Delegates to Project.defaultTasks()
+
+<k>gradlew -q </k>
+</pre>
+</li>
+
+
 
 </ol>
 
+<h2>Custom task types</h2>
+Gradle supports two types of task. One such type is the simple task, where you define the task with an <ks>action closure</ks>. 
+<br/>
+The other type of task is the enhanced task, where the behaviour is built into the task, 
+and the task provides some properties which you can use to configure the behaviour.<br/><br/>
+See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#more_about_tasks" target="web">Authoring Tasks</a>
+and
 
+<a href="https://docs.gradle.org/current/userguide/custom_tasks.html#custom_tasks" target="web">Developing Custom Gradle Task Types</a>
+
+<pre>
+open class GreetingTask : DefaultTask() {
+    @TaskAction
+    fun greet() {
+        println("hello from GreetingTask")
+    }
+}
+// Create a task using the task type
+tasks.register<GreetingTask>("greetings")
+
+
+</pre>
+
+<pre>
+tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline function with reified type!
+// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
+            val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
+            commandLine( // this is a method of class org.gradle.api.Exec
+                    javaExecutable, "-version"
+            )
+// There is no need of doLast / doFirst, actions are already configured
+// Still, we may want to do something before or after the task has been executed
+            doLast { println("$javaExecutable invocation complete") }
+            doFirst { println("Ready to invoke $javaExecutable") }
+        }
+
+
+</pre>
+
+<pre>
+rootProjectDir/buildSrc/src/main/java 
+rootProjectDir/buildSrc/src/main/kotlin
+</pre>
+
+You can create a separate project for your task class. 
+This project produces and publishes a JAR which you can then use in multiple builds and share with others. 
+Generally, this JAR might include some custom plugins, or bundle several related task classes into a single library. 
+Or some combination of the two.
 
 <br/><br/>
 </div>

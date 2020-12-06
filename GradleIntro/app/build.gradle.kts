@@ -33,6 +33,11 @@ application {
 /*
 ADDED TASKS
  */
+
+tasks.register("notgood"){
+    println("Message shown during the configuration phase: no task action defined ")
+}
+
 tasks.register("welcome") { //can be declared before hello and count
     dependsOn("hello")
     dependsOn("count")
@@ -53,4 +58,77 @@ tasks.register("count") {
         println()
     }
 }
+
+repeat(4) { counter ->
+    tasks.register("task$counter") {
+        doLast {
+            println("I'm task number $counter")
+        }
+    }
+}
+
+tasks.named("task0") { dependsOn("task3", "task2") }
+
+val t0 = tasks.named("task0")
+t0{
+    doFirst {
+        println("Configured later, but executed as first in task named ${t0.name}")
+    }
+}
+t0{
+    doLast {
+        println("Another last of task named ${t0.name}")
+    }
+}
+
+tasks.named("task2") { mustRunAfter(tasks.named("task3")) }
+/*
+tasks.getByName("task3") { // let's find an existing task
+    doFirst { // Similar to doLast, but adds operations in head
+        println("Task3: code configured later, but executed as first.")
+    }
+}
+
+ */
+
+//DOES NOT WORK
+//defaultTasks("hello", "myclean")
+
+task("myclean") {
+    description = "A task to clean."
+    doLast {
+        println("My Default Cleaning!")
+    }
+}
+/* */
+
+open class CustomTask @javax.inject.Inject constructor(
+        private val message: String,
+        private val number: Int
+) : DefaultTask()
+tasks.register<CustomTask>("myTask", "hello", 42)
+
+
+open class GreetingTask : DefaultTask() {
+    @TaskAction
+    fun greet() {
+        println("hello from GreetingTask")
+    }
+}
+// Create a task using the task type
+tasks.register<GreetingTask>("greetings")
+
+
+//import org.gradle.internal.jvm.Jvm // Jvm is part of the Gradle API
+tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline function with reified type!
+// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
+            val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
+            commandLine( // this is a method of class org.gradle.api.Exec
+                    javaExecutable, "-version"
+            )
+// There is no need of doLast / doFirst, actions are already configured
+// Still, we may want to do something before or after the task has been executed
+            doLast { println("$javaExecutable invocation complete") }
+            doFirst { println("Ready to invoke $javaExecutable") }
+        }
 
