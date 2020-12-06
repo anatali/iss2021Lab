@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <!--
+<link rel="stylesheet" type="text/css" href="../css/issStyle1.css">
+<script type="text/javascript" src="../css/issStyle.js"></script>
+-->
+<style type="text/css">
+body
+{
+    margin-left:  30px;
+    margin-right: 30px;
+};
+
+P
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+};
+
+a, a:visited, a:active, a:link, a:hover {
+    text-decoration: underline;
+    color: #545454;
+    background-color: transparent;
+}
+
+a:hover {
+    background-color: #cccccc;
+}
+
+
+hr {
+    clear: both;
+    height: 1px;
+    color: #242424;
+    background-color: transparent;
+}
+
+h1, h2, h3 {
+    color: #242424;
+    clear: left;
+    font: 100% Tahoma, Helvetica, Arial, sans-serif;
+    margin-bottom: 0.5em;
+    padding-top: 0.5em;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+top {
+	width: 100%;
+}
+
+
+#i {
+    color: #ff1010;
+}
+tt{
+	font-family: "Arial";
+    font-size: 80%;
+	color: #006600;
+}
+em{
+	font-family: "Arial";
+    font-size: 80%;
+	font-weight: bold;
+	border-style:solid;
+	border-color: #abe876;
+    color: #1632cc;
+}
+bc{
+	font-family: "Arial";
+	font-size: 80%;
+	font-weight: bold;
+    color: #990000;
+	background-color: #fcf8c7;
+}
+ks{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #0000CD	;
+
+}
+kc{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #008000	;
+
+}
+pre{
+	font-family: "Consolas";
+	font-size: 85%;
+	background-color: #f5f5f5;
+	border: 1.5px solid silver;
+	padding: 5px;
+}
+m{
+	font-family: "Helvetica";
+	line-height: 100%;
+ 	font-size: 75%;
+}
+div.body{
+	width: 700px;
+    font-size: 15px;
+}
+k{
+    color: #990000;
+	font-weight: bold;
+}
+h1 {
+    font-size: 150%;
+    background-color: #b2c0ff;
+	padding: 10px;
+}
+
+h2 {
+    background-color: #9ed8ff;
+    font-size: 130%;
+}
+
+h3 {
+	background-color: #e6ccff;
+    font-size: 100%;
+}
+h4 {
+    background-color: #C0F0E0;
+    font-size: 100%;
+	width: 95%;
+	border-radius: 5px;
+	padding: 2px;
+}
+h5 {
+    background-color: #d5ffb0;
+    font-size: 100%;
+
+}
+div.req{
+	background-color: #d9ffb3;
+    font-size: 18px;
+	width: 700px;
+    border: 3px solid green;
+    padding: 15px;
+    margin: 10px;
+}
+div.remark{
+	background-color: #E3F2FD;
+    border: 1.5px solid #d5f2ed;
+    padding: 15px;
+    margin: 10px;
+	border-radius: 25px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+ol, ul, li {
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  padding-bottom: 5px;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+img {
+	border: 1.5px solid #d5f2ed
+
+}
+
+a, a:visited, a:active, a:link, a:hover {
+    text-decoration: underline;
+    color: #545454;
+    background-color: transparent;
+}
+
+div.wrapdesc{
+	width: 90%;
+	margin: auto;
+}
+
+div.imagedesc{
+	width: 85%;
+	margin: auto;
+}
+</style>
+    
+<head>
+   
+<title>GradleIntro</title></head>
+    
+<body>
+<div id="top">
+<h1>ISS_2021 |  Introduction to Gradle<font size="5"></font> </h1>
+<a href="http://htmlpreview.github.com/?https://github.com/anatali/iss2021Lab/blob/master/it.unibo.issLabStart/userDocs/LectureCesena2021.html" target="isslm">LabISS-lectures site</a></font> 
+</div>  
+
+
+<div class="body"> 
+<h2>Introduction</h2>
+
+ 
+
+<h2>Gradle</h2>
+From <a href="https://docs.gradle.org/current/userguide/what_is_gradle.html" target="web">Gradle User Manual</a>
+<ol>
+<li>a build essentially configures a set of tasks and wires them together — based on their dependencies — to create that DAG. 
+<br/>
+Once the task graph has been created, Gradle determines which tasks need to be run in which order and then proceeds to execute them.</li>
+
+<li>Gradle evaluates and executes build scripts in three phases (that form Gradle’s Build Lifecycle): 
+Initialization, Configuration, Execution</li>
+<li>Gradle provides several mechanisms that allow you to extend it: 
+<ul>
+<li><a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Custom task types</a>
+(It’s typically best to put the source file for a custom task type in the 
+<a href="https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources" target="web">buildSrc</a> directory)</li>
+<li>Custom task actions</li>
+<li>Extra properties</li>
+</ul>
+<li>
+<div class="remark">
+well-designed build scripts describe <k>what</k> steps are needed to build the software, 
+not <k>how</k> those steps should do the work. That’s a job for custom task types and plugins.
+</div>
+</li> 
+
+</li>
+
+<li><a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a></li>
+
+<li><a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">The Java Application Plugin</a></li>
+
+</ol>
+
+<h2></h2>
+From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">Building Java Applications Sample</a>.<br/><br/>
+<ol>
+<li>
+Start with some automatic code generation:
+<pre>
+<k>gradle init</k> (select 2, 3, 1, 2, 1, demo, demo)
+
+├── gradle 
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew 	<kc>//Generable with the built-in command</kc> <k>gradle wrapper --gradle-version=&lt;VERSION></k>
+├── gradlew.bat 
+├── settings.gradle.kts 	<kc>//lists the subprojects</kc>
+└── app
+    ├── build.gradle.kts 	<kc>//the build configuration script</kc>
+    └── src
+        ├── main
+        │   └── java 
+        │       └── demo
+        │           └── App.java
+        └── test
+            └── java 
+                └── demo
+                    └── AppTest.java
+					
+</pre>
+</li>
+
+<li>Loook at the generated files <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a>.<br/>
+Our build contains one subproject called <ks>app</ks> that represents the Java application we are building. 
+It is configured in the <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a> file.</li>
+<li>
+The Gradle wrapper is the correct way to use gradle.
+<pre>
+<k>gradlew run</k> 
+> Task :app:run
+Hello World!
+
+<kc>BUILD SUCCESSFUL</kc> in 2s
+2 actionable tasks: 2 executed 
+</pre>
+</li>
+<li>
+The <ks>application plugin</ks> bundles the application, with all its dependencies.
+<pre>
+<k>gradlew build</k> 	<kc>//</kc>
+
+<kc>BUILD SUCCESSFUL</kc> in 2s
+7 actionable tasks: 7 executed
+</pre>
+Look at the generated directory <a href="../app/build/" target="web">app/build/</a>
+ 
+</li>
+ 
+</ol>
+
+<h3>About build, project, tasks</h3>
+From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
+<ol>
+
+<li>Every Gradle <ks>build</ks> is made up of one or more projects.</li>
+<li>A <ks>project</ks> does not necessarily represent a thing to be built.  
+It might represent a thing to be done, such as deploying your application to staging or production environments.<br/>
+Each project is made up of one or more tasks.</li>
+<li>A <ks>task</ks> represents some atomic piece of work which a build performs. <br>
+Gradle tasks are the equivalent to <a href="https://en.wikipedia.org/wiki/Apache_Ant" target="web"> Ant targets</a>, 
+but they are much more powerful.</li>
+<li>
+Example: add a task in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
+and execute it.
+<pre>
+tasks.register("hello") {
+    doLast {
+        println("Hello world from added Task!")
+    }
+}
+
+<k>gradlew hello</k>
+> Task :app:hello
+Hello world from added Task!
+
+<kc>BUILD SUCCESSFUL</kc> in 2s
+1 actionable task: 1 executed
+
+<k>gradlew -q hello</k>	<kc>//-q suppresses Gradle’s log messages</kc>
+Hello world from added Task!
+</pre>
+</li>
+<li>Gradle’s build scripts are code: they give you the full power of Groovy and Kotlin.<br/>
+Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
+<pre>
+tasks.register("count") {
+    doLast {
+        repeat(4) { print("$it ") }
+        println()
+    }
+}
+
+<k>gradlew -q count</k>
+0 1 2 3
+</pre>
+
+</li>
+
+<li>
+You can declare tasks that <ks>depend on other tasks</ks>.
+Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
+<pre>
+tasks.register("welcome") {	<kc>//can be declared before <tt>hello</tt> and <tt>count</tt></kc>
+    dependsOn("hello")
+    dependsOn("count")
+    doLast {
+        println("You are welcome ")
+    }
+}
+
+<k>gradlew -q welcome</k>
+
+0 1 2 3
+Hello world from added Task!
+You are welcome
+</pre>
+
+</li>
+
+<li>Gradle has a configuration phase and an execution phase.
+After the configuration phase, Gradle knows all tasks that should be executed.</li>
+
+</ol>
+
+
+
+<br/><br/>
+</div>
+ </li>
+</ol>
+<div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">
+By AN Unibo-DISI  
+</div> 
+</body>
+</html>
