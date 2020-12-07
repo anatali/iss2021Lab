@@ -359,7 +359,7 @@ Example: add a task in <a href="../app/build.gradle.kts" target="web">build.grad
 and execute it.
 
 <pre>
-tasks.register("hello") {
+tasks.register("hello") { <kc>//Inline function with reified type!</kc>
     doLast {	<kc>//a shortcut to define an action</kc>
         println("Hello world from added Task!")
     }
@@ -530,7 +530,41 @@ See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#mor
 and
 
 <a href="https://docs.gradle.org/current/userguide/custom_tasks.html#custom_tasks" target="web">Developing Custom Gradle Task Types</a>
+<br/><br/>
+<ol>
+<li>
+The Task <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a> 
+reproted in the <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>  
+executes a command line process.
+<pre>
+tasks.register&lt;Exec>("printJavaVersion") { <kc>//Inline function with reified type!</kc>
+<kc>// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit</kc>
+   val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
+   commandLine( <kc>//this is a method of class org.gradle.api.Exec</kc>
+	javaExecutable, "-version"
+ )
+<kc>// There is no need of doLast / doFirst, actions are already configured
+// Still, we may want to do something before or after the task has been executed</kc>
+  doLast {  println("-------- invocation complete") }
+  doFirst { println("-------- Ready to invoke $javaExecutable") }
+}
 
+<k>gradlew -q printJavaVersion</k>
+-------- Ready to invoke C:\Program Files\Java\jdk-11.0.8\bin\java.exe
+java version "11.0.8" 2020-07-14 LTS
+Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS)
+Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.8+10-LTS, mixed mode)
+-------- invocation complete
+</pre>
+
+<pre>
+rootProjectDir/buildSrc/src/main/java 
+rootProjectDir/buildSrc/src/main/kotlin
+</pre>
+</li>
+
+<li>
+Any open class implementing <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>org.gradle.api.Task</ks></a> can be instanced
 <pre>
 open class GreetingTask : DefaultTask() {
     @TaskAction
@@ -538,33 +572,18 @@ open class GreetingTask : DefaultTask() {
         println("hello from GreetingTask")
     }
 }
-// Create a task using the task type
+<kc>// Create a task using the task type</kc>
 tasks.register<GreetingTask>("greetings")
 
-
+<k>gradlew -q greetings</k>
+hello from GreetingTask
 </pre>
-
-<pre>
-tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline function with reified type!
-// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
-            val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
-            commandLine( // this is a method of class org.gradle.api.Exec
-                    javaExecutable, "-version"
-            )
-// There is no need of doLast / doFirst, actions are already configured
-// Still, we may want to do something before or after the task has been executed
-            doLast { println("$javaExecutable invocation complete") }
-            doFirst { println("Ready to invoke $javaExecutable") }
-        }
+</li>
 
 
-</pre>
 
-<pre>
-rootProjectDir/buildSrc/src/main/java 
-rootProjectDir/buildSrc/src/main/kotlin
-</pre>
 
+</ol>
 You can create a separate project for your task class. 
 This project produces and publishes a JAR which you can then use in multiple builds and share with others. 
 Generally, this JAR might include some custom plugins, or bundle several related task classes into a single library. 

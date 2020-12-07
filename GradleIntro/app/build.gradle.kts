@@ -122,13 +122,64 @@ tasks.register<GreetingTask>("greetings")
 //import org.gradle.internal.jvm.Jvm // Jvm is part of the Gradle API
 tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline function with reified type!
 // Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
-            val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
-            commandLine( // this is a method of class org.gradle.api.Exec
-                    javaExecutable, "-version"
-            )
+        val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
+        commandLine( // this is a method of class org.gradle.api.Exec
+                javaExecutable, "-version"
+        )
 // There is no need of doLast / doFirst, actions are already configured
 // Still, we may want to do something before or after the task has been executed
-            doLast { println("$javaExecutable invocation complete") }
-            doFirst { println("Ready to invoke $javaExecutable") }
-        }
+    doLast {  println("-------- invocation complete") }
+    doFirst { println("-------- Ready to invoke $javaExecutable") }
+}
+
+/*
+COMPILING FROM SCRATCH
+ */
+fun findSources(): Array<String> = projectDir // From the project
+        .listFiles { it: File -> it.isDirectory && it.name == "src" } // Find a folder named 'src'
+        ?.firstOrNull() // If it's not there we're done
+        ?.walk() // If it's there, iterate all its content (returns a Sequence<File>)
+        ?.filter { it.extension == "java" } // Pick all Java files
+        ?.map { it.absolutePath } // Map them to their absolute path
+        ?.toList() // Sequences can't get converted to arrays, we must go through lists
+        ?.toTypedArray() // Convert to Array<String>
+        ?: emptyArray() // Yeah if anything's missing there are no sources
+
+tasks.register("showDirs"){
+    fun findDirs(): Array<String> = projectDir
+            .listFiles { it: File -> it.isDirectory && it.name == "src" }
+            ?.firstOrNull() // If it's not there we're done
+            ?.walk() // If it's there, iterate all its content (returns a Sequence<File>)
+            ?.filter { it.name == "App.java" && it.extension == "java" } // Pick all Java files
+            ?.map { it.absolutePath } // Map them to their absolute path
+            ?.toList() // Sequences can't get converted to arrays, we must go through lists
+            ?.toTypedArray() // Convert to Array<String>
+            ?: emptyArray() // Yeah if anything's missing there are no sources
+
+    doLast {
+        //val as =  findDirs()
+        println( "projectDir="+ projectDir )
+        findDirs().forEach{ print("$it \n") }
+    }
+}
+
+tasks.register<Exec>("mycompileJava") {
+    val sources = findSources() //
+    println("       mycompileJava sources.size=" + sources.size)
+    if (sources.isNotEmpty()) { // If the folder exists and there are files
+        val javacExecutable = org.gradle.internal.jvm.Jvm.current().javacExecutable.absolutePath // Use the current JVM's javac
+        commandLine(
+                "$javacExecutable",
+                "-d", "$buildDir/bin", // destination folder: the output directory of Gradle, inside "bin"
+                *sources
+        )
+    }
+// the task's doLast is inherited from Exec
+}
+
+tasks.register("buildDirClean") { // A generic task is fine
+    if (!buildDir.deleteRecursively()) {
+        throw IllegalStateException("Cannot delete $buildDir")
+    }
+}
 
