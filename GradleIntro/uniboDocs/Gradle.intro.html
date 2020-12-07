@@ -206,18 +206,62 @@ and
 <a href="https://docs.gradle.org/current/userguide/build_lifecycle.html#build_lifecycle" target="web">Build Lifecycle</a>.
 
 
-<h3>A short overview</h3>
+	<h3>Gradle | Basic concepts</h3>
+	<ul>
+	<li>Created in 2008 by Gradleware, <a href="https://docs.gradle.org/current/userguide/userguide.html" target="web">Gradle</a> 
+	is mostly implemented in Java 5, with an outer layer in Groovy or Kotlin.</li>
+	<li><k>Gradle project</k>: the semantics is up to us (e.g. build a library JAR, a web application ...).
+	A project does not necessarily represent a <i>thing to be built</i>. It might represent a  <k>thing to be done</k>, 
+		such as deploying your application to staging or production environments. 
+		Each project is made up of one or more <ks>tasks</ks>.</li>
+	<li><k>Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Task</a></k>: 
+	atomic piece of work (e.g. compiling some classes, creating a JAR,...) which a build performs. </li>
+	<li><k>Gradle build script</k>:  Gradle executes  as a set of 'declarative' sentences written as a Groovy (<ks>build.gradle</ks>) or Kotlin 
+	(<ks>build.gradle.kts</ks>) script. 
+	These languages promote the creation of <a href="https://en.wikipedia.org/wiki/Domain-specific_language" target="web">Domain-specific language (DSL)</a>.
+	In particular:
+		<ul>
+		<li>Every task has a list of <k>actions</k>, and when it executes it runs all of them in the order they are declared.	</li>
+		<li>The default task has only actions <tt>doFirst</tt> and <tt>doLast</tt>.</li>
+		<li>Tasks can declare dependencies among each other: one task may need other tasks to complete successfully.</li>
+		<li>The less dependencies are declared, the faster is the build (due to parallelization).</li>
+		<li>Transitive dependencies are resolved automatically (if available in the repository <k>Maven Central / JCenter</k>).</li>
+		</ul>
+</li>
+	<li><k>Gradle plugin</k>: Gradle at its core intentionally provides very little for real world
+automation. All of the useful features, are added by plugins (written in Groovy), that provide concepts, configuration blocks, and tasks  reusable across projects.
+	</li>
+	<li><k>Gradle Java plugin</k>: introduces the concept of source set, with an associated compile classpath
+and runtime classpath, with defaults that copy the Maven conventions:
+		<ul>
+		<li>main containing <ks>src/main/java</ks>  and <ks>src/main/resources</ks> </li>
+		<li>test containing <ks>src/test/java</ks>  and <ks>src/test/resources</ks> </li>
+		</ul>
+	</li>
+	<li><k>Gradle <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html" target="web">wrapper</a></k>: 
+		a script that invokes a declared version of Gradle, downloading it beforehand if necessary.
+	
+		<ul>
+ 		<li><tt>gradle/wrapper/gradle-wrapper.properties</tt>, stores the information about the Gradle distribution.</li>
+		<li><ks>gradle wrapper --gradle-version 2.11</ks> downloads <tt>version 2.11</tt>. </li>
+		<li><ks>./gradlew <task></ks> runs <tt><task></tt> with that exact version.</li>
+ 
+		</ul>
+		<div class="remark">
+		The Gradle wrapper is the correct way to use gradle.
+		</div>
+	</li>
 
-
-
-<ol>
-<li>a build essentially configures a set of tasks and wires them together — based on their dependencies — to create that DAG. 
-<br/>
-Once the task graph has been created, Gradle determines which tasks need to be run in which order and then proceeds to execute them.</li>
-
-<li>Gradle evaluates and executes build scripts in three phases (that form Gradle’s Build Lifecycle): 
-<k>Initialization, Configuration, Execution</k></li>
 <li>
+Gradle evaluates and executes build scripts in three phases (that form Gradle’s Build Lifecycle): 
+<k>Initialization, Configuration, Execution</k>.<br/> 
+A build essentially configures a set of tasks and wires them together — based on their dependencies — to create a Directed acyclic graph (DAG) of thasks. 
+
+ <center><img src="./img/gradleBuild.png" alt="gradleBuild.png" width="80%" height="80%"></center>
+
+Once the task graph has been created, Gradle determines which tasks need to be run in which order and then proceeds to execute them.
+<br/>
+Delaying the actual execution allows for a more fine grained configuration. This will be especially useful when modifying existing behavior 
 <div class="remark">
 Well-designed build scripts describe <k>what</k> steps are needed to build the software, 
 not <k>how</k> those steps should do the work. That’s a job for custom task types and plugins.
@@ -237,7 +281,13 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 
 <li>See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> 
 
-and <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a>
+and <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a> that
+shows the following diagram for the 
+<a href="https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks" target="web">Java Plugin Lifecycle Tasks</a>:
+
+<center><img src="./img/javaPluginTasks.png" alt="javaPluginTasks.png" width="100%" height="100%"></center>
+
+ 
 </li>
 
 </ol>
@@ -304,16 +354,6 @@ Look at the generated directory <a href="../app/build/" target="web">app/build/<
 From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
 <ol>
 
-<li>Every Gradle <ks>build</ks> is made up of one or more projects.</li>
-<li>A <ks>project</ks> does not necessarily represent a thing to be built.  
-It might represent a thing to be done, such as deploying your application to staging or production environments.<br/>
-Each project is made up of one or more tasks.</li>
-<li>A 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web"><ks>Task</ks></a>
-represents some atomic piece of work which a build performs. <br>
-Gradle tasks are the equivalent to <a href="https://en.wikipedia.org/wiki/Apache_Ant" target="web"> Ant targets</a>, 
-but they are much more powerful.</li>
-<li>A Task is made up of a sequence of <ks>Action</ks> objects. </li>
 <li>
 Example: add a task in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 and execute it.
@@ -351,8 +391,6 @@ tasks.register("notgood"){
 
 <k>gradlew notgood</k>	
 Message shown during the configuration phase: no task action defined
-
-<k>gradlew tasks --all</k>	
 </pre>
 </li>
 
@@ -423,10 +461,8 @@ I'm task number 0
 </pre>
 </li>
 
-<li>Gradle has a <ks>configuration phase</ks> and an <ks>execution</ks> phase.
-After the configuration phase, Gradle knows all tasks that should be executed.<br/>
-Delaying the actual execution allows for a more fine grained configuration.
-This will be especially useful when modifying existing behavior</li>
+<li>
+Delaying the actual execution is especially useful when <ks>modifying existing behavior</ks>.</li>
 
 <pre>
 val t0 = tasks.named("task0")
@@ -455,7 +491,7 @@ Another last of task named task0
 
 <li>In some cases it is useful to <ks>control the order</ks> in which 2 tasks will execute, without introducing an explicit dependency between those tasks.
 <br/>
-There are two ordering rules available: <kc>must run after</kc> and <kc>should run after</kc>.
+There are two ordering rules available: <k>must run after</k> and <k>should run after</k>.
 See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:ordering_tasks" target="web">Ordering tasks</a>
 
 
@@ -470,6 +506,7 @@ I'm task number 0
 Another last of task named task0
 </pre>
 </li>
+<!--
 <li>Gradle allows you to define one or more <ks>default tasks</ks> that are executed if no other tasks are specified. 
 
 <pre>
@@ -478,15 +515,16 @@ defaultTasks( "hello" )		//Delegates to Project.defaultTasks()
 <k>gradlew -q </k>
 </pre>
 </li>
-
+-->
 
 
 </ol>
 
 <h2>Custom task types</h2>
-Gradle supports two types of task. One such type is the simple task, where you define the task with an <ks>action closure</ks>. 
+Gradle supports two types of task. One such type is the simple task, where you define the task with an <ks>action closure</ks>,
+as done so far. 
 <br/>
-The other type of task is the enhanced task, where the behaviour is built into the task, 
+The other type of task is the enhanced task, where the <ks>behaviour is built into the task</ks>, 
 and the task provides some properties which you can use to configure the behaviour.<br/><br/>
 See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#more_about_tasks" target="web">Authoring Tasks</a>
 and
