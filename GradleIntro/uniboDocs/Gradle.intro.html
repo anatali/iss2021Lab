@@ -279,7 +279,20 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 
 </li>
 
-<li>See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> 
+<li>
+When Gradle executes a Kotlin build script (.gradle.kts), it compiles the script into a subclass of 
+<a href="https://gradle.github.io/kotlin-dsl-docs/api/org.gradle.kotlin.dsl/-kotlin-build-script/index.html" target="web">KotlinBuildScript</a>.
+This means that all of the visible properties and functions declared by the KotlinBuildScript type are available in your script.
+
+<!-- See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> -->
+
+See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html#script-default-imports" target="web">Writing Build Scripts</a> 
+
+
+Each build script you have is associated with an object of type Project and as the build script executes, it configures this Project.
+</li>
+
+<li>
 
 and <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a> that
 shows the following diagram for the 
@@ -290,6 +303,10 @@ shows the following diagram for the
  
 </li>
 
+<li>Gradle uses two main directories to perform and manage its work: the Gradle <ks>user home</ks> directory 
+and the <ks>Project root</ks> directory.
+See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" target="web">The Directories and Files Gradle Uses</a>
+<li>
 </ol>
 
 <h2>Hands on Gradle</h2>
@@ -374,7 +391,24 @@ Hello world from added Task!
 
 <k>gradlew -q hello</k>	<kc>//-q suppresses Gradle’s log messages</kc>
 Hello world from added Task!
+
+Another way to call: <k>gradlew -q :app:hello</k>
 </pre>
+
+</li>
+
+<li><h3>TaskContainer</h3>
+
+From <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskContainer.html" target="web">Interface TaskContainer</a>
+we gain knowledge about <tt>register</tt>:
+<pre>
+TaskProvider&lt;Task> register​(String name, Action&lt;? super Task> configurationAction)
+</pre>
+<ul>
+<li>A TaskContainer is responsible for managing a set of Task instances.</li>
+<li>You can obtain a <tt>TaskContainer</tt> instance by calling <ks>Project.getTasks()</ks>, 
+or using the tasks property in your build script.</li>
+</ul>
 </li>
 
 <li>
@@ -425,7 +459,7 @@ tasks.register("welcome") {	<kc>//can be declared before <tt>hello</tt> and <tt>
     }
 }
 
-<k>gradlew -q welcome</k>
+<k>gradlew -q welcome</k> 
 0 1 2 3
 Hello world from added Task!
 You are welcome
@@ -528,7 +562,6 @@ The other type of task is the enhanced task, where the <ks>behaviour is built in
 and the task provides some properties which you can use to configure the behaviour.<br/><br/>
 See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#more_about_tasks" target="web">Authoring Tasks</a>
 and
-
 <a href="https://docs.gradle.org/current/userguide/custom_tasks.html#custom_tasks" target="web">Developing Custom Gradle Task Types</a>
 <br/><br/>
 <ol>
@@ -543,7 +576,7 @@ tasks.register&lt;Exec>("printJavaVersion") { <kc>//Inline function with reified
    commandLine( <kc>//this is a method of class org.gradle.api.Exec</kc>
 	javaExecutable, "-version"
  )
-<kc>// There is no need of doLast / doFirst, actions are already configured
+<kc>// There is no need of <k>doLast / doFirst</k>, actions are already configured
 // Still, we may want to do something before or after the task has been executed</kc>
   doLast {  println("-------- invocation complete") }
   doFirst { println("-------- Ready to invoke $javaExecutable") }
@@ -556,27 +589,73 @@ Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS)
 Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.8+10-LTS, mixed mode)
 -------- invocation complete
 </pre>
-
-<pre>
-rootProjectDir/buildSrc/src/main/java 
-rootProjectDir/buildSrc/src/main/kotlin
-</pre>
 </li>
 
 <li>
-Any open class implementing <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>org.gradle.api.Task</ks></a> can be instanced
+<h3>Example: COMPILING FROM SCRATCH</h3>
+<pre>
+fun findSources(): Array<String> = projectDir  
+        .listFiles { it: File -> it.isDirectory && it.name == "src" }  
+        ?.firstOrNull() <kc>// If it's not there we're done</kc>
+        ?.walk() <kc>// If it's there, iterate all its content (returns Sequence&lt;File>)</kc>
+        ?.filter { it.extension == "java" } <kc>// Pick all Java files</kc>
+        ?.map { it.absolutePath } <kc>// Map them to their absolute path</kc>
+        ?.toList() <kc>// Sequences can't get converted to arrays, we must go through lists</kc>
+        ?.toTypedArray() <kc>// Convert to Array&lt;String></kc>
+        ?: emptyArray() <kc>// Yeah if anything's missing there are no sources</kc>
+
+tasks.register<Exec>("mycompileJava") {
+    val sources = findSources()
+    println("       mycompileJava sources.size=" + sources.size  )
+    if (sources.isNotEmpty()) { <kc>// If the folder exists and there are files</kc>
+        val javacExecutable = Jvm.current().javacExecutable.absolutePath  
+        commandLine(
+                "$javacExecutable",
+                <kc>//-cp is required to compile AppTest</kc>
+                "-cp","$projectDir/libs/junit-4.13.jar;$projectDir/build/bin/*", 
+                "-d", "$buildDir/bin", <kc>//destination folder</kc>
+                *sources
+        )
+    }
+<kc>// the task's <k>doLast</k> is inherited from Exec</kc>
+}
+</pre>
+<!--
+javac -cp app\build\classes\java\main\demo\  .\app\src\test\java\demo\AppTest.java
+javac -cp .\app\junit-4.13.jar;.\app\build\bin\demo\*.class .\app\src\test\java\demo\AppTest.java
+javac -cp .\app\junit-4.13.jar;.\app\build\libs\app.jar .\app\src\test\java\demo\AppTest.java
+https://docs.gradle.org/current/userguide/building_java_projects.html
+https://github.com/gradle/kotlin-dsl-samples/tree/master/samples
+-->
+</li>
+
+<li><h3>CUSTOM TASKS</h3>
+
+Any open class implementing <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>org.gradle.api.Task</ks></a> can be instanced.
+<br/>
+See <a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Developing Custom Gradle Task Types</a>
 <pre>
 open class GreetingTask : DefaultTask() {
+	var greeting = "default hello from GreetingTask"
+	
     @TaskAction
     fun greet() {
-        println("hello from GreetingTask")
+         println(greeting)
     }
 }
 <kc>// Create a task using the task type</kc>
-tasks.register<GreetingTask>("greetings")
+tasks.register&lt;GreetingTask>("greetings")
 
 <k>gradlew -q greetings</k>
-hello from GreetingTask
+default hello from GreetingTask
+
+<kc>// Customize</kc>
+tasks.register&lt;GreetingTask>("mygreetings"){
+	greeting = "my customised greetings from GreetingTask"
+}
+
+<k>gradlew -q mygreetings</k>
+my customised greetings from GreetingTask
 </pre>
 </li>
 

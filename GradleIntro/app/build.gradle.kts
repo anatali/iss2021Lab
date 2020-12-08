@@ -5,8 +5,10 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.7.1/userguide/building_java_projects.html
  */
+import org.gradle.internal.jvm.Jvm
 
 plugins {
+    java
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
@@ -17,8 +19,10 @@ repositories {
 }
 
 dependencies {
+    println("DEPENDENCIES ........................... ")
     // Use JUnit test framework.
     testImplementation("junit:junit:4.13")
+    implementation("junit:junit:4.13")
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:29.0-jre")
@@ -29,13 +33,12 @@ application {
     mainClass.set("demo.App")
 }
 
-
 /*
 ADDED TASKS
  */
 
 tasks.register("notgood"){
-    println("Message shown during the configuration phase: no task action defined ")
+    println("Message shown during the configuration phase: no task action defined ${this}")
 }
 
 tasks.register("welcome") { //can be declared before hello and count
@@ -100,29 +103,12 @@ task("myclean") {
         println("My Default Cleaning!")
     }
 }
-/* */
-
-open class CustomTask @javax.inject.Inject constructor(
-        private val message: String,
-        private val number: Int
-) : DefaultTask()
-tasks.register<CustomTask>("myTask", "hello", 42)
-
-
-open class GreetingTask : DefaultTask() {
-    @TaskAction
-    fun greet() {
-        println("hello from GreetingTask")
-    }
-}
-// Create a task using the task type
-tasks.register<GreetingTask>("greetings")
 
 
 //import org.gradle.internal.jvm.Jvm // Jvm is part of the Gradle API
 tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline function with reified type!
 // Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
-        val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
+        val javaExecutable = Jvm.current().javaExecutable.absolutePath
         commandLine( // this is a method of class org.gradle.api.Exec
                 javaExecutable, "-version"
         )
@@ -132,6 +118,31 @@ tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline func
     doFirst { println("-------- Ready to invoke $javaExecutable") }
 }
 
+/*
+EXPLORE THE FILES
+ */
+tasks.register("showSrc"){
+    //SEE https://docs.gradle.org/current/userguide/working_with_files.html
+    //https://docs.gradle.org/current/javadoc/org/gradle/api/file/ProjectLayout.html#files-java.lang.Object...-
+    //https://docs.gradle.org/current/javadoc/org/gradle/api/file/FileCollection.html
+    fun showDir(prefix: String, dir: File) : Unit  {
+        println(prefix + "DIRECTORY:" + dir)
+        dir.listFiles()  //Collection of Files
+                .forEach { it: File -> if( it.isDirectory ) { showDir(prefix + "   ", it) }
+                else println(prefix + "FILE:" + it.name)
+                }
+    }
+    doLast {
+        showDir("", file("src"))
+    }
+}
+/*
+tasks.withType<JavaCompile> {
+    //enable compilation in a separate daemon process
+    //options.fork = true
+    println( "classpath=...$classpath  sourceCompatibility=$sourceCompatibility" )
+}
+*/
 /*
 COMPILING FROM SCRATCH
  */
@@ -145,31 +156,14 @@ fun findSources(): Array<String> = projectDir // From the project
         ?.toTypedArray() // Convert to Array<String>
         ?: emptyArray() // Yeah if anything's missing there are no sources
 
-tasks.register("showDirs"){
-    fun findDirs(): Array<String> = projectDir
-            .listFiles { it: File -> it.isDirectory && it.name == "src" }
-            ?.firstOrNull() // If it's not there we're done
-            ?.walk() // If it's there, iterate all its content (returns a Sequence<File>)
-            ?.filter { it.name == "App.java" && it.extension == "java" } // Pick all Java files
-            ?.map { it.absolutePath } // Map them to their absolute path
-            ?.toList() // Sequences can't get converted to arrays, we must go through lists
-            ?.toTypedArray() // Convert to Array<String>
-            ?: emptyArray() // Yeah if anything's missing there are no sources
-
-    doLast {
-        //val as =  findDirs()
-        println( "projectDir="+ projectDir )
-        findDirs().forEach{ print("$it \n") }
-    }
-}
-
 tasks.register<Exec>("mycompileJava") {
-    val sources = findSources() //
-    println("       mycompileJava sources.size=" + sources.size)
+    val sources = findSources()
+    println("       mycompileJava sources.size=" + sources.size  )
     if (sources.isNotEmpty()) { // If the folder exists and there are files
-        val javacExecutable = org.gradle.internal.jvm.Jvm.current().javacExecutable.absolutePath // Use the current JVM's javac
+        val javacExecutable = Jvm.current().javacExecutable.absolutePath // Use the current JVM's javac
         commandLine(
                 "$javacExecutable",
+                "-cp", "$projectDir/libs/junit-4.13.jar;$projectDir/build/bin/*", //required to compile AppTest
                 "-d", "$buildDir/bin", // destination folder: the output directory of Gradle, inside "bin"
                 *sources
         )
@@ -177,6 +171,36 @@ tasks.register<Exec>("mycompileJava") {
 // the task's doLast is inherited from Exec
 }
 
+
+/*
+CUSTOM TASK TYPES
+*/
+
+open class CustomTask @javax.inject.Inject constructor(
+        private val message: String,
+        private val number: Int
+) : DefaultTask()
+tasks.register<CustomTask>("myTask", "hello", 42)
+
+
+open class GreetingTask : DefaultTask() {
+    var greeting = "default hello from GreetingTask"
+
+    @TaskAction
+    fun greet() {
+        println(greeting)
+    }
+}
+// Create a task using the task type
+tasks.register<GreetingTask>("greetings")
+
+// Customize the greeting
+tasks.register<GreetingTask>("mygreetings") {
+    greeting = "my customised greetings from GreetingTask"
+}
+
+
+//-------------------------------------------------------------
 tasks.register("buildDirClean") { // A generic task is fine
     if (!buildDir.deleteRecursively()) {
         throw IllegalStateException("Cannot delete $buildDir")
