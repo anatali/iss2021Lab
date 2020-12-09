@@ -309,7 +309,8 @@ See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" ta
 <li>
 </ol>
 
-<h2>Hands on Gradle</h2>
+<h1>Hands on Gradle</h1>
+<h2>Starting</h2>
 From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">Building Java Applications Sample</a>.<br/><br/>
 <ol>
 <li>
@@ -336,6 +337,17 @@ Start with some automatic code generation:
                 └── demo
                     └── AppTest.java
 					
+
+
+</pre>
+By default, Gradle uses the directory name as project name. 
+You can change this by creating a settings.gradle file in the directory which specifies the project name.
+
+<pre>
+gradle project 	<kc>//get information about your project</kc>
+
+Root project 'demo'
+\--- Project ':app'
 </pre>
 </li>
 
@@ -343,56 +355,85 @@ Start with some automatic code generation:
 Our build contains one subproject called <ks>app</ks> that represents the Java application we are building. 
 It is configured in the <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a> file.</li>
 <li>
-The Gradle wrapper is the correct way to use gradle.
+The <ks>Gradle wrapper</ks> is the correct way to use gradle.
 <pre>
 <k>gradlew run</k> 
+SETTINGS RUNS ...
+
+> Configure project :app
+ ...... build in app
+
 > Task :app:run
 Hello World!
 
-<kc>BUILD SUCCESSFUL</kc> in 2s
+<kc>BUILD SUCCESSFUL</kc> in 7s
 2 actionable tasks: 2 executed 
 </pre>
 </li>
 <li>
 The <ks>application plugin</ks> bundles the application, with all its dependencies.
 <pre>
-<k>gradlew build</k> 	<kc>//</kc>
+<k>gradlew build</k> 	 
+SETTINGS RUNS ...
 
-<kc>BUILD SUCCESSFUL</kc> in 2s
-7 actionable tasks: 7 executed
+> Configure project :app
+ ...... build in app
+
+BUILD SUCCESSFUL in 9s
+7 actionable tasks: 6 executed, 1 up-to-date
 </pre>
 Look at the generated directory <a href="../app/build/" target="web">app/build/</a>
  
 </li>
+
+<li>
+<pre>
+<k>gradlew -q build</k> 	<kc>//-q suppresses Gradle’s log messages</kc>
+SETTINGS RUNS ...
+ ...... build in app
+</pre>
+</li>
  
 </ol>
 
-<h3>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h3>
+<h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
 From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
 <ol>
 
-<li>
+<li><h3>Tasks execute operations</h3>
+A Task is an atomic operation on the project, which can have input and output files,
+depend on other tasks (can be executed only if those are completed).
+<br/><br/>
 Example: add a task in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 and execute it.
 
 <pre>
 tasks.register("hello") { <kc>//Inline function with reified type!</kc>
     doLast {	<kc>//a shortcut to define an action</kc>
-        println("Hello world from added Task!")
+         println("Hello world from app - this=${this}")
     }
 }
 
 <k>gradlew hello</k>
-> Task :app:hello
-Hello world from added Task!
+SETTINGS RUNS ...
 
-<kc>BUILD SUCCESSFUL</kc> in 2s
+> Configure project :app
+ ...... build in app
+
+> Task :app:hello
+Hello world from app - this=task ':app:hello'
+
+BUILD SUCCESSFUL in 6s
 1 actionable task: 1 executed
 
-<k>gradlew -q hello</k>	<kc>//-q suppresses Gradle’s log messages</kc>
-Hello world from added Task!
+<k>gradlew -q hello</k>	<kc>//<k>-q</k> suppresses Gradle’s log messages</kc>
+SETTINGS RUNS ...
+ ...... build in app
+Hello world from app - this=task ':app:hello'
 
-Another way to call: <k>gradlew -q :app:hello</k>
+
+<k>gradlew -q :app:hello</k>	<kc>//Another way to call</kc>
+
 </pre>
 
 </li>
@@ -423,13 +464,20 @@ tasks.register("notgood"){
     println("Message shown during the configuration phase: no task action defined ")
 }
 
-<k>gradlew notgood</k>	
-Message shown during the configuration phase: no task action defined
+<k>gradlew -q notgood</k>	
+SETTINGS RUNS ...
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
 </pre>
 </li>
 
 
-<li>Gradle’s <ks>build scripts are code</ks>: they give you the full power of Groovy and Kotlin.<br/>
+
+<li><h3>Gradle’s tasks embeds code.</h3>
+<div class="remark">
+Gradle’s <ks>build scripts are code</ks>: they give you the full power of Groovy and Kotlin.
+</div>
+<br/>
 Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 <pre>
 tasks.register("count") {
@@ -440,6 +488,8 @@ tasks.register("count") {
 }
 
 <k>gradlew -q count</k>
+SETTINGS RUNS ...
+ ...... build in app
 0 1 2 3
 </pre>
 
@@ -621,6 +671,9 @@ tasks.register<Exec>("mycompileJava") {
 }
 </pre>
 <!--
+
+classpath=[C:\Users\anatali\.gradle\caches\modules-2\files-2.1\junit\junit\4.13\e49ccba652b735c93bd6e6f59760d8254cf597dd\junit-4.13.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\29.0-jre\801142b4c3d0f0770dd29abea50906cacfddd447\guava-29.0-jre.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.3\42a25dc3219429f0e5d060061f71acb49bf010a0\hamcrest-core-1.3.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\com.google.guava\failureaccess\1.0.1\1dcf1de382a0bf95a3d8b0849546c88bac1292c9\failureaccess-1.0.1.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\com.google.guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\b421526c5f297295adef1c886e5246c39d4ac629\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\org.checkerframework\checker-qual\2.11.1\8c43bf8f99b841d23aadda6044329dad9b63c185\checker-qual-2.11.1.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_annotations\2.3.4\dac170e4594de319655ffb62f41cbd6dbb5e601e\error_prone_annotations-2.3.4.jar, C:\Users\anatali\.gradle\caches\modules-2\files-2.1\com.google.j2objc\j2objc-annotations\1.3\ba035118bc8bac37d7eff77700720999acd9986d\j2objc-annotations-1.3.jar]
+
 javac -cp app\build\classes\java\main\demo\  .\app\src\test\java\demo\AppTest.java
 javac -cp .\app\junit-4.13.jar;.\app\build\bin\demo\*.class .\app\src\test\java\demo\AppTest.java
 javac -cp .\app\junit-4.13.jar;.\app\build\libs\app.jar .\app\src\test\java\demo\AppTest.java

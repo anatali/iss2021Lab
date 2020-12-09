@@ -5,8 +5,6 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.7.1/userguide/building_java_projects.html
  */
-import org.gradle.internal.jvm.Jvm
-
 plugins {
     java
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -19,8 +17,7 @@ repositories {
 }
 
 dependencies {
-    println("DEPENDENCIES ........................... ")
-    // Use JUnit test framework.
+     // Use JUnit test framework.
     testImplementation("junit:junit:4.13")
     implementation("junit:junit:4.13")
 
@@ -34,25 +31,18 @@ application {
 }
 
 /*
-ADDED TASKS
+ADDED
  */
-
-tasks.register("notgood"){
-    println("Message shown during the configuration phase: no task action defined ${this}")
-}
-
-tasks.register("welcome") { //can be declared before hello and count
-    dependsOn("hello")
-    dependsOn("count")
-    doLast {
-        println("You are welcome ")
-    }
-}
+println(" ...... build in app  ")
 
 tasks.register("hello") {
     doLast {
-        println("Hello world from added Task!")
+        println("Hello world from app - this=${this}")
     }
+}
+
+tasks.register("notgood"){
+    println("Message shown during the configuration phase: no task action defined in ${this}")
 }
 
 tasks.register("count") {
@@ -61,149 +51,3 @@ tasks.register("count") {
         println()
     }
 }
-
-repeat(4) { counter ->
-    tasks.register("task$counter") {
-        doLast {
-            println("I'm task number $counter")
-        }
-    }
-}
-
-tasks.named("task0") { dependsOn("task3", "task2") }
-
-val t0 = tasks.named("task0")
-t0{
-    doFirst {
-        println("Configured later, but executed as first in task named ${t0.name}")
-    }
-}
-t0{
-    doLast {
-        println("Another last of task named ${t0.name}")
-    }
-}
-
-tasks.named("task2") { mustRunAfter(tasks.named("task3")) }
-/*
-tasks.getByName("task3") { // let's find an existing task
-    doFirst { // Similar to doLast, but adds operations in head
-        println("Task3: code configured later, but executed as first.")
-    }
-}
-
- */
-
-//DOES NOT WORK
-//defaultTasks("hello", "myclean")
-
-task("myclean") {
-    description = "A task to clean."
-    doLast {
-        println("My Default Cleaning!")
-    }
-}
-
-
-//import org.gradle.internal.jvm.Jvm // Jvm is part of the Gradle API
-tasks.register<Exec>("printJavaVersion") { // Do you Recognize this? inline function with reified type!
-// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
-        val javaExecutable = Jvm.current().javaExecutable.absolutePath
-        commandLine( // this is a method of class org.gradle.api.Exec
-                javaExecutable, "-version"
-        )
-// There is no need of doLast / doFirst, actions are already configured
-// Still, we may want to do something before or after the task has been executed
-    doLast {  println("-------- invocation complete") }
-    doFirst { println("-------- Ready to invoke $javaExecutable") }
-}
-
-/*
-EXPLORE THE FILES
- */
-tasks.register("showSrc"){
-    //SEE https://docs.gradle.org/current/userguide/working_with_files.html
-    //https://docs.gradle.org/current/javadoc/org/gradle/api/file/ProjectLayout.html#files-java.lang.Object...-
-    //https://docs.gradle.org/current/javadoc/org/gradle/api/file/FileCollection.html
-    fun showDir(prefix: String, dir: File) : Unit  {
-        println(prefix + "DIRECTORY:" + dir)
-        dir.listFiles()  //Collection of Files
-                .forEach { it: File -> if( it.isDirectory ) { showDir(prefix + "   ", it) }
-                else println(prefix + "FILE:" + it.name)
-                }
-    }
-    doLast {
-        showDir("", file("src"))
-    }
-}
-/*
-tasks.withType<JavaCompile> {
-    //enable compilation in a separate daemon process
-    //options.fork = true
-    println( "classpath=...$classpath  sourceCompatibility=$sourceCompatibility" )
-}
-*/
-/*
-COMPILING FROM SCRATCH
- */
-fun findSources(): Array<String> = projectDir // From the project
-        .listFiles { it: File -> it.isDirectory && it.name == "src" } // Find a folder named 'src'
-        ?.firstOrNull() // If it's not there we're done
-        ?.walk() // If it's there, iterate all its content (returns a Sequence<File>)
-        ?.filter { it.extension == "java" } // Pick all Java files
-        ?.map { it.absolutePath } // Map them to their absolute path
-        ?.toList() // Sequences can't get converted to arrays, we must go through lists
-        ?.toTypedArray() // Convert to Array<String>
-        ?: emptyArray() // Yeah if anything's missing there are no sources
-
-tasks.register<Exec>("mycompileJava") {
-    val sources = findSources()
-    println("       mycompileJava sources.size=" + sources.size  )
-    if (sources.isNotEmpty()) { // If the folder exists and there are files
-        val javacExecutable = Jvm.current().javacExecutable.absolutePath // Use the current JVM's javac
-        commandLine(
-                "$javacExecutable",
-                "-cp", "$projectDir/libs/junit-4.13.jar;$projectDir/build/bin/*", //required to compile AppTest
-                "-d", "$buildDir/bin", // destination folder: the output directory of Gradle, inside "bin"
-                *sources
-        )
-    }
-// the task's doLast is inherited from Exec
-}
-
-
-/*
-CUSTOM TASK TYPES
-*/
-
-open class CustomTask @javax.inject.Inject constructor(
-        private val message: String,
-        private val number: Int
-) : DefaultTask()
-tasks.register<CustomTask>("myTask", "hello", 42)
-
-
-open class GreetingTask : DefaultTask() {
-    var greeting = "default hello from GreetingTask"
-
-    @TaskAction
-    fun greet() {
-        println(greeting)
-    }
-}
-// Create a task using the task type
-tasks.register<GreetingTask>("greetings")
-
-// Customize the greeting
-tasks.register<GreetingTask>("mygreetings") {
-    greeting = "my customised greetings from GreetingTask"
-}
-
-
-//-------------------------------------------------------------
-tasks.register("buildDirClean") { // A generic task is fine
-    if (!buildDir.deleteRecursively()) {
-        throw IllegalStateException("Cannot delete $buildDir")
-    }
-}
-
