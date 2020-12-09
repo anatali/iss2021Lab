@@ -209,7 +209,14 @@ and
 	<h3>Gradle | Basic concepts</h3>
 	<ul>
 	<li>Created in 2008 by Gradleware, <a href="https://docs.gradle.org/current/userguide/userguide.html" target="web">Gradle</a> 
-	is mostly implemented in Java 5, with an outer layer in Groovy or Kotlin.</li>
+	is mostly implemented in Java 5, with an outer layer in Groovy or Kotlin.
+<div class="remark">
+In our work, we will write <i>Gradle configuration scripts</i> in Kotlin DSL as described in 
+<a href="https://docs.gradle.org/current/dsl/index.html" target="web">Gradle Build Language Reference</a>
+</div>	
+
+
+	</li>
 	<li><k>Gradle project</k>: the semantics is up to us (e.g. build a library JAR, a web application ...).
 	A project does not necessarily represent a <i>thing to be built</i>. It might represent a  <k>thing to be done</k>, 
 		such as deploying your application to staging or production environments. 
@@ -219,14 +226,7 @@ and
 	<li><k>Gradle build script</k>:  Gradle executes  as a set of 'declarative' sentences written as a Groovy (<ks>build.gradle</ks>) or Kotlin 
 	(<ks>build.gradle.kts</ks>) script. 
 	These languages promote the creation of <a href="https://en.wikipedia.org/wiki/Domain-specific_language" target="web">Domain-specific language (DSL)</a>.
-	In particular:
-		<ul>
-		<li>Every task has a list of <k>actions</k>, and when it executes it runs all of them in the order they are declared.	</li>
-		<li>The default task has only actions <tt>doFirst</tt> and <tt>doLast</tt>.</li>
-		<li>Tasks can declare dependencies among each other: one task may need other tasks to complete successfully.</li>
-		<li>The less dependencies are declared, the faster is the build (due to parallelization).</li>
-		<li>Transitive dependencies are resolved automatically (if available in the repository <k>Maven Central / JCenter</k>).</li>
-		</ul>
+	
 </li>
 	<li><k>Gradle plugin</k>: Gradle at its core intentionally provides very little for real world
 automation. All of the useful features, are added by plugins (written in Groovy), that provide concepts, configuration blocks, and tasks  reusable across projects.
@@ -280,13 +280,13 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 </li>
 
 <li>
-When Gradle executes a Kotlin build script (.gradle.kts), it compiles the script into a subclass of 
+When Gradle executes a Kotlin build script (<ks>.gradle.kts</ks>), it compiles the script into a subclass of 
 <a href="https://gradle.github.io/kotlin-dsl-docs/api/org.gradle.kotlin.dsl/-kotlin-build-script/index.html" target="web">KotlinBuildScript</a>.
 This means that all of the visible properties and functions declared by the KotlinBuildScript type are available in your script.
 
 <!-- See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> -->
 
-See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html#script-default-imports" target="web">Writing Build Scripts</a> 
+See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
 
 
 Each build script you have is associated with an object of type Project and as the build script executes, it configures this Project.
@@ -340,6 +340,10 @@ Start with some automatic code generation:
 
 
 </pre>
+
+</li>
+
+<li>Loook at the generated files <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a>.<br/><br/>
 By default, Gradle uses the directory name as project name. 
 You can change this by creating a settings.gradle file in the directory which specifies the project name.
 
@@ -349,11 +353,15 @@ gradle project 	<kc>//get information about your project</kc>
 Root project 'demo'
 \--- Project ':app'
 </pre>
-</li>
-
-<li>Loook at the generated files <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a>.<br/>
 Our build contains one subproject called <ks>app</ks> that represents the Java application we are building. 
-It is configured in the <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a> file.</li>
+It is configured in the <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a> file.
+<div class="remark">
+One of the purposes of the <a href="../settings.gradle.kts" target="web">settings</a> object is to allow you 
+to declare a <k>list of projects</k> which are to be included in the build. <br/>
+Each subproject has its own <tt>build.gradle.kts</tt> file. See the section <a href="#multiprojects">Multi projects</a>.
+</div>
+
+</li>
 <li>
 The <ks>Gradle wrapper</ks> is the correct way to use gradle.
 <pre>
@@ -392,17 +400,32 @@ Look at the generated directory <a href="../app/build/" target="web">app/build/<
 SETTINGS RUNS ...
  ...... build in app
 </pre>
+
 </li>
  
 </ol>
+As the script executes, it configures an object called the <ks>delegate object</ks> of the script:
+<ul>
+<li><i>Settings</i>  script: delegates to instance of 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html" target="web">Settings</a>
+</li>  
+<li><i>Init</i>  script: delegates to instance of 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html" target="web">Gradle</a>
+</li>
+<li><i>Build</i> script: delegates to instance of 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Project</a>
+</li>
+</ul>
+
 
 <h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
 From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
 <ol>
 
-<li><h3>Tasks execute operations</h3>
+<li><h3>Tasks as operations</h3>
 A Task is an atomic operation on the project, which can have input and output files,
 depend on other tasks (can be executed only if those are completed).
+
 <br/><br/>
 Example: add a task in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 and execute it.
@@ -436,8 +459,29 @@ Hello world from app - this=task ':app:hello'
 
 </pre>
 
+
+From <a href="https://docs.gradle.org/current/dsl/index.html" target="web">Gradle Build Language Reference</a> we read:
+<div class="remark">
+A build script is made up of zero or more statements and  script blocks. <br/>
+<ul>
+<li><ks>Statements</ks> can include method calls, property assignments, and local variable definitions. </li>
+<li>A <ks>script block</ks> is a method call which takes a <ks>closure</ks> as a parameter. 
+<!-- The closure is treated as a <i>configuration closure</i> which configures some delegate object as it executes. -->
+</li>
+</ul>
+</div>
+
+In particular:
+		<ul>
+		<li>Every task has a list of <k>actions</k>, and when it executes it runs all of them in the order they are declared.	</li>
+		<li>The default task has only actions <tt>doFirst</tt> and <tt>doLast</tt>.</li>
+		<li>Tasks can declare dependencies among each other: one task may need other tasks to complete successfully.</li>
+		<li>The less dependencies are declared, the faster is the build (due to parallelization).</li>
+		<li>Transitive dependencies are resolved automatically (if available in the repository <k>Maven Central / JCenter</k>).</li>
+		</ul>
 </li>
 
+<!--
 <li><h3>TaskContainer</h3>
 
 From <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskContainer.html" target="web">Interface TaskContainer</a>
@@ -451,11 +495,12 @@ TaskProvider&lt;Task> register​(String name, Action&lt;? super Task> configura
 or using the tasks property in your build script.</li>
 </ul>
 </li>
+-->
 
-<li>
+<li><h3>Task configuration vs. task execution</h3>
 <div class="remark">
 The build script executes when Gradle is invoked; it <k>configures</k> tasks and
-dependencies.
+dependencies.<br/>
 A task is actually <k>executed later</k>,  when it is invoked.
 </div>
 
@@ -470,6 +515,7 @@ SETTINGS RUNS ...
 Message shown during the configuration phase: no task action defined in task ':app:notgood'
 </pre>
 </li>
+
 
 
 
@@ -501,18 +547,20 @@ SETTINGS RUNS ...
 You can declare tasks that <ks>depend on other tasks</ks>.
 Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 <pre>
-tasks.register("welcome") {	<kc>//can be declared before <tt>hello</tt> and <tt>count</tt></kc>
+tasks.register("welcome") {	<kc>//could be declared <k>before</k> <tt>hello</tt> and <tt>count</tt></kc>
     dependsOn("hello")
     dependsOn("count")
     doLast {
-        println("You are welcome ")
+        println("Welcome task that depends on tasks hello and count ")
     }
 }
 
 <k>gradlew -q welcome</k> 
+SETTINGS RUNS ...
+ ...... build in app
 0 1 2 3
-Hello world from added Task!
-You are welcome
+Hello world from app - this=task ':app:hello'
+Welcome task that depends on tasks hello and count
 </pre>
 
 </li>
@@ -529,8 +577,44 @@ repeat(4) { counter ->
 }
 
 <k>gradlew -q task1</k>
+SETTINGS RUNS ...
+ ...... build in app
 I'm task number 1
 </pre>
+</li>
+
+</ol>
+
+<h2 id="multiprojects">Multi projects</h2>
+One of the purposes of the <a href="../settings.gradle.kts" target="web">settings</a> object is to allow you 
+to declare all the projects which are to be included in the build. See
+<a href="https://docs.gradle.org/current/userguide/multi_project_builds.html" target="web">Multi-Project Builds in Gradle</a>
+
+<br/><br/>
+
+In the following, we will create subprojects to introduce further examples of 'gradle programming'.
+For example
+
+<pre>
+println("SETTINGS RUNS ...")
+
+rootProject.name = "demo"   <kc>//overrides the default behavior of naming </kc>
+include("app") <kc>//defines that the build consists of one subproject called app </kc>
+include("exampleCompile") <kc>//defines a subproject called exampleCompile </kc>
+
+<k>gradle project</k>
+Root project 'demo'
++--- Project ':app'
+\--- Project ':exampleCompile'
+
+</pre>
+
+<h2 id="">Examples of Gradle 'programs'</h2>
+
+
+<ol>
+
+
 
 <li>You can <ks>access/modify created tasks</ks> via API.
 

@@ -51,3 +51,19 @@ tasks.register("count") {
         println()
     }
 }
+
+tasks.register("welcome") { //could be declared before hello and count
+    dependsOn("hello")
+    dependsOn("count")
+    doLast {
+        println("Welcome task that depends on tasks hello and count ")
+    }
+}
+
+repeat(4) { counter ->
+    tasks.register("task$counter") {
+        doLast {
+            println("I'm task number $counter")
+        }
+    }
+}
