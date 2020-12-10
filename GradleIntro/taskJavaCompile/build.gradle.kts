@@ -1,7 +1,8 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.internal.jvm.Jvm
 
-println(" ...... build in exampleCompile  ")
+println(" ...... build in taskJavaCompile  ")
+
 
 tasks.register("hello") {
     doLast {

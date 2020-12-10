@@ -5,6 +5,7 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.7.1/userguide/building_java_projects.html
  */
+
 plugins {
     java
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -17,7 +18,7 @@ repositories {
 }
 
 dependencies {
-     // Use JUnit test framework.
+    // Use JUnit test framework.
     testImplementation("junit:junit:4.13")
     implementation("junit:junit:4.13")
 
@@ -31,7 +32,7 @@ application {
 }
 
 /*
-ADDED
+ADDED TASKS
  */
 println(" ...... build in app  ")
 
@@ -61,9 +62,12 @@ tasks.register("welcome") { //could be declared before hello and count
 }
 
 repeat(4) { counter ->
+    //println("app task$counter in $tasks"   )
     tasks.register("task$counter") {
         doLast {
             println("I'm task number $counter")
         }
     }
 }
+
+

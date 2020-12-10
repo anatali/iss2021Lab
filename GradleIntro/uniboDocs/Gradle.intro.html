@@ -336,9 +336,6 @@ Start with some automatic code generation:
             └── java 
                 └── demo
                     └── AppTest.java
-					
-
-
 </pre>
 
 </li>
@@ -456,7 +453,8 @@ Hello world from app - this=task ':app:hello'
 
 
 <k>gradlew -q :app:hello</k>	<kc>//Another way to call</kc>
-
+---------------------------------------------------------------------
+<k>gradlew tasks --all </k>	<kc>//Shows all available tasks</kc>
 </pre>
 
 
@@ -590,33 +588,120 @@ One of the purposes of the <a href="../settings.gradle.kts" target="web">setting
 to declare all the projects which are to be included in the build. See
 <a href="https://docs.gradle.org/current/userguide/multi_project_builds.html" target="web">Multi-Project Builds in Gradle</a>
 
+<div class="remark">
+The benefits of using modular programming include:
+<ul>
+<li>less code has to be written.</li>
+<li>a single procedure can be developed for reuse, eliminating the need to retype the code many times.</li>
+<li>the code is stored across multiple files.</li>
+<li>errors can easily be identified, as they are localised to a subroutine or function.</li>
+<li>the same code can be used in many applications.</li>
+<li>the scoping of variables can easily be controlled.</li>
+</ul>
+<hr/>
+A project dependency is a special form of an execution dependency. 
+It causes the other project to be built first and adds the jar with the classes of the other project to the classpath. 
+It also adds the dependencies of the other project to the classpath.
+<hr/>
+
+</div>
+ 
+
+In the following, we will create new subprojects to introduce further examples of gradle tasks.
 <br/><br/>
 
-In the following, we will create subprojects to introduce further examples of 'gradle programming'.
-For example
+To this end, we will introduce a <ks>new directory for each example</ks>, by properly extending the content of the 
+<a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> file. For example:
+
+<pre>
+println("SETTINGS RUNS ...")
+rootProject.name = "demo"  
+include("app")  
+<k>include("taskAccess")</k>
+</pre>
+
+
+Moreover, we introduce a <a href="../build.gradle.kts" target="web"><ks>top-level project build</ks></a>  
+that configures build behaviour that is shared between all sub-modules so that we don’t have to duplicate things in the sub-modules:
+
+<pre>
+println(" ...... build top-level   ")
+
+allprojects{
+    tasks.register("explain"){	<kc>//The (sub-)project shows itself</kc>
+        doLast {
+            println( "Hello, I'm ${project.name} project. My tasks are:")
+            tasks.forEach { println("${it.name}") }
+        }
+    }
+    repeat(4) { counter ->	<kc>//Each (sub-)project defines 4 tasks</kc>
+        tasks.register("commontask$counter") {
+            doLast {
+                println("I'm commontask number $counter")
+            }
+        }
+    }
+}
+<k>gradlew -q project</k>
+Root project 'demo'
++--- Project ':app'
+\--- Project ':taskAccess'
+
+<k>gradlew -q :app:explain</k>	
+
+<k>gradlew -q :taskAccess:explain</k>	
+
+<k>gradlew -q :taskAccess:task3</k>
+
+</pre>
+
+<!--
+For example, let us introduce a subproject that shwows how tasks can be accessed/modified by using Gradle API
 
 <pre>
 println("SETTINGS RUNS ...")
 
 rootProject.name = "demo"   <kc>//overrides the default behavior of naming </kc>
 include("app") <kc>//defines that the build consists of one subproject called app </kc>
-include("exampleCompile") <kc>//defines a subproject called exampleCompile </kc>
+include("taskAccessControl") <kc>//defines a subproject called exampleCompile </kc>
 
 <k>gradle project</k>
 Root project 'demo'
 +--- Project ':app'
-\--- Project ':exampleCompile'
-
+\--- Project ':taskAccessControl'
 </pre>
 
-<h2 id="">Examples of Gradle 'programs'</h2>
+With Kotlin dsl, you can add your dependencies as long as you use either 
+<pre>
+apply(plugin = "org.jetbrains.kotlin.jvm") 
+apply(plugin = "java").
+</pre>
+https://docs.gradle.org/current/userguide/organizing_gradle_projects.html
+<br/>
 
 
+In this subproject we will make reference to the set of dynamically created tasks.
+<br/><br/>
+https://docs.gradle.org/current/userguide/declaring_dependencies_between_subprojects.html
+<br/>
+https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html:
+Gradle’s recommended way of organizing build logic is to use its plugin system. <br/>
+Another, discouraged, way to share build logic between subproject is cross project configuration via the subprojects {} 
+and allprojects {} DSL constructs.
+
+<br/>
+https://docs.gradle.org/current/userguide/declaring_dependencies_between_subprojects.html
+<br/>
+
+The basic rule behind Gradle’s behavior is: execute all tasks down the hierarchy which have this name. 
+-->
+
+ 
 <ol>
 
 
 
-<li>You can <ks>access/modify created tasks</ks> via API.
+<li><h3>Access/modify/control created tasks via Gradle API</h3>
 
 <pre>
 tasks.named("task0") { 	<kc>//Accessing a task via API - adding a dependency</kc>
