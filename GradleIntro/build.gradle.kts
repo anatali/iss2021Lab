@@ -16,10 +16,12 @@ allprojects{
     repeat(4) { counter ->
         tasks.register("commontask$counter") {
             doLast {
-                println("I'm commontask number $counter")
+                println("I'm commontask number $counter in project ${project.name}")
             }
         }
     }
+
+    defaultTasks( "count" )
 }
 
 subprojects {

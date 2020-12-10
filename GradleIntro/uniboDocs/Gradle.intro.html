@@ -416,14 +416,15 @@ As the script executes, it configures an object called the <ks>delegate object</
 
 
 <h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
-From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
-<ol>
 
-<li><h3>Tasks as operations</h3>
 A Task is an atomic operation on the project, which can have input and output files,
 depend on other tasks (can be executed only if those are completed).
 
-<br/><br/>
+<ol>
+
+<li><h3>Tasks as operations</h3>
+
+From <a href="https://docs.gradle.org/current/userguide/tutorial_using_tasks.html" target="web">Build Script Basics</a>:<br/><br/>
 Example: add a task in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 and execute it.
 
@@ -622,7 +623,7 @@ include("app")
 
 
 Moreover, we introduce a <a href="../build.gradle.kts" target="web"><ks>top-level project build</ks></a>  
-that configures build behaviour that is shared between all sub-modules so that we don’t have to duplicate things in the sub-modules:
+that configures build behaviour that is <k>shared</k> between all sub-modules so that we don’t have to duplicate things in the sub-modules:
 
 <pre>
 println(" ...... build top-level   ")
@@ -637,23 +638,212 @@ allprojects{
     repeat(4) { counter ->	<kc>//Each (sub-)project defines 4 tasks</kc>
         tasks.register("commontask$counter") {
             doLast {
-                println("I'm commontask number $counter")
+                println("I'm commontask number $counter n project ${<k>project.name</k>}")
             }
         }
     }
 }
-<k>gradlew -q project</k>
+</pre>
+
+<h4>gradlew -q project</h4>	
+Shows the structure of the project.
+
+<pre>
 Root project 'demo'
 +--- Project ':app'
 \--- Project ':taskAccess'
-
-<k>gradlew -q :app:explain</k>	
-
-<k>gradlew -q :taskAccess:explain</k>	
-
-<k>gradlew -q :taskAccess:task3</k>
-
 </pre>
+
+ 
+
+<h4>gradlew -q :app:explain</h4>
+First, all the build configurations are executed and then the shared task <tt>explain</tt> is executed with reference 
+to the (sub-)project <tt>app</tt>
+<pre>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+Hello, I'm app project. My tasks are:
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+assemble
+... 
+<kc>//Shows the tasks defined in the <k>java plugin</k>, the tasks defined in  the top-level project build
+<a href="../build.gradle.kts" target="web"><k>./build.gradle.kts</k></a>  (e.g. <ks>explain, commontask0, commontask1, commontask2, commontask3</ks>)
+and the tasks defined in the <tt>app</tt> build
+<a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a>  (e.g. <ks>hello, notgood, count, task0, task1, task2, task3, welcome</ks>)
+</kc>
+</pre>
+
+<ol>
+<li><h3>Running tasks</h3>
+Let us try some call, to better understand the behavior of Gradle.
+<pre>
+<k>gradlew -q :app:commontask0</k>   <kc>//execute a task of (sub-)project app</kc>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+I'm commontask number 0 in project app
+
+
+<k>gradlew -q :taskAccess:commontask0</k>  <kc>//execute a task of (sub-)project taskAccess</kc>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+I'm commontask number 0 in project taskAccess
+
+<k>gradlew -q commontask0</k>  <kc>//execute the task in all the (sub-)projects</kc>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+I'm commontask number 0 in project demo
+I'm commontask number 0 in project app
+I'm commontask number 0 in project taskAccess
+</pre>
+
+</li>
+
+<li><h3>Default tasks</h3>
+Gradle allows you to define one or more default tasks that are executed if no other tasks are specified. 
+
+<pre>
+defaultTasks( "count" )	<kc>//Task count is defined in <a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a> </kc>
+
+<k>gradlew -q </k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+0 1 2 3		<kc>//Result of the task <tt>count</tt> defined in <tt>app</tt>
+</pre>
+</li>
+
+<li><h3>Accessing a task via API - ading behavior</h3>
+Delaying the actual execution of tasks is especially useful when <ks>modifying existing behavior</ks>. 
+<br/><br/>
+Let us extends the behavior of the shared task <ks>commontask1</ks> by adding in the build file 
+<a href="../taskAccess/build.gradle.kts" target="web"><ks>taskAccess/build.gradle.kts</ks></a> of the <tt>taskAccess</tt> subproject 
+a <tt> doFirst</tt>  and another <tt> doLast</tt> operations for that task.
+<pre>
+val t1 = tasks.named("commontask1")
+
+t1{	<kc>//Accessing a task via API - adding behaviour</kc>
+    doFirst {
+        println("Configured later, but executed as first in task named ${t1.name}")
+    }
+}
+t1{ <kc>//Accessing a task via API - adding behaviour</kc>
+    doLast {
+        println("Another last of task named ${t1.name}")
+    }
+}
+
+<k>gradlew -q :taskAcces:commontask1</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+Configured later, but executed as first in task named commontask1
+I'm commontask number 1 in project taskAccess
+Another last of task named commontask1 
+</pre>
+<hr/>
+Let us extends the behavior of the shared task <ks>explain</ks> by adding in the build file 
+<a href="../taskAccess/build.gradle.kts" target="web"><ks>taskAccess/build.gradle.kts</ks></a> of the <tt>taskAccess</tt> subproject 
+a <tt> doFirst</tt>  and another <tt> doLast</tt> operations for that task.
+<pre>
+tasks.named("explain") {
+    doFirst{	<kc>//additional configuration to the task explain</kc>
+        println( "	- I'm the taskAccess sub-project: START - ")
+    }
+    doLast{	<kc>//additional configuration to the task explain</kc>
+        println( "	- I'm the taskAccess sub-project: END - ")
+    }
+}
+</pre>
+
+</li>
+
+<h4>gradlew -q :taskAccess:explain</h4>
+The shared task <tt>explain</tt> shows the tasks available in (sub-)project <tt>taskAccess</tt> with our new prefix and suffix messages. 
+They are less than the tasks available in <tt>app</tt> since the <tt>java plugin</tt>  is not included in the <tt>taskAccess</tt> subproject .
+<pre>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+        - I'm the taskAccess sub-project: START -
+Hello, I'm taskAccess project. My tasks are:
+buildEnvironment
+commontask0
+commontask1
+commontask2
+commontask3
+components
+dependencies
+dependencyInsight
+dependentComponents
+explain
+hello
+help
+kotlinDslAccessorsReport
+model
+outgoingVariants
+projects
+properties
+tasks
+        - I'm the taskAccess sub-project: END -
+</pre>
+
+</li>
+
+<li>
+<h3>Accessing a task via API - adding a dependency</h3>
+State that, in (sub-)project <tt>taskAccess</tt> the shared task <tt>commontask0</tt>, depends on other tasks:
+<pre>
+tasks.named("commontask0") { 	<kc>//Accessing a task via API - adding a dependency</kc>
+	dependsOn("commontask3", "commontask2") 
+}
+
+<k>gradlew -q :taskAccess:commontask0</k>  <kc>//execute a task of (sub-)project taskAccess</kc>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+I'm commontask number 2 in project taskAccess
+I'm commontask number 3 in project taskAccess
+I'm commontask number 0 in project taskAccess
+</pre>
+ 
+</li>
+
+<li>
+<h3>Accessing a task via API - control the execution order</h3>
+In some cases it is useful to <ks>control the order</ks> in whichtasks will execute, without introducing an explicit dependency between those tasks.
+<br/>
+There are two ordering rules available: <k>must run after</k> and <k>should run after</k>.
+See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:ordering_tasks" target="web">Ordering tasks</a>
+
+
+<pre>
+tasks.named("commontask2") { mustRunAfter(tasks.named("task3")) }
+
+<k>gradlew -q :taskAccess:commontask0</k>  <kc>//execute a task of (sub-)project taskAccess</kc>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+I'm commontask number 3 in project taskAccess
+I'm commontask number 2 in project taskAccess
+I'm commontask number 0 in project taskAccess
+</pre>
+
+</li>
+ 
+
 
 <!--
 For example, let us introduce a subproject that shwows how tasks can be accessed/modified by using Gradle API
@@ -697,78 +887,6 @@ The basic rule behind Gradle’s behavior is: execute all tasks down the hierarc
 -->
 
  
-<ol>
-
-
-
-<li><h3>Access/modify/control created tasks via Gradle API</h3>
-
-<pre>
-tasks.named("task0") { 	<kc>//Accessing a task via API - adding a dependency</kc>
-	dependsOn("task3", "task2") }
-
-<k>gradlew -q task0</k>
-I'm task number 2
-I'm task number 3
-I'm task number 0
-</pre>
-</li>
-
-<li>
-Delaying the actual execution is especially useful when <ks>modifying existing behavior</ks>.</li>
-
-<pre>
-val t0 = tasks.named("task0")
-
-t0{	<kc>//Accessing a task via API - adding behaviour</kc>
-    doFirst {
-        println("Configured later, but executed as first in task named ${t0.name}")
-    }
-}
-t0{ <kc>//Accessing a task via API - adding behaviour</kc>
-    doLast {
-        println("Another last of task named ${t0.name}")
-    }
-}
-
-<k>gradlew -q task0</k>
-I'm task number 2
-I'm task number 3
-Configured later, but executed as first in task named task0
-I'm task number 0
-Another last of task named task0
-</pre>
-
-
-</li>
-
-<li>In some cases it is useful to <ks>control the order</ks> in which 2 tasks will execute, without introducing an explicit dependency between those tasks.
-<br/>
-There are two ordering rules available: <k>must run after</k> and <k>should run after</k>.
-See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:ordering_tasks" target="web">Ordering tasks</a>
-
-
-<pre>
-tasks.named("task2") { mustRunAfter(tasks.named("task3")) }
-
-<k>gradlew -q task0</k>
-I'm task number 3
-I'm task number 2
-Configured later, but executed as first in task named task0
-I'm task number 0
-Another last of task named task0
-</pre>
-</li>
-<!--
-<li>Gradle allows you to define one or more <ks>default tasks</ks> that are executed if no other tasks are specified. 
-
-<pre>
-defaultTasks( "hello" )		//Delegates to Project.defaultTasks()
-
-<k>gradlew -q </k>
-</pre>
-</li>
--->
 
 
 </ol>
@@ -784,10 +902,19 @@ and
 <a href="https://docs.gradle.org/current/userguide/custom_tasks.html#custom_tasks" target="web">Developing Custom Gradle Task Types</a>
 <br/><br/>
 <ol>
-<li>
+<li><h3>Extend built-in tasks</h3>
+Gradle offers some facilities to make it writing new tasks easier. <br/>
+
+An example is the <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a>  task type, 
+representing a command to be executed on the underlying command line.
+<br/>
 The Task <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a> 
-reproted in the <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>  
+reported in the <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>  
 executes a command line process.
+<br/>
+Let us introduce the new sub-project <tt>taskCustom</tt> with its own
+build file <a href="../taskCustom/build.gradle.kts" target="web"><ks>taskCustom/build.gradle.kts</ks></a> 
+
 <pre>
 tasks.register&lt;Exec>("printJavaVersion") { <kc>//Inline function with reified type!</kc>
 <kc>// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit</kc>
@@ -801,7 +928,7 @@ tasks.register&lt;Exec>("printJavaVersion") { <kc>//Inline function with reified
   doFirst { println("-------- Ready to invoke $javaExecutable") }
 }
 
-<k>gradlew -q printJavaVersion</k>
+<k>gradlew -q :taskCustom:printJavaVersion</k>
 -------- Ready to invoke C:\Program Files\Java\jdk-11.0.8\bin\java.exe
 java version "11.0.8" 2020-07-14 LTS
 Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS)

@@ -17,8 +17,6 @@ tasks.register("hello") {
     }
 }
 
-
-/*
 //Adding a dependency on a task
 tasks.named("commontask0") { 	//Accessing a task via API -
     dependsOn("commontask3", "commontask2")
@@ -27,27 +25,19 @@ tasks.named("commontask0") { 	//Accessing a task via API -
 //Control order execution
 tasks.named("commontask2") { mustRunAfter(tasks.named("commontask3")) }
 
+val t1 = tasks.named("commontask1")
+
 //Modify an existing behaviour
-val t2 = tasks.named("commontask2")
-
-t2{	//Accessing a task via API - adding behaviour
+t1{	//Accessing a task via API - adding behaviour
     doFirst {
-        println("Configured later, but executed as first in task named ${t2.name}")
+        println("Configured later, but executed as first in task named ${t1.name}")
     }
 }
-t2{ //Accessing a task via API - adding behaviour
+t1{ //Accessing a task via API - adding behaviour
     doLast {
-        println("Another last of task named ${t2.name}")
+        println("Another last of task named ${t1.name}")
     }
 }
-*/
-/*
-..\gradlew -q :taskAccess:commontask3
 
-..\gradlew -q :taskAccess:commontask2
-
-..\gradlew -q :taskAccess:commontask0
-
- */
 
 
