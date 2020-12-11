@@ -8,6 +8,14 @@ tasks.register("hello") {
     }
 }
 
+tasks.register<Copy>("mycopy") {    //Registers a new task of type Copy and configures it
+    println("projectDir= $projectDir") //GradleIntro\taskCustom
+    println("buildDir  = $buildDir")   //GradleIntro\taskCustom\build
+    from("$projectDir/../app/src"){
+        exclude( "**/main/resources", "**/test" )
+    }
+    into( "../copiedFiles" )
+}
 
 tasks.register<Exec>("printJavaVersion") { //Inline function with reified type!
 // Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit

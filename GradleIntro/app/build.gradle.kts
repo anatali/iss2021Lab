@@ -70,4 +70,12 @@ repeat(4) { counter ->
     }
 }
 
+tasks.register<Copy>("mycopy") {    //Registers a new task of type Copy and configures it
+    println("projectDir= $projectDir") //GradleIntro\app
+    println("buildDir  = $buildDir")   //GradleIntro\app\build
+    from("$projectDir/../app/src"){
+        exclude( "**/main/resources", "**/test" )
+    }
+    into( "../copiedFiles" )
+}
 

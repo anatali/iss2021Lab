@@ -215,6 +215,9 @@ In our work, we will write <i>Gradle configuration scripts</i> in Kotlin DSL as 
 <a href="https://docs.gradle.org/current/dsl/index.html" target="web">Gradle Build Language Reference</a>
 </div>	
 
+<li>
+<center><img src="./img/gradle-project-tasks.png" alt="gradle-project-tasks.png" width="80%" height="80%"></center>
+</li>
 
 	</li>
 	<li><k>Gradle project</k>: the semantics is up to us (e.g. build a library JAR, a web application ...).
@@ -263,15 +266,21 @@ Once the task graph has been created, Gradle determines which tasks need to be r
 <br/>
 Delaying the actual execution allows for a more fine grained configuration. This will be especially useful when modifying existing behavior 
 <div class="remark">
-Well-designed build scripts describe <k>what</k> steps are needed to build the software, 
-not <k>how</k> those steps should do the work. That’s a job for custom task types and plugins.
+<ul>
+<li>The base mechanism is hiding imperativity under a clean, <k>declarative API</k>.
+Usability, understandability, and, ultimately, maintability, get increased when <i>'Imperativity gets hidden under the hood'</i>.
+</li>
+
+<li>Well-designed build scripts describe <k>what</k> steps are needed to build the software, 
+not <k>how</k> those steps should do the work. That’s a job for custom task types and plugins.</li>
+</ul>
 </div>
 </li> 
 <li>Gradle provides several mechanisms that allow you to extend it: 
 <ul>
 <li><a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Custom task types</a>
 (It’s typically best to put the source file for a custom task type in the 
-<a href="https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources" target="web">buildSrc</a> directory)</li>
+<a href="https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources" target="web"><k>buildSrc</k></a> directory)</li>
 <li>Custom task actions</li>
 <li>Extra properties</li>
 </ul>
@@ -286,13 +295,16 @@ This means that all of the visible properties and functions declared by the Kotl
 
 <!-- See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> -->
 
-See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
+<br/>
 
-
-Each build script you have is associated with an object of type Project and as the build script executes, it configures this Project.
+Each build script is associated with an object of type 
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web">Project</a> 
+ and as the build script executes, it configures this 
+ <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Gradle Project</a>.
 </li>
 
 <li>
+See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
 
 and <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a> that
 shows the following diagram for the 
@@ -417,9 +429,11 @@ As the script executes, it configures an object called the <ks>delegate object</
 
 <h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
 
-A Task is an atomic operation on the project, which can have input and output files,
+A <ks>Task</ks>is an atomic operation on the project, which can have input and output files,
 depend on other tasks (can be executed only if those are completed).
-
+<br/><br/>
+<ks>tasks</ks> is a container objects that contain Task objects. 
+You can use the <ks>named()</ks> method to configure existing tasks and the <ks>register()</ks> method to create new ones.
 <ol>
 
 <li><h3>Tasks as operations</h3>
@@ -582,6 +596,27 @@ I'm task number 1
 </pre>
 </li>
 
+<li>
+You can exploit <ks>existing task types</ks>
+<pre>
+tasks.register<k>&lt;Copy></k>("mycopy") {    <kc>//Registers a new task of type Copy and configures it</kc>
+    println("projectDir= $projectDir") <kc>//GradleIntro\app</kc>
+    println("buildDir  = $buildDir")   <kc>//GradleIntro\app\build</kc>
+    from("$projectDir/../app/src"){
+        exclude( "**/main/resources", "**/test" )
+    }
+    into( "../copiedFiles" )
+}
+
+<k>gradlew -q mycopy</k>
+SETTINGS RUNS ...
+ ...... build in app
+projectDir= C:\Didattica2018Work\iss2021Lab\GradleIntro\app
+buildDir  = C:\Didattica2018Work\iss2021Lab\GradleIntro\app\build
+<kc>//Look at the (created) directory <i>copiedFiles</i></kc>
+</pre>
+</li>
+
 </ol>
 
 <h2 id="multiprojects">Multi projects</h2>
@@ -710,7 +745,7 @@ I'm commontask number 0 in project taskAccess
 Gradle allows you to define one or more default tasks that are executed if no other tasks are specified. 
 
 <pre>
-defaultTasks( "count" )	<kc>//Task count is defined in <a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a> </kc>
+defaultTasks( "count" )	<kc>//Task <tt>count</tt> is defined in <a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a> </kc>
 
 <k>gradlew -q </k>
 SETTINGS RUNS ...
@@ -829,7 +864,9 @@ See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec
 
 
 <pre>
-tasks.named("commontask2") { mustRunAfter(tasks.named("task3")) }
+tasks.named("commontask2") { 
+	mustRunAfter(tasks.named("task3")) 
+}
 
 <k>gradlew -q :taskAccess:commontask0</k>  <kc>//execute a task of (sub-)project taskAccess</kc>
 SETTINGS RUNS ...
@@ -892,25 +929,35 @@ The basic rule behind Gradle’s behavior is: execute all tasks down the hierarc
 </ol>
 
 <h2>Custom task types</h2>
-Gradle supports two types of task. One such type is the simple task, where you define the task with an <ks>action closure</ks>,
-as done so far. 
+Gradle supports two types of task. 
+<ul>
+<li>One such type is the simple task, where you define the task with an <ks>action closure</ks>,
+as done so far. </li>
+<li>The other type of task is the enhanced task, where the <ks>behaviour is built into the task</ks>, 
+and the task provides some properties which you can use to configure the behaviour.
 <br/>
-The other type of task is the enhanced task, where the <ks>behaviour is built into the task</ks>, 
-and the task provides some properties which you can use to configure the behaviour.<br/><br/>
 See <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#more_about_tasks" target="web">Authoring Tasks</a>
 and
 <a href="https://docs.gradle.org/current/userguide/custom_tasks.html#custom_tasks" target="web">Developing Custom Gradle Task Types</a>
-<br/><br/>
+</li>
+</ul>
+
+ 
 <ol>
 <li><h3>Extend built-in tasks</h3>
 Gradle offers some facilities to make it writing new tasks easier. <br/>
+The Gradle DSL supports a task block for defining your own custom tasks.  
+The Gradle API includes a wide range of existing tasks (like <tt>Copy</tt>, <tt>Wrapper</tt>, and <tt>Exec</tt>) 
+that you can use simply by setting properties.<br/>
+ 
+<!-- done with http://www.plantuml.com/plantuml/uml/ -->
+<center><img src="./img/gradleExec.png" alt="gradleExec.png" width="30%" height="30%"></center>
+ 
+An example is the Task <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a> 
+reported in the <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>,  
+that executes a command line process.
 
-An example is the <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a>  task type, 
-representing a command to be executed on the underlying command line.
-<br/>
-The Task <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a> 
-reported in the <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>  
-executes a command line process.
+
 <br/>
 Let us introduce the new sub-project <tt>taskCustom</tt> with its own
 build file <a href="../taskCustom/build.gradle.kts" target="web"><ks>taskCustom/build.gradle.kts</ks></a> 
@@ -929,6 +976,11 @@ tasks.register&lt;Exec>("printJavaVersion") { <kc>//Inline function with reified
 }
 
 <k>gradlew -q :taskCustom:printJavaVersion</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+ ...... build in taskAccess sub-project
+ ...... build in taskCustom sub-project
 -------- Ready to invoke C:\Program Files\Java\jdk-11.0.8\bin\java.exe
 java version "11.0.8" 2020-07-14 LTS
 Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS)
