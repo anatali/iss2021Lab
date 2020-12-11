@@ -1007,6 +1007,7 @@ Message shown during the configuration phase: no task action defined in task ':a
 "Hello from Windows"
 </pre>
 
+
 <h4>Example: print the current version of Java</h4>
 
 <pre>
@@ -1037,10 +1038,23 @@ java version "15.0.1" 2020-10-20
 Java(TM) SE Runtime Environment (build 15.0.1+9-18)
 Java HotSpot(TM) 64-Bit Server VM (build 15.0.1+9-18, mixed mode, sharing)
 -------- printJavaVersion END</pre>
+</li>
+<li> 
  
-<h4>Example: COMPILING FROM SCRATCH</h4>
+<h3>Example: commands to compile Java</h3>
+Let us introduce the new sub-project <tt>taskJavaCompile</tt> (with its own
+build file <a href="../taskJavaCompile/build.gradle.kts" target="web">taskJavaCompile/build.gradle.kts</a> )
+and modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
 <pre>
-fun findSources(): Array<String> = projectDir  
+println("SETTINGS RUNS ...")
+rootProject.name = "demo"  
+include("app")  
+//include("taskAccess")
+//include("taskCustom")
+include("taskJavaCompile")
+</pre>
+<pre>
+fun findSources(): Array&lt;String> = projectDir  
         .listFiles { it: File -> it.isDirectory && it.name == "src" }  
         ?.firstOrNull() <kc>// If it's not there we're done</kc>
         ?.walk() <kc>// If it's there, iterate all its content (returns Sequence&lt;File>)</kc>
@@ -1050,21 +1064,33 @@ fun findSources(): Array<String> = projectDir
         ?.toTypedArray() <kc>// Convert to Array&lt;String></kc>
         ?: emptyArray() <kc>// Yeah if anything's missing there are no sources</kc>
 
-tasks.register&lt;Exec>("mycompileJava") {
-    val sources = findSources()
-    println("       mycompileJava sources.size=" + sources.size  )
-    if (sources.isNotEmpty()) { <kc>// If the folder exists and there are files</kc>
-        val javacExecutable = Jvm.current().javacExecutable.absolutePath  
+tasks.register<Exec>("mycompileJava") {
+    val sep  = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
+    val classpathFiles = compileClasspath.resolve()
+    val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
+                         else classpathFiles.joinToString(separator = sep )
+    // Build the command
+    val sources = findJavaSources()
+    println("sources.size=" + sources.size)
+    if (sources.isNotEmpty())  {
+        val javacExecutable = Jvm.current().javacExecutable.absolutePath
         commandLine(
-                "$javacExecutable",
-                <kc>//-cp is required to compile AppTest</kc>
-                "-cp","$projectDir/libs/junit-4.13.jar;$projectDir/build/bin/*", 
-                "-d", "$buildDir/bin", <kc>//destination folder</kc>
-                *sources
+            "$javacExecutable",
+            "-cp", myclasspath,
+            "-d", "$projectDir/output", <kc>//The compiled files go here</kc>
+            *sources
         )
     }
-<kc>// the task's <k>doLast</k> is inherited from Exec</kc>
 }
+
+<k>gradlew -q :taskJavaCompile:mycompileJava</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+ ...... build in taskJavaCompile
+sources.size=2
+
 </pre>
 <!--
 
