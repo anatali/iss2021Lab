@@ -17,34 +17,28 @@ tasks.register<Copy>("mycopy") {    //Registers a new task of type Copy and conf
     into( "../copiedFiles" )
 }
 
-task<Exec>("hello") {
+task<Exec>("mycmd") {
     workingDir("$projectDir")
     if (System.getProperty("os.name").toLowerCase().contains("windows")) {
         commandLine(
-                "cmd", "/c",
-                "echo", "Hello xxx from Windows"    )
+                "cmd", "/c",    //Esegue il comando specificato dalla stringa e quindi si arresta.
+                "echo", "Hello from Windows"    )
     } else {
         commandLine(
                 "sh", "-c",
-                "echo", "Hello xxx from NO-Windows" )
+                "echo", "Hello from NO-Windows" )
     }
 }
 
-/*
-project.exec {
-    commandLine( "$projectDir/cmd2.bat" )
-}
-*/
-tasks.register<Exec>("mycmdline") { //Inline function with reified type!
+
+tasks.register<Exec>("printJavaVersion") { //Inline function with reified type!
 // Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit
     val javaExecutable = Jvm.current().javaExecutable.absolutePath
-    val command        = "cmd1.bat"
-     //this is a method of class org.gradle.api.Exec
-     commandLine("$projectDir/cmd1.bat" )
+    //this is a method of class org.gradle.api.Exec
      commandLine( javaExecutable, "-version" )
 // There is no need of doLast / doFirst, actions are already configured
 // Still, we may want to do something before or after the task has been executed
-    doLast {  println("-------- exec END") }
-    doFirst { println("-------- exec STARTS" ) }
+    doLast {  println("-------- printJavaVersion END") }
+    doFirst { println("-------- printJavaVersion STARTS" ) }
 }
 

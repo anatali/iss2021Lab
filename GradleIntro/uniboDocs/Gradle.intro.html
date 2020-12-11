@@ -727,7 +727,7 @@ and the tasks defined in the <tt>app</tt> build
 </pre>
 
 <ol>
-<li><h3>Running tasks</h3>
+<li><h3>Running multi-project tasks</h3>
 Let us try some call, to better understand the behavior of Gradle.
 <pre>
 <k>gradlew -q :app:commontask0</k>   <kc>//execute a task of (sub-)project app</kc>
@@ -772,7 +772,7 @@ SETTINGS RUNS ...
 </pre>
 </li>
 
-<li><h3>Accessing a task via API - ading behavior</h3>
+<li><h3>Accessing a task via API - adding behavior</h3>
 Delaying the actual execution of tasks is especially useful when <ks>modifying existing behavior</ks>. 
 <br/><br/>
 Let us extends the behavior of the shared task <ks>commontask1</ks> by adding in the build file 
@@ -981,8 +981,33 @@ that executes a command line process.
 <center><img src="./img/gradleExec.png" alt="gradleExec.png" width="30%" height="30%"></center>
 
  
-<h4>Example: COMPILING FROM SCRATCH</h4>
+<h4>Example: execute a command</h4>
 
+<pre>
+task&lt;Exec>("mycmd") {
+    workingDir("$projectDir")
+    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+        commandLine(
+                "cmd", "/c", <kc>//Esegue il comando specificato dalla stringa e poi si arresta</kc>
+                "echo", "Hello from Windows"    )
+    } else {
+        commandLine(
+                "sh", "-c",
+                "echo", "Hello from NO-Windows" )
+    }
+}
+
+<k>gradlew -q :taskCustom:mycmd</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+ ...... build in taskAccess sub-project
+ ...... build in taskCustom sub-project
+"Hello from Windows"
+</pre>
+
+<h4>Example: print the current version of Java</h4>
 
 <pre>
 import org.gradle.internal.jvm.Jvm
@@ -996,22 +1021,22 @@ tasks.register&lt;Exec>("printJavaVersion") {
    )
 <kc>// There is no need of <k>doLast / doFirst</k>, actions are already configured
 // Still, we may want to do something before or after the task has been executed</kc>
-  doLast {  println("-------- invocation complete") }
-  doFirst { println("-------- Ready to invoke $javaExecutable") }
+  doLast {  println("-------- printJavaVersion END") }
+  doFirst { println("-------- printJavaVersion START") }
 }
 
 <k>gradlew -q :taskCustom:printJavaVersion</k>
 SETTINGS RUNS ...
  ...... build top-level
  ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
  ...... build in taskAccess sub-project
  ...... build in taskCustom sub-project
--------- Ready to invoke C:\Program Files\Java\jdk-11.0.8\bin\java.exe
-java version "11.0.8" 2020-07-14 LTS
-Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS)
-Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.8+10-LTS, mixed mode)
--------- invocation complete
-</pre>
+-------- printJavaVersion STARTS
+java version "15.0.1" 2020-10-20
+Java(TM) SE Runtime Environment (build 15.0.1+9-18)
+Java HotSpot(TM) 64-Bit Server VM (build 15.0.1+9-18, mixed mode, sharing)
+-------- printJavaVersion END</pre>
  
 <h4>Example: COMPILING FROM SCRATCH</h4>
 <pre>
