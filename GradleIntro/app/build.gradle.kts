@@ -36,13 +36,19 @@ ADDED TASKS
  */
 println(" ...... build in app  ")
 
+task("hello") {
+    doLast {
+        println("Hello world from app - this=${this}")
+    }
+}
+/*
 tasks.register("hello") {
     doLast {
         println("Hello world from app - this=${this}")
     }
 }
-
-tasks.register("notgood"){
+*/
+task("notgood"){
     println("Message shown during the configuration phase: no task action defined in ${this}")
 }
 
@@ -51,6 +57,10 @@ tasks.register("count") {
         repeat(4) { print("$it ") }
         println()
     }
+}
+
+tasks.named("count"){
+    doFirst { println("count STARTS ")}
 }
 
 tasks.register("welcome") { //could be declared before hello and count

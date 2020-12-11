@@ -431,9 +431,7 @@ As the script executes, it configures an object called the <ks>delegate object</
 
 A <ks>Task</ks>is an atomic operation on the project, which can have input and output files,
 depend on other tasks (can be executed only if those are completed).
-<br/><br/>
-<ks>tasks</ks> is a container objects that contain Task objects. 
-You can use the <ks>named()</ks> method to configure existing tasks and the <ks>register()</ks> method to create new ones.
+
 <ol>
 
 <li><h3>Tasks as operations</h3>
@@ -443,7 +441,7 @@ Example: add a task in <a href="../app/build.gradle.kts" target="web">build.grad
 and execute it.
 
 <pre>
-tasks.register("hello") { <kc>//Inline function with reified type!</kc>
+tasks("hello") { <!-- <kc>//Inline function with reified type!</kc> -->
     doLast {	<kc>//a shortcut to define an action</kc>
          println("Hello world from app - this=${this}")
     }
@@ -516,9 +514,10 @@ The build script executes when Gradle is invoked; it <k>configures</k> tasks and
 dependencies.<br/>
 A task is actually <k>executed later</k>,  when it is invoked.
 </div>
+ 
 
 <pre>
-tasks.register("notgood"){
+tasks("notgood"){
     println("Message shown during the configuration phase: no task action defined ")
 }
 
@@ -535,7 +534,12 @@ Message shown during the configuration phase: no task action defined in task ':a
 <li><h3>Gradle’s tasks embeds code.</h3>
 <div class="remark">
 Gradle’s <ks>build scripts are code</ks>: they give you the full power of Groovy and Kotlin.
+<br/><br/>
+<ks>tasks</ks> is a container objects that contain Task objects. You can use:<br/>
+ the <ks>register()</ks> method to create new ones <br/>
+ the <ks>named()</ks> method to configure existing tasks. 
 </div>
+
 <br/>
 Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 <pre>
@@ -550,6 +554,18 @@ tasks.register("count") {
 SETTINGS RUNS ...
  ...... build in app
 0 1 2 3
+
+-----------------------------------------------------------
+tasks.named("count"){
+    doFirst { println("count STARTS ")}
+}
+
+<k>gradlew -q count</k>
+SETTINGS RUNS ...
+ ...... build in app
+count STARTS
+0 1 2 3
+
 </pre>
 
 </li>
@@ -944,31 +960,40 @@ and
 
  
 <ol>
-<li><h3>Extend built-in tasks</h3>
+
 Gradle offers some facilities to make it writing new tasks easier. <br/>
-The Gradle DSL supports a task block for defining your own custom tasks.  
 The Gradle API includes a wide range of existing tasks (like <tt>Copy</tt>, <tt>Wrapper</tt>, and <tt>Exec</tt>) 
 that you can use simply by setting properties.<br/>
  
-<!-- done with http://www.plantuml.com/plantuml/uml/ -->
-<center><img src="./img/gradleExec.png" alt="gradleExec.png" width="30%" height="30%"></center>
+
+
+<li><h3>Example: using <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web">org.gradle.api.Exec</a></h3>
  
-An example is the Task <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a> 
-reported in the <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>,  
+As an example, let us introduce the new sub-project <tt>taskCustom</tt> (with its own
+build file <a href="../taskCustom/build.gradle.kts" target="web">taskCustom/build.gradle.kts</a> )
+and a custom version of the 
+Task <a href="https://docs.gradle.org/current/dsl/org.gradle.api.tasks.Exec.html" target="web"><ks>org.gradle.api.Exec</ks></a> 
+(see <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>Gradle Build Language Reference </ks></a>) 
 that executes a command line process.
 
 
-<br/>
-Let us introduce the new sub-project <tt>taskCustom</tt> with its own
-build file <a href="../taskCustom/build.gradle.kts" target="web"><ks>taskCustom/build.gradle.kts</ks></a> 
+<!-- done with http://www.plantuml.com/plantuml/uml/ -->
+<center><img src="./img/gradleExec.png" alt="gradleExec.png" width="30%" height="30%"></center>
+
+ 
+<h4>Example: COMPILING FROM SCRATCH</h4>
+
 
 <pre>
-tasks.register&lt;Exec>("printJavaVersion") { <kc>//Inline function with reified type!</kc>
+import org.gradle.internal.jvm.Jvm
+println(" ...... build in taskCustom sub-project  ")
+
+tasks.register&lt;Exec>("printJavaVersion") {  
 <kc>// Configuration action is of type T.() -> Unit, in this case Exec.T() -> Unit</kc>
-   val javaExecutable = org.gradle.internal.jvm.Jvm.current().javaExecutable.absolutePath
+   val javaExecutable = Jvm.current().javaExecutable.absolutePath
    commandLine( <kc>//this is a method of class org.gradle.api.Exec</kc>
 	javaExecutable, "-version"
- )
+   )
 <kc>// There is no need of <k>doLast / doFirst</k>, actions are already configured
 // Still, we may want to do something before or after the task has been executed</kc>
   doLast {  println("-------- invocation complete") }
@@ -987,10 +1012,8 @@ Java(TM) SE Runtime Environment 18.9 (build 11.0.8+10-LTS)
 Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.8+10-LTS, mixed mode)
 -------- invocation complete
 </pre>
-</li>
-
-<li>
-<h3>Example: COMPILING FROM SCRATCH</h3>
+ 
+<h4>Example: COMPILING FROM SCRATCH</h4>
 <pre>
 fun findSources(): Array<String> = projectDir  
         .listFiles { it: File -> it.isDirectory && it.name == "src" }  
@@ -1002,7 +1025,7 @@ fun findSources(): Array<String> = projectDir
         ?.toTypedArray() <kc>// Convert to Array&lt;String></kc>
         ?: emptyArray() <kc>// Yeah if anything's missing there are no sources</kc>
 
-tasks.register<Exec>("mycompileJava") {
+tasks.register&lt;Exec>("mycompileJava") {
     val sources = findSources()
     println("       mycompileJava sources.size=" + sources.size  )
     if (sources.isNotEmpty()) { <kc>// If the folder exists and there are files</kc>
