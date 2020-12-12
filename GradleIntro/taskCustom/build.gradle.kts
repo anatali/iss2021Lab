@@ -1,13 +1,6 @@
 import org.gradle.internal.jvm.Jvm
 println(" ...... build in taskCustom sub-project  ")
-/*
-tasks.register("hello") {
-    doLast {
-        println("Hello world from taskCustom -- this=${this}  ")
-        //tasks.forEach { println("${it.name}") }
-    }
-}
-*/
+
 tasks.register<Copy>("mycopy") {    //Registers a new task of type Copy and configures it
     println("projectDir= $projectDir") //GradleIntro\taskCustom
     println("buildDir  = $buildDir")   //GradleIntro\taskCustom\build
@@ -22,7 +15,9 @@ task<Exec>("mycmd") {
     if (System.getProperty("os.name").toLowerCase().contains("windows")) {
         commandLine(
                 "cmd", "/c",    //Esegue il comando specificato dalla stringa e quindi si arresta.
-                "echo", "Hello from Windows"    )
+                "echo", "Hello from Windows"
+                //"cmd1.bat"
+        )
     } else {
         commandLine(
                 "sh", "-c",

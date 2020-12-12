@@ -1159,7 +1159,9 @@ task&lt;Exec>("mycmd") {
     if (System.getProperty("os.name").toLowerCase().contains("windows")) {
         commandLine(
                 "cmd", "/c", <kc>//Esegue il comando specificato dalla stringa e poi si arresta</kc>
-                "echo", "Hello from Windows"    )
+                "echo", "Hello from Windows"    
+                //"cmd1.bat"    <kc>//Another command <a href="../taskCustom/cmd1.bat" target="web">cmd1.bat</a></kc>
+		)
     } else {
         commandLine(
                 "sh", "-c",
@@ -1212,7 +1214,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 15.0.1+9-18, mixed mode, sharing)
 <li> 
  
 <h3>Example: commands to compile Java</h3>
-Let us introduce the new sub-project <tt>taskJavaCompile</tt> (with its own
+Let us introduce the new sub-project <tt>taskJavaCompile</tt> ( with its own
 build file <a href="../taskJavaCompile/build.gradle.kts" target="web">taskJavaCompile/build.gradle.kts</a> )
 and modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
 <pre>
@@ -1275,18 +1277,11 @@ https://github.com/gradle/kotlin-dsl-samples/tree/master/samples
 </li>
 
 <li><h3>Example: commands to run Java</h3>
-a runtimeClasspath configuration 'inherits' from compileClasspath and includes the output folder
 
-<pre>
-val compileClasspath by configurations.creating
-val runtimeClasspath by configurations.creating {
-    <kc>// The configuration is an extension of compileClasspath</kc>
-    extendsFrom(compileClasspath) 
-}
-</pre>
 
-Let us introduce the new sub-project <tt>taskJavaRun</tt>
-and modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
+Let us introduce the new sub-project <tt>taskJavaRun</tt> ( with its own
+build file <a href="../taskJavaRun/build.gradle.kts" target="web">taskJavaRun/build.gradle.kts</a> )
+and modify <a href="../taskJavaRun/settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
 <pre>
 println("SETTINGS RUNS ...")
 rootProject.name = "demo"  
@@ -1299,20 +1294,31 @@ include("app")
 
 In the new project, we include the following directories:
 <pre>
-testJavaRun
-	lib	
-		junit-4.13.jar
-	src
-		<a href="../taskJavaRun/src/Program1.java" target="web">Program1.java</a>
-		<a href="../taskJavaRun/src/TestProgram1.java" target="web">TestProgram1.java</a>
+Root project 'demo'
++--- Project ':app'
+\--- Project ':taskJavaRun'
+              lib	
+                 junit-4.13.jar
+              src
+                <a href="../taskJavaRun/src/Program1.java" target="web">Program1.java</a>
+                <a href="../taskJavaRun/src/TestProgram1.java" target="web">TestProgram1.java</a> <kc>//Requires JUnit</kc>
 </pre>
-
+<h4>runtimeClasspath  “inherits” from compileClasspath </h4>
 The  build file for this project is <a href="../taskJavaRun/build.gradle.kts" target="web">taskJavaRun/build.gradle.kts</a>:
 <pre>
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.internal.jvm.Jvm
 
 println(" ...... build in taskJavaRun  ")
+
+<kc>//a runtimeClasspath configuration 'inherits' from compileClasspath and includes the output folder</kc>
+val compileClasspath by configurations.creating
+val runtimeClasspath by configurations.creating {
+	<kc>// The configuration is an extension of compileClasspath</kc>
+    extendsFrom(compileClasspath) 
+}
+
+val sep = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
 
 data class FinderInFolder(val directory: String) {
     fun withExtension(extension: String): Array<String> = projectDir
@@ -1335,18 +1341,11 @@ fun DependencyHandlerScope.forEachLibrary(todo: DependencyHandlerScope.(String) 
     }
 }
 
-val compileClasspath by configurations.creating
-val runtimeClasspath by configurations.creating {
-    extendsFrom(compileClasspath) 
-}
-
-val sep = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
-
 dependencies {
     forEachLibrary {
         compileClasspath(files(it))
     }
-    runtimeClasspath(files("$projectDir/bin"))
+    runtimeClasspath( files("$projectDir/bin") )
 }
 
 val compileJava = tasks.register<Exec>("compileJava") {
@@ -1395,13 +1394,57 @@ Hello from Program1 written in Java
 </pre>
 </li>
 
-<li><h2>CUSTOM TASKS</h2>
+<li><h3>User-defined Task types</h3>
+New, user defined tasks:
+<ul>
+<li>must implement the  <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/ask.html" target="web"> <ks>Task</ks></a> interface</li>
+<li>must be extensible (<ks>open</ks> class). At runtime, Gradle creates subclasses on the fly.</li>
+<li>usually inherit from <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/DefaultTask.html" target="web"> <ks>DefaultTask</ks></a></li>
+<li>must have a parameterless constructor annotated with <ks>@Inject</ks>, since the costruction of tasks happens via dependency injection</li>
+<li>A public method can be marked as <ks>@TaskAction</ks>, and will get invoked to execute the task</li>
+</ul>
 
-Any open class implementing <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>org.gradle.api.Task</ks></a> can be instanced.
-<br/>
-See <a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Developing Custom Gradle Task Types</a>
+<div class="remark">
+It is a good practice (that will become mandatory in future Gradle releases) to annotate
+every <ks>public property</ks> of a task with a marker annotation that determines whether it is an <k>input</k> or
+an <k>output</k>.
+<pre>
+<kc>@Input,	@InputFile,	@InputFiles,	@InputDirectory,	@InputDirectories</kc>
+<kc>@OutputFile,	@OutputFiles,	@OutputDirectory,	@OutputDirectories</kc>
+<kc>@Internal</kc> marks some property that is used as output internally.
+</pre>
+</div>
+
+<h4>Incremental builds and incremental tasks</h4>
+The reason of Input/Output annotations is related to
+<a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks" target="web"> <ks> Incremental Build</ks></a>
+and the need of
+<a href="https://docs.gradle.org/current/userguide/custom_tasks.html#incremental_tasks" target="web"> <ks>Incremental tasks</ks></a>.
+<ul>
+<li>Gradle caches intermediate build results, using Input/Output markers to undersand
+whether or not some task is up to date. Time to build completion can decrease from tens on minutes to seconds!</li>
+<li>When launched with the <ks>-t</ks> option, Gradle re-runs the requested tasks every time something
+changes. Input/Output markers are used to understand <ks>what</ks> to actually run again</li>
+
+</ul>
+
+Let us introduce the new sub-project <tt>taskClasses</tt> ( with its own
+build file <a href="../taskClasses/build.gradle.kts" target="web">taskClasses/build.gradle.kts</a> )
+and modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
+<pre>
+println("SETTINGS RUNS ...")
+rootProject.name = "demo"  
+include("app")  
+//include("taskAccess")
+//include("taskCustom")
+//include("taskJavaCompile")
+include("taskJavaRun") 
+<k>include("taskClasses")</k>
+</pre>
+See also <a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Developing Custom Gradle Task Types</a>
 <pre>
 open class GreetingTask : DefaultTask() {
+	@Input
 	var greeting = "default hello from GreetingTask"
 	
     @TaskAction
@@ -1409,31 +1452,48 @@ open class GreetingTask : DefaultTask() {
          println(greeting)
     }
 }
-<kc>// Create a task using the task type</kc>
-tasks.register&lt;GreetingTask>("greetings")
 
-<k>gradlew -q greetings</k>
-default hello from GreetingTask
-
-<kc>// Customize</kc>
+<kc>// Create a task using the new tasktype and customize</kc>
 tasks.register&lt;GreetingTask>("mygreetings"){
 	greeting = "my customised greetings from GreetingTask"
 }
 
-<k>gradlew -q mygreetings</k>
+<k>gradlew -q :taskClasses:mygreetings</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+ ...... build in taskClasses sub-project
 my customised greetings from GreetingTask
+
 </pre>
 </li>
 
-
-
-
 </ol>
+
+
+<h2>Gradle buildSrc</h2>
+Unfortunately, subprojects have no access to the root’s defined types.
+Gradle provides project-global type definitions using a special 
+<a href="https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources" target="web"><ks>buildSrc</ks></a> folder.
+This allows imperative code to get isolated and shared among subprojects.
+<br/><br/>
+
+The directory buildSrc is treated as an included build. <br/> 
+Upon discovery of the directory, Gradle automatically compiles and tests this code and puts it in the classpath of your build script. <br/> 
+For multi-project builds there can be only one buildSrc directory, which has to sit in the root project directory. 
+<br/><br/>
+
+
+
+<h2>Gradle plugins</h2>
+
+<!--
 You can create a separate project for your task class. 
 This project produces and publishes a JAR which you can then use in multiple builds and share with others. 
 Generally, this JAR might include some custom plugins, or bundle several related task classes into a single library. 
 Or some combination of the two.
-
+-->
 <br/><br/>
 </div>
  </li>

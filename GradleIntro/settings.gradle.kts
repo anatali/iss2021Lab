@@ -12,4 +12,5 @@ include("app") //defines that the build consists of one subproject called app th
 //include("taskAccess")
 //include("taskCustom")
 //include("taskJavaCompile")
-include("taskJavaRun")
+//include("taskJavaRun")
+include("taskClasses")

@@ -58,13 +58,19 @@ val compileJava = tasks.register<Exec>("compileJava") {
     }
 }
 
+fun showJavaJvm(){
+    val jvm = Jvm.current()
+    val jreHome = jvm .getJre()?.getHomeDir() ?: null  //safe op
+    println("Java version: ${jvm.getJavaVersion()} jre HomeDir: ${jreHome}")
+}
+
 tasks.register<Exec>("runJava") {
     val classpathFiles = runtimeClasspath.resolve()
     val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
                          else classpathFiles.joinToString(separator = sep )
     val mainClass = "Program1" // Horribly hardcoded, we must do something
     val javaExecutable = Jvm.current().javaExecutable.absolutePath
-
+    showJavaJvm() //just to
     commandLine(
             "$javaExecutable",
             "-cp", myclasspath,
@@ -73,3 +79,11 @@ tasks.register<Exec>("runJava") {
 
     dependsOn(compileJava)
 }
+/*
+      Result result = JUnitCore.runClasses(TestJunit.class);
+
+      for (Failure failure : result.getFailures()) {
+         System.out.println(failure.toString());
+      }
+
+ */
