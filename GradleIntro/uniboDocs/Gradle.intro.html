@@ -184,6 +184,73 @@ div.imagedesc{
 	margin: auto;
 }
 </style>
+
+<style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 260px;
+  background-color: #F3F781;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+</style>
+
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
     
 <head>
    
@@ -386,6 +453,9 @@ Hello World!
 <kc>BUILD SUCCESSFUL</kc> in 7s
 2 actionable tasks: 2 executed 
 </pre>
+
+</ul>
+
 </li>
 <li>
 The <ks>application plugin</ks> bundles the application, with all its dependencies.
@@ -400,7 +470,18 @@ BUILD SUCCESSFUL in 9s
 7 actionable tasks: 6 executed, 1 up-to-date
 </pre>
 Look at the generated directory <a href="../app/build/" target="web">app/build/</a>
- 
+<br/><br/>
+As the script executes, it configures an object called the <ks>delegate object</ks> of the script:
+<ul>
+<li><i>Build</i> script: delegates to instance of 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Project</a>
+</li>
+<li><i>Settings</i>  script: delegates to instance of 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html" target="web">Settings</a>
+</li>  
+<li><i>Init</i>  script: delegates to instance of 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html" target="web">Gradle</a>
+</li> 
 </li>
 
 <li>
@@ -411,20 +492,9 @@ SETTINGS RUNS ...
 </pre>
 
 </li>
+
  
 </ol>
-As the script executes, it configures an object called the <ks>delegate object</ks> of the script:
-<ul>
-<li><i>Settings</i>  script: delegates to instance of 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html" target="web">Settings</a>
-</li>  
-<li><i>Init</i>  script: delegates to instance of 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html" target="web">Gradle</a>
-</li>
-<li><i>Build</i> script: delegates to instance of 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Project</a>
-</li>
-</ul>
 
 
 <h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
@@ -569,14 +639,16 @@ count STARTS
 </pre>
 
 </li>
+ 
 
 
+<li><h3>Task dependencies</h3>
+ 
 
-<li>
 You can declare tasks that <ks>depend on other tasks</ks>.
 Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
 <pre>
-tasks.register("welcome") {	<kc>//could be declared <k>before</k> <tt>hello</tt> and <tt>count</tt></kc>
+tasks.register("welcome") {	<kc>//could be declared <k>before</k> <tt>hello</tt> and <tt>count</tt> (hoisting)</kc>
     dependsOn("hello")
     dependsOn("count")
     doLast {
@@ -594,7 +666,33 @@ Welcome task that depends on tasks hello and count
 
 </li>
 
-<li>You can <ks>create tasks dynamically</ks>.
+<li>The <ks><i>clean</i> task</ks> <br/>
+The clean task is defined by the 
+<a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">Java plugin</a>
+
+ and it simply removes the <a href="../app/build/" target="web">app/build/</a> (buildDir) folder, that contains the output of the gradle operation)
+
+<br/><br/>
+Gradle will track task dependencies and clean appropriate parts for you. Thus, You don't need to run the clean task. 
+However, if custom tasks don't track their dependencies well (they're bugged), then clean is a workaround.
+ 
+<pre>
+tasks.register("myclean") {  
+	doLast {
+		if ( !buildDir.deleteRecursively() ) {
+			throw IllegalStateException("Cannot delete $buildDir")
+		}
+	}
+}
+
+<k>gradlew clean</k> 	 
+ 
+</pre>
+
+</li>
+
+<li><h3>Dynamic Tasks</h3>
+You can <ks>create tasks dynamically</ks>.
 
 <pre>
 repeat(4) { counter ->
@@ -634,6 +732,78 @@ buildDir  = C:\Didattica2018Work\iss2021Lab\GradleIntro\app\build
 </li>
 
 </ol>
+
+
+<h2 id="dependencies">About <a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html" target="web"> dependencies</a></h2>
+Every dependency declared for a Gradle project applies to a specific scope. 
+For example some dependencies should be used for compiling source code whereas others only need to be available at runtime. 
+<br/><br/>
+Gradle represents the scope of a dependency with the help of a 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> <ks>Configuration</ks></a>, i.e.
+a <b class="popup" onclick="myFunction()"><em>resolvable</em> 
+  <span class="popuptext" id="myPopup">'resolvable' means that it can be mappable to actual resources)</span>
+</b> set of dependencies.
+ <br/>
+Every configuration can be identified by a unique name.
+<pre>
+<kc>// Gradle way to create a configuration</kc>
+val compileClasspath by configurations.creating <kc>// Delegation</kc>
+	dependencies {
+		forEachLibrary { // this function does not exist, unfortunate...
+		compileClasspath(files(it))
+	}
+}
+
+
+tasks.register&lt;Exec>("compileJava") {
+	<kc>// Resolve the classpath configuration (in general, files could be remote and need fetching)</kc>
+	val classpathFiles = compileClasspath.resolve()
+	val sources = findSources() <kc>// Find sources</kc>
+	if (sources != null) {
+		val javacExecutable = Jvm.current().javacExecutable.absolutePath
+		val separator = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"  
+		commandLine(
+          "$javacExecutable", "-cp", classpathFiles.joinToString(separator = separator),
+          "-d", "bin", *sources
+	    )
+	}
+}
+
+data class FinderInFolder(val directory: String) {
+fun withExtension(extension: String): Array<String> = projectDir
+	.listFiles { it: File -> it.isDirectory && it.name == directory }
+	?.firstOrNull()
+	?.walk()
+	?.filter { it.extension == extension }
+	?.map { it.absolutePath }
+	?.toList()
+	?.toTypedArray()
+	?: emptyArray()
+}
+fun findFilesIn(directory: String) = FinderInFolder(directory)
+fun findSources() = findFilesIn("src").withExtension("java")
+fun findLibraries() = findFilesIn("lib").withExtension("jar")
+fun DependencyHandlerScope.forEachLibrary(todo: DependencyHandlerScope.(String) -> Unit) {
+findLibraries().forEach { todo(it) }
+}
+
+
+</pre>
+Many Gradle plugins add pre-defined configurations to your project. 
+The <a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">Java plugin</a>, for example, 
+adds configurations to represent the various classpaths it needs for source code compilation, 
+executing tests and the like.  
+<br/><br/>
+A configuration can extend other configurations to form an inheritance hierarchy. 
+Child configurations inherit the whole set of dependencies declared for any of its superconfigurations.
+<br/>
+Configuration inheritance is heavily used by Gradle core plugins like the 
+<a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">Java plugin</a>. 
+A Java project that uses JUnit to write and execute test code also needs Guava if its classes are imported in the production source code.
+
+<center><img src="./img/dependency-management-configuration-inheritance.png" 
+	alt="dependency-management-configuration-inheritance.png" width="65%" height="65%"></center>
+ 
 
 <h2 id="multiprojects">Multi projects</h2>
 One of the purposes of the <a href="../settings.gradle.kts" target="web">settings</a> object is to allow you 
@@ -852,7 +1022,7 @@ tasks
 </li>
 
 <li>
-<h3>Accessing a task via API - adding a dependency</h3>
+<h3>Accessing a task via API - adding dependency</h3>
 State that, in (sub-)project <tt>taskAccess</tt> the shared task <tt>commontask0</tt>, depends on other tasks:
 <pre>
 tasks.named("commontask0") { 	<kc>//Accessing a task via API - adding a dependency</kc>
@@ -1054,7 +1224,7 @@ include("app")
 include("taskJavaCompile")
 </pre>
 <pre>
-fun findSources(): Array&lt;String> = projectDir  
+fun findJavaSources(): Array&lt;String> = projectDir  
         .listFiles { it: File -> it.isDirectory && it.name == "src" }  
         ?.firstOrNull() <kc>// If it's not there we're done</kc>
         ?.walk() <kc>// If it's there, iterate all its content (returns Sequence&lt;File>)</kc>
@@ -1066,7 +1236,7 @@ fun findSources(): Array&lt;String> = projectDir
 
 tasks.register<Exec>("mycompileJava") {
     val sep  = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
-    val classpathFiles = compileClasspath.resolve()
+    val classpathFiles = compileClasspath.resolve()  <kc>//could be empty: NO joinToString</kc>
     val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
                          else classpathFiles.joinToString(separator = sep )
     // Build the command
@@ -1076,7 +1246,7 @@ tasks.register<Exec>("mycompileJava") {
         val javacExecutable = Jvm.current().javacExecutable.absolutePath
         commandLine(
             "$javacExecutable",
-            "-cp", myclasspath,
+            "-cp", myclasspath,  
             "-d", "$projectDir/output", <kc>//The compiled files go here</kc>
             *sources
         )
@@ -1104,7 +1274,128 @@ https://github.com/gradle/kotlin-dsl-samples/tree/master/samples
 -->
 </li>
 
-<li><h3>CUSTOM TASKS</h3>
+<li><h3>Example: commands to run Java</h3>
+a runtimeClasspath configuration 'inherits' from compileClasspath and includes the output folder
+
+<pre>
+val compileClasspath by configurations.creating
+val runtimeClasspath by configurations.creating {
+    <kc>// The configuration is an extension of compileClasspath</kc>
+    extendsFrom(compileClasspath) 
+}
+</pre>
+
+Let us introduce the new sub-project <tt>taskJavaRun</tt>
+and modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
+<pre>
+println("SETTINGS RUNS ...")
+rootProject.name = "demo"  
+include("app")  
+//include("taskAccess")
+//include("taskCustom")
+//include("taskJavaCompile")
+<k>include("taskJavaRun")</k>
+</pre>
+
+In the new project, we include the following directories:
+<pre>
+testJavaRun
+	lib	
+		junit-4.13.jar
+	src
+		<a href="../taskJavaRun/src/Program1.java" target="web">Program1.java</a>
+		<a href="../taskJavaRun/src/TestProgram1.java" target="web">TestProgram1.java</a>
+</pre>
+
+The  build file for this project is <a href="../taskJavaRun/build.gradle.kts" target="web">taskJavaRun/build.gradle.kts</a>:
+<pre>
+import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.internal.jvm.Jvm
+
+println(" ...... build in taskJavaRun  ")
+
+data class FinderInFolder(val directory: String) {
+    fun withExtension(extension: String): Array<String> = projectDir
+            .listFiles { it: File -> it.isDirectory && it.name == directory }
+            ?.firstOrNull()
+            ?.walk()
+            ?.filter { it.extension == extension }
+            ?.map { it.absolutePath }
+            ?.toList()
+            ?.toTypedArray()
+            ?: emptyArray()
+}
+fun findFilesIn(directory: String) = FinderInFolder(directory)
+fun findSources() = findFilesIn("src").withExtension("java")
+fun findLibraries() = findFilesIn("lib").withExtension("jar")
+fun DependencyHandlerScope.forEachLibrary(todo: DependencyHandlerScope.(String) -> Unit) {
+    findLibraries().forEach {
+        println("library $it")
+        todo(it)
+    }
+}
+
+val compileClasspath by configurations.creating
+val runtimeClasspath by configurations.creating {
+    extendsFrom(compileClasspath) 
+}
+
+val sep = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
+
+dependencies {
+    forEachLibrary {
+        compileClasspath(files(it))
+    }
+    runtimeClasspath(files("$projectDir/bin"))
+}
+
+val compileJava = tasks.register<Exec>("compileJava") {
+    val classpathFiles = compileClasspath.resolve()
+    val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
+                         else classpathFiles.joinToString(separator = sep )
+    // Build the command
+    val sources = findSources()
+    if (sources != null)  {
+        // Use the current JVM's javac
+        val javacExecutable = Jvm.current().javacExecutable.absolutePath
+
+        commandLine(
+                "$javacExecutable",
+                "-cp", myclasspath,  
+                "-d", "$projectDir/bin", //The compiled files go here
+                *sources
+        )
+    }
+}
+
+tasks.register<Exec>("runJava") {
+    val classpathFiles = runtimeClasspath.resolve()
+    val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
+                         else classpathFiles.joinToString(separator = sep )
+    val mainClass = "Program1" // Horribly hardcoded, we must do something
+    val javaExecutable = Jvm.current().javaExecutable.absolutePath
+
+    commandLine(
+            "$javaExecutable",
+            "-cp", myclasspath,
+            mainClass
+    )
+
+    dependsOn(compileJava)
+}
+
+<k>gradlew -q :taskJavaRun:runJava</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+ ...... build in taskJavaRun
+library C:\Didattica2018Work\iss2021Lab\GradleIntro\taskJavaRun\lib\junit-4.13.jar
+Hello from Program1 written in Java
+</pre>
+</li>
+
+<li><h2>CUSTOM TASKS</h2>
 
 Any open class implementing <a href="https://docs.gradle.org/current/dsl/index.html" target="web"><ks>org.gradle.api.Task</ks></a> can be instanced.
 <br/>

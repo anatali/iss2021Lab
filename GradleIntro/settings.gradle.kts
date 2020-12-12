@@ -11,4 +11,5 @@ rootProject.name = "demo" //overrides the default behavior of naming the build a
 include("app") //defines that the build consists of one subproject called app that contains the build logic
 //include("taskAccess")
 //include("taskCustom")
-include("taskJavaCompile")
+//include("taskJavaCompile")
+include("taskJavaRun")

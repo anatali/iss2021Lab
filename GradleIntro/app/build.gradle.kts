@@ -89,3 +89,11 @@ tasks.register<Copy>("mycopy") {    //Registers a new task of type Copy and conf
     into( "../copiedFiles" )
 }
 
+tasks.register("myclean") {
+    doLast {
+        if ( !buildDir.deleteRecursively() ) {
+            throw IllegalStateException("Cannot delete $buildDir")
+        }
+    }
+}
+
