@@ -32,7 +32,7 @@ tasks.register<Exec>("mycompileJava") {
     val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
                          else classpathFiles.joinToString(separator = sep )
     // Build the command
-    val sources = findJavaSources() //findJavaSources()
+    val sources = findJavaSources()
     println("sources.size=" + sources.size)
     if (sources.isNotEmpty())  {
         //println(" ----------------------- ${sources.get(0)} classpathFiles=$classpathFiles  " )

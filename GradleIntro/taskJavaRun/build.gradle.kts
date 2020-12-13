@@ -68,9 +68,10 @@ tasks.register<Exec>("runJava") {
     val classpathFiles = runtimeClasspath.resolve()
     val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
                          else classpathFiles.joinToString(separator = sep )
+    println("myclasspath: ${myclasspath}")
     val mainClass = "Program1" // Horribly hardcoded, we must do something
     val javaExecutable = Jvm.current().javaExecutable.absolutePath
-    showJavaJvm() //just to
+    showJavaJvm() //just to test ...
     commandLine(
             "$javaExecutable",
             "-cp", myclasspath,

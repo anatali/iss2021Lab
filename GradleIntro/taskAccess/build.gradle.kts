@@ -42,7 +42,10 @@ t1{ //Accessing a task via API - adding behaviour
 /*
 ADDED AFTER buildSrc
 */
+val compileClasspath by configurations.creating
 
 task<CommonTask>("ct"){
+    println("compileClasspath= $compileClasspath " )
     msg ="Hello from ${this.name} in ${project.name}"
 }
+
