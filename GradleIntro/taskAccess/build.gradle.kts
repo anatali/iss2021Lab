@@ -39,5 +39,10 @@ t1{ //Accessing a task via API - adding behaviour
     }
 }
 
+/*
+ADDED AFTER buildSrc
+*/
 
-
+task<CommonTask>("ct"){
+    msg ="Hello from ${this.name} in ${project.name}"
+}

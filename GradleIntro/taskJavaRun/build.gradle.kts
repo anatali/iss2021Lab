@@ -79,11 +79,7 @@ tasks.register<Exec>("runJava") {
 
     dependsOn(compileJava)
 }
-/*
-      Result result = JUnitCore.runClasses(TestJunit.class);
 
-      for (Failure failure : result.getFailures()) {
-         System.out.println(failure.toString());
-      }
-
- */
+tasks.register<RunJava >("dorunJava") {
+    mainClass = "$projectDir/src/Program1"
+}

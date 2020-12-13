@@ -1473,17 +1473,80 @@ my customised greetings from GreetingTask
 
 
 <h2>Gradle buildSrc</h2>
-Unfortunately, subprojects have no access to the root’s defined types.
-Gradle provides project-global type definitions using a special 
+Since subprojects have no access to the root’s defined types, Gradle provides project-global type definitions using a special 
 <a href="https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources" target="web"><ks>buildSrc</ks></a> folder.
-This allows imperative code to get isolated and shared among subprojects.
 <br/><br/>
-
-The directory buildSrc is treated as an included build. <br/> 
 Upon discovery of the directory, Gradle automatically compiles and tests this code and puts it in the classpath of your build script. <br/> 
+This allows imperative code to get isolated and shared among subprojects.
+><br/>
 For multi-project builds there can be only one buildSrc directory, which has to sit in the root project directory. 
 <br/><br/>
+<pre>
+Root project 'demo'
++--- Project ':app'
+buildSrc	
+  src
+    main
+       kotlin 
+         <a href="../buildSrc/src/main/kotlin/CommonOps.kt" target="web">CommonOps.kt</a> 
+ </pre>
+ 
+<a href="../buildSrc/src/main/kotlin/CommonOps.kt" target="web">buildSrc/src/main/kotlin/CommonOps.kt</a> includes the definition of the code of a custom  Task.
+<pre>
+open class CommonTask @Inject constructor() : DefaultTask() {
+    @Input var prefix ="buildSrc/CommonTask | "
+    @Input var msg    ="Hello from CommonTask"
+    @TaskAction
+    fun commonOp() {
+        println("$prefix $msg  ")
+    }
+}
+</pre>
+The custom task cannot be used by itself; we need to create an enanced task.
+For example, let us consider the sub-projects <tt>app</tt> and <tt>taskAcces</tt>
+<pre>
+println("SETTINGS RUNS ...")
+rootProject.name = "demo"  
+include("app")  
+include("taskAccess")
+//include("taskCustom")
+...
+</pre>
+Now introduce in these sub-projects an enhanced  <tt>CommonTask</tt>
 
+<pre>
+task<CommonTask>("ct"){
+    msg ="Hello from ${this.name} in ${project.name}"
+}
+</pre>
+Finally, let us tell Gradle to run the task named <tt>ct</tt>:
+</pre>
+<pre>
+<k>gradle -q ct</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+ ...... build in taskAccess sub-project
+<k>buildSrc/CommonTask |  Hello from ct in app
+buildSrc/CommonTask |  Hello from ct in taskAccess</k>
+</pre>
+Note that Gradle creates a <a href="../buildSrc/build/" target="web"><ks>build</ks></a> directory under 
+<tt>buildSrc</tt>.
+
+<h3>Refactoring Java operations</h3>
+Now we can define our custom tasks to compile and run Java programs within 
+<a href="../buildSrc/src/main/kotlin/JavaOps.kt" target="web">JavaOps.kt</a> and introduce in sub-project <tt>taskJavaRun</tt>
+the enanched task
+
+<pre>
+build
+</pre>
+
+
+<pre>
+build
+</pre>
 
 
 <h2>Gradle plugins</h2>
