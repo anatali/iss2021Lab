@@ -274,6 +274,14 @@ and
 
 
 	<h3>Gradle | Basic concepts</h3>
+	Gradle is an enterprise-ready build system, powered by declarative and expressive DSL (Groovy and Kotlin).
+	<br/>
+	FIGIRA Pg. 29
+	<div class ="remark">
+Gradle applies the principles of domain-driven design (DDD) to model its own
+domain-building software. As a consequence, projects and tasks have a direct class
+representation in Gradle’s API.	
+	</div>
 	<ul>
 	<li>Created in 2008 by Gradleware, <a href="https://docs.gradle.org/current/userguide/userguide.html" target="web">Gradle</a> 
 	is mostly implemented in Java 5, with an outer layer in Groovy or Kotlin.
@@ -1746,7 +1754,23 @@ build
 
 <h2>Gradle plugins</h2>
 <!-- From https://thecodinginterface.com/blog/gradle-guide-for-java-developers/ -->
-Plugins are handy chunks of functionality that can be added to a Gradle project which are provided by Gradle itself as well as third party developers. 
+<a href="https://docs.gradle.org/current/userguide/plugins.html" target="web"><ks>Gradle Plugins</ks></a>
+ are handy chunks of functionality that can be added to a Gradle project which are provided by Gradle itself as well as third party developers. 
+<br/>
+Gradle distinguishes two types of plugins: <i>script plugins</i> and <i>binary plugins</i>.
+<ul>
+<li>A <k>script plugin</k> is a regular Gradle build script that can be imported
+into other build scripts. To use an external library directly in a build script, you’ll need to declare it in its classpath.
+For that purpose, Gradle’s API interface 
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web"><ks>org.gradle.api.Project</ks></a>
+ exposes the method <ks>buildscript</ks>.</li>
+<li>A <k>binary plugins</k> must implement the interface  
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Plugin.html" target="web"><ks>org.gradle.api.Plugin</ks></a>. Its
+source code usually lives in the <ks>buildSrc</ks> directory and is distributed as a <tt>JAR</tt> file</li>
+</ul>
+From <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:using_plugins" target="web"><ks>Using plugins</ks></a>,
+we read that, to use the build logic encapsulated in a plugin, Gradle first  needs to <k>resolve</k> the plugin, and then it needs to 
+<k>apply</k> the plugin to the target, usually a Project.
 
 <!--
 You can create a separate project for your task class. 
