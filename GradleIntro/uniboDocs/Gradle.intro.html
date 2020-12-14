@@ -271,24 +271,27 @@ function myFunction() {
  read <a href="https://docs.gradle.org/current/userguide/what_is_gradle.html" target="web">What is Gradle?</a>
 and 
 <a href="https://docs.gradle.org/current/userguide/build_lifecycle.html#build_lifecycle" target="web">Build Lifecycle</a>.
-
-
-	<h3>Gradle | Basic concepts</h3>
+<br/><br/>
 	Gradle is an enterprise-ready build system, powered by declarative and expressive DSL (Groovy and Kotlin).
 	<br/>
-	FIGIRA Pg. 29
+	<center><img src="./img/gradleDSLAPI.png" alt="gradleDSLAPI.png" width="100%" height="100%"></center>
+ 
 	<div class ="remark">
-Gradle applies the principles of domain-driven design (DDD) to model its own
-domain-building software. As a consequence, projects and tasks have a direct class
-representation in Gradle’s API.	
+Gradle applies the principles of <ks>domain-driven design</ks> (<k>DDD</k>) to model its own domain-building software. <br/>
+As a consequence, projects and tasks have a direct class representation in Gradle’s API.
 	</div>
-	<ul>
+	
+	
+<ul>
 	<li>Created in 2008 by Gradleware, <a href="https://docs.gradle.org/current/userguide/userguide.html" target="web">Gradle</a> 
 	is mostly implemented in Java 5, with an outer layer in Groovy or Kotlin.
 <div class="remark">
-In our work, we will write <i>Gradle configuration scripts</i> in Kotlin DSL as described in 
+Gradle establishes a vocabulary for its model by exposing a DSL implemented in	Groovy/Kotlin.<br/>
+In our work, we will write <i>Gradle configuration scripts</i> in <k>Kotlin DSL</k> as described in 
 <a href="https://docs.gradle.org/current/dsl/index.html" target="web">Gradle Build Language Reference</a>
 </div>	
+
+	<h3>Gradle | Basic concepts</h3>
 
 <li>
 <center><img src="./img/gradle-project-tasks.png" alt="gradle-project-tasks.png" width="80%" height="80%"></center>
@@ -307,7 +310,7 @@ In our work, we will write <i>Gradle configuration scripts</i> in Kotlin DSL as 
 	
 </li>
 	<li><k>Gradle plugin</k>: Gradle at its core intentionally provides very little for real world
-automation. All of the useful features, are added by plugins (written in Groovy), that provide concepts, configuration blocks, and tasks  reusable across projects.
+automation. All of the useful features, are added by plugins, that provide concepts, configuration blocks, and tasks  reusable across projects.
 	</li>
 	<li><k>Gradle Java plugin</k>: introduces the concept of source set, with an associated compile classpath
 and runtime classpath, with defaults that copy the Maven conventions:
@@ -325,20 +328,55 @@ and runtime classpath, with defaults that copy the Maven conventions:
 		<li><ks>./gradlew <task></ks> runs <tt><task></tt> with that exact version.</li>
  
 		</ul>
+		
+<h3>Gradle execution</h3>
 		<div class="remark">
 		The Gradle wrapper is the correct way to use gradle.
 		</div>
 	</li>
 
+<li>Gradle uses two main directories to perform and manage its work: the Gradle <ks>user home</ks> directory 
+and the <ks>Project root</ks> directory.
+See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" target="web">The Directories and Files Gradle Uses</a>
+<l/i>
+
 <li>
 Gradle evaluates and executes build scripts in three phases (that form Gradle’s Build Lifecycle): 
-<k>Initialization, Configuration, Execution</k>.<br/> 
+<k>Initialization, Configuration, Execution</k>.
+<div class="remark">
+Gradle scripts are <k>configuration scripts</k>. As the script executes, it configures an object of a particular type. <br/>
+For example, as a <tt>build script</tt> executes, it configures an object of type 
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web">Project</a> ,
+(while Init script delegates to Gradle and Settings script delegates to Settings). 
+This object is called the delegate object of the script.
+</div>
+
+<center><img src="./img/06fig04.jpg" alt="06fig04.jpg" width="80%" height="80%"></center>
+
+<li>
+When Gradle executes a Kotlin build script (<ks>.gradle.kts</ks>), it compiles the script into a subclass of 
+<a href="https://gradle.github.io/kotlin-dsl-docs/api/org.gradle.kotlin.dsl/-kotlin-build-script/index.html" target="web">KotlinBuildScript</a>.
+This means that all of the visible properties and functions declared by the KotlinBuildScript type are available in your script.
+<br/>
+Each build script is associated with an object of type 
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web">Project</a> 
+ and as the build script executes, it configures this 
+ <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Gradle Project</a>.
+ 
+ <pre>
+ 
+ </pre>
+</li>
+
+<li>
 A build essentially configures a set of tasks and wires them together — based on their dependencies — to create a Directed acyclic graph (DAG) of thasks. 
 
  <center><img src="./img/gradleBuild.png" alt="gradleBuild.png" width="80%" height="80%"></center>
 
 Once the task graph has been created, Gradle determines which tasks need to be run in which order and then proceeds to execute them.
-<br/>
+</li>
+
+<li>
 Delaying the actual execution allows for a more fine grained configuration. This will be especially useful when modifying existing behavior 
 <div class="remark">
 <ul>
@@ -363,20 +401,7 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 
 </li>
 
-<li>
-When Gradle executes a Kotlin build script (<ks>.gradle.kts</ks>), it compiles the script into a subclass of 
-<a href="https://gradle.github.io/kotlin-dsl-docs/api/org.gradle.kotlin.dsl/-kotlin-build-script/index.html" target="web">KotlinBuildScript</a>.
-This means that all of the visible properties and functions declared by the KotlinBuildScript type are available in your script.
 
-<!-- See also <a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:kotlin" target="web">Kotlin DSL</a> -->
-
-<br/>
-
-Each build script is associated with an object of type 
-<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web">Project</a> 
- and as the build script executes, it configures this 
- <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Gradle Project</a>.
-</li>
 
 <li>
 See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
@@ -390,10 +415,7 @@ shows the following diagram for the
  
 </li>
 
-<li>Gradle uses two main directories to perform and manage its work: the Gradle <ks>user home</ks> directory 
-and the <ks>Project root</ks> directory.
-See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" target="web">The Directories and Files Gradle Uses</a>
-<li>
+
 </ol>
 
 <h1>Hands on Gradle</h1>
