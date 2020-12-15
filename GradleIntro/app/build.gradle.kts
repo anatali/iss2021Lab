@@ -7,7 +7,6 @@
  */
 
 plugins {
-    java
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }

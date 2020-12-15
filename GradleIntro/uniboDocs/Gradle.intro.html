@@ -274,12 +274,12 @@ and
 <br/><br/>
 	Gradle is an enterprise-ready build system, powered by declarative and expressive DSL (Groovy and Kotlin).
 	<br/>
-	<center><img src="./img/gradleDSLAPI.png" alt="gradleDSLAPI.png" width="100%" height="100%"></center>
  
 	<div class ="remark">
 Gradle applies the principles of <ks>domain-driven design</ks> (<k>DDD</k>) to model its own domain-building software. <br/>
 As a consequence, projects and tasks have a direct class representation in Gradle’s API.
 	</div>
+	<center><img src="./img/gradleDSLAPI.png" alt="gradleDSLAPI.png" width="100%" height="100%"></center>
 	
 	
 <ul>
@@ -362,10 +362,6 @@ Each build script is associated with an object of type
 <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web">Project</a> 
  and as the build script executes, it configures this 
  <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Gradle Project</a>.
- 
- <pre>
- 
- </pre>
 </li>
 
 <li>
@@ -389,7 +385,127 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 </ul>
 </div>
 </li> 
-<li>Gradle provides several mechanisms that allow you to extend it: 
+
+<li>
+<h3>Gradle plugins</h3>
+<div class="remark"> 
+All of the useful features of Gradle, like the ability to compile Java code, are added by <k>plugins</k>. 
+</div>
+From <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:using_plugins" target="web"><ks>Using plugins</ks></a>,
+we read that, to use the build logic encapsulated in a plugin, Gradle first  needs to <k>resolve</k> the plugin, and then it needs to 
+<k>apply</k> the plugin to the target, usually a Project.
+<br/><br/>
+
+Plugins add new tasks (e.g. JavaCompile), domain objects (e.g. SourceSet), conventions 
+(e.g. Java source is located at src/main/java) as well as extending core objects and objects from other plugins.
+<br/><br/>
+Gradle distinguishes two types of plugins: <i>script plugins</i> and <i>binary plugins</i>.
+<ul>
+<li>A <k>script plugin</k> is a regular Gradle build script <ks>that can be imported</ks> into other build scripts.
+ <!-- To use an external library directly in a build script, you’ll need to declare it in its classpath.
+For that purpose, Gradle’s API interface 
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web"><ks>org.gradle.api.Project</ks></a>
+ exposes the method <ks>buildscript</ks>.--> 
+The Gradle’s API class <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Project</a>
+ exposes the method <k>buildscript</k>, that works as a 
+ <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> Configuration</a>
+ section that states  how gradle is able to perform the build. 
+ <pre>
+ buildscript{
+	repositories{ ... }
+	dependencies{ classpath '... xxx' }	<kc>//To use an external library </kc>
+	task{ ... }
+ }
+ apply plugin: 'xxx'
+</pre>
+</li>
+<li>A <k>binary plugins</k> must implement the interface  
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Plugin.html" target="web"><ks>org.gradle.api.Plugin</ks></a>. When
+defined by the user, uts source code usually lives in the <ks>buildSrc</ks> directory and is distributed as a <tt>JAR</tt> file.
+
+<pre>
+ plugins{
+	java
+	application
+ }
+</pre>
+ 
+</li>
+</ul>
+See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
+<h4>The Java plugin</h4> 
+ The Java plugin is a <i>small <k>opinionated</k> framework</i> that assumes sensible default values for many aspects of a Java project.
+ <br/>
+In  <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a> we can see
+the following diagram for the 
+<a href="https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks" target="web">Java Plugin Lifecycle Tasks</a>:
+
+<center><img src="./img/javaPluginTasks.png" alt="javaPluginTasks.png" width="100%" height="100%"></center>
+
+The command line
+<pre>
+gradlew properties
+</pre> 
+gives us a list of configurable standard and plugin properties, plus their default values.
+
+</li>
+
+<li><h3>Gradle Configurations</h3>
+
+Plugins can introduce configurations to define the scope for a dependency.
+For example, dependencies required for compiling Java production source code are added
+with the <k>implementation</k> configuration.
+<div class="remark">
+Gradle version 6 supports both the <k>implementation</k> and <i>compile</i> dependency configurations.
+<br/>
+Yowever, <i>compile</i>, compile is now deprecated.
+</div>
+
+
+
+Every dependency declared for a Gradle project applies to a specific <k>scope</k>.
+ For example some dependencies should be used for compiling source code whereas others only need to be available at runtime.
+<br/>
+Gradle represents the scope of a dependency with the help of a 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> <ks>Configuration</ks></a>, i.e.
+a <b class="popup" onclick="myFunction()"><em>resolvable</em> 
+  <span class="popuptext" id="myPopup">'resolvable' means that it can be mappable to actual resources)</span>
+</b> set of dependencies.
+<br/><br/>
+A <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> Configuration</a>
+represents a group of artifacts and their dependencies.
+Every configuration can be identified by a unique name.
+<br/>
+Many Gradle plugins add pre-defined configurations to your project. 
+The <a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">J<ks>ava plugin</ks></a>, for example, 
+adds configurations to represent the various classpaths it needs for source code compilation, 
+executing tests and the like.  
+<center><img src="./img/dependency-management-configurations.png" alt="dependency-management-configurations.png" width="65%" height="65%"></center>
+<br/>
+The <a href="https://docs.gradle.org/current/userguide/java_library_plugin.html" target="web"><ks>Java Library Plugin</ks></a>
+adds an additional api configuration, on top of the <k>implementation</k> configuration.
+
+<br/><br/>
+Configurations can be directly added and accessed at the root level of a project; you
+can decide to use one of the configurations provided by a plugin or declare your own.
+For example:
+<pre>
+dependencies {
+   testImplementation 'junit:junit:4.13'
+   implementation 'com.google.guava:guava:29.0.1-jre'
+}
+</pre>
+shows  two dependencies: the Junit library which targets the <k>testImplementation</k> dependency target 
+and the guava library which targets the <k>implementation</k> dependency target.
+<br/> <br/> 
+Every project owns a 
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ConfigurationContainer.html" target="web">ConfigurationContainer</a>
+that manages the corresponding configurations.
+
+</li>
+
+<li><h3>Extends Gradle </h3>
+Gradle provides several mechanisms that allow you to extend it: 
 <ul>
 <li><a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Custom task types</a>
 (It’s typically best to put the source file for a custom task type in the 
@@ -403,17 +519,7 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 
 
 
-<li>
-See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
 
-and <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a> that
-shows the following diagram for the 
-<a href="https://docs.gradle.org/current/userguide/java_plugin.html#lifecycle_tasks" target="web">Java Plugin Lifecycle Tasks</a>:
-
-<center><img src="./img/javaPluginTasks.png" alt="javaPluginTasks.png" width="100%" height="100%"></center>
-
- 
-</li>
 
 
 </ol>
@@ -449,46 +555,73 @@ Start with some automatic code generation:
 
 </li>
 
-<li>Loook at the generated files <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a>.<br/><br/>
-By default, Gradle uses the directory name as project name. 
-You can change this by creating a settings.gradle file in the directory which specifies the project name.
-
-<pre>
-gradle project 	<kc>//get information about your project</kc>
-
-Root project 'demo'
-\--- Project ':app'
-</pre>
+<li> 
 Our build contains one subproject called <ks>app</ks> that represents the Java application we are building. 
 It is configured in the <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a> file.
+
+<pre>
+plugins { application  }
+
+repositories { jcenter() }
+
+dependencies {
+    testImplementation("junit:junit:4.13")
+    <kc>// This dependency is used by the application.</kc>
+    implementation("com.google.guava:guava:29.0-jre")
+}
+
+application { mainClass.set("demo.App") }
+</pre>
+
+The plugin <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">Application</a> 
+implicitly applies the 
+<a href="https://docs.gradle.org/current/userguide/java_plugin.html#java_plugin" target="web">Java plugin</a>
+
+Java plugin and the 
+<a href="https://docs.gradle.org/current/userguide/distribution_plugin.html#distribution_plugin" target="web">Distribution plugin</a>
+that facilitates building archives that serve as distributions of the project. 
+Distribution archives typically contain the executable application and other supporting files, such as documentation.
+ 
+</li>
+
+<li>Loook at the generated file <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a>.
 <div class="remark">
 One of the purposes of the <a href="../settings.gradle.kts" target="web">settings</a> object is to allow you 
 to declare a <k>list of projects</k> which are to be included in the build. <br/>
 Each subproject has its own <tt>build.gradle.kts</tt> file. See the section <a href="#multiprojects">Multi projects</a>.
 </div>
+By default, Gradle uses the directory name as project name. 
+You can change this in the settings.gradle file.
+
+<pre>
+<k>gradlew project</k> 	<kc>//get information about your project</kc>
+
+Root project 'demo'
+\--- Project ':app'
+
+
+<k>gradlew properties</k> 	<kc>//get a list of  standard and plugin properties</kc>
+allprojects: [root project 'demo', project ':app']
+...
+name: demo
+...
+project: root project 'demo'
+...
+rootDir: C:\Didattica2018Work\iss2021Lab\GradleIntro
+rootProject: root project 'demo'
+...
+subprojects: [project ':app']
+...
+</pre>
+
 
 </li>
 <li>
 The <ks>Gradle wrapper</ks> is the correct way to use gradle.
-<pre>
-<k>gradlew run</k> 
-SETTINGS RUNS ...
 
-> Configure project :app
- ...... build in app
-
-> Task :app:run
-Hello World!
-
-<kc>BUILD SUCCESSFUL</kc> in 7s
-2 actionable tasks: 2 executed 
-</pre>
-
-</ul>
-
-</li>
-<li>
-The <ks>application plugin</ks> bundles the application, with all its dependencies.
+ 
+The <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">Application</a> 
+bundles the application, with all its dependencies.
 <pre>
 <k>gradlew build</k> 	 
 SETTINGS RUNS ...
@@ -502,16 +635,16 @@ BUILD SUCCESSFUL in 9s
 Look at the generated directory <a href="../app/build/" target="web">app/build/</a>
 <br/><br/>
 As the script executes, it configures an object called the <ks>delegate object</ks> of the script:
-<ul>
-<li><i>Build</i> script: delegates to instance of 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Project</a>
-</li>
-<li><i>Settings</i>  script: delegates to instance of 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html" target="web">Settings</a>
-</li>  
-<li><i>Init</i>  script: delegates to instance of 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html" target="web">Gradle</a>
-</li> 
+	<ul>
+	<li><i>Build</i> script: delegates to instance of 
+	<a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html" target="web">Project</a>
+	</li>
+	<li><i>Settings</i>  script: delegates to instance of 
+	<a href="https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html" target="web">Settings</a>
+	</li>  
+	<li><i>Init</i>  script: delegates to instance of 
+	<a href="https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html" target="web">Gradle</a>
+	</li> 
 </li>
 
 <li>
@@ -523,9 +656,121 @@ SETTINGS RUNS ...
 
 </li>
 
- 
-</ol>
+<li>
+<pre>
+<k>gradlew run</k> 
+SETTINGS RUNS ...
 
+> Configure project :app
+ ...... build in app
+
+> Task :app:run
+Hello World!
+
+<kc>BUILD SUCCESSFUL</kc> in 7s
+2 actionable tasks: 2 executed 
+</pre>
+</li> 
+ 
+
+
+<!--
+<h2 id="dependencies">About <a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html" target="web"> dependencies</a>
+and <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> Configuration</a></h2>
+-->
+
+<li>
+<h3>Implementation configuration</h3>
+
+<!-- From https://tomgregory.com/gradle-implementation-vs-compile-dependencies/ -->
+When we’re configuring Gradle dependencies in a Java project, all we’re really doing is configuring which dependencies should appear 
+on two classpaths:
+<ul>
+<li><k>Compile classpath</k> – this is a list of dependencies that are required for the JDK to be able to compile Java code into <tt>.class</tt> files</li>
+<li><k>Runtime classpath</k> – this list of dependencies is required to actually run the compiled Java code</li>
+</ul>
+
+Given there are only two classpaths, it makes sense that we have three options to declare our dependencies.
+
+<center><img src="./img/JavaDependencies.png" alt="JavaDependencies.png" width="65%" height="65%"></center>
+Use the <k>implementation</k> dependency configuration if you need the dependency to be on both the compile and runtime classpaths. 
+If not, consider <tt> compileOnly</tt> or <tt> runtimeOnly</tt>. 
+<br/><br/>
+
+ 
+You can inspect your classpaths using the task <k>dependencies</k> (see
+ <a href="https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html" target="web"><ks>Viewing and debugging dependencies</ks></a> 
+ )
+ Gradle can visualize the whole dependency tree for every configuration available in a project.
+<pre>
+<k>gradle -q :app:dependencies --configuration implementation</k>
+implementation - Implementation only dependencies for source set 'main'. (n)
+\--- com.google.guava:guava:29.0-jre (n)
+
+(n) - Not resolved (configuration is not meant to be resolved)
+A web-based, searchable dependency report is available by adding the --scan option.
+</pre>
+
+It’s a very similar story for test dependencies, with the Gradle Java plugin providing the 
+<tt>testRuntimeOnly</tt>, <tt>testImplementation</tt>, and <tt>testCompileOnly</tt> dependency configurations. 
+
+<center><img src="./img/JavaTestDependencies.png" alt="JavaTestDependencies.png" width="65%" height="65%"></center>
+
+<pre>
+
+<k>gradle -q :app:dependencies </k>
+testImplementation - Implementation only dependencies for source set 'test'. (n)
+\--- junit:junit:4.13 (n)
+
+(n) - Not resolved (configuration is not meant to be resolved)
+A web-based, searchable dependency report is available by adding the --scan option.
+</pre>
+
+
+The `gradle dependencies` command that lists all the dependencies of a project for each dependency target 
+<pre>
+<k>gradle -q dependencies </k>
+No configurations
+
+<k>gradlew :app:dependencies</k>
+<kc>//... list all the dependencies</kc>
+
+<k>gradlew :app:dependencies --configuration testRuntimeClasspath</k>
+testRuntimeClasspath - Runtime classpath of source set 'test'.
++--- com.google.guava:guava:29.0-jre
+|    +--- com.google.guava:failureaccess:1.0.1
+|    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    +--- com.google.code.findbugs:jsr305:3.0.2
+|    +--- org.checkerframework:checker-qual:2.11.1
+|    +--- com.google.errorprone:error_prone_annotations:2.3.4
+|    \--- com.google.j2objc:j2objc-annotations:1.3
+\--- junit:junit:4.13
+     \--- org.hamcrest:hamcrest-core:1.3
+</pre>
+
+
+<h3>Configuration hierarchies</h3>
+A configuration can extend other configurations to form an inheritance hierarchy. 
+Child configurations inherit the whole set of dependencies declared for any of its superconfigurations.
+  <br/> <br/>
+Configuration inheritance is heavily used by Gradle core plugins like the 
+<a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">Java plugin</a>. 
+A Java project that uses JUnit to write and execute test code also needs Guava if its classes are imported in the production source code.
+
+<center><img src="./img/dependency-management-configuration-inheritance.png" 
+	alt="dependency-management-configuration-inheritance.png" width="65%" height="65%"></center>
+
+
+
+
+<hr/>
+A project dependency is a special form of an execution dependency. 
+It causes the other project to be built first and adds the jar with the classes of the other project to the classpath. 
+It also adds the dependencies of the other project to the classpath.
+<hr/>
+
+</li>
+</ol>
 
 <h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
 
@@ -810,6 +1055,7 @@ findLibraries().forEach { todo(it) }
 
 </pre>
 -->
+
  
 
 <h2 id="multiprojects">Multi projects</h2>
@@ -925,7 +1171,7 @@ I'm commontask number 0 in project demo
 I'm commontask number 0 in project app
 I'm commontask number 0 in project taskAccess
 </pre>
--->
+ 
 </li>
 
 <li><h3>Default tasks</h3>
@@ -1115,224 +1361,6 @@ The basic rule behind Gradle’s behavior is: execute all tasks down the hierarc
 
 </ol>
 
-<h2 id="dependencies">About <a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html" target="web"> dependencies</a>
-and <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> Configuration</a></h2>
-Gradle provides a way to specify where to find dependencies which are often common repositories
-<pre>
-repositories {
-    jcenter()
-}
-</pre>
-
-Every dependency declared for a Gradle project applies to a specific <k>scope</k>.
- For example some dependencies should be used for compiling source code whereas others only need to be available at runtime.
-<br/>
-Gradle represents the scope of a dependency with the help of a 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> <ks>Configuration</ks></a>, i.e.
-a <b class="popup" onclick="myFunction()"><em>resolvable</em> 
-  <span class="popuptext" id="myPopup">'resolvable' means that it can be mappable to actual resources)</span>
-</b> set of dependencies.
-<br/><br/>
-When declaring (Java) dependencies in Gradle you provide a <k>dependency configuration</k> to which to assign your dependency. 
-<pre>
-dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:2.2.5.RELEASE")
-}
-</pre>
-
-The file <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a> shows  wo dependencies. 
-One of these dependencies are the Junit unittesting library which targets the testImplementation dependency target 
-and the other is the guava library which targets the implementation dependency target.
-<pre>
-dependencies {
-    // This dependency is found on compile classpath of this component and consumers.
-    implementation 'com.google.guava:guava:29.0.1-jre'
-
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.13'
-}
-</pre>
-
-The `gradle dependencies` command that lists all the dependencies of a project for each dependency target 
-<pre>
-<k>gradlew :app:dependencies</k>
- ...... build top-level
- ...... build in app
-Message shown during the configuration phase: no task action defined in task ':app:notgood'
- ...... build in taskAccess sub-project
-compileClasspath= configuration ':taskAccess:compileClasspath'
- ...... build in taskJavaRun
-library C:\Didattica2018Work\iss2021Lab\GradleIntro\taskJavaRun\lib\junit-4.13.jar
-
-------------------------------------------------------------
-Project :app
-------------------------------------------------------------
-
-annotationProcessor - Annotation processors and their dependencies for source set 'main'.
-No dependencies
-
-apiElements - API elements for main. (n)
-No dependencies
-
-archives - Configuration for archive artifacts. (n)
-No dependencies
-
-compileClasspath - Compile classpath for source set 'main'.
-+--- junit:junit:4.13
-|    \--- org.hamcrest:hamcrest-core:1.3
-\--- com.google.guava:guava:29.0-jre
-     +--- com.google.guava:failureaccess:1.0.1
-     +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
-     +--- com.google.code.findbugs:jsr305:3.0.2
-     +--- org.checkerframework:checker-qual:2.11.1
-     +--- com.google.errorprone:error_prone_annotations:2.3.4
-     \--- com.google.j2objc:j2objc-annotations:1.3
-
-compileOnly - Compile only dependencies for source set 'main'. (n)
-No dependencies
-
-default - Configuration for default artifacts. (n)
-No dependencies
-
-implementation - Implementation only dependencies for source set 'main'. (n)
-+--- junit:junit:4.13 (n)
-\--- com.google.guava:guava:29.0-jre (n)
-
-runtimeClasspath - Runtime classpath of source set 'main'.
-+--- junit:junit:4.13
-|    \--- org.hamcrest:hamcrest-core:1.3
-\--- com.google.guava:guava:29.0-jre
-     +--- com.google.guava:failureaccess:1.0.1
-     +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
-     +--- com.google.code.findbugs:jsr305:3.0.2
-     +--- org.checkerframework:checker-qual:2.11.1
-     +--- com.google.errorprone:error_prone_annotations:2.3.4
-     \--- com.google.j2objc:j2objc-annotations:1.3
-
-runtimeElements - Elements of runtime for main. (n)
-No dependencies
-
-runtimeOnly - Runtime only dependencies for source set 'main'. (n)
-No dependencies
-
-testAnnotationProcessor - Annotation processors and their dependencies for source set 'test'.
-No dependencies
-
-testCompileClasspath - Compile classpath for source set 'test'.
-+--- junit:junit:4.13
-|    \--- org.hamcrest:hamcrest-core:1.3
-\--- com.google.guava:guava:29.0-jre
-     +--- com.google.guava:failureaccess:1.0.1
-     +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
-     +--- com.google.code.findbugs:jsr305:3.0.2
-     +--- org.checkerframework:checker-qual:2.11.1
-     +--- com.google.errorprone:error_prone_annotations:2.3.4
-     \--- com.google.j2objc:j2objc-annotations:1.3
-
-testCompileOnly - Compile only dependencies for source set 'test'. (n)
-No dependencies
-
-testImplementation - Implementation only dependencies for source set 'test'. (n)
-\--- junit:junit:4.13 (n)
-
-testRuntimeClasspath - Runtime classpath of source set 'test'.
-+--- junit:junit:4.13
-|    \--- org.hamcrest:hamcrest-core:1.3
-\--- com.google.guava:guava:29.0-jre
-     +--- com.google.guava:failureaccess:1.0.1
-     +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
-     +--- com.google.code.findbugs:jsr305:3.0.2
-     +--- org.checkerframework:checker-qual:2.11.1
-     +--- com.google.errorprone:error_prone_annotations:2.3.4
-     \--- com.google.j2objc:j2objc-annotations:1.3
-
-testRuntimeOnly - Runtime only dependencies for source set 'test'. (n)
-No dependencies
-
-(n) - Not resolved (configuration is not meant to be resolved)
-
-A web-based, searchable dependency report is available by adding the --scan option.
-</pre>
-<br/><br/>
-A <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> Configuration</a>
-represents a group of artifacts and their dependencies.
-Every configuration can be identified by a unique name.
-<br/>
-Many Gradle plugins add pre-defined configurations to your project. <br/>
-The <a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">J<ks>ava plugin</ks></a>, for example, 
-adds configurations to represent the various classpaths it needs for source code compilation, 
-executing tests and the like.  
-
-<center><img src="./img/dependency-management-configurations.png" alt="dependency-management-configurations.png" width="65%" height="65%"></center>
-
- 
-
-<br/>
-The <a href="https://docs.gradle.org/current/userguide/java_library_plugin.html" target="web"><ks>Java Library Plugin</ks></a>
-adds an additional api configuration, on top of the <k>implementation</k> configuration.
-<div class="remark">
-Gradle version 6 supports both the <k>implementation</k> and <i>compile</i> dependency configurations.
-<br/>
-Yowever, <i>compile</i>, compile is now deprecated.
-</div>
-
-<h3>Implementation configuration</h3>
-
-<!-- From https://tomgregory.com/gradle-implementation-vs-compile-dependencies/ -->
-When you’re building and running a Java project there are two classpaths involved:
-<ul>
-<li><k>Compile classpath</k> – this is a list of dependencies that are required for the JDK to be able to compile Java code into <tt>.class</tt> files</li>
-<li><k>Runtime classpath</k> – this list of dependencies is required to actually run the compiled Java code</li>
-</ul>
- 
-You can inspect your classpaths using this task  (see
- <a href="https://docs.gradle.org/current/userguide/viewing_debugging_dependencies.html" target="web"><ks>Viewing and debugging dependencies</ks></a> 
- )
- Gradle can visualize the whole dependency tree for every configuration available in a project.
-<pre>
-<k>gradle -q :app:dependencies --configuration implementation</k>
-implementation - Implementation only dependencies for source set 'main'. (n)
-+--- junit:junit:4.13 (n)
-\--- com.google.guava:guava:29.0-jre (n)
-
-(n) - Not resolved (configuration is not meant to be resolved)
-</pre>
-
-
-Given there are only two classpaths, it makes sense that we have three options to declare our dependencies.
-
-<center><img src="./img/JavaDependencies.png" alt="JavaDependencies.png" width="65%" height="65%"></center>
-Use the <k>implementation</k> dependency configuration if you need the dependency to be on both the compile and runtime classpaths. 
-If not, consider <tt> compileOnly</tt> or <tt> runtimeOnly</tt>. 
-
-<center><img src="./img/JavaTestDependencies.png" alt="JavaTestDependencies.png" width="65%" height="65%"></center>
-
-
-
-
-  <br/> <br/>
-A configuration can extend other configurations to form an inheritance hierarchy. 
-Child configurations inherit the whole set of dependencies declared for any of its superconfigurations.
-
-
-
-<h3>Configuration hierarchies</h3>
-
-Configuration inheritance is heavily used by Gradle core plugins like the 
-<a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">Java plugin</a>. 
-A Java project that uses JUnit to write and execute test code also needs Guava if its classes are imported in the production source code.
-
-<center><img src="./img/dependency-management-configuration-inheritance.png" 
-	alt="dependency-management-configuration-inheritance.png" width="65%" height="65%"></center>
-
-
-
-
-<hr/>
-A project dependency is a special form of an execution dependency. 
-It causes the other project to be built first and adds the jar with the classes of the other project to the classpath. 
-It also adds the dependencies of the other project to the classpath.
-<hr/>
 
 
 
@@ -1778,21 +1806,6 @@ build
 <!-- From https://thecodinginterface.com/blog/gradle-guide-for-java-developers/ -->
 <a href="https://docs.gradle.org/current/userguide/plugins.html" target="web"><ks>Gradle Plugins</ks></a>
  are handy chunks of functionality that can be added to a Gradle project which are provided by Gradle itself as well as third party developers. 
-<br/>
-Gradle distinguishes two types of plugins: <i>script plugins</i> and <i>binary plugins</i>.
-<ul>
-<li>A <k>script plugin</k> is a regular Gradle build script that can be imported
-into other build scripts. To use an external library directly in a build script, you’ll need to declare it in its classpath.
-For that purpose, Gradle’s API interface 
-<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html" target="web"><ks>org.gradle.api.Project</ks></a>
- exposes the method <ks>buildscript</ks>.</li>
-<li>A <k>binary plugins</k> must implement the interface  
-<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Plugin.html" target="web"><ks>org.gradle.api.Plugin</ks></a>. Its
-source code usually lives in the <ks>buildSrc</ks> directory and is distributed as a <tt>JAR</tt> file</li>
-</ul>
-From <a href="https://docs.gradle.org/current/userguide/plugins.html#sec:using_plugins" target="web"><ks>Using plugins</ks></a>,
-we read that, to use the build logic encapsulated in a plugin, Gradle first  needs to <k>resolve</k> the plugin, and then it needs to 
-<k>apply</k> the plugin to the target, usually a Project.
 
 <!--
 You can create a separate project for your task class. 
