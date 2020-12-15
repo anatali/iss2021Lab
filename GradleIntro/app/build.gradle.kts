@@ -96,9 +96,3 @@ tasks.register("myclean") {
     }
 }
 
-/*
-ADDED AFTER buildSrc
-*/
-task<CommonTask>("ct"){
-    msg ="Hello from ${this.name} in ${project.name}"
-}

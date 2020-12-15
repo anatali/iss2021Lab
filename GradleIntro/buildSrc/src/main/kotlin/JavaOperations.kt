@@ -9,7 +9,7 @@ import java.io.File
 import javax.inject.Inject
 
 // Inject annotation is required!
-open class Clean @Inject constructor() : DefaultTask() { // Must be open: Gradle generates subclasses at runtime
+open class Clean @Inject constructor() : DefaultTask() {
     @TaskAction
     fun clean() {
         if (!project.buildDir.deleteRecursively()) {
@@ -29,7 +29,7 @@ data class FinderInFolder(val project: Project, val directory: String) {
             ?: emptyArray()
 }
 fun Project.findFilesIn(directory: String) = FinderInFolder(this, directory)
-fun Project.findSources() = this.findFilesIn("src").withExtension("java")
+fun Project.findSources()   = this.findFilesIn("src").withExtension("java")
 fun Project.findLibraries() = this.findFilesIn("lib").withExtension("jar")
 
 abstract class JavaTask(javaExecutable: File = Jvm.current().javaExecutable) : Exec() {
@@ -49,17 +49,21 @@ abstract class JavaTask(javaExecutable: File = Jvm.current().javaExecutable) : E
         update()
     }
 
-    fun javaCommandLine(vararg arguments: String) = commandLine(
-            executable,
-            *(if (classPath.isEmpty()) emptyArray() else arrayOf("-cp", classPathDescriptor)),
-            *arguments
-    )
-
-    abstract fun update(): Unit
-
-    companion object {
-        val separator = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
+    fun javaCommandLine(vararg arguments: String) {
+        println("JavaTask | javaCommandLine num of arguments=${arguments.size} : ${arguments[0] } ")
+        commandLine(
+                executable,
+                *(if (classPath.isEmpty()) emptyArray() else arrayOf("-cp", classPathDescriptor)),
+                *arguments
+        )
     }
+
+        abstract fun update(): Unit
+
+        companion object {
+            val separator = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
+        }
+
 }
 
 open class CompileJava @javax.inject.Inject constructor() : JavaTask(Jvm.current().javacExecutable) {
@@ -79,6 +83,7 @@ open class CompileJava @javax.inject.Inject constructor() : JavaTask(Jvm.current
     init { update() }
 
     final override fun update() {
+        println("CompileJava | update num of sources=${sources.size}  ")
         javaCommandLine("-d", outputFolder, *sources.toTypedArray())
     }
 }
@@ -87,6 +92,7 @@ open class RunJava @javax.inject.Inject constructor() : JavaTask() {
     @Input
     var mainClass: String = "Main"
         set(value) {
+            println("RunJava | value=${value}  ")
             field = value
             update()
         }
@@ -95,5 +101,8 @@ open class RunJava @javax.inject.Inject constructor() : JavaTask() {
         dependsOn(project.tasks.withType<CompileJava>())
     }
 
-    final override fun update() { javaCommandLine(mainClass) }
+    final override fun update() {
+        println("RunJava | update classPath=${classPath} mainClass=${mainClass}  executable=$executable") //{classPath.joinToString(separator = ";")}
+        javaCommandLine(mainClass)
+    }
 }

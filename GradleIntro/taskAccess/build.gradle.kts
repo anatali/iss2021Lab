@@ -1,4 +1,3 @@
-//Dynamically created tasks
 println(" ...... build in taskAccess sub-project  ")
 
 tasks.named("explain") {

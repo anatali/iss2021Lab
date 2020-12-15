@@ -1730,8 +1730,8 @@ Since subprojects have no access to the root’s defined types, Gradle provides 
 <br/><br/>
 Upon discovery of the directory, Gradle automatically compiles and tests this code and puts it in the classpath of your build script. <br/> 
 This allows imperative code to get isolated and shared among subprojects.
-><br/>
-For multi-project builds there can be only one buildSrc directory, which has to sit in the root project directory. 
+<br/>
+For multi-project builds there can be only one <tt>buildSrc</tt> directory, which has to sit in the root project directory. 
 <br/><br/>
 <pre>
 Root project 'demo'
@@ -1755,16 +1755,21 @@ open class CommonTask @Inject constructor() : DefaultTask() {
 }
 </pre>
 The custom task cannot be used by itself; we need to create an enanced task.
-For example, let us consider the sub-projects <tt>app</tt> and <tt>taskAcces</tt>
+<br/>
+Let us introduce the new sub-project <tt>taskForBuildSrc</tt> ( with its own
+build file <a href="../taskForBuildSrc/build.gradle.kts" target="web">taskForBuildSrc/build.gradle.kts</a> )
+and modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> as follows:
+
+
 <pre>
 println("SETTINGS RUNS ...")
 rootProject.name = "demo"  
 include("app")  
-include("taskAccess")
-//include("taskCustom")
 ...
+include("taskForBuildSrc")    
 </pre>
-Now introduce in these sub-projects an enhanced  <tt>CommonTask</tt>
+<!-- For example, let us consider the sub-projects <tt>app</tt> and <tt>taskAcces</tt> -->
+Now introduce an enhanced  <tt>CommonTask</tt> named <tt>ct</tt>:
 
 <pre>
 task<CommonTask>("ct"){
@@ -1774,19 +1779,23 @@ task<CommonTask>("ct"){
 Finally, let us tell Gradle to run the task named <tt>ct</tt>:
 </pre>
 <pre>
-<k>gradle -q ct</k>
+<k>gradlew -q ct</k>
 SETTINGS RUNS ...
  ...... build top-level
  ...... build in app
 Message shown during the configuration phase: no task action defined in task ':app:notgood'
  ...... build in taskAccess sub-project
-<k>buildSrc/CommonTask |  Hello from ct in app
-buildSrc/CommonTask |  Hello from ct in taskAccess</k>
+taskAccess | compileClasspath= configuration ':taskForBuildSrc:compileClasspath'
+<ks>buildSrc/CommonTask |  Hello from ct in taskForBuildSrc</ks>
+
 </pre>
-Note that Gradle creates a <a href="../buildSrc/build/" target="web"><ks>build</ks></a> directory under 
-<tt>buildSrc</tt>. 
+Note that Gradle creates a <a href="../buildSrc/build/" target="web"><ks>buildSrc/build</ks></a> directory. 
 Gradle automatically compiles and tests the <tt>buildSrc</tt> code and puts it in the classpath of the build script. <br/> 
 
+<pre>
+<k>gradlew :taskForBuildSrc:dependencies</k>
+
+</pre>
 <h3>Refactoring Java operations</h3>
 Now we can define our custom tasks to compile and run Java programs within 
 <a href="../buildSrc/src/main/kotlin/JavaOps.kt" target="web">JavaOps.kt</a> and introduce in sub-project <tt>taskJavaRun</tt>
