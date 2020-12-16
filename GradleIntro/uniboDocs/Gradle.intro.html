@@ -1623,7 +1623,7 @@ tasks.register<Exec>("runJava") {
     val classpathFiles = runtimeClasspath.resolve()
     val myclasspath    = if( classpathFiles.size==0 ) classpathFiles;
                          else classpathFiles.joinToString(separator = sep )
-    val mainClass = "Program1" // Horribly hardcoded, we must do something
+    val mainClass = "Program1" <kc>//TODO: avoid hardcoding the name</kc>
     val javaExecutable = Jvm.current().javaExecutable.absolutePath
 
     commandLine(
@@ -1796,18 +1796,75 @@ Gradle automatically compiles and tests the <tt>buildSrc</tt> code and puts it i
 <k>gradlew :taskForBuildSrc:dependencies</k>
 
 </pre>
-<h3>Refactoring Java operations</h3>
-Now we can define our custom tasks to compile and run Java programs within 
-<a href="../buildSrc/src/main/kotlin/JavaOps.kt" target="web">JavaOps.kt</a> and introduce in sub-project <tt>taskJavaRun</tt>
-the enanched task
+<h3>Refactoring Java operations to compile/run</h3>
+Now, let us define our custom tasks to compile and run Java programs within 
+<a href="../buildSrc/src/main/kotlin/JavaCompileRun.kt" target="web"><ks>JavaCompileRun.kt</ks></a> and introduce a new sub-project 
+<tt>taskForBuildSrc</tt> with its own
+build file <a href="../taskForBuildSrc/build.gradle.kts" target="web">taskForBuildSrc/build.gradle.kts</a>.
+<br/><br/>
 
+Here, we exploit the declarative style of Gradle to define enanched tasks to compile and run Java programs
+written somewhere in the  <a href="../taskForBuildSrc/src" target="web"><ks>taskForBuildSrc/src</ks></a> directory.
+For example:
 <pre>
-xxx
+lib
+   junit-4-13.jar
+src
+   main  
+      java
+	     <a href="../taskForBuildSrc/src/main/java/P1.java" target="web">P1.java</a> 
+   test	 
+      java
+	     <a href="../taskForBuildSrc/src/test/java/P1Test.java" target="web">P1Test.java</a>  <kc>//requires JUnit</kc>
+ <a href="../taskForBuildSrc/src/P0.java" target="web">P0.java</a> 	
+</pre>
+ 
+We can modify <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> to include the project
+<tt>taskForBuildSrc</tt> only:
+<pre>
+println("SETTINGS RUNS ...")
+rootProject.name = "demo"  
+//include("app")  
+//include("taskAccess")
+//include("taskCustom")
+//include("taskJavaCompile")
+//include("taskJavaRun")
+//include("taskClasses")
+include("taskForBuildSrc")
 </pre>
 
+Now, we can execute:
 
 <pre>
-build
+<k>gradlew -q :taskForBuildSrc:RunJava</k>
+ ...... build top-level
+ ...... build in taskForBuildSrc sub-project
+taskForBuildSrc | dependencies BUIILDIR= C:\...\taskForBuildSrc\build
+taskForBuildSrc | FOUND lib: C:\...\taskForBuildSrc\lib\junit-4.13.jar
+JavaTask | task ':taskForBuildSrc:runJava' - fromConfiguration classPath=[<kc>jars in lib and build/bin</kc>] 
+<=============> 100% CONFIGURING [3s]
+> IDLE
+</pre>
+<div class="remark">
+The task waits  (see the <tt>readline</tt> in task <tt>runJava</tt> 
+in <a href="../taskForBuildSrc/src" target="web">taskForBuildSrc/src</a>) 
+until the user writes on the console the name of the program to run:
+</div>
+<pre>
+<k>P1</k>
+RunJava  | going to run ... P1
+JavaTask | javaCommandLine RunJava update - n arguments= 1	the first is: P1 
+JavaTask | javaCommandLine CompileJava update - n arguments= 5 <kc>The source files</kc>
+Hello from P1 written in Java
+</pre>
+
+Let us re-run the task, by interting the name of a program that requires <ks>JUnit</ks>:
+<pre>
+<k>P1Test</k>
+RunJava  | going to run ... P1Test
+JavaTask | javaCommandLine RunJava update - num of arguments= 1  the first is: P1Test  
+JavaTask | javaCommandLine CompileJava update - num of arguments= 5
+P1Test | true
 </pre>
 
   

@@ -1,4 +1,7 @@
-
+/*
+This class is compiled and executed by means of the custom tasks
+defined in buildSrc/src/main/java/JavaCompileRun
+ */
 
 public class P1 {
     public static String getGreeting() {

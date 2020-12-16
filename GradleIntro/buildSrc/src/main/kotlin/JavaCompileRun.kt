@@ -34,6 +34,10 @@ fun Project.findLibraries() = this.findFilesIn("lib").withExtension("jar")
 
 abstract class JavaTask(javaExecutable: File = Jvm.current().javaExecutable) : Exec() {
 
+    companion object {
+        val separator = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
+    }
+
     init { executable = javaExecutable.absolutePath }
 
     @Input
@@ -41,18 +45,18 @@ abstract class JavaTask(javaExecutable: File = Jvm.current().javaExecutable) : E
             .withExtension("jar")
             .map { project.file(it) }
             .toSet()
-        protected set
+
     private val classPathDescriptor get() = classPath.joinToString(separator = separator)
 
     fun fromConfiguration(configuration: Configuration) {
-        println("JavaTask | fromConfiguration $configuration")
         classPath = configuration.resolve()
-        update()
+        println("JavaTask | $this - fromConfiguration classPath=${classPath}")
+        update()  //could compile/run Main
     }
 
-    fun javaCommandLine(vararg arguments: String) {
+    fun javaCommandLine(msg: String, vararg arguments: String) {
         //println("JavaTask | javaCommandLine num of arguments=${arguments.size} ${arguments[0]}")
-        showArguments("", arguments)
+        showArguments(msg, arguments)  //ADDED to better understand the behavior
         commandLine(
                 executable,
                 *(if (classPath.isEmpty()) emptyArray() else arrayOf("-cp", classPathDescriptor)),
@@ -61,16 +65,13 @@ abstract class JavaTask(javaExecutable: File = Jvm.current().javaExecutable) : E
     }
 
     fun showArguments(msg: String, arguments: Array<out String>){
-        print("JavaTask | javaCommandLine $msg arguments ")
-        arguments.forEach { a -> print( "${a}   " ) }
+        print("JavaTask | javaCommandLine $msg - num of arguments= ${arguments.size} the first is: ${arguments[0]}")
+        //arguments.forEach { a -> print( "${a}   " ) }
         println("")
     }
 
-        abstract fun update(): Unit
+    abstract fun update(): Unit
 
-        companion object {
-            val separator = if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":"
-        }
 
 }
 
@@ -92,7 +93,7 @@ open class CompileJava @javax.inject.Inject constructor() : JavaTask(Jvm.current
 
     final override fun update() {
         //println("CompileJava | update num of sources=${sources.size}  ")
-        javaCommandLine("-d", outputFolder, *sources.toTypedArray())
+        javaCommandLine("CompileJava update","-d", outputFolder, *sources.toTypedArray())
     }
 }
 
@@ -100,7 +101,7 @@ open class RunJava @javax.inject.Inject constructor() : JavaTask() {
     @Input
     var mainClass: String = "Main"
         set(value) {
-            //println("RunJava | value=${value}  ")
+            println("RunJava  | going to run ... ${value}  ")
             field = value
             update()
         }
@@ -111,6 +112,6 @@ open class RunJava @javax.inject.Inject constructor() : JavaTask() {
 
     final override fun update() {
         //println("RunJava | update classPath=${classPath} mainClass=${mainClass}  executable=$executable") //{classPath.joinToString(separator = ";")}
-        javaCommandLine(mainClass)
+        javaCommandLine("RunJava update", mainClass)
     }
 }

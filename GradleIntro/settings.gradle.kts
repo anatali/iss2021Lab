@@ -8,7 +8,7 @@
  */
 println("SETTINGS RUNS ...")
 rootProject.name = "demo" //overrides the default behavior of naming the build after the directory it’s in
-include("app") //defines that the build consists of one subproject called app that contains the build logic
+//include("app") //defines that the build consists of one subproject called app that contains the build logic
 //include("taskAccess")
 //include("taskCustom")
 //include("taskJavaCompile")
