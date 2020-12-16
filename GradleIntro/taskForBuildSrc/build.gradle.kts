@@ -1,12 +1,36 @@
 /*
 See buildSrc
 */
+println(" ...... build in taskForBuildSrc sub-project  ")
+
+val compileClasspath by configurations.creating
+val runtimeClasspath by configurations.creating {
+    extendsFrom(compileClasspath)
+}
+dependencies {
+    findLibraries().forEach {
+        println("--------------------------------------- $it")
+        compileClasspath(files(it))
+        //compileOnly( files(it) )
+    }
+    println("--------------------------------------- $buildDir")
+    runtimeClasspath(files("$buildDir/bin"))
+    //runtimeOnly(files("$buildDir/bin"))
+}
+tasks.register<CompileJava>("compileJava")
+
+tasks.register<RunJava>("runJava") {
+    //fromConfiguration(configurations.runtimeClasspath.get())
+    fromConfiguration( runtimeClasspath )
+    mainClass = "P1"
+}
+
 /*
 plugins{
     application
 }
 
-println(" ...... build in taskForBuildSrc sub-project  ")
+
 
 repositories {
     // Use JCenter for resolving dependencies.
@@ -33,58 +57,34 @@ task<CommonTask>("ct"){
 task<RunJava>("commonRunJava"){
     mainClass="P0"
 }
-
- */
-
-val compileClasspath by configurations.creating
-val runtimeClasspath by configurations.creating {
-    extendsFrom(compileClasspath)
-}
-dependencies {
-    findLibraries().forEach {
-        compileClasspath(files(it))
-        //compileOnly( files(it) )
-    }
-    runtimeClasspath(files("$buildDir/bin"))
-    //runtimeOnly(files("$buildDir/bin"))
-}
-tasks.register<CompileJava>("compileJava")
+*/
 
 
 
 
+
+
+/*
 dependencies {
     compileClasspath(project(":library")) {
         targetConfiguration = "runtimeClasspath"
     }
 }
-/*
+
+
+
+
 tasks.compileJava {
     dependsOn(project(":library").tasks.compileJava)
     fromConfiguration(configurations.compileClasspath.get())
 }
 */
-tasks.register<RunJava>("runJava") {
-    fromConfiguration(configurations.runtimeClasspath.get())
-    mainClass = "P1"
-}
+
 /*
 allprojects {
     tasks.register<Clean>("clean")
 }
 
-subprojects {
-    val compileClasspath by configurations.creating
-    val runtimeClasspath by configurations.creating {
-        extendsFrom(compileClasspath)
-    }
-    dependencies {
-        findLibraries().forEach {
-            compileClasspath(files(it))
-        }
-        runtimeClasspath(files("$buildDir/bin"))
-    }
-    tasks.register<CompileJava>("compileJava")
-}
+
 
 */

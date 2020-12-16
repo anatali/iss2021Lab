@@ -23,14 +23,18 @@ allprojects{
 
     defaultTasks( "count" )
 }
-
-subprojects {
 /*
-    // Useful for dependencies
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "java")
-    dependencies {
-        implementation(project(":app"))
+subprojects {
+    val compileClasspath by configurations.creating
+    val runtimeClasspath by configurations.creating {
+        extendsFrom(compileClasspath)
     }
-    */
+    dependencies {
+        findLibraries().forEach {
+            compileClasspath(files(it))
+        }
+        runtimeClasspath(files("$buildDir/bin"))
+    }
+    tasks.register<CompileJava>("compileJava")
 }
+*/
