@@ -45,17 +45,25 @@ abstract class JavaTask(javaExecutable: File = Jvm.current().javaExecutable) : E
     private val classPathDescriptor get() = classPath.joinToString(separator = separator)
 
     fun fromConfiguration(configuration: Configuration) {
+        println("JavaTask | fromConfiguration $configuration")
         classPath = configuration.resolve()
         update()
     }
 
     fun javaCommandLine(vararg arguments: String) {
-        println("JavaTask | javaCommandLine num of arguments=${arguments.size} : ${arguments[0] } ")
+        //println("JavaTask | javaCommandLine num of arguments=${arguments.size} ${arguments[0]}")
+        showArguments("", arguments)
         commandLine(
                 executable,
                 *(if (classPath.isEmpty()) emptyArray() else arrayOf("-cp", classPathDescriptor)),
                 *arguments
         )
+    }
+
+    fun showArguments(msg: String, arguments: Array<out String>){
+        print("JavaTask | javaCommandLine $msg arguments ")
+        arguments.forEach { a -> print( "${a}   " ) }
+        println("")
     }
 
         abstract fun update(): Unit
@@ -83,7 +91,7 @@ open class CompileJava @javax.inject.Inject constructor() : JavaTask(Jvm.current
     init { update() }
 
     final override fun update() {
-        println("CompileJava | update num of sources=${sources.size}  ")
+        //println("CompileJava | update num of sources=${sources.size}  ")
         javaCommandLine("-d", outputFolder, *sources.toTypedArray())
     }
 }
@@ -92,7 +100,7 @@ open class RunJava @javax.inject.Inject constructor() : JavaTask() {
     @Input
     var mainClass: String = "Main"
         set(value) {
-            println("RunJava | value=${value}  ")
+            //println("RunJava | value=${value}  ")
             field = value
             update()
         }
@@ -102,7 +110,7 @@ open class RunJava @javax.inject.Inject constructor() : JavaTask() {
     }
 
     final override fun update() {
-        println("RunJava | update classPath=${classPath} mainClass=${mainClass}  executable=$executable") //{classPath.joinToString(separator = ";")}
+        //println("RunJava | update classPath=${classPath} mainClass=${mainClass}  executable=$executable") //{classPath.joinToString(separator = ";")}
         javaCommandLine(mainClass)
     }
 }
