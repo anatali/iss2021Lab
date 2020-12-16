@@ -319,23 +319,35 @@ and runtime classpath, with defaults that copy the Maven conventions:
 		<li>test containing <ks>src/test/java</ks>  and <ks>src/test/resources</ks> </li>
 		</ul>
 	</li>
-	<li><k>Gradle <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html" target="web">wrapper</a></k>: 
-		a script that invokes a declared version of Gradle, downloading it beforehand if necessary.
 	
-		<ul>
- 		<li><tt>gradle/wrapper/gradle-wrapper.properties</tt>, stores the information about the Gradle distribution.</li>
-		<li><ks>gradle wrapper --gradle-version 2.11</ks> downloads <tt>version 2.11</tt>. </li>
-		<li><ks>./gradlew <task></ks> runs <tt><task></tt> with that exact version.</li>
+	
+<h3>Gradle wrapper </h3>
  
+	<li>		
+The <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html" target="web">Gradle wrapper</a>  is a core feature that 
+enables a machine to run a Gradle build script without having to install the runtime. 
+It also ensures that the build script is run with a specific version of Gradle. <br/><br/>
+It does so by automatically downloading the Gradle
+runtime from a central location, unpacking it to your local file system, and using itfor the build. 
+<br/><br/>
+Its ultimate goal is to create reliable and reproducible builds independent
+of the operating system, system setup, or installed Gradle version.
+<br/><br/>	
+		<ul>
+ 		<li>The file <a href="../gradle/wrapper/gradle-wrapper.properties" target="web">gradle/wrapper/gradle-wrapper.properties</a>
+stores the information about the Gradle distribution.</li>
+		<li><pre>gradle wrapper --gradle-version xx.yy  <kc>//downloads a specific version</pre> </li>
 		</ul>
-		
-<h3>Gradle execution</h3>
-		<div class="remark">
+ 		<div class="remark">
 		The Gradle wrapper is the correct way to use gradle.
+		<pre>gradlew &lt;task></ks> <kc>//runs <tt>&lt;task></tt> with that exact version.</kc></pre>
 		</div>
-	</li>
+</li>
+ 
 
-<li>Gradle uses two main directories to perform and manage its work: the Gradle <ks>user home</ks> directory 
+<h3>Gradle execution</h3>
+<li>
+Gradle uses two main directories to perform and manage its work: the Gradle <ks>user home</ks> directory 
 and the <ks>Project root</ks> directory.
 See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" target="web">The Directories and Files Gradle Uses</a>
 <l/i>
@@ -452,34 +464,31 @@ gives us a list of configurable standard and plugin properties, plus their defau
 
 <li><h3>Gradle Configurations</h3>
 
-Plugins can introduce configurations to define the scope for a dependency.
-For example, dependencies required for compiling Java production source code are added
-with the <k>implementation</k> configuration.
-<div class="remark">
-Gradle version 6 supports both the <k>implementation</k> and <i>compile</i> dependency configurations.
-<br/>
-Yowever, <i>compile</i>, compile is now deprecated.
-</div>
-
-
-
-Every dependency declared for a Gradle project applies to a specific <k>scope</k>.
- For example some dependencies should be used for compiling source code whereas others only need to be available at runtime.
-<br/>
-Gradle represents the scope of a dependency with the help of a 
-<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> <ks>Configuration</ks></a>, i.e.
-a <b class="popup" onclick="myFunction()"><em>resolvable</em> 
+In Gradle, dependencies are grouped by configurations.
+A <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"><ks>Configuration</ks></a>
+represents a <b class="popup" onclick="myFunction()"><em>resolvable</em> 
   <span class="popuptext" id="myPopup">'resolvable' means that it can be mappable to actual resources)</span>
-</b> set of dependencies.
+</b> set of dependencies, and is identified by a unique name.
 <br/><br/>
-A <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> Configuration</a>
-represents a group of artifacts and their dependencies.
-Every configuration can be identified by a unique name.
-<br/>
+<!-- Plugins introduce configurations to define the scope for a dependency. -->
+Every dependency declared for a Gradle project applies to a specific <k>scope</k> by means of a
+<a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"> <ks>Configuration</ks></a>.
+ For example some dependencies should be used for compiling source code whereas others only need to be available at runtime.
+
+<br/><br/>
 Many Gradle plugins add pre-defined configurations to your project. 
 The <a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">J<ks>ava plugin</ks></a>, for example, 
 adds configurations to represent the various classpaths it needs for source code compilation, 
 executing tests and the like.  
+More specifically, dependencies required for compiling Java production source code are added
+with the <k>implementation</k> configuration.
+<div class="remark">
+Gradle version 6 supports both the <k>implementation</k> and <i>compile</i> dependency configurations.
+<br/>
+However, <i>compile</i>, compile is now deprecated.
+</div>
+
+
 <center><img src="./img/dependency-management-configurations.png" alt="dependency-management-configurations.png" width="65%" height="65%"></center>
 <br/>
 The <a href="https://docs.gradle.org/current/userguide/java_library_plugin.html" target="web"><ks>Java Library Plugin</ks></a>
@@ -616,6 +625,7 @@ subprojects: [project ':app']
 
 
 </li>
+
 <li>
 The <ks>Gradle wrapper</ks> is the correct way to use gradle.
 
@@ -632,7 +642,9 @@ SETTINGS RUNS ...
 BUILD SUCCESSFUL in 9s
 7 actionable tasks: 6 executed, 1 up-to-date
 </pre>
-Look at the generated directory <a href="../app/build/" target="web">app/build/</a>
+Look at the generated directory <a href="../app/build/" target="web"><ks>app/build/</ks></a> and at the generated report file for tests
+<a href="../app/build/reports/tests/test/index.html" target="web"><ks>index.html</ks></a>.
+
 <br/><br/>
 As the script executes, it configures an object called the <ks>delegate object</ks> of the script:
 	<ul>
@@ -645,6 +657,7 @@ As the script executes, it configures an object called the <ks>delegate object</
 	<li><i>Init</i>  script: delegates to instance of 
 	<a href="https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html" target="web">Gradle</a>
 	</li> 
+	</ul>
 </li>
 
 <li>
@@ -658,7 +671,14 @@ SETTINGS RUNS ...
 
 <li>
 <pre>
-<k>gradlew run</k> 
+<k>java -cp app/build/classes/java/main    demo.App </k> 	<kc>//using Java to run</kc>
+Hello World!
+</pre>
+</li>
+
+<li>
+<pre>
+<k>gradlew run</k> 	<kc>//using Gradle to run</kc>
 SETTINGS RUNS ...
 
 > Configure project :app
@@ -672,7 +692,29 @@ Hello World!
 </pre>
 </li> 
  
+<li>
+<pre>
+</k>jar tf app/build/libs/app-1.0.jar</k>	<kc>//Verify that the archive is valid</kc>
+META-INF/
+META-INF/MANIFEST.MF
+demo/
+demo/App.class
 
+<k>gradlew jar</k>	<kc>//Already done by application</kc>
+
+<k>jar xf app/build/libs/app-1.0.jar META-INF/MANIFEST.MF</k>
+
+<k>java -jar app/build/libs/app-1.0.jar</k> 	<kc>//run from jar</kc>
+
+
+
+Hello World!
+
+
+
+
+</pre>
+</li>
 
 <!--
 <h2 id="dependencies">About <a href="https://docs.gradle.org/current/userguide/declaring_dependencies.html" target="web"> dependencies</a>

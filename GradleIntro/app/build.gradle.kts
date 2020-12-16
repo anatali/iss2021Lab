@@ -31,6 +31,24 @@ application {
 }
 
 /*
+CHANGE PROPERTIES
+*/
+version = 1.0
+/*
+tasks.jar {
+    manifest {
+        attributes(mapOf("Implementation-Title" to project.name,
+                "Implementation-Version" to project.version))
+    }
+}
+*/
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "demo.App"
+    }
+}
+
+/*
 ADDED TASKS
  */
 println(" ...... build in app  ")
