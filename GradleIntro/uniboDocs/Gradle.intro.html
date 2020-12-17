@@ -353,6 +353,16 @@ See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" ta
 <l/i>
 
 <li>
+Each time you initiate a build, the JVM has to be started, Gradle’s dependencies have to be loaded into the class
+loader, and the project object model has to be constructed. This procedure usually
+takes a couple of seconds. 
+<h4>Gradle deamon</h4>
+The Gradle daemon runs Gradle as a background process. Once started, the gradle command
+will reuse the forked daemon process for subsequent builds, avoiding the
+startup costs altogether.
+</li>
+
+<li>
 Gradle evaluates and executes build scripts in three phases (that form Gradle’s Build Lifecycle): 
 <k>Initialization, Configuration, Execution</k>.
 <div class="remark">
@@ -600,31 +610,10 @@ to declare a <k>list of projects</k> which are to be included in the build. <br/
 Each subproject has its own <tt>build.gradle.kts</tt> file. See the section <a href="#multiprojects">Multi projects</a>.
 </div>
 By default, Gradle uses the directory name as project name. 
-You can change this in the settings.gradle file.
-
-<pre>
-<k>gradlew project</k> 	<kc>//get information about your project</kc>
-
-Root project 'demo'
-\--- Project ':app'
-
-
-<k>gradlew properties</k> 	<kc>//get a list of  standard and plugin properties</kc>
-allprojects: [root project 'demo', project ':app']
-...
-name: demo
-...
-project: root project 'demo'
-...
-rootDir: C:\Didattica2018Work\iss2021Lab\GradleIntro
-rootProject: root project 'demo'
-...
-subprojects: [project ':app']
-...
-</pre>
-
+You can change this in the <a href="../settings.gradle.kts" target="web">settings.gradle.kts</a> file.
 
 </li>
+
 
 <li>
 The <ks>Gradle wrapper</ks> is the correct way to use gradle.
@@ -664,6 +653,7 @@ As the script executes, it configures an object called the <ks>delegate object</
 <pre>
 <k>gradlew -q build</k> 	<kc>//-q suppresses Gradle’s log messages</kc>
 SETTINGS RUNS ...
+ ...... build top-level		//After Multi project
  ...... build in app
 </pre>
 
@@ -705,15 +695,59 @@ demo/App.class
 <k>jar xf app/build/libs/app-1.0.jar META-INF/MANIFEST.MF</k>
 
 <k>java -jar app/build/libs/app-1.0.jar</k> 	<kc>//run from jar</kc>
-
-
-
 Hello World!
-
-
-
-
 </pre>
+</li>
+
+<li><h3>Properties</h3>
+Each instance of Project and Task provides properties that are accessible through getter
+and setter methods. A property could be a task’s description or the project’s version.
+<br/><br/>
+Properties can be directly injected into your project by declaring them in a properties
+file named <ks>gradle.properties</ks></a>
+under the directory <tt>&lt;USER_HOME>/.gradle</tt> or a project’s root directory. 
+This file consists of key-value pairs.
+
+<pre>
+myprop1="myprop1-value"
+</pre>
+
+<h4>Extra properties</h4>
+All enhanced objects in Gradle’s domain model can hold extra user-defined properties.
+This includes, but is not limited to, projects, tasks, and source sets.
+<pre>
+ext{
+    set( "myprop3", "myprop3-value defined using the ext namespace ")
+}
+</pre>
+Extra properties on a project are visible from its subprojects.
+<br/><br/>
+For examples, see later the sub-project <a href="#taskProperties"><ks>taskProperites</ks></a>:
+
+
+<h4>Predefined access to properties</h4>
+<pre>
+<k>gradlew project</k> 	<kc>//get information about your project</kc>
+
+Root project 'demo'
+\--- Project ':app'
+
+
+<k>gradlew properties</k> 	<kc>//get a list of  standard and plugin properties</kc>
+allprojects: [root project 'demo', project ':app']
+...
+name: demo
+...
+project: root project 'demo'
+...
+rootDir: C:\Didattica2018Work\iss2021Lab\GradleIntro
+rootProject: root project 'demo'
+...
+subprojects: [project ':app']
+...
+</pre>
+
+
 </li>
 
 <!--
@@ -1132,7 +1166,7 @@ include("app")
 </pre>
 
 
-Moreover, we introduce a <a href="../build.gradle.kts" target="web"><ks>top-level project build</ks></a>  
+Moreover, we introduce a <a href="../build.gradle.kts" target="web"><ks>top-level project build.gradle.kts</ks></a>  
 that configures build behaviour that is <k>shared</k> between all sub-modules so that we don’t have to duplicate things in the sub-modules:
 
 <pre>
@@ -1159,6 +1193,11 @@ allprojects{
 Shows the structure of the project.
 
 <pre>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in app
+Message shown during the configuration phase: no task action defined in task ':app:notgood'
+
 Root project 'demo'
 +--- Project ':app'
 \--- Project ':taskAccess'
@@ -1176,12 +1215,11 @@ SETTINGS RUNS ...
  ...... build in taskAccess sub-project
 Hello, I'm app project. My tasks are:
 Message shown during the configuration phase: no task action defined in task ':app:notgood'
-assemble
 ... 
-<kc>//Shows the tasks defined in the <k>java plugin</k>, the tasks defined in  the top-level project build
-<a href="../build.gradle.kts" target="web"><k>./build.gradle.kts</k></a>  (e.g. <ks>explain, commontask0, commontask1, commontask2, commontask3</ks>)
-and the tasks defined in the <tt>app</tt> build
-<a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a>  (e.g. <ks>hello, notgood, count, task0, task1, task2, task3, welcome</ks>)
+    <kc>//Shows the tasks defined in the <k>java plugin</k>, the tasks defined in  the top-level project build
+    <a href="../build.gradle.kts" target="web"><k>./build.gradle.kts</k></a>  (e.g. <ks>explain, commontask0, commontask1, commontask2, commontask3</ks>)
+    and the tasks defined in the <tt>app</tt> build
+    <a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a>  (e.g. <ks>hello, notgood, count, task0, task1, task2, task3, welcome</ks>)
 </kc>
 </pre>
 
@@ -1220,15 +1258,39 @@ I'm commontask number 0 in project taskAccess
 Gradle allows you to define one or more default tasks that are executed if no other tasks are specified. 
 
 <pre>
-defaultTasks( "count" )	<kc>//Task <tt>count</tt> is defined in <a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a> </kc>
+defaultTasks( "count" )	<kc>//declared in <a href="../build.gradle.kts" target="web"><k>build.gradle.kts</k></a> allprojects </kc>
+<kc>//The task <tt>count</tt> is defined in <a href="../app/build.gradle.kts" target="web"><k>app/build.gradle.kts</k></a> </kc>
 
 <k>gradlew -q </k>
 SETTINGS RUNS ...
  ...... build top-level
  ...... build in app
- ...... build in taskAccess sub-project
 0 1 2 3		<kc>//Result of the task <tt>count</tt> defined in <tt>app</tt>
 </pre>
+</li>
+
+<li id="taskProperties"><h3>Using properties</h3>
+In order to experiment the usage of (extra properties), let us introduce a new sub-project <tt>taskProperties</tt> with a local file
+ <a href="../taskProperties/gradle.properties" target="web"><ks>taskProperties/gradle.properties</ks></a>.
+ <br/> <br/>
+The sub-project
+build file <a href="../taskProperties/build.gradle.kts" target="web">taskProperties/build.gradle.kts</a>  
+does introduce a set of differnet ways to declare extra properties and defines a task named <tt>showMyProps</tt>
+that accesses these properties and shows their value.
+ 
+ 
+<pre>
+<k>gradle -q taskProperties:showMyProps</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in taskProperties
+myprop1                   = "myprop1-value defined in taskProperties/gradle.properies"
+myprop2                   = myprop2-value defined using by extra
+ext.get("myprop3")      = myprop3-value defined using the ext namespace
+extra["logo"]           = this is a task
+project.extra["purpose"]= todo
+</pre>
+ 
 </li>
 
 <li><h3>Accessing a task via API - adding behavior</h3>
@@ -1355,10 +1417,46 @@ I'm commontask number 0 in project taskAccess
 
 </li>
  
+<li><h3>Hooking into the build lifecycle</h3>
+In Gradle, a <k>lifecycle event</k> can occur before, during, or after a specific build phase.
+<br/>
+Sometimes, it could be useful to execute code when a specific lifecycle event occurs. 
+For example, to get feedback about failed builds as early as possible, we could send an email
+to all developers on the team.
+<br/><br/>
+Let us introduce a new sub-project <tt>taskEvents</tt>
+The sub-project build file <a href="../taskEvents/build.gradle.kts" target="web">taskEvents/build.gradle.kts</a>  
+show the two main ways to write a callback to build lifecycle events: <br/><br/>
+<ul>
+<li>within a closure
+<pre>
+gradle.taskGraph.whenReady {
+    println("whenReady version=$version ${hasTask(":taskEvents:release")}" )
+    version =
+            if (hasTask(":taskEvents:release")) "1.0"
+            else "1.0-SNAPSHOT"
+}
+</pre>
+</li>
+<li>with an implementation of a listener interface provided by the Gradle API.
+<pre>
+</pre>
+</li>
+</ul> 
 
+<pre>
+<k>gradle -q :taskEvents:release</k>
+SETTINGS RUNS ...
+ ...... build top-level
+ ...... build in taskEvents sub-project
+whenReady version=not-yet-defined true
+We build the zip with version=1.0
+We release now
+</pre>
+</li>
 
 <!--
-For example, let us introduce a subproject that shwows how tasks can be accessed/modified by using Gradle API
+For example, let us introduce a subproject that shows how tasks can be accessed/modified by using Gradle API
 
 <pre>
 println("SETTINGS RUNS ...")
