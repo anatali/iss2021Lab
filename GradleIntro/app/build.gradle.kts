@@ -114,3 +114,22 @@ tasks.register("myclean") {
     }
 }
 
+/*
+INPUT-OUTPUT dependencies
+ */
+task("t1"){
+    //Configuration
+    inputs.property("version",version)
+    //outputs.property()
+    //Action
+    doLast{
+        version="1.1"
+        println("task t1 $version")
+    }
+}
+
+task("t2"){
+    doLast{
+        println("task t2 $version")
+    }
+}

@@ -360,6 +360,8 @@ takes a couple of seconds.
 The Gradle daemon runs Gradle as a background process. Once started, the gradle command
 will reuse the forked daemon process for subsequent builds, avoiding the
 startup costs altogether.
+<br>The daemon process will automatically expire after some (three-hour) idle time.
+<br><br>
 </li>
 
 <li>
@@ -997,7 +999,7 @@ count STARTS
  
 
 You can declare tasks that <ks>depend on other tasks</ks>.
-Example: add in <a href="../app/build.gradle.kts" target="web">build.gradle.kts</a>
+Example: add in <a href="../app/build.gradle.kts" target="web">app/build.gradle.kts</a>
 <pre>
 tasks.register("welcome") {	<kc>//could be declared <k>before</k> <tt>hello</tt> and <tt>count</tt> (hoisting)</kc>
     dependsOn("hello")
@@ -1015,9 +1017,27 @@ Hello world from app - this=task ':app:hello'
 Welcome task that depends on tasks hello and count
 </pre>
 
+<div class="remark">
+Gradle’s philosophy is to declare <k>what</k> should be executed before a given task, <k>not how</k> it should be executed.
+Thus, Gradle <ks>doesn’t guarantee</ks> the order in which the dependencies of a task are executed.
+<br/><br/>
+However, the execution order is automatically determined by the <ks>input/output specification</ks> of a task.
+Task inputs and outputs are evaluated during the <k>configuration phase</k> to wire up the task dependencies
+</div>
+
+<h4>Task inputs and outputs</h4>
+A task is considered <k>up to date</k> if inputs and outputs haven’t changed since the last task execution.
+Therefore, the task only runs if the inputs and outputs are different; otherwise, it’s skipped.
+Inputs and outputs are defined as fields in class 
+<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/DefaultTask.html" target="web"> <ks>DefaultTask</ks></a>.
+<br/><br/>
+For examples see the section <a href="#userdefinedtasks">User-defined Task types</a>.
+
 </li>
 
-<li>The <ks><i>clean</i> task</ks> <br/>
+
+
+<li><h3>The <ks>clean</ks> task </h3>  
 The clean task is defined by the 
 <a href="https://docs.gradle.org/current/userguide/java_plugin.html" target="web">Java plugin</a>
 
@@ -1786,7 +1806,7 @@ Hello from Program1 written in Java
 </pre>
 </li>
 
-<li><h3>User-defined Task types</h3>
+<li><h3 id="userdefinedtasks">User-defined Task types</h3>
 New, user defined tasks:
 <ul>
 <li>must implement the  <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/ask.html" target="web"> <ks>Task</ks></a> interface</li>
@@ -2007,7 +2027,18 @@ JavaTask | javaCommandLine CompileJava update - num of arguments= 5
 P1Test | true
 </pre>
 
-  
+ 
+<h2>CI<</h2>
+<pre>
+https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/migrating-from-jenkins-to-github-actions
+
+https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions
+
+https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions
+
+https://knapsackpro.com/ci_comparisons/jenkins/vs/github-actions
+
+</pre> 
 
 <!--
 You can create a separate project for your task class. 
