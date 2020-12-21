@@ -182,6 +182,13 @@ table, th, td {
 }
 </style>
 
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
 <head>
    
 <title>LabIss20201</title>
@@ -192,20 +199,28 @@ table, th, td {
  
 <title>LabIss2021</title></head><body>
     
-<h1>LabIss2021</h1>
+<h1>Ingegneria dei Sistemi Software 2021</h1>
 
 <h2>Introduction</h2>
  <center>
  <table style="width:98%">
  
 	<tr>
-	<td style="width:60%">	 
+	<td style="width:60%">Lectures<br/>	 
 	<m><a href="./LectureBologna2021.html" target="lab">LectureBologna20-21</a></m>	
 	</td>
 	<td style="width:35%">Project <bc>issLabStart</bc><br/>
  	</td>
-<td><tt>1.0</tt></td>
+<td><tt></tt></td>
 	</tr>
+	
+	 	<tr>
+	<td style="width:60%">	 <h3>Startup</h3>
+ 	</td>
+	<td style="width:35%"> 
+	</td>
+<td><tt></tt></td>
+	</tr>	
 	
 	<tr>
 	<td  >	 
@@ -215,7 +230,7 @@ table, th, td {
 	</td>
 	<td>Project <bc>issLabStart</bc><br/>
 	</td>
-<td><tt>1.1</tt></td>
+<td><tt></tt></td>
 	</tr>
 	
  	<tr>
@@ -224,40 +239,235 @@ table, th, td {
 	</td>
 	<td>Project <bc>issLabStart</bc><br/>
 	</td>
-<td><tt>1.2</tt></td>
+<td><tt></tt></td>
 	</tr>		
 
  	<tr>
 	<td  >	Trattandosi di sviluppo software, occorre fare riferimento a qualche tecnologia di base<br/> 
-	<m><a href="./Lab0ISS2020.html" target="lab">Lab0ISS2020 | Tools</a></m>	
-	 in particular: <m><a href="./Lab0.html#uniboactions" target="lab">Lab0_2020 | Iss-unibo specific configuration and actions</a></m> <br/>
+	<m><a href="./Lab0_ISS2021.html" target="lab">Lab0_ISS2021 | Tools</a></m>	
+	 in particular: <m><a href="./Lab0_ISS2021.html#uniboactions" target="lab">Lab0_ISS2021 | Iss-unibo specific configuration and actions</a></m> <br/>
 	 nell'ambito di processi di sviluppo agili e cooperativi<br/>
 <a href="https://github.com/anatali/iss2021Lab.git" target="web"> <m><ks>https://github.com/anatali/iss2021Lab.git </ks></m></a>
 	</td>
 	<td> Project <bc>issLabStart</bc> </td>
-<td><tt>1.3</tt></td>
+<td><tt></tt></td>
 	</tr> 
  	<tr>
 	<td  > La conosenza e l'uso di linguaggi e strumenti (esistenti) non basta <br/>	 
 	<m><a href="./ISSM2020.pdf" target="lab">72939 - INGEGNERIA DEI SISTEMI SOFTWARE M</a> &nbsp; &nbsp; &nbsp;
 	 <a href="./72939LabISSIntro.html" target="lab">72939 - Software Systems Engineering M | overview</a></m><br/>
-    Un (dominio di) problema introduce un gap rispetto alle tecnologie che può essere notevole e può essere meglio superato grazie alla modellazione,
+    Un (dominio di) problema introduce un gap rispetto alle tecnologie realizzative che, quando elevato, può essere meglio superato grazie alla modellazione,
 	al domain-driven design e alla definizione di linguaggi custom.	
 	</td>
-	<td> 
-<div class="tooltip">Project <bc>issLabStart</bc> 
-  <span class="tooltiptext">See gitHub</span>
-</div>
-	</td> 
-<td><tt>1.4</tt></td>
+	<td> Project <bc>issLabStart</bc> 
+	</td>
+	
+<td><tt></tt></td>
+	</tr>
+	
+	 	<tr>
+	<td style="width:60%">	 <h3>Mondi reali e mondi virtuali</h3>
+ 	</td>
+	<td style="width:35%"> 
+	</td>
+<td><tt></tt></td>
 	</tr>
  
-	
+ 	<tr>
+	<td>Le applicazioni IOT consentono di affrontare diversi tipi e livelli di problemi e di affronatre la progettazione
+	di sistemi software per mondi reali (sistemi embedded) e mondi virtuali (virtual-ugmented reality)<br/>
+	<m><a href="./devsDDR.html" target="lab">Building a physical DDR</a></m>	&nbsp; &nbsp; &nbsp; 
+	<m><a href="../../it.unibo.virtualRobot2020/userDocs/LabVirtualRobot.html" target="lab">LabVirtualRobot | Interacting with a virtual robot</a></m>
+	</td>
+	<td>Project <bc>issLabStart</bc> &nbsp; &nbsp; &nbsp;  <bc>it.unibo.virtualRobot2020</bc> <br/>
+	</td>
+<td></td>
+	</tr>	
 </table>
 </center> 	
 
+
+</table>
+</center> 	
+
+ <h2>Tools & Languages </h2>
+ <center>
+ <table style="width:98%">
+ 
+ 
+ 	<tr>
+	<td style="width:60%">	 <h3>Software build automation and CI</h3>
+ 	</td>
+	<td style="width:35%"> 
+	</td>
+<td><tt></tt></td>
+	</tr>
+	
+ 
+  	<tr>
+	<td style="width:60%">	  
+	<m><a href="../../GradleIntro/uniboDocs/Gradle.intro.html" target="lab">LabIss2021 | Introduction to Gradle</a></m>	
+	</td>
+	<td style="width:35%">Project <bc>GradleIntro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+  	<tr>
+	<td style="width:60%">	  
+	<m><a href="../../GradleIntro/uniboDocs/DevOpsIntro.html" target="lab">LabIss2021 | Introduction to DevOps</a></m>	
+	</td>
+	<td style="width:35%">Project <bc>GradleIntro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>	
+
+ 	<tr>
+	<td style="width:60%">	 <h3>Kotlin</h3>
+ 	</td>
+	<td style="width:35%"> 
+	</td>
+<td><tt></tt></td>
+	</tr>	
+	
+	<tr>
+	<td style="width:35%">	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/LabIntroductionToKotlin.html" target="lab">LabKotlin | Introduction to KOTLIN</a></m>	
+	</td>
+	<td style="width:35%">Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:60%">	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/LabDsl.html" target="lab">LabKotlin | Kotlin Internal DSL</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+	
+ 	<tr>
+	<td style="width:60%">	 <h3>Spring</h3>
+ 	</td>
+	<td style="width:35%"> 
+	</td>
+<td><tt></tt></td>
+	</tr>		
+	
+	<tr>
+	<td>	 
+	<m><a href="../../webspring.intro/userDocs/LabSpringIntro.html" target="lab">LabSpringIntro | Introduction to the usage of Spring Boot</a></m>	
+	</td>
+	<td>Project <bc>webspring.intro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+	
+	<tr>
+	<td>	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/LabReactive.html" target="lab">LabReactive | Introduction to ReactiveProgramming (in Java)</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+	
+	 	<tr>
+	<td>	<h3>CoAP</h3>
+ 	</td>
+	<td> 
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+    <tr>
+	<td>	 
+	<m><a href="../../it.unibo.coapintro/userDocs/LabCoAP.html" target="lab">LabCoAP | Introduction to CoAP</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.coapintro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+	
+ 	<tr>
+	<td>	<h3>QAkactors</h3>
+ 	</td>
+	<td> 
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+	<tr>
+	<td>	 
+	<m><a href="../../it.unibo.qakactor/userDocs/LabQakIntro2020.html" target="lab">LabQakIntro2020.html | Introduction to QAkactors</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qakactor</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+	
+	<tr>
+	<td>	 
+	<m><a href="../../it.unibo.demoqak20/userdocs/LabQakExamples2020.html" target="lab">LabQakExamples2020 | Using the QActor (meta)model</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.demoqak20</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+	
+	<tr>
+	<td>	 
+	<m><a href="../../it.unibo.qakactor/userdocs/LabQakPrologUsage2020.html" target="lab">LabQakPrologUsage2020 |  </a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qakactor</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+ 
+
+ </table>
+ </center>
   
   
+   
+ 
+<h2>Methodology</h2>
+<center>
+ <table style="width:98%">
+<tr>
+	<td style="width:60%">	 
+	<m><a href="../../it.unibo.boundaryRobot/userDocs/RobotActorBoundary.html" target="lab">RobotActorBoundary | A first actor-based robot-application</a></m>	
+	</td>
+	<td style="width:35%">Project <bc>it.unibo.boundaryRobot</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+ 
+	<tr>
+	<td>	 
+	<m><a href="../../it.unibo.qak20.boudaryrobot.analysis/userDocs/AgileModelBased.html" target="lab">Methodology | Model-based Agile Development</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak20.boudaryrobot.analysis</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+	
+	<tr>
+	<td>	 
+	<m><a href="../../webspring.intro/userDocs/LabArchitectures.html" target="lab">LabArchitectures | From MVC to Hexagonal architectures</a></m>	
+	</td>
+	<td>Project <bc>webspring.intro</bc><br/>
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+ </table>
+</center>
+
 <br/><br/>
     
 </body>
