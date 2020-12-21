@@ -1,0 +1,724 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <!--
+<link rel="stylesheet" type="text/css" href="../css/issStyle1.css">
+<script type="text/javascript" src="../css/issStyle.js"></script>
+-->
+<style type="text/css">
+body
+{
+    margin-left:  30px;
+    margin-right: 30px;
+};
+
+P
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+};
+
+a, a:visited, a:active, a:link, a:hover {
+    text-decoration: underline;
+    color: #545454;
+    background-color: transparent;
+}
+
+a:hover {
+    background-color: #cccccc;
+}
+
+
+hr {
+    clear: both;
+    height: 1px;
+    color: #242424;
+    background-color: transparent;
+}
+
+h1, h2, h3 {
+    color: #242424;
+    clear: left;
+    font: 100% Tahoma, Helvetica, Arial, sans-serif;
+    margin: 10;
+    margin-right: 15px;
+    margin-bottom: 0.5em;
+    padding-top: 0.5em;
+    border-bottom: 1px solid #242424;
+}
+
+h1 {
+    font-size: 150%;
+    background-color: #b2c0ff;
+}
+
+h2 {
+    background-color: #d9fbff;
+    font-size: 110%;
+}
+
+h3 {
+	background-color: #e6ccff;
+    font-size: 80%;
+}
+h4 {
+    background-color: #99ffcc;
+    font-size: 100%;
+}
+#i {
+    color: #ff1010;
+}
+tt{
+	font-family: "Arial";
+    font-size: 80%;
+	color: #006600;
+}
+em{
+	font-family: "Arial";
+    font-size: 80%;
+	font-weight: bold;
+	border-style:solid;
+	border-color: #ccffff;
+    color: #0033cc;
+}
+bc{
+	font-family: "Arial";
+	font-size: 80%;
+	font-weight: bold;
+    color: #990000;
+	background-color: #fcf8c7;
+}
+k{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #990000;
+	 
+}
+ks{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #0000CD	;
+	 
+}
+kc{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #008000	;
+	 
+}
+pre{
+	font-family: "Helvetica";
+	font-size: 70%;
+	background-color: #fcf8c7; 
+}
+m{
+	font-family: "Helvetica";
+	line-height: 100%;
+ 	font-size: 75%;
+}
+div.body{
+	width: 800px;
+    font-size: 18px;
+}    
+div.req{
+	background-color: #d9ffb3;
+    font-size: 18px;
+	width: 700px;
+    border: 3px solid green;
+    padding: 15px;
+    margin: 10px;
+}    
+div.remark{
+	background-color: #FFFC33;     
+    border: 3px solid green;
+    padding: 15px;
+    margin: 10px;
+}  
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+  -->
+</style>
+
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: lightyellow;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: relative;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: relative;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
+<head>
+   
+<title>LabIss2020Bo</title>
+</head>
+    
+<body>
+
+ 
+<title>LabIss2020Bo</title></head><body>
+    
+<h1>LabIss2020Bo</h1>
+
+<h2>Introduction</h2>
+ <center>
+ <table style="width:98%">
+ 
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="./LectureBologna1920.html" target="lab">LectureBologna19-20</a></m>	
+	</td>
+	<td>Project <bc>issLabStart</bc><br/>
+ 	</td>
+<td>-</td>
+	</tr>
+ 
+ 	<tr>
+	<td  >	 
+	<m><a href="./ISSM2020.pdf" target="lab">72939 - INGEGNERIA DEI SISTEMI SOFTWARE M</a></m>	
+	</td>
+	<td> 
+<div class="tooltip">Project <bc>issLabStart</bc> 
+  <span class="tooltiptext">See gitHub</span>
+</div>
+	</td> 
+<td><tt>1</tt></td>
+	</tr>
+ 
+
+ <tr>
+	<td style="width:45%">	 
+	<m><a href="./72939LabISSIntro.html" target="lab">72939 - Software Systems Engineering M | overview</a></m>	
+	</td>
+	<td> Project <bc>issLabStart</bc> </td>
+<td><tt>2</tt></td>
+	</tr>
+	
+ 	<tr>
+	<td style="width:35%">	 
+	<m><a href="./TFBO19ISS.pdf" target="lab">Final task ISS-2019 Bologna</a></m>	
+	</td>
+	<td>Project <bc>issLabStart</bc><br/>
+	</td>
+<td>-</td>
+	</tr>
+
+	
+ 	<tr>
+	<td style="width:35%">	 
+	<m><a href="./template2020.html" target="lab">Workflow Template</a></m>	
+	</td>
+	<td>Project <bc>issLabStart</bc><br/>
+	</td>
+<td><tt>5.1</tt></td>
+	</tr>
+
+
+	
+</table>
+</center> 	
+
+ <h2>Tools & Languages </h2>
+ <center>
+ <table style="width:98%">
+ 	<tr>
+	<td style="width:45%">	 
+	<m><a href="./Lab0.html" target="lab">Lab0_2020 | Tools</a></m>	
+	 in particular: <m><a href="./Lab0.html#uniboactions" target="lab">Lab0_2020 | Iss-unibo specific configuration and actions</a></m> 
+	</td>
+	<td> Project <bc>issLabStart</bc> </td>
+<td><tt>-</tt></td>
+	</tr>
+ 
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/LabIntroductionToKotlin.html" target="lab">LabKotlin | Introduction to KOTLIN</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt>-</tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/LabDsl.html" target="lab">LabKotlin | Kotlin Internal DSL</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt>9</tt></td>
+	</tr>
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../webspring.intro/userDocs/LabSpringIntro.html" target="lab">LabSpringIntro | Introduction to the usage of Spring Boot</a></m>	
+	</td>
+	<td>Project <bc>webspring.intro</bc><br/>
+	</td>
+<td><tt>16</tt></td>
+	</tr>
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/LabReactive.html" target="lab">LabReactive | Introduction to ReactiveProgramming (in Java)</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt>18</tt></td>
+	</tr>
+
+		<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.coapintro/userDocs/LabCoAP.html" target="lab">LabCoAP | Introduction to CoAP</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.coapintro</bc><br/>
+	</td>
+<td><tt>17-b</tt></td>
+	</tr>
+	
+ 
+	
+	
+	
+	
+	
+ 	<tr>
+	<td style="width:45%">	<h3>QAkactors</h3>
+ 	</td>
+	<td> 
+	</td>
+<td><tt></tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qakactor/userDocs/LabQakIntro2020.html" target="lab">LabQakIntro2020.html | Introduction to QAkactors</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qakactor</bc><br/>
+	</td>
+<td><tt>10</tt></td>
+	</tr>
+
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.demoqak20/userdocs/LabQakExamples2020.html" target="lab">LabQakExamples2020 | Using the QActor (meta)model</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.demoqak20</bc><br/>
+	</td>
+<td><tt>10-a</tt></td>
+	</tr>
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qakactor/userdocs/LabQakPrologUsage2020.html" target="lab">LabQakPrologUsage2020 |  </a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qakactor</bc><br/>
+	</td>
+<td><tt>10-b</tt></td>
+	</tr>
+ 
+ 
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.demoqak20/userdocs/ApplProposal0.html" target="lab">ApplProposal0.html | A set of tasks to do </a></m>	
+	and <a href="../../it.unibo.taskAcquire/src/gettaskstudent1.qak" target="lab">gettaskstudent1.qak</a>
+	</td>
+	<td>Project <bc>it.unibo.demoqak20</bc> and Project <bc>it.unibo.taskAcquire</bc> <br/>
+	</td>
+<td><tt>10-c</tt></td>
+	</tr>
+ 
+
+ </table>
+ </center>
+ 
+
+<h2>Robots (as IOT devices)</h2>
+
+ <center>
+ <table style="width:98%">
+ 	<tr>
+	<td style="width:45%">	 
+	<m><a href="./devsDDR.html" target="lab">Building a DDR</a></m>	
+	</td>
+	<td>Project <bc>issLabStart</bc><br/>
+	</td>
+<td>-</td>
+	</tr>
+ 
+  	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.virtualRobot2020/userDocs/LabVirtualRobot.html" target="lab">LabVirtualRobot | Interacting with a virtual robot</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.virtualRobot2020</bc><br/>
+	</td>
+<td><tt>3</tt></td>
+	</tr>
+ 
+   	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.kotlinIntro/userDocs/FirstActorRobot.html" target="lab">FirstActor | Using Kotlin actors to control a (virtual)robot</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt>4</tt></td>
+	</tr>
+<tr>
+<td><h3>Robot types</h3></td>
+<td></td>
+<td></td>
+</tr>	
+   	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.mbot2020/userDocs/Mbot2020.html" target="lab">Mbot2020 | The reference ddr robot</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.mbot2020</bc><br/>
+	</td>
+<td><tt>13-a</tt></td>
+	</tr>	
+	
+   	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.mnano2020/userDocs/LabNanoRobot.html" target="lab">LabNanoRobot | The home-made basicrobot</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.mnano2020</bc><br/>
+	</td>
+<td><tt>13-b</tt></td>
+	</tr>	
+
+   	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.mvirtual2020/userDocs/LabUsingVirtualRobot.html" target="lab">LabUsingVirtualRobot | Using the virtualrobot </a></m>	
+	</td>
+	<td>Project <bc>it.unibo.mvirtual2020</bc><br/>
+	</td>
+<td><tt>13-c</tt></td>
+	</tr>	
+
+	
+</table>
+</center>
+
+<h2>Methodology</h2>
+<center>
+ <table style="width:98%">
+<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.boundaryRobot/userDocs/RobotActorBoundary.html" target="lab">RobotActorBoundary | A first actor-based robot-application</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.boundaryRobot</bc><br/>
+	</td>
+<td><tt>5</tt></td>
+	</tr>
+
+<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.boundaryRobot/userDocs/RobotActorBoundary2.html" target="lab">RobotActorBoundary  | From test plans to a layered architecture</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.boundaryRobot</bc><br/>
+	</td>
+<td><tt>6</tt></td>
+	</tr>
+
+
+<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.actorfsm/userDocs/basicrobot.html" target="lab">basicrobot | A reusable FSM actor (towards 'microservices')</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.boundaryRobot</bc><br/>
+	</td>
+<td><tt>7</tt></td>
+	</tr>	
+	
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.actorfsm/userDocs/FSM.html" target="lab">FSM | A kotlin-based DSL</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt>8</tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.boudaryrobot.analysis/userDocs/AgileModelBased.html" target="lab">Methodology | Model-based Agile Development</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak20.boudaryrobot.analysis</bc><br/>
+	</td>
+<td><tt>14</tt></td>
+	</tr>
+
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../webspring.intro/userDocs/LabArchitectures.html" target="lab">LabArchitectures | From MVC to Hexagonal architectures</a></m>	
+	</td>
+	<td>Project <bc>webspring.intro</bc><br/>
+	</td>
+<td><tt>17</tt></td>
+	</tr>
+	
+</table>
+</center>
+
+<h2>Raspberry</h2>
+<center>
+ <table style="width:98%">
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.bls20/userDocs/bls2020.html" target="lab">BLS2020: The button-led system</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.bls20</bc><br/>
+	</td>
+<td><tt>11</tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.raspIntro2020/userDocs/LabRaspiIntro.html" target="lab">LabRaspiIntro | Using the Raspberry Pi</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.raspIntro2020</bc><br/>
+	</td>
+<td><tt>12</tt></td>
+	</tr>
+
+
+
+ 
+</table>
+</center>
+
+<h2>Applications</h2>
+<center>
+ <table style="width:98%">
+ 
+ 
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.boudaryrobot.analysis/userDocs/AgileModelBased.html" target="lab">Methodology | Model-based Agile Development</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak20.boudaryrobot.analysis</bc><br/>
+	</td>
+<td><tt>14</tt></td>
+	</tr>
+
+		<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.boudaryrobot.analysis/userDocs/RobotQakBoundary.html" target="lab">Qak20Robotboundary |The robotboundary problem</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak20.boudaryrobot.analysis</bc><br/>
+	</td>
+<td><tt>15</tt></td>
+	</tr>
+
+ <tr>
+<td><h3>Web front-end</h3></td>
+<td></td>
+<td></td>
+</tr>		
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../webspring.intro/userDocs/LabSpringUsageIntro.html" target="lab">LabSpringIntro | Introduction to the usage of Spring Boot</a><br/>
+	<a href="../../webspring.intro/userDocs/LabSpringIntro.html" target="lab">LabSpringIntro | Introduction to Spring Boot</a>
+	</m>	
+	</td>
+	<td>Project <bc>webspring.intro</bc><br/>
+	</td>
+<td><tt>16</tt></td>
+	</tr>
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../webspring.intro/userDocs/LabArchitectures.html" target="lab">LabArchitectures | From MVC to Hexagonal architectures</a></m>	
+	</td>
+	<td>Project <bc>webspring.intro</bc><br/>
+	</td>
+<td><tt>17</tt></td>
+	</tr>
+
+ <tr>
+<td><h3>Using ddr robots</h3></td>
+<td></td>
+<td></td>
+</tr>		
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.basicrobot/userDocs/Qak20Basicrobot.html" target="lab">Qak20Basicrobot | The basicrobot using QAkactors</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak20.basicrobot</bc><br/>
+	</td>
+<td><tt>18</tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.robotboundary/userDocs/Qak20Robotboundary.html" target="lab">Qak20Robotboundary | The robotboundary using QAkactors</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak20.robotboundary</bc><br/>
+	</td>
+<td><tt>19</tt></td>
+	</tr>
+
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../robotWeb2020/userDocs/RobotWebonSpring.html" target="lab">RobotWeb | A user-interface based on SpringBoot for robot-control</a></m>	
+	</td>
+	<td>Project <bc>robotWeb2020</bc><br/>
+	</td>
+<td><tt>20</tt></td>
+	</tr>
+
+<tr>
+<td><h3>The radar</h3></td>
+<td></td>
+<td></td>
+</tr>	
+
+		<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak.radar2020/userDocs/LabRadarGui.html" target="lab">LabRadarGui | Radar GUI as a service</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.qak.radar2020</bc><br/>
+	</td>
+<td><tt>21-a</tt></td>
+	</tr>
+
+	
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.radarusage/userDocs/LabRadarUsage.html" target="lab">LabRadarUsage | Using the RadarGUI service</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.radarusage</bc><br/>
+	</td>
+<td><tt>21-b</tt></td>
+	</tr>
+
+	
+<tr>
+<td><h3>Using a planner</h3></td>
+<td></td>
+<td></td>
+</tr>	
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.planner20/userDocs/LabPlanner.html" target="lab">LabPlanner | Exploiting Planning Tools</a></m>	
+ 	</td>
+	<td>Project <bc>it.unibo.planner20</bc><br/>
+	</td>
+<td><tt>22-a</tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.robotroommap/userDocs/LabRobotPlanned.html" target="lab">LabRobotPlanned | Moving a robot with plans</a></m>	
+ 	</td>
+	<td>Project <bc>it.unibo.qak20.robotroommap</bc><br/>
+	</td>
+<td><tt>22-b</tt></td>
+	</tr>
+
+	<tr>
+	<td style="width:45%">	 
+	<m><a href="../../it.unibo.qak20.domains/userDocs/LabDomanins.html" target="lab">LabDomains: a tea-room</a></m>	
+ 	</td>
+	<td>Project <bc>it.unibo.qak20.domains</bc><br/>
+	</td>
+<td><tt>23</tt></td>
+	</tr>
+	
+ <tr>
+<td><h3>The final task</h3>
+<a href="./TemaFinaleBo20.html" target="lab">TemaFinaleBo20.html</a><br/>
+<a href="./TFBO20ISS.pdf" target="lab">TFBO20ISS.pdf</a>
+</td>
+
+ 
+<td></td>
+<td></td>
+</tr>	
+
+
+
+
+	
+  
+</table>
+</center>
+ 
+
+ <h2>Beyond traditional programming models</h2>
+ <center>
+ <table style="width:98%">
+ 
+  	<tr>
+	<td style="width:45%">	 
+	<m><a href="IntroSpringBoot.html" target="lab">Experimenting Spring Boot</a></m>	
+	</td>
+	<td>Project <bc>it.unibo.kotlinIntro</bc><br/>
+	</td>
+<td><tt>0 (16)</tt></td>
+	</tr>
+ 
+ 	
+
+	</table>
+</center> 
+
+ 
+  
+<br/><br/>
+    
+</body>
+</html>
+  
+
+
+    
+
+<div style="background-color:rgba(86, 56, 453, 0.9); width:100%;text-align:center;font-size:small;color:white">
+By AN Unibo-DISI    
+</div> 
+    
+ </div>  
+   
+ 
+</body></html>
