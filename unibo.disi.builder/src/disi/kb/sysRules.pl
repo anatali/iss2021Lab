@@ -1,14 +1,3 @@
-/*
- PrefixedStrings
-*/
-package disi.builder
-
-object builtin{
-		
-/*
- SYSTEM RULES (sysRules.pl")
-*/
-val sysRules ="""
 %==============================================
 % CONTEXT HANDLING UTILTY
 %==============================================
@@ -135,7 +124,3 @@ replaceRule( Rule, NewRule ):-
 % msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
 % MSGTYPE : dispatch request answer
 %%% --------------------------------------------------
-"""
-	
-}
-	

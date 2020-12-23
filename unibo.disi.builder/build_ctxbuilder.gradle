@@ -99,3 +99,6 @@ jar {
     }
 }
 */
+jar {
+     from sourceSets.main.allSource
+}
