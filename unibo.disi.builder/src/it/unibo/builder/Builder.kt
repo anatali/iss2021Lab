@@ -27,9 +27,6 @@ class Builder ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( name, sc
 								   val ctxHost = getCurSol("HOST") 
 								   val ctxPort = getCurSol("PORT") 
 						println("ctxName=${ctxName} ctxHost=${ctxHost}")
-						disi.builder.disigenerator.genCtxMain( "$ctxName"  )
-						solve("getActorNames(NAMES,ctxdemo0)","") //set resVar	
-						println(currentSolution)
 					}
 				}	 
 			}
