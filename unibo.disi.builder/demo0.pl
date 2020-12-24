@@ -1,7 +1,7 @@
 %====================================================================================
 % demo0 description   
 %====================================================================================
-ctx(ctxdemo0, "localhost",  "TCP", "8095").
- qactor( demo, ctxdemo0, "it.unibo.demo.Demo").
-%%  qactor( sender, ctxdemo0, "it.unibo.sender.Sender").
-%%  qactor( perceiver, ctxdemo0, "it.unibo.perceiver.Perceiver").
+context(ctxdemo0, "localhost",  "TCP", "8095").
+ qactor( demo, ctxdemo0, "it.unibo.demo.demo").
+ %% qactor( sender, ctxdemo0, "it.unibo.sender.sender").
+ %% qactor( perceiver, ctxdemo0, "it.unibo.perceiver.perceiver").

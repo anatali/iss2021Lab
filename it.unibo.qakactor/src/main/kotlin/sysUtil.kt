@@ -86,6 +86,7 @@ object sysUtil{
         //Create the messages
         try {
             val dispatcNames      = solve("getDispatchIds(D)", "D")
+			//println("               %%% sysUtil | dispatcNames $dispatcNames" )
             val dispatchNamesList = strRepToList(dispatcNames!!)
             dispatchNamesList.forEach { d -> createDispatch(d) }
         }catch( e : Exception){ //println("               %%% sysUtil | NO DISPATCH FOUND")
@@ -95,6 +96,7 @@ object sysUtil{
 		val ctxs: String? = solve("getCtxNames( X )", "X")
 			//context( CTX, HOST, PROTOCOL, PORT )
 			val ctxsList = strRepToList(ctxs!!)
+			//println("               %%% sysUtil | getCtxNames $ctxs" )
 			//waits for all the other context before activating the actors
 			ctxsList.forEach { ctx -> createTheContext(ctx, hostName = hostName) }//foreach ctx
 		//APR2020: removed, since we use CoAP e no more TCP
@@ -228,14 +230,18 @@ object sysUtil{
 
 	fun solve( goal: String, resVar: String  ) : String? {
 		//println("sysUtil  | solveGoal ${goal}" );
-		val sol = pengine.solve( "$goal.")
-		if( sol.isSuccess ) {
-			if( resVar.length == 0 ) return "success"
-			val result = sol.getVarValue(resVar)  //Term
-			var resStr = result.toString()
-			return  strCleaned( resStr )
+		try {
+			val sol = pengine.solve("$goal.")
+			if (sol.isSuccess) {
+				if (resVar.length == 0) return "success"
+				val result = sol.getVarValue(resVar)  //Term
+				var resStr = result.toString()
+				return strCleaned(resStr)
+			} else return null
+		}catch( e:Exception){
+			println("solve $goal ERROR ${e}")
+			return null
 		}
-		else return null
 	}
 
 	fun loadTheory( path: String ) {
