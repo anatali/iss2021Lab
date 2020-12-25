@@ -65,7 +65,15 @@ object generator{
 	  fun genFilePathName(fName: String) : String{
 		  return "$outSrcDir/$packagelogo/$fName"
 	  }
+
+/*
+ Generate the gradle build file
+*/
+	fun genGradleBuild( sysName: String ){
+		genUtils.genFileDir( outSrcDir,  "",  "build" , "gradle", builtin.genGradleRules(sysName) )		
+	}
 	
+		
 /*
  Generate the code for the contexts
 */
@@ -127,10 +135,14 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.channels.SendChannel
 
-class $actorName(name: String, scope: CoroutineScope){
- 
-@kotlinx.coroutines.ObsoleteCoroutinesApi
-@kotlinx.coroutines.ExperimentalCoroutinesApi
+var senderActor   : SendChannel<String>?  = null
+var receiverActor : SendChannel<String>?  = null
+val cpus = Runtime.getRuntime().availableProcessors(); 
+
+fun curThread() : String { 
+	return "thread=${Thread.currentThread().name} / nthreads=${Thread.activeCount()}" 
+}
+               
 fun startReceiver( scope : CoroutineScope ){
 	receiverActor = scope.actor<String> {   
 		println("receiverActor STARTS")
@@ -143,7 +155,28 @@ fun startReceiver( scope : CoroutineScope ){
 	}
 }
  
+fun startSender( scope : CoroutineScope){
+	senderActor = scope.actor {  
+		//actor is a coroutine builder (dual of produce)
+		println("senderActor   STARTS")
+ 		receiverActor!!.send("Hello1")
+		delay(250)
+ 		receiverActor!!.send("Hello2")
+		delay(250)
+		receiverActor!!.send("end")
+		println("senderActor   ENDS")
+ 	}
 } 
+
+@kotlinx.coroutines.ObsoleteCoroutinesApi
+@kotlinx.coroutines.ExperimentalCoroutinesApi
+
+fun main() = runBlocking{
+    println("BEGINS CPU=" + cpus  )
+ 	startReceiver( this )
+	startSender( this )
+    println("ENDS " + curThread() )
+}
 """
 	}
 	fun genActorCodeContent( actorName: String) : String{
@@ -227,6 +260,8 @@ Generate the Kotlin code given a system model written in Prolog
 	fun genCodeFromModel(modelFileName : String){
 		println("generator | START")
 		genSysRules()
+	    genGradleBuild( modelFileName )
+	
 		pengine.solve("consult('$modelFileName.pl')." )  
 		pengine.solve("consult( '$outSrcDir/sysRules.pl' )." )
 		val sol = pengine.solve("system(SYSNAME,BEHAVIOUR)." )
