@@ -8,10 +8,7 @@ QActor provabuilder context ctxprovabuilder{
 		println("provabuilder | STARTS")	    
  		
 		//run resources.it.unibo.utils.utils.generator.genSysRules()
-		//run disi.builder.disigenerator.genSysRules()  
-		
-		
-		
+		run disi.builder.generator.genCodeFromModel("demo0")
 		 
  	} 
 }

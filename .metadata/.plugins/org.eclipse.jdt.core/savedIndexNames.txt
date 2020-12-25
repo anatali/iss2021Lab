@@ -1,0 +1,8 @@
+INDEX VERSION 1.131+C:\Didattica2018Work\iss2021Lab\.metadata\.plugins\org.eclipse.jdt.core
+2197538195.index
+2734220782.index
+1343599297.index
+2646710351.index
+2890901841.index
+146268249.index
+2328269416.index

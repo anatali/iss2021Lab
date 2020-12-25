@@ -1,0 +1,30 @@
+System builder2020
+
+Context ctxbuilder ip [host="localhost" port=8077]
+
+/*
+ * consulta il modello del sistema descritto in Prolog e genera codice
+ */
+QActor builder context ctxbuilder{
+ 	 
+	State s0 initial { 	
+		println("builder | STARTS")	 
+ 		
+		//run resources.it.unibo.utils.utils.generator.genSysRules()
+		//run disi.builder.disigenerator.genSysRules()  
+
+		solve( consult("demo0.pl")	     )  
+ 		solve( consult("sysRules.pl")	 ) 
+ 		solve( ctx( NAME, HOST, PROTOCOL, PORT ) )
+ 		[# val CtxName = getCurSol("NAME") 
+		   val ctxHost = getCurSol("HOST") 
+		   val ctxPort = getCurSol("PORT") 
+		#]
+		println( "ctxName=${ctxName} ctxHost=${ctxHost}" ) 
+		//Genero il main
+		run disi.builder.disigenerator.genCtxMain("$CtxName")  
+		
+		solve( getActorNames(NAMES,ctxdemo0))
+		println( currentSolution )
+ 	} 
+}

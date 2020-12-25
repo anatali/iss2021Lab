@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<stringAttribute key="org.eclipse.buildship.core.originalclasspathprovider" value="org.jetbrains.kotlin.core.kotlinClasspathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.buildship.core.classpathprovider"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="it.unibo.demo.DemoKt"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="it.unibo.provabuilder"/>
+</launchConfiguration>

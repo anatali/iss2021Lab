@@ -12,9 +12,9 @@ val runtimeClasspath by configurations.creating {
     extendsFrom(compileClasspath)
 }
 dependencies {
-    println("taskForBuildSrc | dependencies BUIILDIR= $buildDir")
+    //println("taskForBuildSrc | dependencies BUIILDIR= $buildDir")
     findLibraries().forEach {
-        println("taskForBuildSrc | FOUND lib: $it")
+        //println("taskForBuildSrc | FOUND lib: $it")
         compileClasspath(files(it))
     }
     runtimeClasspath(files("$buildDir/bin"))
@@ -28,3 +28,12 @@ tasks.register<RunJava>("runJava") {
     mainClass = progName!!
 }
 
+/*
+ADDED AFTER buildSrc
+*/
+//val compileClasspath by configurations.creating
+
+task<CommonTask>("ct"){
+    //println("compileClasspath= $compileClasspath " )
+    msg ="Hello from ${this.name} in ${project.name}"
+}

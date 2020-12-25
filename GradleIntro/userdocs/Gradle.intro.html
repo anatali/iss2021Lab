@@ -551,7 +551,7 @@ Gradle provides several mechanisms that allow you to extend it:
 From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">Building Java Applications Sample</a>.<br/><br/>
 <ol>
 <li>
-Start with some automatic code generation:
+From an empty working dir (e.g. <tt>GradleIntro</tt>), start with some automatic code generation:
 <pre>
 <k>gradle init</k> (select 2, 3, 1, 2, 1, demo, demo)
 
@@ -1933,30 +1933,29 @@ include("taskForBuildSrc")
 Now introduce an enhanced  <tt>CommonTask</tt> named <tt>ct</tt>:
 
 <pre>
-task<CommonTask>("ct"){
+task&lt;CommonTask>("ct"){
     msg ="Hello from ${this.name} in ${project.name}"
 }
 </pre>
 Finally, let us tell Gradle to run the task named <tt>ct</tt>:
 </pre>
 <pre>
-<k>gradlew -q ct</k>
+<k>gradlew -q :taskForBuildSrc:ct</k>
 SETTINGS RUNS ...
  ...... build top-level
  ...... build in app
 Message shown during the configuration phase: no task action defined in task ':app:notgood'
- ...... build in taskAccess sub-project
-taskAccess | compileClasspath= configuration ':taskForBuildSrc:compileClasspath'
+ ...... build in taskForBuildSrc sub-project
 <ks>buildSrc/CommonTask |  Hello from ct in taskForBuildSrc</ks>
-
 </pre>
 Note that Gradle creates a <a href="../buildSrc/build/" target="web"><ks>buildSrc/build</ks></a> directory. 
 Gradle automatically compiles and tests the <tt>buildSrc</tt> code and puts it in the classpath of the build script. <br/> 
-
+<!--
 <pre>
 <k>gradlew :taskForBuildSrc:dependencies</k>
 
 </pre>
+-->
 <h3>Refactoring Java operations to compile/run</h3>
 Now, let us define our custom tasks to compile and run Java programs within 
 <a href="../buildSrc/src/main/kotlin/JavaCompileRun.kt" target="web"><ks>JavaCompileRun.kt</ks></a> and introduce a new sub-project 

@@ -16,12 +16,11 @@ class Provabuilder ( name: String, scope: CoroutineScope  ) : ActorBasicFsm( nam
 	@kotlinx.coroutines.ObsoleteCoroutinesApi
 	@kotlinx.coroutines.ExperimentalCoroutinesApi			
 	override fun getBody() : (ActorBasicFsm.() -> Unit){
-		 var counter=0  
 		return { //this:ActionBasciFsm
 				state("s0") { //this:State
 					action { //it:State
 						println("provabuilder | STARTS")
-						generator.genSysRules(  )
+						disi.builder.generator.genCodeFromModel( "demo0"  )
 					}
 				}	 
 			}

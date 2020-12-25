@@ -1,0 +1,8 @@
+open class CommonTask @Inject constructor() : DefaultTask() {
+    @Input var prefix ="buildSrc/CommonTask | "
+    @Input var msg    ="Hello from CommonTask"
+    @TaskAction
+    fun disibuild() {
+        println("$prefix $msg  ")
+    }
+}
