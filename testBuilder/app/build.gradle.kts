@@ -48,7 +48,7 @@ ADDED AFTER buildSrc
 
 task<CommonTask>("ct"){
     println("................... ct " )
-    actorModel="demo0"
+    actorModel="demo1"
 }
 /*
 open class DisiGenTask : DefaultTask() {

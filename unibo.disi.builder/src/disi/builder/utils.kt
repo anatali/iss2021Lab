@@ -18,8 +18,9 @@ object generator{
 		return "$outSrcDir/$packagelogo/$fName"
 	}
 
-	fun genSysRules(){
+	fun genSysRules(){	//WE GENERATE A LOCAL COPY (for our generation ) AND THE GLOBAL ONE (for the user appl)
 		genUtils.genFileDir( outSrcDir,  "",  "sysRules" , "pl", builtin.sysRules )
+		genUtils.genFileDir( "./",  "",  "sysRules" , "pl", builtin.sysRules )
 	}
 
 
@@ -52,9 +53,7 @@ fun main() = runBlocking {
 		try {
 			//generate a new directory
 			val dirName = genFilePathName(ctxName)
-			val folder  = File(dirName)
-			println( "generator | genMainCtxFile created dir=$dirName"  )
-			folder.mkdirs()
+			genUtils.genDirectory(dirName)
 			val mainfName = "$dirName/Main_${ctxName}.kt"
 			println( "generator | genMainCtxFile mainfName=$mainfName"  )
 			val mainf     = java.io.File( mainfName )
@@ -67,18 +66,30 @@ fun main() = runBlocking {
 		}
 	}
 
-	fun genCtxMain(modelFileName : String ) : String{
+	fun getCtxName() : String {
 		val sol = pengine.solve("context(NAME,HOST,PROTOCOL,PORT)." )
 		if(  sol.isSuccess  ) {
 			val ctxName = sol.getVarValue("NAME").toString()
 			val ctxHost = sol.getVarValue("HOST").toString()
 			//val ctxPort = sol.getVarValue("PORT").toString()
 			println("ctxName=${ctxName} ctxHost=${ctxHost}")
-			val content = genCtxMainContent( genFilePathName(ctxName) , modelFileName )
-			genMainCtxFile(ctxName,content)
-			return ctxName
+ 			return ctxName
 		}
-		else{ println("generator | ctx not found"); return "" }
+		else{ throw Exception("generator | ctx not found") }
+	}
+
+	fun getCtxNames() : List<String>{
+		val sol = pengine.solve("getCtxNames(CTXNAMES)." )
+		if(  sol.isSuccess  ) {
+			val ctxNames = sol.getVarValue("CTXNAMES") 	//List
+			val ctxNamesList = genUtils.strRepToList(ctxNames.toString())
+			return ctxNamesList
+		}else throw Exception("")
+	}
+
+	fun genCtxMain( ctxName : String, modelFileName : String ){
+		val content = genCtxMainContent( genFilePathName(ctxName) , modelFileName )
+		genMainCtxFile(ctxName,content)
 	}
 
 	/*
@@ -187,21 +198,22 @@ class $actorName(name: String, scope: CoroutineScope) : ActorBasicFsm( name, sco
 		println( "generator | genCodeActorFile actorName=$actorName filePathName=$filePathName")
 		//generate a new directory
 		val dirName = genFilePathName(actorName)
+		genUtils.genDirectory(dirName)
+		/*
 		val folder  = File(dirName)
-		folder.mkdirs()
+		folder.mkdirs()*/
 		val actorfName = "$dirName/${actorName}.kt"
-		println( "generator | genCodeActorFile actorfName=$actorfName"  )
 		val actorf     = java.io.File( actorfName )
 		if( actorf.exists() ) return
-
+		println( "generator | genCodeActorFile actorfName=$actorfName"  )
 		var content = "todo"
 		if( msgdriven ) content    = genActorMsgDrivenCodeContent( actorName )
 		else content    = genActorCodeContent( actorName )
 		actorf.writeText( content )
-		println("generator | done msgdriven=$msgdriven genCodeActorFile for $actorName")
+		//println("generator | done msgdriven=$msgdriven genCodeActorFile for $actorName")
 	}
 
-	fun genActorsCode(ctxName : String ){
+	fun genActorsCode( ctxName : String ){
 		val sol = pengine.solve("getActorNames(ACTORS,$ctxName)." )
 		if(  sol.isSuccess  ) {
 			val actorNames     = sol.getVarValue("ACTORS") //List
@@ -210,6 +222,14 @@ class $actorName(name: String, scope: CoroutineScope) : ActorBasicFsm( name, sco
 		}else println("generator | genActorsCode ERROR")
 	}
 
+	/*
+	Generate the code for all the actors in the given context
+	 */
+	fun genTheContextCode( ctxName : String, modelFileName : String ) {
+		genCtxMain( ctxName, modelFileName )
+		//GENERATE THE SKELETON CODE OF THE MSG-BASED QAK ACTORS
+		genActorsCode( ctxName )
+	}
 
 	/*
     Generate the Kotlin code given a system model written in Prolog
@@ -217,27 +237,39 @@ class $actorName(name: String, scope: CoroutineScope) : ActorBasicFsm( name, sco
 	fun genCodeFromModel(modelFileName : String){
  		val path = System.getProperty("user.dir")
 		println("generator | START path=:$path"  );
-
+	//GENERATE THE OUTPUT DIRECTORY, if it does not exist
 		val dirName = genFilePathName(outSrcDir)
-		val folder  = File(dirName)
-		if( ! folder.exists()  ) {
-			println("generator | genCodeFromModel created dir=$dirName")
-			folder.mkdirs()
-		}
+		genUtils.genDirectory(dirName)
 
+	//GENERATE THE GRADLE BUILD FILE
 		genGradleBuild( modelFileName )
+	//GENERATE THE SYSTEM RULES (written in Prolog)
 		genSysRules()	//genera sysRules.pl che poi VIENE USATO
 
+	//LOAD THE MODEL IN THE LOCAL KB
 		pengine.solve("consult('$modelFileName.pl')." )
+	//LOAD THE SYSTEM RULES	IN THE LOCAL KB
 		pengine.solve("consult( '$outSrcDir/sysRules.pl' )." )
+	//GET THE ACTOR BEHAVIOUR MODEL (msgdriven or  msgbased)
 		val sol = pengine.solve("system(SYSNAME,BEHAVIOUR)." )
 		if(  sol.isSuccess  ) {
 			val behaviour = sol.getVarValue("BEHAVIOUR").toString()
 			msgdriven     = (behaviour == "msgdriven")
 			println("generator | genCodeFromModel msgdriven=$behaviour")
 		}
-		val ctxName = genCtxMain( modelFileName )
-		genActorsCode( ctxName )
+		/*
+		For a msg-driven actor system we must have just ONE context
+		 */
+		if(  msgdriven ){  //GENERATE THE SKELETON CODE OF THE MSG-DRIVEN KOTLIN ACTORS
+			val ctxName = getCtxName()
+  			genActorsCode( ctxName )
+		}else{
+		/*
+		For a msg-based (qak) actor system we might have N>1 contexts
+		*/
+			val ctxNamesList = getCtxNames() //List<String>
+			ctxNamesList.forEach{ ctxName -> genTheContextCode(  ctxName, modelFileName ) }
+		}
 		println("generator | END")
 	}
 
@@ -251,5 +283,5 @@ class $actorName(name: String, scope: CoroutineScope) : ActorBasicFsm( name, sco
 		println("path=:$path"  );
 		
 		generator.genCodeFromModel("demo0")
-		//genUtils.genSysRules()
+
 	}

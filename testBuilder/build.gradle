@@ -89,14 +89,15 @@ sourceSets {
     //main.java.srcDirs += 'resources'
     //test.java.srcDirs += 'test'		//test is specific
 }
-/*
-mainClassName = 'it.unibo.DemoKt'
 
+mainClassName = 'it.unibo.demo.DemoKt'  //gradle run uses this mainClassName
+
+/*
 jar {
     println("executing jar")
     from sourceSets.main.allSource
     manifest {
-        attributes 'Main-Class': "it.unibo.DemoKt"
+        attributes 'Main-Class': "it.unibo.demo.DemoKt"
     }
 }
 */

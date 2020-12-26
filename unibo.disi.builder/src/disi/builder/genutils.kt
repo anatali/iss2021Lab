@@ -21,16 +21,22 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
      //println(" +++ generate " + fName)
 	 return fName
 }
-/*
- genFileDir
-*/	
+
  fun genFileDir( dir: String,  packageName: String,  name: String,  suffix:String ,  contents: String){
 	val fName    = genFileName(dir, packageName, name, suffix )
 	val fa       = java.io.File( fName )
 	if( fa.exists() ) return
 	fa.writeText(contents)	  
 }
-	
+
+	fun genDirectory( dirName: String   ){
+		val folder  = File(dirName)
+		if( folder.exists() ) return
+		else{
+			println( "generator | genMainCtxFile created dir=$dirName"  )
+			folder.mkdirs()
+		}
+	}
 	
 	fun copyFile(dir: String,  packageName: String,  name: String,  suffix:String){
 		val sourcefName    = genFileName(dir, packageName, name, suffix )
