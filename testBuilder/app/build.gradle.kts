@@ -8,8 +8,8 @@
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.3.72"
-
+    //id("org.jetbrains.kotlin.jvm") version "1.3.72"
+    `kotlin-dsl`
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 }
@@ -40,3 +40,29 @@ application {
     // Define the main class for the application.
     mainClass.set("testBuilder.AppKt")
 }
+
+/*
+ADDED AFTER buildSrc
+*/
+//val compileClasspath by configurations.creating
+
+task<CommonTask>("ct"){
+    println("................... ct " )
+    msg ="Hello from ${this.name} in ${project.name}"
+}
+
+open class DisiGenTask : DefaultTask() {
+    @TaskAction
+    fun buildActorCode() {
+        println("DisiGenTask START")
+        generator.genCodeFromModel("demo0")
+    }
+}
+tasks.register<DisiGenTask>("genactor")
+
+/*
+task<DisiGenTask>("disiBuild"){
+    println("................... ct " )
+    msg ="Hello from ${this.name} in ${project.name}"
+}
+*/
