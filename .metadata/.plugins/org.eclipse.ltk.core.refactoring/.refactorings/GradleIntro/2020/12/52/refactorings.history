@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;src&apos; to &apos;it.unibo.provabuilder/buildSrc&apos;&#x0D;&#x0A;- Original project: &apos;GradleIntro&apos;&#x0D;&#x0A;- Destination element: &apos;it.unibo.provabuilder/buildSrc&apos;&#x0D;&#x0A;- Original element: &apos;src&apos;" description="Copy folder" destination="=it.unibo.provabuilder/buildSrc" element1="buildSrc/src" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1608918830682" units="0" version="1.0"/>
-</session>

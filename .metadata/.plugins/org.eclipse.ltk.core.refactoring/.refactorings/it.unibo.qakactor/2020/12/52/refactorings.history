@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;sysRules.pl&apos; to &apos;unibo.disi.builder&apos;&#x0D;&#x0A;- Original project: &apos;it.unibo.qakactor&apos;&#x0D;&#x0A;- Destination element: &apos;unibo.disi.builder&apos;&#x0D;&#x0A;- Original element: &apos;sysRules.pl&apos;" description="Copy file" element1="src/main/kotlin/sysRules.pl" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1608831129315" target="/unibo.disi.builder" units="0" version="1.0"/>
-</session>

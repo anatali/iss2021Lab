@@ -48,21 +48,21 @@ ADDED AFTER buildSrc
 
 task<CommonTask>("ct"){
     println("................... ct " )
-    msg ="Hello from ${this.name} in ${project.name}"
+    actorModel="demo0"
 }
-
+/*
 open class DisiGenTask : DefaultTask() {
     @TaskAction
     fun buildActorCode() {
         println("DisiGenTask START")
-        generator.genCodeFromModel("demo0")
+        //generator.genCodeFromModel("demo0")
     }
 }
 tasks.register<DisiGenTask>("genactor")
 
-/*
+
 task<DisiGenTask>("disiBuild"){
-    println("................... ct " )
-    msg ="Hello from ${this.name} in ${project.name}"
-}
-*/
+    println("................... disiBuild " )
+    actorModel="demo0"
+
+}*/

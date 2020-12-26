@@ -10,7 +10,7 @@ var receiverActor : SendChannel<String>?  = null
 val cpus = Runtime.getRuntime().availableProcessors(); 
 
 fun curThread() : String { 
-	return "thread=Execution worker for ':' / nthreads=72" 
+	return "thread=Execution worker for ':' / nthreads=77" 
 }
                
 fun startReceiver( scope : CoroutineScope ){

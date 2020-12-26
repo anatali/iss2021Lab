@@ -5,8 +5,8 @@
 	<projects/>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.jetbrains.kotlin.core.kotlinNature</nature>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+		<nature>org.jetbrains.kotlin.core.kotlinNature</nature>
 	</natures>
 	<buildSpec>
 		<buildCommand>
