@@ -14,6 +14,9 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     id("disiPlugin")
+    id("disiBuilderJavaPlugin")
+    id("disiBuilderKotlinPlugin")
+
 }
 
 repositories {
@@ -23,10 +26,13 @@ repositories {
         mavenLocal()
   }
 
+
 project.plugins.forEach() {
     println( it )
 }
 
+
+/*
 buildscript {
     repositories {
         flatDir {
@@ -35,7 +41,7 @@ buildscript {
         }
         dependencies { classpath("disi:it.unibo.disiPlugin-1.0") }
     }
-}
+}*/
 
 /*
 apply plugin: is used when specifying your plugin by its class name (ex. apply plugin: JavaPlugin)

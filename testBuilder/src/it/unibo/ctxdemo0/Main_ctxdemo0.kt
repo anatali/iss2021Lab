@@ -6,5 +6,5 @@ import it.unibo.kactor.sysUtil
 import kotlinx.coroutines.runBlocking
 
 fun main() = runBlocking {
-	QakContext.createContexts( "localhost", this, "demo1.pl", "sysRules.pl" )
+	QakContext.createContexts( "localhost", this, "demo0.pl", "sysRules.pl" )
 }

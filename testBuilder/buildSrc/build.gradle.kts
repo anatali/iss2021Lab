@@ -15,7 +15,7 @@ dependencies{
     //implementation("it.unibo.alice.tuprolog:tuprolog:2.1.1")
 
     implementation( "tuprolog:2p301" )
-    implementation( "disiIss2020:unibo.disi.builder-1.0" )
+    //implementation( "disiIss2020:unibo.disi.builder-1.0" )
 }
 
 gradlePlugin {
@@ -23,6 +23,16 @@ gradlePlugin {
         create("myPlugins") {
             id = "disiPlugin"
             implementationClass = "unibo.disi.plugins.MyPlugin"
+        }
+
+        create("disiPlugins") {
+            id = "disiBuilderJavaPlugin"
+            implementationClass = "unibo.disi.plugins.DisiBuilderAsPlugin"
+        }
+
+        create("mydisiPlugins") {
+            id = "disiBuilderKotlinPlugin"
+            implementationClass = "unibo.disi.builder.DisiBuilderPluign"
         }
     }
 }

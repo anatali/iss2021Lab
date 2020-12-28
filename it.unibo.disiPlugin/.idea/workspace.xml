@@ -23,309 +23,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="507f30c6-781d-47ba-8d92-390f2f64e702" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../file-diff-plugin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.3/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.3/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.5/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.5/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha256-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha512-checksums.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/configuration-cache/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/unibo/disi/plugins/MyPlugin.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/classes/java/main/unibo/disi/plugins/MyTask.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ivy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/build-history.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/java-sources-proto-map.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i.len" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/compileKotlin/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/kotlin/itunibodisiPlugin10jar-classes.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/libs/it.unibo.disiPlugin-1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/libs/it.unibo.disiPlugin.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/pluginDescriptors/unibo.disiPlugin.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/poms/pom-default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/DisiBuilder/module.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/DisiBuilder/pom-default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/disiPluginPluginMarkerMaven/pom-default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/mavenJava/module.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/mavenJava/pom-default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/pluginMaven/module.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/publications/pluginMaven/pom-default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.jar.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.jar.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.jar.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.jar.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.module.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.module.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.module.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.module.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.pom" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.pom.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.pom.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.pom.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/1.0/it.unibo.disiPlugin-1.0.pom.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/maven-metadata.xml.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/maven-metadata.xml.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/maven-metadata.xml.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/maven-metadata.xml.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.jar.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.jar.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.jar.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.jar.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.module.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.module.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.module.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.module.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.pom" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.pom.md5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.pom.sha1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.pom.sha256" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/repo/unibo/disi/it.unibo.disiPlugin/unspecified/it.unibo.disiPlugin-unspecified.pom.sha512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/reports/plugin-development/validation-report.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/resources/main/META-INF/gradle-plugins/unibo.disiPlugin.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/publishDisiBuilderPublicationToDisiRepoRepository/module-maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/publishDisiBuilderPublicationToMavenLocal/module-maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/publishDisiBuilderPublicationToMyRepoRepository/module-maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/publishDisiPluginPluginMarkerMavenPublicationToMavenLocal/module-maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/tmp/publishPluginMavenPublicationToMavenLocal/module-maven-metadata.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/unibo/disi/plugins/MyPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/unibo/disi/plugins/MyTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibo.disi.builder/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibo.disi.builder/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/test.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibo.disi.builder/src/disiPlugin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibo.disi.builder/src/entry.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibolibs/it.unibo.disiPlugin-1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../unibolibs/it.unibo.disiPlugin.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.jdt.core.external.folders/.location" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/history.version" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.version" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.debug.ui.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.junit.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jsch.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.discovery.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.editors.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.workbench.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.debug.core/.launches/Config - Main_ctxdemo0.kt.launch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.debug.core/.launches/Config - demo.kt.launch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/.org.eclipse.jdt.core.external.folders/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/1000893301.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/1026287560.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/123860335.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/1347435150.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/1363371503.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/1467143923.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/1857577605.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2196206729.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2226072732.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2328269416.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2394231702.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/254442204.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2595264030.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2610830201.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/2734220782.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/3104147617.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/3288513779.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/3529367727.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/3795807717.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/4155066694.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/4178871191.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/4254095041.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/816193608.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/83782868.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/javaLikeNames.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.ui/OpenTypeHistory.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.ui/QualifiedTypeNameHistory.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/05b0fe8524860bd73cbb07ef30fb34cc/_0.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/05b0fe8524860bd73cbb07ef30fb34cc/write.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/830bc118332e77292949ed1e6d2fabe0/_0.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/830bc118332e77292949ed1e6d2fabe0/write.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/a9cf28a881ce60c78ad176b9d71a1c0d/_0.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/a9cf28a881ce60c78ad176b9d71a1c0d/write.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/workspaceState.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/logback.1.16.0.20200318-1040.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.oomph.setup/workspace.setup" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.ui.intro/dialog_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.ui.intro/introstate" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.xtend.ide/dialog_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.xtend.ide/resource.change.registry" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/DisiBuilderAsPlugin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/genutils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/CommonOps.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/CommonOps.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/ctxdemo0/Main_ctxdemo0.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/demo/demo.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/src/sysRules.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/builtin.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/classes/kotlin/main/META-INF/unibo.disi.builder.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/classes/kotlin/main/META-INF/unibo.disi.builder.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/classes/kotlin/main/disi/builder/builtin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/build-history.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/build-history.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/proto.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/counters.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/counters.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/file-to-id.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/id-to-file.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.keystream.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.len" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab.values.at" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/caches-jvm/lookups/lookups.tab_i" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/last-build.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/compileKotlin/last-build.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/unibodisibuilder10jar-classes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/kotlin/unibodisibuilder10jar-classes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build/tmp/jar/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/builtin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/builtin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibolibs/unibo.disi.builder-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../unibolibs/unibo.disi.builder-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/userdocs/DisiBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/userdocs/DisiBuilder.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -349,6 +81,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1mEtEs05bzouYvFaPkfXMfxl9tA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -361,6 +96,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -389,6 +125,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

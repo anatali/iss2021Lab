@@ -98,7 +98,7 @@ m{
  	font-size: 75%;
 }
 div.body{
-	width: 700px;
+	 
     font-size: 15px;
 }
 k{
@@ -254,11 +254,11 @@ function myFunction() {
     
 <head>
    
-<title>DisiBuilder</title></head>
+<title>DisiBuilder0</title></head>
     
 <body>
 <div id="top">
-<h1>LabIss2021 |  DisiBuilder<font size="5"></font> </h1>
+<h1>LabIss2021 |  DisiBuilder0<font size="5"></font> </h1>
 </div>  
 
 
@@ -266,49 +266,44 @@ function myFunction() {
 <h2>Introduction</h2>
 
 
-
- <table style="width:98%">
-<tbody>	
+<table style="width:98%">
+ 
 <tr>
-<td style="width:50%" >
-The generator code is defined in
-
-
-<a href="../src/builder2020.qak" target="web">builder2020.qak</a>
+<td style="width:70%" >
+The generator code is defined in <br/
+<a href="../buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt" target="web">
+buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt</a>
 <br/><br/>
-<a href="../src/disi/builder/utils.kt" target="web">disi/builder/utils.kt</a>
+The generator code is used to define a custom Gradle plugin:<br/>
+<a href="../buildSrc/src/main/kotlin/unibo/disi/builder/DisiBuilderPlugin.kt" target="web">
+buildSrc/src/main/kotlin/unibo/disi/builder/DisiBuilderPlugin.kt</a>
 <br/><br/>
-<a href="../src/disi/builder/builtin.kt" target="web">disi/builder/builtin.kt</a>
+The plugin is created in
+<a href="../buildSrc/build.gradle.kts" target="web">buildSrc/build.gradle.kts</a>
+
+<br/><br/>
+The plugin is used in
+<a href="../app/build.gradle.kts" target="web">app/build.gradle.kts</a>
+
+<pre>
+project.plugins.forEach() {
+    println( it )
+}
+</pre>
 </td>
 <td>
 </td>
 </tr>
- </tbody>
+ 
 </table>
 
-<pre>
-
-</pre>
+ 
 
 
 
  <br/><br/>
-</div>  
-
-
  
  
-<tbody>	
-<tr>
-<td style="width:50%" >
- 
-
-</td>
-<td>
-</td>
-</tr>
- </tbody>
-</table>
  
 <h2>CI</h2>
 <pre>
@@ -327,26 +322,11 @@ The generator code is defined in
 </tr>
  </tbody>
 </table>
- <br/><br/>
-</div>  
-
- 
- 
-<tbody>	
-<tr>
-<td style="width:50%" >
  
 
-</td>
-<td>
-</td>
-</tr>
- </tbody>
-</table> 
 <br/><br/>
 </div>
- </li>
-</ol>
+ 
 <div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">
 By AN Unibo-DISI  
 </div> 

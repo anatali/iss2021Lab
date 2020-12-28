@@ -18,10 +18,11 @@ plugins {
     id 'eclipse'
     id 'application'
     id 'java-gradle-plugin'     //for building a plugin => org.gradle.api
+    id 'maven-publish'
 }
 
+group 'unibo.disi'
 version '1.0'
-
 sourceCompatibility = 1.8
 
 repositories {
@@ -52,6 +53,48 @@ sourceSets {
     main.java.srcDirs += 'resources'
     test.java.srcDirs += 'test'		//test is specific
 }
+/*
+PLUGIN SECTION
+ */
+//a new instance of a plugin is created for each project it is applied to
+class GreetingPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        project.task('helloplugin') {
+            doLast {
+                println 'Hello from the GreetingPlugin'
+            }
+        }
+    }
+}
+//METTO il plugin in buildSrc ??? per avere i task di generazione
+// Apply the plugin
+apply plugin: GreetingPlugin
+
+//-------------------------------------------------------
+gradlePlugin {
+    plugins {
+        /*
+        create("greetingsPlugin") {
+            id = "unibo.disi.buildplugin"
+            implementationClass = "unibo.disi.plugins.MyPlugin"
+        }*/
+
+        disiPlugin {
+            id = 'unibo.disiPlugin.builder'
+            implementationClass = 'UtilsKt'
+        }
+    }
+}
+/*
+gradlePlugin {
+    plugins {
+        disiPlugin {
+            id = 'unibo.disi.builder'
+            implementationClass = 'disiPlugin'
+        }
+    }
+}
+*/
 
 
 /*
@@ -68,29 +111,6 @@ jar {
 
 
 
-//a new instance of a plugin is created for each project it is applied to
-class GreetingPlugin implements Plugin<Project> {
-    void apply(Project project) {
-        project.task('helloplugin') {
-            doLast {
-                println 'Hello from the GreetingPlugin'
-            }
-        }
-    }
-}
-//METTO il plugin in buildSrc ??? per avere i task di generazione
-// Apply the plugin
-apply plugin: GreetingPlugin
-
-gradlePlugin {
-    plugins {
-        disiPlugin {
-            id = 'unibo.disi.builder'
-            implementationClass = 'disiPlugin'
-        }
-    }
-}
 
 
-//apply plugin: unibo.disi.builder
 
