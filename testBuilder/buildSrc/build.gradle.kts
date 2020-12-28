@@ -1,5 +1,6 @@
 plugins {
     `kotlin-dsl`
+    `java-gradle-plugin`
 }
 repositories {
     mavenCentral()
@@ -15,4 +16,13 @@ dependencies{
 
     implementation( "tuprolog:2p301" )
     implementation( "disiIss2020:unibo.disi.builder-1.0" )
+}
+
+gradlePlugin {
+    plugins {
+        create("myPlugins") {
+            id = "disiPlugin"
+            implementationClass = "unibo.disi.plugins.MyPlugin"
+        }
+    }
 }

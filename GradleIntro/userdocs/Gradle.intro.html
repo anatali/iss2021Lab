@@ -288,8 +288,6 @@ As a consequence, projects and tasks have a direct class representation in Gradl
 Gradle establishes a vocabulary for its model by exposing a DSL implemented in	Groovy/Kotlin.<br/>
 In our work, we will write <i>Gradle configuration scripts</i> in <k>Kotlin DSL</k> as described in 
 <a href="https://docs.gradle.org/current/dsl/index.html" target="web">Gradle Build Language Reference</a>
-<br/>
-<ks>WARNING</ks>: The Gradle Kotlin DSL does not seem currently supported in Eclipse.
 </div>	
 
 	<h3>Gradle | Basic concepts</h3>
@@ -551,7 +549,7 @@ Gradle provides several mechanisms that allow you to extend it:
 From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">Building Java Applications Sample</a>.<br/><br/>
 <ol>
 <li>
-From an empty working dir (e.g. <tt>GradleIntro</tt>), start with some automatic code generation:
+Start with some automatic code generation:
 <pre>
 <k>gradle init</k> (select 2, 3, 1, 2, 1, demo, demo)
 
@@ -1933,29 +1931,30 @@ include("taskForBuildSrc")
 Now introduce an enhanced  <tt>CommonTask</tt> named <tt>ct</tt>:
 
 <pre>
-task&lt;CommonTask>("ct"){
+task<CommonTask>("ct"){
     msg ="Hello from ${this.name} in ${project.name}"
 }
 </pre>
 Finally, let us tell Gradle to run the task named <tt>ct</tt>:
 </pre>
 <pre>
-<k>gradlew -q :taskForBuildSrc:ct</k>
+<k>gradlew -q ct</k>
 SETTINGS RUNS ...
  ...... build top-level
  ...... build in app
 Message shown during the configuration phase: no task action defined in task ':app:notgood'
- ...... build in taskForBuildSrc sub-project
+ ...... build in taskAccess sub-project
+taskAccess | compileClasspath= configuration ':taskForBuildSrc:compileClasspath'
 <ks>buildSrc/CommonTask |  Hello from ct in taskForBuildSrc</ks>
+
 </pre>
 Note that Gradle creates a <a href="../buildSrc/build/" target="web"><ks>buildSrc/build</ks></a> directory. 
 Gradle automatically compiles and tests the <tt>buildSrc</tt> code and puts it in the classpath of the build script. <br/> 
-<!--
+
 <pre>
 <k>gradlew :taskForBuildSrc:dependencies</k>
 
 </pre>
--->
 <h3>Refactoring Java operations to compile/run</h3>
 Now, let us define our custom tasks to compile and run Java programs within 
 <a href="../buildSrc/src/main/kotlin/JavaCompileRun.kt" target="web"><ks>JavaCompileRun.kt</ks></a> and introduce a new sub-project 
@@ -2039,6 +2038,53 @@ Or some combination of the two.
 
  </li>
 </ol>
+
+<h2>Custom plugins</h2>
+https://docs.gradle.org/current/userguide/custom_plugins.html 
+
+<h3>buildScript</h3>
+The buildscript block is for the build.gradle file itself.<br/>
+The buildScript block determines which plugins, task classes, and other classes are available for use in the rest of the build script. 
+Without a buildScript block, you can use everything that ships with Gradle out-of-the-box. 
+If you additionally want to use third-party plugins, task classes, or other classes (in the build script!), 
+you have to specify the corresponding dependencies in the buildScript block.
+<br/><br/>
+https://medium.com/@StefMa/its-time-to-ditch-the-buildscript-block-a1ab12e0d9ce
+<br/>
+https://tomgregory.com/introduction-to-gradle-plugins/
+
+<br/><br/>
+https://www.vogella.com/tutorials/GradleTutorial/article.html
+You can refresh dependencies in your cache with the command line option --refresh-dependencies. 
+You can also delete the cached files under ~/.gradle/caches. With the next build Gradle attempts to download the dependencies again
+
+<br/><br/>
+Currently gradle provides two publishing mechanisms. Original - shipped with java plugin - is described here and is based on a task of type Upload. 
+https://docs.gradle.org/current/userguide/artifact_management.html
+<br/><br/>
+This mechanism is going to be replaced by the - currently incubating - second mechanism that is separated from java plugin 
+and also splitted into maven and ivy. This new mechanism is described here.
+https://docs.gradle.org/current/userguide/publishing_maven.html <br/>
+Read this before:
+https://docs.gradle.org/current/userguide/publishing_setup.html#publishing_overview
+
+<h3>From  https://docs.gradle.org/current/userguide/plugins.html</h3>
+Binary plugins can reside within a build script, within the project hierarchy or externally in a plugin jar. 
+Script plugins are additional build scripts that further configure the build and usually implement a declarative approach to manipulating the build.
+<br/><br/>
+A plugin often starts out as a script plugin (because they are easy to write) and then, 
+as the code becomes more valuable, it’s migrated to a binary plugin that can be easily tested and shared between multiple projects or organizations.
+<br/><br/>
+
+To use the build logic encapsulated in a plugin, Gradle needs to perform two steps. <br/>
+First, it needs to resolve the plugin, and then it needs to apply the plugin to the target, usually a Project.
+<br/><br/>
+Script plugins are self-resolving in that they are resolved from the specific file path or URL provided when applying them. 
+
+<br/><br/> 
+From https://medium.com/decisionbrain/when-to-not-use-mavenlocal-in-your-gradle-build-script-6da03902f9df<br/>
+mavenLocal() repository is not the Gradle dependency cache. It is a repository where you can deploy components with ./gradlew publishToMavenLocal (assuming you use the maven-publish Gradle plugin).
+
 </div>
 <br/><br/>
 <div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">

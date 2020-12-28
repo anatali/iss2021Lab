@@ -9,3 +9,11 @@
 
 rootProject.name = "testBuilder"
 include("app")
+
+/*
+pluginManagement {
+    repositories {
+        //maven { url = uri("file://C:/tmp/repo") }
+        mavenLocal()
+    }
+}*/
