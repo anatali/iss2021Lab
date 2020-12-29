@@ -30,7 +30,7 @@ plugins { } is used when specifying your plugin by its id (ex. plugins { id 'jav
 repositories {
     mavenCentral()
     jcenter()
-    mavenLocal()
+    //mavenLocal()
     flatDir {   dirs '../unibolibs'	 }
 }
 

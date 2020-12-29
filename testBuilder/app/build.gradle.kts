@@ -13,24 +13,24 @@ plugins {
     //`kotlin-dsl`
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    id("disiPlugin")
-    id("disiBuilderJavaPlugin")
-    id("disiBuilderKotlinPlugin")
+    //id("unibo.disi.disiPlugin")
+    //id("unibo.disi.disiBuilderJavaPlugin")
+    //id("unibo.disi.mydisiBuilderKotlinPlugin")
+    id("it.unibo.disi.mydisiBuilderKotlinPlugin")
 
 }
-
+/*
 repositories {
     // Use JCenter for resolving dependencies.
     //jcenter()
         //mavenCentral()
         mavenLocal()
   }
-
+*/
 
 project.plugins.forEach() {
     println( it )
 }
-
 
 /*
 buildscript {

@@ -23,33 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="507f30c6-781d-47ba-8d92-390f2f64e702" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/DisiBuilderAsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/genutils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/ctxdemo0/Main_ctxdemo0.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/demo/demo.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/sysRules.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/builtin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/src/disi/builder/utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/userdocs/DisiBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/userdocs/DisiBuilder.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

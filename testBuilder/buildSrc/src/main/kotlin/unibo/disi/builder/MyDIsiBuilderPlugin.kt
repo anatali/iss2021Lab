@@ -3,13 +3,13 @@ package unibo.disi.builder
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class DisiBuilderPlugin : Plugin<Project> {
+class MyDisiBuilderPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.task("buildDisi") {
             doLast {
 
-                val s = generator.genFilePathName("pluto")
-                 println("Hello from disiBuilder plugin $s ")
+                val s = generator.genFilePathName("pippo")
+                 println("Hello from MyDisiBuilderPlugin plugin $s ")
 
                 //generator.genCodeFromModel("demo0")
             }

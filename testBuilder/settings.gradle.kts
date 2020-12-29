@@ -6,14 +6,15 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user manual at https://docs.gradle.org/6.7.1/userguide/multi_project_builds.html
  */
-
-rootProject.name = "testBuilder"
-include("app")
-
 /*
+//NON NECESSARIO PER app
 pluginManagement {
     repositories {
         //maven { url = uri("file://C:/tmp/repo") }
         mavenLocal()
+        gradlePluginPortal()
     }
 }*/
+rootProject.name = "testBuilder"
+include("app")
+

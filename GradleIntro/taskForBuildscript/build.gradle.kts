@@ -1,28 +1,53 @@
 import org.gradle.internal.impldep.org.mozilla.javascript.tools.shell.Global.readline
 
 println(" ...... build in taskForBuildscript sub-project  ")
+/*
+plugins{    //specifying plugin by its id - you need to create a plugin id.
+    id("it.unibo.disi.mydisiBuilderKotlinPlugin") version "3.5"
+}
+repositories {
+    mavenLocal()
+}
+*/
+
+
 
 /*
 In this subproject, ...
  */
+
 buildscript {
     repositories {
         //mavenCentral()
         //jcenter()
         mavenLocal()
-        flatDir {   dirs("../unibolibs")	 }
-        //flatDir {   dirs("C:\\tmp\\repo")	 }
-    }
+        //flatDir {   dirs("../unibolibs")	 }
+     }
     // everything listed in the dependencies is actually a plugin,
     // which we'll do "apply plugin" in our module level gradle file.
     //https://medium.com/@StefMa/its-time-to-ditch-the-buildscript-block-a1ab12e0d9ce
     dependencies {
-        classpath( "disi:unibo.disi.builder-1.0" )
-        //classpath( "unibo.disi:it.unibo.disiPlugin:1.0" )
+        // ~/.m2/repository/com/company/product/plugin/product-gradle-plugin/1.0/product-gradle-plugin-1.0.jar
+        //classpath 'com.company.product.plugin:product-gradle-plugin:1.0'
+
+        //~/.m2/repository/mydisiBuilderKotlinPlugin/mydisiBuilderKotlinPlugin.gradle.plugin/2.0
+        //classpath( "mydisiBuilderKotlinPlugin:mydisiBuilderKotlinPlugin.gradle.plugin:2.0" )
     }
 
+    apply(plugin = "it.unibo.disi.mydisiBuilderKotlinPlugin")  //not found
 
 }
+
+
+//apply { plugin("mydisiBuilderKotlinPlugin")  }
+//apply(plugin = "mydisiBuilderKotlinPlugin") //specifying  plugin by its class name
+/*
+1. You can code it directly within your Gradle build script.
+2. You can put it under buildSrc (ex. buildSrc/src/main/groovy/MyCustomPlugin).
+3. You can import your custom plugin as a jar in your buildscript method.
+*/
+
+
 /*
 buildscript {
     repositories {

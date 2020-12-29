@@ -23,33 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50ea17fb-0697-4f83-8e46-048964d75be8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/DisiBuilderAsPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/genutils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/MyDIsiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.disiPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.provabuilder/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/ctxdemo0/Main_ctxdemo0.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/demo/demo.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/sysRules.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/builtin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/disi/builder/utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userdocs/DisiBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/userdocs/DisiBuilder.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,25 +148,25 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="445" y="150" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1609060258698" />
-    <state width="1185" height="152" key="GridCell.Tab.0.bottom" timestamp="1609068359110">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1398" height="192" key="GridCell.Tab.0.bottom" timestamp="1609254837869">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state width="1185" height="152" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609068359110" />
-    <state width="1398" height="192" key="GridCell.Tab.0.bottom/0.0.1536.920@0.0.1536.920" timestamp="1609004504219" />
-    <state width="1185" height="152" key="GridCell.Tab.0.center" timestamp="1609068359110">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1398" height="192" key="GridCell.Tab.0.bottom/0.0.1536.920@0.0.1536.920" timestamp="1609254837869" />
+    <state width="1398" height="192" key="GridCell.Tab.0.center" timestamp="1609254837869">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state width="1185" height="152" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609068359110" />
-    <state width="1398" height="192" key="GridCell.Tab.0.center/0.0.1536.920@0.0.1536.920" timestamp="1609004504219" />
-    <state width="1185" height="152" key="GridCell.Tab.0.left" timestamp="1609068359110">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1398" height="192" key="GridCell.Tab.0.center/0.0.1536.920@0.0.1536.920" timestamp="1609254837869" />
+    <state width="1398" height="192" key="GridCell.Tab.0.left" timestamp="1609254837869">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state width="1185" height="152" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609068359110" />
-    <state width="1398" height="192" key="GridCell.Tab.0.left/0.0.1536.920@0.0.1536.920" timestamp="1609004504219" />
-    <state width="1185" height="152" key="GridCell.Tab.0.right" timestamp="1609068359110">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1398" height="192" key="GridCell.Tab.0.left/0.0.1536.920@0.0.1536.920" timestamp="1609254837869" />
+    <state width="1398" height="192" key="GridCell.Tab.0.right" timestamp="1609254837869">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state width="1185" height="152" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609068359110" />
-    <state width="1398" height="192" key="GridCell.Tab.0.right/0.0.1536.920@0.0.1536.920" timestamp="1609004504219" />
+    <state width="1398" height="192" key="GridCell.Tab.0.right/0.0.1536.920@0.0.1536.920" timestamp="1609254837869" />
   </component>
 </project>

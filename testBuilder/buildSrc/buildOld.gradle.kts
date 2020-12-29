@@ -5,15 +5,13 @@ plugins {
 
 }
 repositories {
-    mavenLocal()        //MUST BE THE FIRST
     mavenCentral()
+    //flatDir {   dirs( "C:\\Didattica2018Work\\iss2021Lab\\testBuilder\\buildSrc\\lib"	 ) }
+    //flatDir {   dirs( "./lib"	 ) }
     flatDir {   dirs( "../../unibolibs"	 ) }
 }
 
-group   = "it.unibo.disi"
-version = "3.5"
-
-println("Project.GRADLE_PROPERTIES = ${ Project.GRADLE_PROPERTIES }")
+version = "2.0"
 
 dependencies{
     // https://mvnrepository.com/artifact/it.unibo.alice.tuprolog/tuprolog
@@ -26,41 +24,23 @@ dependencies{
 
 gradlePlugin {
     plugins {
-        /*
         create("myPlugins") {
-            id = "unibo.disi.disiPlugin"
+            id = "disiPlugin"
             implementationClass = "unibo.disi.plugins.MyPlugin"
         }
 
         create("disiPlugins") {
-            id = "unibo.disi.disiBuilderJavaPlugin"
+            id = "disiBuilderJavaPlugin"
             implementationClass = "unibo.disi.plugins.DisiBuilderAsPlugin"
         }
 
         create("mydisiPlugins") {
-            id = "unibo.disi.disiBuilderKotlinPlugin"
+            id = "disiBuilderKotlinPlugin"
             implementationClass = "unibo.disi.builder.DisiBuilderPlugin"
         }
-
-         */
         create("my2disiPlugins") {
-            id = "$group.mydisiBuilderKotlinPlugin"
+            id = "mydisiBuilderKotlinPlugin"
             implementationClass = "unibo.disi.builder.MyDisiBuilderPlugin"
         }
     }
 }
-/*
-publishing{
-    publications {
-
-        create<MavenPublication>("disi") {
-            groupId = "unibo.disi"
-            artifactId = "builder"
-            version = "4.0"
-            from(components["java"])
-        }
-    }
-
-}
-*/
-
