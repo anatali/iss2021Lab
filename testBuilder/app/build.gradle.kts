@@ -13,18 +13,13 @@ plugins {
     //`kotlin-dsl`
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    //id("unibo.disi.disiPlugin")
-    //id("unibo.disi.disiBuilderJavaPlugin")
-    //id("unibo.disi.mydisiBuilderKotlinPlugin")
-    id("it.unibo.disi.mydisiBuilderKotlinPlugin")
+    id("unibo.disi.builder") version "1.0"
 
 }
 /*
 repositories {
-    // Use JCenter for resolving dependencies.
     //jcenter()
-        //mavenCentral()
-        mavenLocal()
+    //mavenCentral()
   }
 */
 
@@ -32,39 +27,24 @@ project.plugins.forEach() {
     println( it )
 }
 
-/*
-buildscript {
-    repositories {
-        flatDir {
-            dirs("../../unibolibs")
-            //flatDir {   dirs("C:\\tmp\\repo")
-        }
-        dependencies { classpath("disi:it.unibo.disiPlugin-1.0") }
-    }
-}*/
-
-/*
-apply plugin: is used when specifying your plugin by its class name (ex. apply plugin: JavaPlugin)
-plugins { } is used when specifying your plugin by its id (ex. plugins { id 'java' })
- */
-//apply{ plugin( "gradle-plugins" ) }
-//apply{ plugin( "unibo.disi.plugins.MyPlugin" ) }
-
-/*
-POWERSHELL
-gradle properties |
-    Where-Object { $_ -match '(?<=^plugins: \[).*(?=\])'; } |
-    Out-Null;
-$Matches.Values -split ", " |
-    ForEach-Object { ($_ -split "@")[0]; }
- */
 task("showClasspath")  {
     doLast {
         buildscript.configurations.forEach{ println( it.allArtifacts ) }
     }
 }
 
-//dependencies {  implementation( project (":app") )  }
+task("buildActors"){
+    doLast{
+        val v = unibo.disi.builder.generator.genCodeFromModel("demo0")
+    }
+}
+task("hello"){
+    doLast(){
+        println("hello testBuilder")
+    }
+}
+
+
 /*
 dependencies {
     // Align versions of all Kotlin components
@@ -92,24 +72,19 @@ application {
 
 /*
 ADDED AFTER buildSrc
-*/
+
 //val compileClasspath by configurations.creating
 
 task<CommonTask>("ct"){
     println("................... ct " )
     actorModel="demo1"
 }
+*/
 
-task("hello"){
-    doLast(){
-        println("hello testBuilder")
-    }
-}
+
 
 /*
-plugins {
-    id("unibo.disi.buildplugin") version "1.0"
-}
+//A LOCALLY DEFINED PLUGIN
 
 open class DisiGenTask : DefaultTask() {
     @TaskAction
@@ -126,3 +101,11 @@ task<DisiGenTask>("disiBuild"){
     actorModel="demo0"
 
 }*/
+/*
+//POWERSHELL JUST TO KNOWN ...
+gradle properties |
+    Where-Object { $_ -match '(?<=^plugins: \[).*(?=\])'; } |
+    Out-Null;
+$Matches.Values -split ", " |
+    ForEach-Object { ($_ -split "@")[0]; }
+ */

@@ -8,10 +8,12 @@ class DisiBuilderPlugin : Plugin<Project> {
         project.task("buildDisi") {
             it.doLast{
                 val s = generator.genFilePathName("pluto")
-                 println("Hello from disiBuilder plugin $s ")
+                 println("disiBuilder plugin | generates the path-name: $s ")
 
                 //generator.genCodeFromModel("demo0")
             }
         }
+        //project.task("buildActors")
+
     }
 }

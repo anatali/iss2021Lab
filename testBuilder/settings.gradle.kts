@@ -6,15 +6,17 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user manual at https://docs.gradle.org/6.7.1/userguide/multi_project_builds.html
  */
-    /*
-//NON NECESSARIO PER app
+
+println("SETTINGS pluginManagement ...")
 pluginManagement {
     repositories {
-        //maven { url = uri("file://C:/tmp/repo") }
-        mavenLocal()
+        //maven { url = uri("file://C:/Users/utente/.m2/repository") }
+        maven(url = "../uniboRepos/maven-repo")
+        //REQUIRED FOR THE unibo gradle plugins
+        flatDir { dirs("../unibolibs") }
         gradlePluginPortal()
     }
-}*/
+}
 rootProject.name = "testBuilder"
 include("app")
 

@@ -6,18 +6,17 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user manual at https://docs.gradle.org/6.7.1/userguide/multi_project_builds.html
  */
-
+/*
 println("SETTINGS pluginManagement ...")
 pluginManagement {
     repositories {
         //maven { url = uri("file://C:/Users/utente/.m2/repository") }
-        //maven(url = uri("file://C:\\Didattica2018Work\\iss2021Lab\\consuming\\maven-repo"))
         maven(url = "../uniboRepos/maven-repo")
-        //mavenLocal()
+        //REQUIRED FOR THE unibo gradle plugins
         flatDir {   dirs( "../unibolibs"	 ) }
         gradlePluginPortal()
     }
-}
+}*/
 println("SETTINGS RUNS ...")
 rootProject.name = "demo" //overrides the default behavior of naming the build after the directory it’s in
 //include("app") //defines that the build consists of one subproject called app that contains the build logic

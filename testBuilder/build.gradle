@@ -9,6 +9,8 @@ USAGE:
 	gradle  -b build.gradle -q tasks --all
 	gradle  -b build.gradle cleanDistDir	//to clean the src directory
 ================================================================================
+
+THIS IS RELATED TO THE GENERATED CODE
 */
 plugins {
     id 'java'

@@ -2,102 +2,62 @@ import org.gradle.internal.impldep.org.mozilla.javascript.tools.shell.Global.rea
 
 println(" ...... build in taskForBuildscript sub-project  ")
 
-plugins{    //specifying plugin by its id - you need to create a plugin id.
-    //id("it.unibo.disi.mydisiBuilderKotlinPlugin") version "3.5"
-    //id("com.example.hello") version "1.0.0"
+/*
+plugins{
     id("unibo.disi.builder") version "1.0"
 }
-/*
-repositories {
-    //mavenLocal()
-    //maven { url = uri("file://C:/Users/utente/.m2/repository") }
-    flatDir {   dirs( "../../unibolibs"	 ) }
-}
-*/
 
+*/
 
 
 /*
 In this subproject, ...
  */
-/*
+
 buildscript {
     repositories {
-        //mavenCentral()
+        mavenCentral()
         //jcenter()
-        maven { url = uri("file://C:/Users/utente/.m2/repository") }
-        //mavenLocal()
-        //flatDir {   dirs("../unibolibs")	 }
+        //maven { url = uri("file://C:\\Didattica2018Work\\iss2021Lab\\uniboRepos\\maven-repo") }  //OK
+        maven ( url= "../../uniboRepos/maven-repo" )
+        flatDir {   dirs("../../unibolibs")	 }
      }
     // everything listed in the dependencies is actually a plugin,
     // which we'll do "apply plugin" in our module level gradle file.
     //https://medium.com/@StefMa/its-time-to-ditch-the-buildscript-block-a1ab12e0d9ce
     dependencies {
-        // ~/.m2/repository/com/company/product/plugin/product-gradle-plugin/1.0/product-gradle-plugin-1.0.jar
-        //classpath 'com.company.product.plugin:product-gradle-plugin:1.0'
-
-        //~/.m2/repository/mydisiBuilderKotlinPlugin/mydisiBuilderKotlinPlugin.gradle.plugin/2.0
-        //classpath( "mydisiBuilderKotlinPlugin:mydisiBuilderKotlinPlugin.gradle.plugin:2.0" )
+        // ~/.m2/repository/  com/company/product/plugin/ product-gradle-plugin/1.0/product-gradle-plugin-1.0.jar
+        //classpath 'com.company.product.plugin:        product-gradle-plugin:1.0'
+        //classpath( "unibo.disi.plugin:unibo.disi.builder.gradle.plugin:1.0" )
+        classpath( "unibo.disi.builder:unibo.disi.builder.gradle.plugin:1.0" )
     }
 
-    apply(plugin = "it.unibo.disi.mydisiBuilderKotlinPlugin")  //not found
+    //apply(plugin = "it.unibo.disi.mydisiBuilderKotlinPlugin")  //not found
 
 }
-*/
 
-//apply { plugin("mydisiBuilderKotlinPlugin")  }
-//apply(plugin = "mydisiBuilderKotlinPlugin") //specifying  plugin by its class name
+
+//apply { plugin("unibo.disi.builder")  }       //OK
+apply(plugin = "unibo.disi.builder")            //OK
 /*
-1. You can code it directly within your Gradle build script.
-2. You can put it under buildSrc (ex. buildSrc/src/main/groovy/MyCustomPlugin).
+1. You can code the plugin directly within your Gradle build script.
+2. You can put the plugin under buildSrc (ex. buildSrc/src/main/...).
 3. You can import your custom plugin as a jar in your buildscript method.
 */
 
+//gradle -q :taskForBuildscript:tasks --all INCLUDES buildDisi and hellobs
 
-/*
-buildscript {
-    repositories {
-        maven {
-            url = uri("https://plugins.gradle.org/m2/")
-        }
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30-M1")
+//extend the task buildDisi defined by the plugin unibo.disi.builder
+tasks.named("buildDisi"){ //Accessing a task via API - adding behaviour
+    doFirst {
+        println("STARTING the DISI-BUILDING ...  ${this.name}")
     }
 }
 
-apply(plugin = "org.jetbrains.kotlin.jvm")
-*/
 
-/*
-apply {
-    plugin("java")
-    plugin("org.jetbrains.kotlin.jvm:1.3.72")
-}
-*/
-
-/*
-apply{
-        plugin("unibo.disi.plugins.MyPlugin")
-}
-*/
-
-
-task("hellobs") {
-    println(" .......... hellobs")
+task("jobbs") {
     doLast {	//a shortcut to define an action
-        println("Hello world from taskForBuildscript - this=${this}")
-        //val v = disi.builder.test()
-        //println(v)
+        val v = unibo.disi.builder.generator.genFilePathName("xxx")
+        println("${this.name} has used the 'unibo.disi.builder' plugin to generate the path: $v")
     }
 }
-
-/*
-task("hellobs") {
-    println(" .......... hellobs")
-    doLast {	//a shortcut to define an action
-        println("Hello world from taskForBuildscript - this=${this}")
-        val v = generator.genFilePathName("xxx")
-        //println(v)
-    }
-}*/

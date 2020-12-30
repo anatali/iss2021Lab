@@ -1,8 +1,5 @@
 package unibo.disi.builder
 
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStreamWriter
 import alice.tuprolog.*
 //import disi.builder.builtin
 

@@ -39,13 +39,13 @@ gradlePlugin {
 
         create("mydisiPlugins") {
             id = "unibo.disi.disiBuilderKotlinPlugin"
-            implementationClass = "unibo.disi.builder.DisiBuilderPlugin"
+            implementationClass = "DisiBuilderPlugin"
         }
 
          */
         create("my2disiPlugins") {
             id = "$group.mydisiBuilderKotlinPlugin"
-            implementationClass = "unibo.disi.builder.MyDisiBuilderPlugin"
+            implementationClass = "MyDisiBuilderPlugin"
         }
     }
 }

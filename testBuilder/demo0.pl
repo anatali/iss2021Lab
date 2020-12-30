@@ -1,7 +1,7 @@
 %====================================================================================
 % demo0 description   
 %====================================================================================
-system( demo0, msgbased ).
+system( demo0, msgdriven ).
 
 context(ctxdemo0, "localhost",  "TCP", "8095").
  qactor( demo, ctxdemo0, "it.unibo.demo.demo").
