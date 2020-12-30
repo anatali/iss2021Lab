@@ -1,0 +1,2 @@
+com/example/plugin/GreetingPlugin.java
+ com.example.plugin.GreetingPlugin

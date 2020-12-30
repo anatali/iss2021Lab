@@ -13,7 +13,7 @@ object genUtils {
 
 fun genFileName( dir: String,  packageName: String,  name: String,  suffix:String ) : String {
    val sysName  = packageName.replace(".", "/")
-   var fName    = ""
+   var fName    = " "
    var afterDot = ""
 	 if( suffix.length > 0  ) afterDot = "." + suffix
 	 if( sysName.length > 0 ) fName   = dir+"/"+sysName + "/" + name + afterDot

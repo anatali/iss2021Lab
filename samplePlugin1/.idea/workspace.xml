@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cda89e07-1ddb-44db-afde-548b81e9b0ee" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../README" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/greeting-plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../consuming/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/functionalTest/kotlin/it/unibo/disiBuilderPlugin/ItUniboDisiBuilderPluginPluginFunctionalTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/DisiBuilderPlugin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/builtin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/genutils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/utils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/test/kotlin/it/unibo/disiBuilderPlugin/ItUniboDisiBuilderPluginPluginTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/userdocs/DisiBuilderPlugin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha256-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/sha512-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/configuration-cache/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/classes/java/main/com/example/plugin/GreetingPlugin.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/libs/greeting-plugin-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/pluginDescriptors/com.example.hello.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/pluginDescriptors/com.example.plugin.greeting.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/publications/goodbyePluginMarkerMaven/pom-default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/publications/greetingPluginMarkerMaven/pom-default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/publications/helloPluginMarkerMaven/pom-default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/publications/pluginMaven/module.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/publications/pluginMaven/pom-default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/resources/main/META-INF/gradle-plugins/com.example.hello.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/resources/main/META-INF/gradle-plugins/com.example.plugin.greeting.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/tmp/jar/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/tmp/publishGoodbyePluginMarkerMavenPublicationToMavenRepository/module-maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/tmp/publishGreetingPluginMarkerMavenPublicationToMavenRepository/module-maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/tmp/publishHelloPluginMarkerMavenPublicationToMavenRepository/module-maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/build/tmp/publishPluginMavenPublicationToMavenRepository/module-maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/src/functionalTest/java/com/example/plugin/GreetingPluginFunctionalTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/src/main/java/com/example/plugin/GreetingPlugin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/greeting-plugin/src/test/java/com/example/plugin/GreetingPluginTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample_gradle_plugin-kotlin-dsl.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.jar.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.module.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/1.0.0/greeting-plugin-1.0.0.pom.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/greeting-plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/1.0.0/com.example.hello.gradle.plugin-1.0.0.pom.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/hello/com.example.hello.gradle.plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/1.0.0/com.example.plugin.greeting.gradle.plugin-1.0.0.pom.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/com/example/plugin/greeting/com.example.plugin.greeting.gradle.plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../unibolibs/buildSrc-3.5.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradleIntro/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../file-diff-plugin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/6.7.1/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/6.7.1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/configuration-cache/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradleTest/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/LabIss2021Bo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/genutils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/genutils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/userdocs/DisiBuilder0.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiPlugin/userdocs/DisiBuilderPlugin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../unibo.disi.builder/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1mNitGiUFDUhCYotLQq4n1qLskx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cda89e07-1ddb-44db-afde-548b81e9b0ee" name="Default Changelist" comment="" />
+      <created>1609340661532</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1609340661532</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,12 +1,17 @@
 import org.gradle.internal.impldep.org.mozilla.javascript.tools.shell.Global.readline
 
 println(" ...... build in taskForBuildscript sub-project  ")
-/*
+
 plugins{    //specifying plugin by its id - you need to create a plugin id.
-    id("it.unibo.disi.mydisiBuilderKotlinPlugin") version "3.5"
+    //id("it.unibo.disi.mydisiBuilderKotlinPlugin") version "3.5"
+    //id("com.example.hello") version "1.0.0"
+    id("unibo.disi.builder") version "1.0"
 }
+/*
 repositories {
-    mavenLocal()
+    //mavenLocal()
+    //maven { url = uri("file://C:/Users/utente/.m2/repository") }
+    flatDir {   dirs( "../../unibolibs"	 ) }
 }
 */
 
@@ -15,12 +20,13 @@ repositories {
 /*
 In this subproject, ...
  */
-
+/*
 buildscript {
     repositories {
         //mavenCentral()
         //jcenter()
-        mavenLocal()
+        maven { url = uri("file://C:/Users/utente/.m2/repository") }
+        //mavenLocal()
         //flatDir {   dirs("../unibolibs")	 }
      }
     // everything listed in the dependencies is actually a plugin,
@@ -37,7 +43,7 @@ buildscript {
     apply(plugin = "it.unibo.disi.mydisiBuilderKotlinPlugin")  //not found
 
 }
-
+*/
 
 //apply { plugin("mydisiBuilderKotlinPlugin")  }
 //apply(plugin = "mydisiBuilderKotlinPlugin") //specifying  plugin by its class name

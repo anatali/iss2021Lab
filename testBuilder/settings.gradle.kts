@@ -6,7 +6,7 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user manual at https://docs.gradle.org/6.7.1/userguide/multi_project_builds.html
  */
-/*
+    /*
 //NON NECESSARIO PER app
 pluginManagement {
     repositories {
