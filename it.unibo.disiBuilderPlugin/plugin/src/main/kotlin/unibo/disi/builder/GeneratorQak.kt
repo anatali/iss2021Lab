@@ -1,6 +1,6 @@
 package unibo.disi.builder
 
-object generatorQak {
+object GeneratorQak {
 
 fun genSkeleton( actorName: String ): String {
     //val packageName = dirName.replace("${generator.outSrcDir}/", "").replace("/", ".")

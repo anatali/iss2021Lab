@@ -16,12 +16,6 @@ plugins {
     id("unibo.disi.builder") version "1.0"
 
 }
-/*
-repositories {
-    //jcenter()
-    //mavenCentral()
-  }
-*/
 
 project.plugins.forEach() {
     println( it )
@@ -33,42 +27,23 @@ task("showClasspath")  {
     }
 }
 
-task("mybuild"){
+task("buildDemo0"){
     doLast{
         val v = unibo.disi.builder.Generator.genCodeFromModel("demo0")
     }
 }
+task("buildDemo1"){
+    doLast{
+        val v = unibo.disi.builder.Generator.genCodeFromModel("demo1")
+    }
+}
+
 task("hello"){
     doLast(){
         println("hello testBuilder")
     }
 }
 
-
-/*
-dependencies {
-    // Align versions of all Kotlin components
-    implementation( platform("org.jetbrains.kotlin:kotlin-bom"))
-
-    // Use the Kotlin JDK 8 standard library.
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    // This dependency is used by the application.
-    implementation("com.google.guava:guava:29.0-jre")
-
-    // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-    // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-}
-
-
-application {
-    // Define the main class for the application.
-    mainClass.set("testBuilder.AppKt")
-}
-*/
 
 /*
 ADDED AFTER buildSrc

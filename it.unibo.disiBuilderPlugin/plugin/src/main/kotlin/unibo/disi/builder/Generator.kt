@@ -33,12 +33,12 @@ object Generator{
 			println("ctxName=${ctxName} ctxHost=${ctxHost}")
  			return ctxName
 		}
-		else{ throw Exception("generator | ctx not found") }
+		else{ throw Exception("Generator | ctx not found") }
 	}
 
  	fun genCodeFromModel(modelFileName : String){
  		val path = System.getProperty("user.dir")
-		println("generator | START path=:$path"  );
+		println("Generator | START path=:$path modelFileName=$modelFileName"  );
 	//GENERATE THE OUTPUT DIRECTORY, if it does not exist
 		val dirName = genUtils.genFilePathName(outSrcDir)
 		genUtils.genDirectory(dirName)
@@ -56,18 +56,18 @@ object Generator{
 		val sol = pengine.solve("system(SYSNAME,BEHAVIOUR)." )
 		if(  sol.isSuccess  ) {
 			val behaviour = sol.getVarValue("BEHAVIOUR").toString()
+			println("Generator | genCodeFromModel $modelFileName behaviour=$behaviour")
 			msgdriven = (behaviour == "msgdriven")
-			println("generator | genCodeFromModel msgdriven=$behaviour")
 			if (msgdriven) {  //GENERATE THE SKELETON CODE OF THE MSG-DRIVEN KOTLIN ACTORS
 				generatorActors.genActorsCode(getFirstCtxName(), msgdriven)
 			} else {
 				generatorMsgBasedSystem.gen( modelFileName )
 			}
 		}//success
-		println("generator | END")
+		println("Generator | END")
 	}
 
-}//Object generator
+}//Object Generator
 
 	fun main() {	//args: Array<String>?
 		//Utils.test()

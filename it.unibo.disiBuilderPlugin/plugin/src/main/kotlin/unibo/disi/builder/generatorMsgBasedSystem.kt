@@ -11,7 +11,7 @@ object generatorMsgBasedSystem {
     }
 
     fun getCtxNames() : List<String>{
-        val sol = generator.pengine.solve("getCtxNames(CTXNAMES)." )
+        val sol = Generator.pengine.solve("getCtxNames(CTXNAMES)." )
         if(  sol.isSuccess  ) {
             val ctxNames = sol.getVarValue("CTXNAMES") 	//List
             val ctxNamesList = genUtils.strRepToList(ctxNames.toString())
@@ -19,5 +19,4 @@ object generatorMsgBasedSystem {
         }else throw Exception("")
     }
 
-}
-}
+}//generatorMsgBasedSystem

@@ -13,7 +13,7 @@ open class BuildActorTask @Inject constructor() : DefaultTask() {
     @TaskAction
     fun build() {
         println("$prefix $actorModel  ")
-        generator.genCodeFromModel("$actorModel")
+        Generator.genCodeFromModel("$actorModel")
     }
 }
 

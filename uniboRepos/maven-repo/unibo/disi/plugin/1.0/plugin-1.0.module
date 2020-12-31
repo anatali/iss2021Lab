@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.7.1",
-      "buildId": "7jydkcffyfddfhenly4kdg4xqq"
+      "buildId": "rlivxeklk5gtrez2p563sqv7ym"
     }
   },
   "variants": [
@@ -30,11 +30,11 @@
         {
           "name": "plugin-1.0.jar",
           "url": "plugin-1.0.jar",
-          "size": 22699,
-          "sha512": "e27800a7256f96da381732f821aee2ca0ce3ab20a3be6af83301c56506f7ee3700519544e37b36476b7be8bbfcec47a3827e97d64b9e38b903b19d4d4c1f6b42",
-          "sha256": "a1be124e90d9637e889769982581b34a36d9a6b379209cadd57bcde3241b8192",
-          "sha1": "365406127ab065c037a176e317a420f7585d5270",
-          "md5": "ecbf6c0fd6a3a788c8bf90a7e131b907"
+          "size": 29512,
+          "sha512": "703c802d593dc8a9b98f95318bc1f5f6f6f0e2ad03670c46aac0d034846be06186a9348c40e0687598639be0d873c7292d043cd1c08eff05f5379b24b16bab6b",
+          "sha256": "cc378412680ba480fb7de3ab4251cd88b03a3eefa834e590654feba4ecfa2019",
+          "sha1": "61bf989507bedee8da64f1c74954bf0ff342f0c1",
+          "md5": "0f49f6607a2466ee2e1d2fe072e1c087"
         }
       ]
     },
@@ -77,11 +77,11 @@
         {
           "name": "plugin-1.0.jar",
           "url": "plugin-1.0.jar",
-          "size": 22699,
-          "sha512": "e27800a7256f96da381732f821aee2ca0ce3ab20a3be6af83301c56506f7ee3700519544e37b36476b7be8bbfcec47a3827e97d64b9e38b903b19d4d4c1f6b42",
-          "sha256": "a1be124e90d9637e889769982581b34a36d9a6b379209cadd57bcde3241b8192",
-          "sha1": "365406127ab065c037a176e317a420f7585d5270",
-          "md5": "ecbf6c0fd6a3a788c8bf90a7e131b907"
+          "size": 29512,
+          "sha512": "703c802d593dc8a9b98f95318bc1f5f6f6f0e2ad03670c46aac0d034846be06186a9348c40e0687598639be0d873c7292d043cd1c08eff05f5379b24b16bab6b",
+          "sha256": "cc378412680ba480fb7de3ab4251cd88b03a3eefa834e590654feba4ecfa2019",
+          "sha1": "61bf989507bedee8da64f1c74954bf0ff342f0c1",
+          "md5": "0f49f6607a2466ee2e1d2fe072e1c087"
         }
       ]
     }

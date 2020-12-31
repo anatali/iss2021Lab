@@ -57,7 +57,7 @@ tasks.named("buildDisi"){ //Accessing a task via API - adding behaviour
 
 task("jobbs") {
     doLast {	//a shortcut to define an action
-        val v = unibo.disi.builder.generator.genFilePathName("xxx")
+        val v = unibo.disi.builder.genUtils.genFilePathName("xxx")
         println("${this.name} has used the 'unibo.disi.builder' plugin to generate the path: $v")
     }
 }

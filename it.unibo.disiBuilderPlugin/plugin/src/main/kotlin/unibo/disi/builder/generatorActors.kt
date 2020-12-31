@@ -8,14 +8,14 @@ object  generatorActors {
             val actorNames     = sol.getVarValue("ACTORS") //List
             val actorNamesList = genUtils.strRepToList(actorNames.toString())
             actorNamesList.forEach{
-                v -> genCodeActorFile(Generator.genFilePathName(v), v, msgdriven) }
+                v -> genCodeActorFile(genUtils.genFilePathName(v), v, msgdriven) }
         }else println("generator | genActorsCode ERROR")
     }
 
     fun genCodeActorFile( filePathName: String, actorName : String, msgdriven : Boolean ){
         println( "generatorActors | genCodeActorFile actorName=$actorName filePathName=$filePathName")
         //generate a new directory
-        val dirName = Generator.genFilePathName(actorName)
+        val dirName = genUtils.genFilePathName(actorName)
         genUtils.genDirectory(dirName)
         val actorfName = "$dirName/${actorName}.kt"
         val actorf     = java.io.File( actorfName )
