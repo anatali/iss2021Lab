@@ -11,6 +11,10 @@ object genUtils {
 		println("Hello from Utils.kt")
 	}
 
+	fun genFilePathName(fName: String) : String{
+		return "${Generator.outSrcDir}/${Generator.packagelogo}/$fName"
+	}
+
 fun genFileName( dir: String,  packageName: String,  name: String,  suffix:String ) : String {
    val sysName  = packageName.replace(".", "/")
    var fName    = ""

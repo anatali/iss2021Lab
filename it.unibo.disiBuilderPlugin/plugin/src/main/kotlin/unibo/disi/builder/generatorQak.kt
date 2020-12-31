@@ -2,7 +2,7 @@ package unibo.disi.builder
 
 object generatorQak {
 
-  fun genSkeleton( actorName: String ): String {
+fun genSkeleton( actorName: String ): String {
     //val packageName = dirName.replace("${generator.outSrcDir}/", "").replace("/", ".")
     val dollar = "$"
     return """
