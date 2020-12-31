@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.7.1",
-      "buildId": "tovaqgk7ubcl3eau34sxcugtcu"
+      "buildId": "7jydkcffyfddfhenly4kdg4xqq"
     }
   },
   "variants": [
@@ -30,11 +30,11 @@
         {
           "name": "plugin-1.0.jar",
           "url": "plugin-1.0.jar",
-          "size": 20364,
-          "sha512": "b5d80b03f44aaa66b36721b8aeb8c2de0825974f2f49697544edf934239eda3a6188697c7a25635a83284ff6603a2fa56d8970d62f024c366de2889c3ab09937",
-          "sha256": "4b7f3d386136dae8d6471f63ee345b056ae396aa00b6ff77007c3eaf9e015593",
-          "sha1": "3c3da6fe2346e123812d87a8bb2a34bf3313b1ad",
-          "md5": "ebfa08dfb242d70cc83b6b933856ca0b"
+          "size": 22699,
+          "sha512": "e27800a7256f96da381732f821aee2ca0ce3ab20a3be6af83301c56506f7ee3700519544e37b36476b7be8bbfcec47a3827e97d64b9e38b903b19d4d4c1f6b42",
+          "sha256": "a1be124e90d9637e889769982581b34a36d9a6b379209cadd57bcde3241b8192",
+          "sha1": "365406127ab065c037a176e317a420f7585d5270",
+          "md5": "ecbf6c0fd6a3a788c8bf90a7e131b907"
         }
       ]
     },
@@ -77,11 +77,11 @@
         {
           "name": "plugin-1.0.jar",
           "url": "plugin-1.0.jar",
-          "size": 20364,
-          "sha512": "b5d80b03f44aaa66b36721b8aeb8c2de0825974f2f49697544edf934239eda3a6188697c7a25635a83284ff6603a2fa56d8970d62f024c366de2889c3ab09937",
-          "sha256": "4b7f3d386136dae8d6471f63ee345b056ae396aa00b6ff77007c3eaf9e015593",
-          "sha1": "3c3da6fe2346e123812d87a8bb2a34bf3313b1ad",
-          "md5": "ebfa08dfb242d70cc83b6b933856ca0b"
+          "size": 22699,
+          "sha512": "e27800a7256f96da381732f821aee2ca0ce3ab20a3be6af83301c56506f7ee3700519544e37b36476b7be8bbfcec47a3827e97d64b9e38b903b19d4d4c1f6b42",
+          "sha256": "a1be124e90d9637e889769982581b34a36d9a6b379209cadd57bcde3241b8192",
+          "sha1": "365406127ab065c037a176e317a420f7585d5270",
+          "md5": "ecbf6c0fd6a3a788c8bf90a7e131b907"
         }
       ]
     }

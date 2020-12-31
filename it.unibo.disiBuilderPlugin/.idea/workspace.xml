@@ -23,35 +23,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee84e364-a80b-4eb4-b62b-f43788efbb99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/CommonOps.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../testBuilder/userdocs/TestDisiBuilder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/taskForBuildscript/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorQak.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/src/demo0.qak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/version.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/version.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/DisiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/DisiBuilderPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userdocs/DisiBuilderPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/userdocs/DisiBuilderPlugin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/DisiBuilderPlugin.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../samplePlugin1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../samplePlugin1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.project" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/buildOld.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/buildOld.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/DisiBuilderAsPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/java/unibo/disi/plugins/DisiBuilderAsPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/java/unibo/disi/plugins/MyPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/java/unibo/disi/plugins/MyTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/java/unibo/disi/plugins/MyTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/CommonOps.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/DisiGenTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/DisiGenTask.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/builtin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/builtin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/unibo/disi/builder/DIsiBuilderPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/MyDIsiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/unibo/disi/builder/MyDIsiBuilderPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/builtin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/unibo/disi/builder/builtin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/genutils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/unibo/disi/builder/genutils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/backup/buildSrcxxx/src/main/kotlin/unibo/disi/builder/utils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/demo0.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/demo0.pl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/ctxdemo0/Main_ctxdemo0.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/src/it/unibo/demo/demo.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../testBuilder/src/sysRules.pl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml" afterDir="false" />
@@ -89,6 +75,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />

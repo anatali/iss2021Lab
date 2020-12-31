@@ -6,6 +6,7 @@ package it.unibo.disiBuilderPlugin
 import org.gradle.api.Project
 import org.gradle.api.Plugin
 import unibo.disi.builder.generator
+import unibo.disi.builder.generatorQak
 
 /**
  * A simple 'hello world' plugin.
@@ -15,9 +16,15 @@ class DisiBuilderPlugin: Plugin<Project> {
         // Register a task
         project.tasks.register("buildDisi") { task ->
             task.doLast {
-                println("Hello from plugin DisiBuilderPlugin ")
                 val s = generator.genFilePathName("pluto")
-                println("Hello from disiBuilder plugin $s ")
+                println("DisiBuilderPlugin | generates the path-name: $s ")
+            }
+        }
+
+        project.task("buildActors"){
+            it.doLast {
+                println("DisiBuilderPlugin | generates Qak ")
+                generatorQak.genQak( "./src", "demoactor")
             }
         }
     }

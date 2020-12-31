@@ -33,7 +33,7 @@ task("showClasspath")  {
     }
 }
 
-task("buildActors"){
+task("mybuild"){
     doLast{
         val v = unibo.disi.builder.generator.genCodeFromModel("demo0")
     }
