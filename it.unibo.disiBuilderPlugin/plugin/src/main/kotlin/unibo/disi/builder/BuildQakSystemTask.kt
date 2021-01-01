@@ -26,6 +26,7 @@ open class BuildQakSystemTask @Inject constructor() : DefaultTask() {
         println("$prefix input qakProjectDir=$qakProjectDir  qakSysName=$qakSysName")
         if( projectDir != "-" && sysName != "-" ) GeneratorQak.genQak(projectDir, sysName)
 
+
     }
 }
 

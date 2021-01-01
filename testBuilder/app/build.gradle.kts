@@ -17,9 +17,11 @@ plugins {
 
 }
 
+/*
 project.plugins.forEach() {
     println( it )
 }
+*/
 
 task("showClasspath")  {
     doLast {
@@ -47,6 +49,22 @@ task("hello"){
 task<unibo.disi.builder.BuildActorTask>("yyy"){
     prefix   = "BuildActorTask test ..."
     actorModel="yyy"
+}
+/*
+task("enterDemoMode", Exec::class) {
+    group      = "demoMode"
+    executable = "adp"
+    args = listOf("shell", "settings", "put", "global", "sysui_demo_allowed", "1")
+}
+*/
+task<Exec>("echoNat") {
+    workingDir("$projectDir")
+    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+        //commandLine("cmd", "/c", "echo", "my name is nat")
+        commandLine("cmd", "/c", "gradle", "eclipse")
+    } else {
+        commandLine( "sh", "-c", "echo", "nico")
+    }
 }
 
 /*

@@ -9,30 +9,21 @@ USAGE:
 	gradle  -b build.gradle -q tasks --all
 	gradle  -b build.gradle cleanDistDir	//to clean the src directory
 ================================================================================
-
-THIS IS RELATED TO THE GENERATED CODE
 */
 plugins {
     id 'java'
     id 'eclipse'
     id 'application'
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
-    //id 'gradle.plugin.it.unibo.disiPlugin' version '1.0'
 }
 
 version '1.0'
-sourceCompatibility = 1.8
 
-/*
-apply plugin: is used when specifying your plugin by its class name (ex. apply plugin: JavaPlugin)
-plugins { } is used when specifying your plugin by its id (ex. plugins { id 'java' })
- */
-//apply plugin: "unibo.disi.plugins.MyPlugin"
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
     jcenter()
-    //mavenLocal()
     flatDir {   dirs '../unibolibs'	 }
 }
 
@@ -95,30 +86,27 @@ compileTestKotlin {
 
 sourceSets {
     main.java.srcDirs += 'src'
-    //main.java.srcDirs += 'resources'
-    //test.java.srcDirs += 'test'		//test is specific
+    main.java.srcDirs += 'resources'
+    test.java.srcDirs += 'test'		//test is specific
 }
-
-mainClassName = 'it.unibo.demo.DemoKt'  //gradle run uses this mainClassName
-
-
-
+ 
 task doeclipse(type: Exec) {
     workingDir "$projectDir"
     if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
         commandLine 'cmd', '/c', 'gradle', 'eclipse'
     } else {
-        commandLine 'sh', '-c', 'mycommand', 'arg1'
+        commandLine 'sh', '-c', 'gradle', 'eclipse'
     }
-}
-
+} 
 /*
+mainClassName = 'it.unibo.prova5Kt'
+
 jar {
     println("executing jar")
     from sourceSets.main.allSource
     manifest {
-        attributes 'Main-Class': "it.unibo.demo.DemoKt"
+        attributes 'Main-Class': "it.unibo.prova5Kt"
     }
 }
 */
-
+ 

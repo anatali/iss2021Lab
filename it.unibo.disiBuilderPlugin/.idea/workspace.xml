@@ -23,25 +23,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee84e364-a80b-4eb4-b62b-f43788efbb99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/BuildQakSystemTask.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/version.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/version.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../prova5/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../prova5/src/prova5.qak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/www.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../testBuilder/xxx.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/BuildQakSystemTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/BuildQakSystemTask.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorQak.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorQak.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/builtin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/builtin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/genUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/genUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userdocs/DisiBuilderPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/userdocs/DisiBuilderPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../testBuilder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../testBuilder/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml.md5" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml.md5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/it/unibo/disiBuilderPlugin/greeting/it.unibo.disiBuilderPlugin.greeting.gradle.plugin/maven-metadata.xml.sha1" afterDir="false" />

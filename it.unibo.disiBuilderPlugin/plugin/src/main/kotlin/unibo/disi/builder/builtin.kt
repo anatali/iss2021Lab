@@ -4,7 +4,7 @@
 package unibo.disi.builder
 
 object builtin{
-		
+	val dollar = "$"
 /*
  SYSTEM RULES (sysRules.pl")
 */
@@ -233,7 +233,14 @@ sourceSets {
     test.java.srcDirs += 'test'		//test is specific
 }
  
- 
+task doeclipse(type: Exec) {
+    workingDir "${dollar}projectDir"
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine 'cmd', '/c', 'gradle', 'eclipse'
+    } else {
+        commandLine 'sh', '-c', 'gradle', 'eclipse'
+    }
+} 
 /*
 mainClassName = 'it.unibo.${sysName}Kt'
 
