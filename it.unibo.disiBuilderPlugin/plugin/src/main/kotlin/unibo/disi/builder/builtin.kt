@@ -157,7 +157,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.71'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
 }
 
 version '1.0'
@@ -249,7 +249,64 @@ jar {
 """
 	return gradleRules
 }
- 
+
+/*
+
+ */
+fun genEclipseProject( sysName: String ) : String {
+	val eclipseProject = """
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>$sysName</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.jetbrains.kotlin.ui.kotlinBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.jetbrains.kotlin.core.kotlinNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>kotlin_bin</name>
+			<type>2</type>
+			<locationURI>org.jetbrains.kotlin.core.filesystem:/$sysName/kotlin_bin</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>		
+	"""
+
+	return eclipseProject
+}
+
+	fun genEclipseClasspth(  ) : String {
+		val eclipseClasspath = """
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-14">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.jetbrains.kotlin.core.KOTLIN_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>			
+			"""
+
+		return eclipseClasspath
+	}
 
 }//object builtin
 	

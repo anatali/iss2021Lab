@@ -20,17 +20,23 @@ class DisiBuilderPlugin: Plugin<Project> {
                 println("DisiBuilderPlugin | generates the path-name: $s ")
             }
         }
-
+/*
         project.task("buildQakSystem"){
             it.doLast {
                 println("DisiBuilderPlugin | generates Qak ")
                 GeneratorQak.genQak("./src", "demoactor")
             }
         }
-
+*/
         project.tasks.register("projectInfo", ProjectInfoTask::class.java) {
             it.doFirst {
                 println("DisiBuilderPlugin | projectInfo ")
+            }
+        }
+
+        project.tasks.register("buildQakSystem", BuildQakSystemTask::class.java ){
+            it.doFirst {
+                println("DisiBuilderPlugin | buildQakSystem ")
             }
         }
 

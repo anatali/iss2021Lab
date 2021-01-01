@@ -28,6 +28,7 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 
  fun genFileDir( dir: String,  packageName: String,  name: String,  suffix:String ,  contents: String){
 	val fName    = genFileName(dir, packageName, name, suffix )
+	 println( "genUtils | genFileDir fName=$fName"  )
 	val fa       = java.io.File( fName )
 	if( fa.exists() ) return
 	fa.writeText(contents)	  
@@ -57,6 +58,17 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 	
 	fun strRepToList( lr: String ) : List<String>{
 		return lr.replace("[","").replace("]","").split(",")
+	}
+
+	fun writeOnFile( actorfName : String, content: String){
+		try {
+			println("genUtils | writeOnFile actorfName=$actorfName")
+			val actorf = java.io.File(actorfName)
+			if (actorf.exists()) return
+			actorf.writeText(content)
+		}catch( e: Exception){
+			println("genUtils | writeOnFile actorfName=$actorfName ERROR")
+		}
 	}
 
 }//Object genUtils
