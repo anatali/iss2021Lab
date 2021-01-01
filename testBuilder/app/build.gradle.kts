@@ -44,6 +44,10 @@ task("hello"){
     }
 }
 
+task<unibo.disi.builder.BuildActorTask>("yyy"){
+    prefix   = "BuildActorTask test ..."
+    actorModel="yyy"
+}
 
 /*
 ADDED AFTER buildSrc

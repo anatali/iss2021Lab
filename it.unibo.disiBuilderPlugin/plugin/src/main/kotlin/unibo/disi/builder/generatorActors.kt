@@ -21,7 +21,7 @@ object  generatorActors {
         val actorf     = java.io.File( actorfName )
         if( actorf.exists() ) return
         println( "generatorActors | genCodeActorFile actorfName=$actorfName"  )
-        var content = "todo"
+        var content : String
         if( msgdriven) content    = generatorActorMsgDrivenCode.gen(actorName)
         else           content    = GeneratorActorMsgBasedCode.gen(actorName)
         actorf.writeText( content )

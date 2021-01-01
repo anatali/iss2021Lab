@@ -69,10 +69,13 @@ QActor msgproducer context ctxdemooqak{
   }
 
   fun genQak( dirName: String, sysactorName: String ){
-    val actorfName = "$dirName/${sysactorName}.qak"
+    val myDirName = "C:/tmp/xxx/src"
+    val projectDirName = genUtils.genDirectory(myDirName).toString()
+
+    val actorfName = "${myDirName}/${sysactorName}.qak"
+    println( "generatorQak | genQak actorfName=$actorfName"  )
     val actorf     = java.io.File( actorfName )
     if( actorf.exists() ) return
-    println( "generatorQak | genQak actorfName=$actorfName"  )
     var content = genSkeleton( sysactorName )
     actorf.writeText( content )
   }

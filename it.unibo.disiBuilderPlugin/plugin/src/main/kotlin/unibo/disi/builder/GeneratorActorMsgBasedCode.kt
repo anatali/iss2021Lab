@@ -31,7 +31,10 @@ class $actorName(name: String, scope: CoroutineScope) : ActorBasicFsm( name, sco
 				}
  				state("waitinput") {
 					action {
+                        stateTimer = TimerActor("timer_waitinput", 
+                             scope, context!!, "local_tout_demoactor_s1", 1000.toLong() )
 					}
+                    transition(edgeName="t00",targetState="handleTimeOut",cond=whenTimeout("local_tout_demoactor_waitinput")) 
 					transition(edgeName="t01",targetState="endOfWork",cond=whenEvent("end"))
 					transition(edgeName="t02",targetState="endOfWork",cond=whenTimeout("local_tout_${actorName}_waitinput"))   
 				}			

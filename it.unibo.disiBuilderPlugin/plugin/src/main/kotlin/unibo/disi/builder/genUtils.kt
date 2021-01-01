@@ -17,7 +17,7 @@ object genUtils {
 
 fun genFileName( dir: String,  packageName: String,  name: String,  suffix:String ) : String {
    val sysName  = packageName.replace(".", "/")
-   var fName    = ""
+   var fName : String
    var afterDot = ""
 	 if( suffix.length > 0  ) afterDot = "." + suffix
 	 if( sysName.length > 0 ) fName   = dir+"/"+sysName + "/" + name + afterDot
@@ -33,11 +33,11 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 	fa.writeText(contents)	  
 }
 
-	fun genDirectory( dirName: String   ){
+	fun genDirectory( dirName: String ) {
 		val folder  = File(dirName)
 		if( folder.exists() ) return
 		else{
-			println( "generator | genMainCtxFile created dir=$dirName"  )
+			println( "genUtils | genDirectory created dir=$dirName"  )
 			folder.mkdirs()
 		}
 	}
