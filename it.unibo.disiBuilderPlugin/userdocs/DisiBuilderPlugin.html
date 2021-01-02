@@ -314,6 +314,7 @@ Exclude the testing code for the moment ...
 <tbody>	
 <tr>
 <td style="width:20%" >
+buildDisiTest<br/>
 projectInfo 
 
 </td>
@@ -332,10 +333,10 @@ projectInfo
 
 <tr>
 <td>
-<ks>buildQakSystem  --projectdir</ks>
+<ks>buildQakSystem  --sysname prova0 --projectdir C:\Didattica2018Work\iss2021Lab\provaDisiBuilder </ks>
 
 </td>
-<td>
+<td> 
 </td>
 </tr>
 
@@ -344,8 +345,50 @@ projectInfo
 
  </tbody>
 </table>
- 
- 
+
+<h2>Example</h2>
+https://docs.gradle.org/current/userguide/init_scripts.html
+<pre>
+In  <kc>C:\...\provaDisiBuilder</kc> execute:
+gradle init  2  4  1  2 - -
+</pre>
+
+Include in <kc>C:\...\provaDisiBuilder\settings.gradle.kts</kc>
+ <pre>
+pluginManagement {
+    println("SETTINGS pluginManagement ...")
+    repositories {
+        maven(url = "../uniboRepos/maven-repo")       
+        flatDir { dirs("../unibolibs") } //REQUIRED FOR THE unibo plugins
+        gradlePluginPortal()
+    }
+}
+</pre>
+
+Include in <kc>C:\...\provaDisiBuilder\settings.gradle.kts</kc>
+ <pre>
+plugins {
+     ...
+  	id("unibo.disi.builder") version "1.0"
+}
+</pre>
+
+Execute
+<pre>
+gradle -q buildQakSystem  --sysname prova0
+</pre>
+
+Open Eclipse and import existing project <kc>C:\...\provaDisiBuilder</kc>. We will use Eclipse mainly for its editor capabilities.<br/>
+
+Open IntelliJ and import (as a Gradle project) existing project <kc>C:\...\provaDisiBuilder</kc>.<br/>
+
+Open prova0.qak (convert in Xtext)<br/>
+
+Add Kotlin nature to the project<br/>
+
+Execute <kc>C:\...\provaDisiBuilder\src\it\unibo\ctxprova0\MainCtxprova0.kt</kc>
+
+
 <h2>CI</h2>
 <pre>
  

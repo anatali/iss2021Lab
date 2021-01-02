@@ -10,9 +10,9 @@ import javax.inject.Inject
 // Inject annotation is required!
 open class BuildQakSystemTask @Inject constructor() : DefaultTask() {
     @Input var prefix         ="BuildQakSystemTask | "
-    @Input var projectDir     ="-"
+    @Input var projectDir     = System.getProperty("user.dir")
     @Input var sysName        ="-"
-    private var qakProjectDir = "-"
+    private var qakProjectDir = projectDir
     private var qakSysName    = "-"
 
     @Option(option = "projectdir", description = "Project directory.")
@@ -23,7 +23,7 @@ open class BuildQakSystemTask @Inject constructor() : DefaultTask() {
 
     @TaskAction
     fun build() {
-        println("$prefix input qakProjectDir=$qakProjectDir  qakSysName=$qakSysName")
+        println("$prefix input projectDir=$projectDir  sysName=$sysName")
         if( projectDir != "-" && sysName != "-" ) GeneratorQak.genQak(projectDir, sysName)
 
 
