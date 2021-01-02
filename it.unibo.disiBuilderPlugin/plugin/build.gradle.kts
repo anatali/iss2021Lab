@@ -17,10 +17,7 @@ plugins {
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
-    /*
-    ADDED
-     */
-    flatDir {   dirs( "../../unibolibs"	 ) }
+    flatDir {   dirs( "../../unibolibs"	 ) }    //ADDED
 }
 
 dependencies {
@@ -35,19 +32,39 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    /*
-    ADDED
-     */
-    implementation( "tuprolog:2p301" )
-}
 
+    implementation( "tuprolog:2p301" )  //ADDED
+}
+/*
 gradlePlugin {
     // Define the plugin
     val greeting by plugins.creating {
         id = "it.unibo.disiBuilderPlugin.greeting"
-        implementationClass = "it.unibo.disiBuilderPlugin.ItUniboDisiBuilderPluginPlugin"
+        implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPluginPlugin"
     }
 }
+*/
+
+//CHANGED : another version
+gradlePlugin {
+    plugins {
+        create("builder") {
+            id = "unibo.disi.builder"
+            implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPlugin"
+        }
+    }
+}
+
+/*
+//CHANGED
+gradlePlugin {
+    // Define the plugin
+    val builder by plugins.creating {
+        id = "unibo.disi.builder"
+        implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPluginPlugin"
+    }
+}
+*/
 
 // Add a source set for the functional test suite
 val functionalTestSourceSet = sourceSets.create("functionalTest") {
@@ -74,16 +91,6 @@ ADDED: publishing part
  */
 group = "unibo.disi"
 version = "1.0"
-
-gradlePlugin {
-    plugins {
-        create("builder") {
-            id = "unibo.disi.builder"
-            implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPlugin"
-        }
-
-    }
-}
 
 publishing {
     repositories {

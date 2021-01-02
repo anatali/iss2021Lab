@@ -5,34 +5,51 @@ package it.unibo.disiBuilderPlugin
 
 import java.io.File
 import org.gradle.testkit.runner.GradleRunner
-import kotlin.test.Test
+ import kotlin.test.Test
 import kotlin.test.assertTrue
-
+import org.junit.Before
 /**
- * A simple functional test for the 'it.unibo.disiBuilderPlugin.greeting' plugin.
+ * A simple functional test for the 'unibo.disi.builder' plugin.
  */
 class ItUniboDisiBuilderPluginPluginFunctionalTest {
-    /*
-    @Test fun `can run task`() {
+    val projectDir = File("build/functionalTest")
+    val runner     = GradleRunner.create()  //org.gradle.testkit.runner.GradleRunner
+
+    @Before
+        fun setUp(){
         // Setup the test build
-        val projectDir = File("build/functionalTest")
+        println(" --------------- Setup the build  ")
         projectDir.mkdirs()
         projectDir.resolve("settings.gradle").writeText("")
         projectDir.resolve("build.gradle").writeText("""
             plugins {
-                id('it.unibo.disiBuilderPlugin.greeting')
+                id('unibo.disi.builder')
             }
         """)
-
-        // Run the build
-        val runner = GradleRunner.create()
         runner.forwardOutput()
         runner.withPluginClasspath()
-        runner.withArguments("greeting")
         runner.withProjectDir(projectDir)
-        val result = runner.build();
+    }
+    @Test fun run_buildDisiTest() {
+        // Run the build
+         runner.withArguments("buildDisiTest")
+         val result = runner.build();
+
+        //result.output is the textual output produced during the build.
+        val tasks = result.getTasks()  //List<BuildTask>
+        tasks.forEach{ v -> println("task: ${v}")}
 
         // Verify the result
-        assertTrue(result.output.contains("Hello from plugin 'it.unibo.disiBuilderPlugin.greeting'"))
-    }*/
+        assertTrue(result.output.contains("DisiBuilderPlugin | generates the path-name:"))
+    }
+
+    @Test fun run_projectInfo() {
+        runner.withArguments("projectInfo")
+        val result = runner.build();
+         // Verify the result
+        //val prjName = getProject().getName()
+        assertTrue(result.output.contains("projectName" ))
+
+    }
+
 }

@@ -264,6 +264,25 @@ function myFunction() {
 
 <div class="body"> 
 <h2>Introduction</h2>
+In this work, we create a custom Gradle plugin (with Kotlin) that provides a set of actor-creation tasks.<br/><br/>
+Our work starts with the usage of option 4 of the <tt>gradle init</tt>  command within an empty directory.
+(The original result of the command is reported in the project <a href="../../provaPlugin" target="web">C:/.../iss2021Lab/provaPlugin</a>).
+<br/><br/>
+In our case, let us give the command in an empty directory named <ks>C:/.../iss2021Lab/it.unibo.disiBuilderPlugin</ks>:
+<pre>
+gradle init  4  3  2 - -
+</pre>
+
+This command generates a file <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a>  in which we
+ADD some sentence and CHANGE some others.
+
+
+
+Exclude the testing code for the moment ...
+<br/>
+ <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a>  
+<br/>
+<a href="../../uniboRepos/maven-repo" target="web">../../uniboRepos/maven-repo</a>  
 
 
 <table style="width:98%">
@@ -298,16 +317,6 @@ project.plugins.forEach() {
 </table>
 
 
-<pre>
-<kc>In it.unibo.disiBuilderPlugin</kc>
-gradle init  4  3  2 - -
-
-</pre>
-Exclude the testing code for the moment ...
-<br/>
- <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a>  
-<br/>
-<a href="../../uniboRepos/maven-repo" target="web">../../uniboRepos/maven-repo</a>  
 
 <h2>Tasks</h2>
  <table style="width:98%">

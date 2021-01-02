@@ -80,7 +80,8 @@ QActor msgproducer context ctx$sysName{
     val currentDir = System.getProperty("user.dir")
     val projectPath    = "$dirPath"     //  /$sysName
     val sourcePath     = "$projectPath/src"
-    val projectDirName = genUtils.genDirectory(sourcePath).toString()
+    //val projectDirName =
+      genUtils.genDirectory(sourcePath).toString()
       //GRADLE
       genUtils.genFileDir( projectPath,  "",  "build" , "gradle", builtin.genGradleRules(sysName) )
 

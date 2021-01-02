@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.7.1",
-      "buildId": "6x5at7ruybcifd4fubi3cezuni"
+      "buildId": "ukd4jloozjbddnf6nvnw7n7724"
     }
   },
   "variants": [
@@ -30,11 +30,11 @@
         {
           "name": "plugin-1.0.jar",
           "url": "plugin-1.0.jar",
-          "size": 40294,
-          "sha512": "70124f3e7799260e93bab423bc0a9fa318276204da9e64bfe674fa1dc2a90c043e6f0d7a22dbf7b2bbd397d1237a05b247e69e87bdb288b9337a2080a17b65b5",
-          "sha256": "d5c25e9478453d7aaa434f6d69c03ad6c0857cd851003d7d33231f104161bede",
-          "sha1": "6cfe7a065f203274f0b7b27c3894e9185bd13ec9",
-          "md5": "78ae8cd7d70ccb8500f2db6fe7c8c373"
+          "size": 39754,
+          "sha512": "78df62f90b929141b036828fea48e8f60e47ed6320850693925a196d83b5ce3dbf099d766aa78c5fd9dc64f964b7d568dbeb0f6e8dd4b4463e55502a5af5a68e",
+          "sha256": "943aa41728919e58c4933f57a8f9c7292b7c9f6a9f11609f9fdbfacd77e02caa",
+          "sha1": "53b2d5cd6195401219de8a5d0d05006cdbf50e95",
+          "md5": "0621c39723f93e8211113a2f07d33b82"
         }
       ]
     },
@@ -77,11 +77,11 @@
         {
           "name": "plugin-1.0.jar",
           "url": "plugin-1.0.jar",
-          "size": 40294,
-          "sha512": "70124f3e7799260e93bab423bc0a9fa318276204da9e64bfe674fa1dc2a90c043e6f0d7a22dbf7b2bbd397d1237a05b247e69e87bdb288b9337a2080a17b65b5",
-          "sha256": "d5c25e9478453d7aaa434f6d69c03ad6c0857cd851003d7d33231f104161bede",
-          "sha1": "6cfe7a065f203274f0b7b27c3894e9185bd13ec9",
-          "md5": "78ae8cd7d70ccb8500f2db6fe7c8c373"
+          "size": 39754,
+          "sha512": "78df62f90b929141b036828fea48e8f60e47ed6320850693925a196d83b5ce3dbf099d766aa78c5fd9dc64f964b7d568dbeb0f6e8dd4b4463e55502a5af5a68e",
+          "sha256": "943aa41728919e58c4933f57a8f9c7292b7c9f6a9f11609f9fdbfacd77e02caa",
+          "sha1": "53b2d5cd6195401219de8a5d0d05006cdbf50e95",
+          "md5": "0621c39723f93e8211113a2f07d33b82"
         }
       ]
     }
