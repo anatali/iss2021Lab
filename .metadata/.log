@@ -9120,3 +9120,9 @@ java.lang.ArrayIndexOutOfBoundsException: 33
 	at org.eclipse.jdt.internal.core.search.indexing.IndexManager$1.execute(IndexManager.java:1075)
 	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:401)
 	at java.lang.Thread.run(Unknown Source)
+
+!ENTRY org.jetbrains.kotlin.core 2 0 2021-01-02 21:24:15.011
+!MESSAGE Could not check for update (Could not obtain update site)
+
+!ENTRY org.jetbrains.kotlin.core 2 0 2021-01-02 21:24:21.399
+!MESSAGE Could not check for update (Could not obtain update site)
