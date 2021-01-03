@@ -9126,3 +9126,6 @@ java.lang.ArrayIndexOutOfBoundsException: 33
 
 !ENTRY org.jetbrains.kotlin.core 2 0 2021-01-02 21:24:21.399
 !MESSAGE Could not check for update (Could not obtain update site)
+
+!ENTRY org.jetbrains.kotlin.core 2 0 2021-01-03 16:55:04.431
+!MESSAGE Could not check for update (Could not obtain update site)

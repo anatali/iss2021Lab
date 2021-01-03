@@ -17,7 +17,7 @@ class DisiBuilderPlugin: Plugin<Project> {
         //Used to check the behavior
         project.tasks.register("buildDisiTest") { task ->
             task.doLast {
-                val s = genUtils.genFilePathName("test")
+                val s = GenUtils.genFilePathName("test")
                 println("DisiBuilderPlugin | generates the path-name: $s ")
             }
         }

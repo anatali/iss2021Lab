@@ -17,6 +17,7 @@ open class BuildActorTask @Inject constructor() : DefaultTask() {
     fun build() {
         println("$prefix input actorModel=$actorModel   ")
         if( actorModel != "-") Generator.genCodeFromModel("$actorModel")
+        else  println("sorry, $actorModel does not exist")
     }
 }
 

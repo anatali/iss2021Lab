@@ -5,7 +5,7 @@ object  GeneratorMsgDrivenSystem {
 
     fun gen(  sysKb : Prolog ){
         val ctxName = getFirstCtxName( sysKb )
-        GeneratorActorsInContext.gen(ctxName, sysKb )  //Gen the code of the actors
+        GeneratorActorsInContext.gen(ctxName, sysKb, true )  //Gen the code of the actors
      }
 
     private fun getFirstCtxName( sysKb : Prolog ) : String {

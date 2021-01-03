@@ -3,7 +3,7 @@
 */
 package unibo.disi.builder
 
-object builtin{
+object Builtin{
 	val dollar = "$"
 /*
  SYSTEM RULES (sysRules.pl")

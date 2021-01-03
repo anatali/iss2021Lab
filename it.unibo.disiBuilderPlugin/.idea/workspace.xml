@@ -23,27 +23,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee84e364-a80b-4eb4-b62b-f43788efbb99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../provaDisiBuilder/demo0.pl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../provaDisiBuilder/demo1.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.ide.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.ide.prefs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/functionalTest/kotlin/it/unibo/disiBuilderPlugin/ItUniboDisiBuilderPluginPluginFunctionalTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/functionalTest/kotlin/it/unibo/disiBuilderPlugin/ItUniboDisiBuilderPluginPluginFunctionalTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/ProjectInfoTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/ProjectInfoTask.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorActors.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorCtx.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorCtx.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userdocs/DisiBuilderPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/userdocs/DisiBuilderPlugin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorCtx.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorCtx.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorQak.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorQak.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/builtin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/Builtin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/genUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GenUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorActorMsgDrivenCode.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorActorMsgDrivenCode.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgBasedSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/build_ctxprova0.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/prova0.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/settings.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/it/unibo/ctxprova0/MainCtxprova0.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/it/unibo/msgproducer/Msgproducer.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/it/unibo/prova0actor/Prova0actor.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/log4j.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/prova0.qak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/sysRules.pl" beforeDir="false" afterPath="$PROJECT_DIR$/plugin/src/sysRules.pl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../provaPlugin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.md5" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.sha256" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.sha512" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/builder/unibo.disi.builder.gradle.plugin/maven-metadata.xml.sha512" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.md5" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.sha256" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.sha256" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.sha512" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.jar.sha512" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.md5" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.sha256" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.sha256" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.sha512" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/1.0/plugin-1.0.module.sha512" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.md5" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.md5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.sha1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.sha256" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.sha256" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.sha512" beforeDir="false" afterPath="$PROJECT_DIR$/../uniboRepos/maven-repo/unibo/disi/plugin/maven-metadata.xml.sha512" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +130,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../provaDisiBuilder" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
@@ -100,6 +139,8 @@
       <recent name="unibo.disi.builder" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.disiBuilderPlugin" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.disiBuilderPlugin\plugin\src" />
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.disiBuilderPlugin\plugin\src\main\kotlin\unibo\disi\builder" />
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.disiBuilderPlugin\plugin\src\main\kotlin" />
     </key>
@@ -177,6 +218,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="323" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1609693490289">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="323" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.690@0.0.1280.690" timestamp="1609693490289" />
     <state x="335" y="135" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1609606882608">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
@@ -185,21 +230,25 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="428" y="99" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1609585597638" />
-    <state width="1170" height="247" key="GridCell.Tab.0.bottom" timestamp="1609609017071">
+    <state width="1238" height="230" key="GridCell.Tab.0.bottom" timestamp="1609692288922">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1170" height="247" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609609017071" />
-    <state width="1170" height="247" key="GridCell.Tab.0.center" timestamp="1609609017071">
+    <state width="1238" height="230" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609692288922" />
+    <state width="1238" height="230" key="GridCell.Tab.0.center" timestamp="1609692288922">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1170" height="247" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609609017071" />
-    <state width="1170" height="247" key="GridCell.Tab.0.left" timestamp="1609609017070">
+    <state width="1238" height="230" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609692288922" />
+    <state width="1238" height="230" key="GridCell.Tab.0.left" timestamp="1609692288921">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1170" height="247" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609609017070" />
-    <state width="1170" height="247" key="GridCell.Tab.0.right" timestamp="1609609017071">
+    <state width="1238" height="230" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609692288921" />
+    <state width="1238" height="230" key="GridCell.Tab.0.right" timestamp="1609692288922">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1170" height="247" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609609017071" />
+    <state width="1238" height="230" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609692288922" />
+    <state x="349" y="77" width="581" height="534" key="find.popup" timestamp="1609694299300">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="349" y="77" width="581" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1609694299300" />
   </component>
 </project>

@@ -42,14 +42,13 @@ class ItUniboDisiBuilderPluginPluginFunctionalTest {
         // Verify the result
         assertTrue(result.output.contains("DisiBuilderPlugin | generates the path-name:"))
     }
-
+/*  //Just to show another possible test
     @Test fun run_projectInfo() {
         runner.withArguments("projectInfo")
         val result = runner.build();
          // Verify the result
         //val prjName = getProject().getName()
         assertTrue(result.output.contains("projectName" ))
-
     }
-
+*/
 }

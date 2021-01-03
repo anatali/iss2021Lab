@@ -4,15 +4,15 @@ import alice.tuprolog.Prolog
 
 object GeneratorCtx {
 
-    fun genTheContextCode( ctxName : String, modelFileName : String, sysKb : Prolog) {
+    fun genTheContextCode( ctxName : String, modelFileName : String, sysKb : Prolog, msgdriven:Boolean) {
         genCtxMain(ctxName, modelFileName)
         //GENERATE THE SKELETON CODE OF ALL THE ACTORS IN THE CONTEXT
         //GeneratorMsgDrivenSystem.gen( ctxName  )
-        GeneratorActorsInContext.gen(ctxName, sysKb)
+        GeneratorActorsInContext.gen(ctxName, sysKb, msgdriven)
     }
 
     fun genCtxMain( ctxName : String, modelFileName : String ){
-        val content = genCtxMainContent( genUtils.genFilePathName(ctxName), modelFileName)
+        val content = genCtxMainContent( GenUtils.genFilePathName(ctxName), modelFileName)
         genMainCtxFile(ctxName, content)
     }
 
@@ -37,8 +37,8 @@ fun main() = runBlocking {
     fun genMainCtxFile( ctxName: String, content: String ) {
         try {
             //generate a new directory
-            val dirName = genUtils.genFilePathName(ctxName)
-            genUtils.genDirectory(dirName)
+            val dirName = GenUtils.genFilePathName(ctxName)
+            GenUtils.genDirectory(dirName)
             val mainfName = "$dirName/Main_${ctxName}.kt"
             println( "generator | genMainCtxFile mainfName=$mainfName"  )
             val mainf     = java.io.File( mainfName )

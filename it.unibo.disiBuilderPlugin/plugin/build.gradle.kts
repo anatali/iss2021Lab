@@ -37,6 +37,7 @@ dependencies {
 }
 
 //CHANGED
+/*
 gradlePlugin {
     // Define the plugin
     plugins {
@@ -45,18 +46,18 @@ gradlePlugin {
             implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPlugin"
         }
     }
-}
+}*/
 
-/*
+
 //CHANGED : another version
 gradlePlugin {
     // Define the plugin
     val builder by plugins.creating {
         id = "unibo.disi.builder"
-        implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPluginPlugin"
+        implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPlugin"
     }
 }
-*/
+
 
 // Add a source set for the functional test suite
 val functionalTestSourceSet = sourceSets.create("functionalTest") {

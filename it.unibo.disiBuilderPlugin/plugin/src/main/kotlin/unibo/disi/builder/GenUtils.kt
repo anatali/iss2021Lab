@@ -5,7 +5,7 @@ import java.io.FileOutputStream
 import java.io.OutputStreamWriter
 import alice.tuprolog.*
 
-object genUtils {
+object GenUtils {
 
 	fun test() {
 		println("Hello from Utils.kt")
@@ -28,7 +28,7 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 
  fun genFileDir( dir: String,  packageName: String,  name: String,  suffix:String ,  contents: String){
 	val fName    = genFileName(dir, packageName, name, suffix )
-	 println( "genUtils | genFileDir fName=$fName"  )
+	 println( "GenUtils | genFileDir fName=$fName"  )
 	val fa       = java.io.File( fName )
 	if( fa.exists() ) return
 	fa.writeText(contents)	  
@@ -38,19 +38,19 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 		val folder  = File(dirName)
 		if( folder.exists() ) return
 		else{
-			println( "genUtils | genDirectory created dir=$dirName"  )
+			println( "GenUtils | genDirectory created dir=$dirName"  )
 			folder.mkdirs()
 		}
 	}
 	
-	fun copyFile(dir: String,  packageName: String,  name: String,  suffix:String){
-		val sourcefName    = genFileName(dir, packageName, name, suffix )
+	fun copyFile(sourcedir: String,  destdir: String, packageName: String,  name: String,  suffix:String){
+		val sourcefName    = genFileName(sourcedir, packageName, name, suffix )
 		val fsource        = java.io.File( sourcefName )
-		println( sourcefName )
+		println( "GenUtils | copyFile sourcefName=$sourcefName" )
 		val contents = fsource.readText()
-		
-		val destfName      = genFileName("./src-gen",  "", name, suffix )
-		println( destfName )
+
+		val destfName      = genFileName(destdir,  "", name, suffix )
+		println( "GenUtils | copyFile destfName=$destfName" )
 		val fdest          = java.io.File( destfName )
 		fdest.writeText(contents)
 	}	
@@ -62,14 +62,14 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 
 	fun writeOnFile( actorfName : String, content: String){
 		try {
-			println("genUtils | writeOnFile actorfName=$actorfName")
+			println("GenUtils | writeOnFile actorfName=$actorfName")
 			val actorf = java.io.File(actorfName)
 			if (actorf.exists()) return
 			actorf.writeText(content)
 		}catch( e: Exception){
-			println("genUtils | writeOnFile actorfName=$actorfName ERROR")
+			println("GenUtils | writeOnFile actorfName=$actorfName ERROR")
 		}
 	}
 
-}//Object genUtils
+}//Object GenUtils
 
