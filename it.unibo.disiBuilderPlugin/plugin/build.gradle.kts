@@ -11,13 +11,13 @@ plugins {
     `java-gradle-plugin`
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.72"
-    `maven-publish`    //ADDED
+    `maven-publish`    //ADDED TO PUBLISH
 }
 
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
-    flatDir {   dirs( "../../unibolibs"	 ) }    //ADDED
+    flatDir {dirs( "../../unibolibs")}   //ADDED TO ACCESS to the TuProlog library
 }
 
 dependencies {
@@ -33,20 +33,12 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    implementation( "tuprolog:2p301" )  //ADDED
+    implementation( "tuprolog:2p301" )  //ADDED TO USE the TuProlog library
 }
-/*
+
+//CHANGED
 gradlePlugin {
     // Define the plugin
-    val greeting by plugins.creating {
-        id = "it.unibo.disiBuilderPlugin.greeting"
-        implementationClass = "it.unibo.disiBuilderPlugin.DisiBuilderPluginPlugin"
-    }
-}
-*/
-
-//CHANGED : another version
-gradlePlugin {
     plugins {
         create("builder") {
             id = "unibo.disi.builder"
@@ -56,7 +48,7 @@ gradlePlugin {
 }
 
 /*
-//CHANGED
+//CHANGED : another version
 gradlePlugin {
     // Define the plugin
     val builder by plugins.creating {

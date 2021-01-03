@@ -23,14 +23,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8225f43f-c528-4bfa-a720-4c639dab155e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/ProjectInfoTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/ProjectInfoTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorActors.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorCtx.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/GeneratorCtx.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/userdocs/DisiBuilderPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/userdocs/DisiBuilderPlugin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/eclipsecmdlog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/eclipsecmdlog.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../provaDisiBuilder/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/build_ctxprova0.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/it/unibo/ctxprova0/MainCtxprova0.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/it/unibo/msgproducer/Msgproducer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/it/unibo/prova0actor/Prova0actor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../provaDisiBuilder/src/prova0.qak" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

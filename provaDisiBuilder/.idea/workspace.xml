@@ -23,13 +23,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1241883-ad08-4764-b28f-0a5614415431" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/DisiBuilderPlugin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/ProjectInfoTask.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/ProjectInfoTask.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorActors.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorCtx.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/GeneratorCtx.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/plugin/src/main/kotlin/unibo/disi/builder/generatorMsgBasedSystem.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/userdocs/DisiBuilderPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.disiBuilderPlugin/userdocs/DisiBuilderPlugin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eclipsecmdlog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/eclipsecmdlog.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_ctxprova0.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/ctxprova0/MainCtxprova0.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/msgproducer/Msgproducer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unibo/prova0actor/Prova0actor.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prova0.qak" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../provaPlugin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../provaPlugin/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,21 +124,21 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="446" y="114" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1609605216188" />
-    <state width="1185" height="225" key="GridCell.Tab.0.bottom" timestamp="1609619126271">
+    <state width="1185" height="225" key="GridCell.Tab.0.bottom" timestamp="1609619160054">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1185" height="225" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609619126271" />
-    <state width="1185" height="225" key="GridCell.Tab.0.center" timestamp="1609619126271">
+    <state width="1185" height="225" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609619160054" />
+    <state width="1185" height="225" key="GridCell.Tab.0.center" timestamp="1609619160053">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1185" height="225" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609619126271" />
-    <state width="1185" height="225" key="GridCell.Tab.0.left" timestamp="1609619126271">
+    <state width="1185" height="225" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609619160053" />
+    <state width="1185" height="225" key="GridCell.Tab.0.left" timestamp="1609619160053">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1185" height="225" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609619126271" />
-    <state width="1185" height="225" key="GridCell.Tab.0.right" timestamp="1609619126271">
+    <state width="1185" height="225" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609619160053" />
+    <state width="1185" height="225" key="GridCell.Tab.0.right" timestamp="1609619160054">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1185" height="225" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609619126271" />
+    <state width="1185" height="225" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609619160054" />
   </component>
 </project>

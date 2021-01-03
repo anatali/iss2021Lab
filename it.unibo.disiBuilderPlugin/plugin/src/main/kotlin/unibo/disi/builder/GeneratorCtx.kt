@@ -1,16 +1,18 @@
 package unibo.disi.builder
 
-object generatorCtx {
+import alice.tuprolog.Prolog
 
-    fun genTheContextCode( ctxName : String, modelFileName : String, msgdriven : Boolean ) {
+object GeneratorCtx {
+
+    fun genTheContextCode( ctxName : String, modelFileName : String, sysKb : Prolog) {
         genCtxMain(ctxName, modelFileName)
         //GENERATE THE SKELETON CODE OF ALL THE ACTORS IN THE CONTEXT
-        generatorActors.genActorsCode( ctxName, msgdriven )
+        //GeneratorMsgDrivenSystem.gen( ctxName  )
+        GeneratorActorsInContext.gen(ctxName, sysKb)
     }
 
     fun genCtxMain( ctxName : String, modelFileName : String ){
-        val content = genCtxMainContent(
-                genUtils.genFilePathName(ctxName), modelFileName)
+        val content = genCtxMainContent( genUtils.genFilePathName(ctxName), modelFileName)
         genMainCtxFile(ctxName, content)
     }
 

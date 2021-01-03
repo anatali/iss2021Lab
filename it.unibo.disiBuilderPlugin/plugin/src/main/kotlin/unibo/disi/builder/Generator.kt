@@ -3,7 +3,7 @@ import alice.tuprolog.*
 
 object Generator{
 
-	val pengine     = Prolog()
+	val sysKb       = Prolog()
 	val userDir     =  System.getProperty("user.dir") //.replace("\\","//")
 	val outSrcDir   =  "$userDir/src"
 	val packagelogo = "it/unibo"
@@ -16,7 +16,6 @@ object Generator{
 		genUtils.genFileDir( outSrcDir,  "",  "sysRules" , "pl", builtin.sysRules )
 		genUtils.genFileDir( "./",  "",  "sysRules" , "pl", builtin.sysRules )
 	}
-
 	/*
      Generate the gradle build file
     */
@@ -24,17 +23,6 @@ object Generator{
 		genUtils.genFileDir( "./",  "",  "build" , "gradle", builtin.genGradleRules(sysName) )
 	}
 
- 	fun getFirstCtxName() : String {
-		val sol = pengine.solve("context(NAME,HOST,PROTOCOL,PORT)." )
-		if(  sol.isSuccess  ) {
-			val ctxName = sol.getVarValue("NAME").toString()
-			val ctxHost = sol.getVarValue("HOST").toString()
-			//val ctxPort = sol.getVarValue("PORT").toString()
-			println("ctxName=${ctxName} ctxHost=${ctxHost}")
- 			return ctxName
-		}
-		else{ throw Exception("Generator | ctx not found") }
-	}
 
  	fun genCodeFromModel(modelFileName : String){
  		val path = System.getProperty("user.dir")
@@ -42,26 +30,24 @@ object Generator{
 	//GENERATE THE OUTPUT DIRECTORY, if it does not exist
 		val dirName = genUtils.genFilePathName(outSrcDir)
 		genUtils.genDirectory(dirName)
-
 	//GENERATE THE GRADLE BUILD FILE
 		genGradleBuild( modelFileName )
 	//GENERATE THE SYSTEM RULES (written in Prolog)
 		genSysRules()	//genera sysRules.pl che poi VIENE USATO QUI SOTTO
-
 	//LOAD THE MODEL IN THE LOCAL KB
-		pengine.solve("consult('$modelFileName.pl')." )
+		sysKb.solve("consult('$modelFileName.pl')." )
 	//LOAD THE SYSTEM RULES	IN THE LOCAL KB
-		pengine.solve("consult( '$outSrcDir/sysRules.pl' )." )
+		sysKb.solve("consult( '$outSrcDir/sysRules.pl' )." )
 	//GET THE ACTOR BEHAVIOUR MODEL (msgdriven or  msgbased)
-		val sol = pengine.solve("system(SYSNAME,BEHAVIOUR)." )
+		val sol = sysKb.solve("system(SYSNAME,BEHAVIOUR)." )
 		if(  sol.isSuccess  ) {
 			val behaviour = sol.getVarValue("BEHAVIOUR").toString()
 			println("Generator | genCodeFromModel $modelFileName behaviour=$behaviour")
 			msgdriven = (behaviour == "msgdriven")
-			if (msgdriven) {  //GENERATE THE SKELETON CODE OF THE MSG-DRIVEN KOTLIN ACTORS
-				generatorActors.genActorsCode(getFirstCtxName(), msgdriven)
+			if (msgdriven) {
+				GeneratorMsgDrivenSystem.gen( sysKb ) //ONE Context only
 			} else {
-				generatorMsgBasedSystem.gen( modelFileName )
+				generatorMsgBasedSystem.gen( modelFileName, sysKb ) //Many contexts possible
 			}
 		}//success
 		println("Generator | END")

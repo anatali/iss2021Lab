@@ -21,6 +21,7 @@ a, a:visited, a:active, a:link, a:hover {
     text-decoration: underline;
     color: #545454;
     background-color: transparent;
+	font-size: 93%;
 }
 
 a:hover {
@@ -55,7 +56,7 @@ top {
 }
 tt{
 	font-family: "Arial";
-    font-size: 80%;
+    font-size: 90%;
 	color: #006600;
 }
 em{
@@ -68,7 +69,7 @@ em{
 }
 bc{
 	font-family: "Arial";
-	font-size: 80%;
+	font-size: 90%;
 	font-weight: bold;
     color: #990000;
 	background-color: #fcf8c7;
@@ -77,13 +78,13 @@ ks{
 	font-family: "Arial";
 	font-weight: bold;
     color: #0000CD	;
-
+	font-size: 90%;
 }
 kc{
 	font-family: "Arial";
 	font-weight: bold;
     color: #008000	;
-
+	font-size: 90%;
 }
 pre{
 	font-family: "Consolas";
@@ -99,11 +100,12 @@ m{
 }
 div.body{
 	 
-    font-size: 15px;
+    font-size: 18px;
 }
 k{
     color: #990000;
 	font-weight: bold;
+	font-size: 90%;
 }
 h1 {
     font-size: 150%;
@@ -264,32 +266,110 @@ function myFunction() {
 
 <div class="body"> 
 <h2>Introduction</h2>
-In this work, we create a custom Gradle plugin (with Kotlin) that provides a set of actor-creation tasks.<br/><br/>
+In this work, we create (with Kotlin) a custom Gradle plugin  that provides a set of actor-creation tasks.<br/><br/>
 Our work starts with the usage of option 4 of the <tt>gradle init</tt>  command within an empty directory.
 (The original result of the command is reported in the project <a href="../../provaPlugin" target="web">C:/.../iss2021Lab/provaPlugin</a>).
 <br/><br/>
-In our case, let us give the command in an empty directory named <ks>C:/.../iss2021Lab/it.unibo.disiBuilderPlugin</ks>:
+In our case, we procede as follows:
+<h3>Startup</h3>
+<ol>
+<li>Introduce a new (empty) directory named <ks>C:/.../iss2021Lab/it.unibo.disiBuilderPlugin</ks>. 
+The directory <tt>iss2021Lab</tt> must include the sub-directory <a href="../../uniboRepos/maven-repo" target="web"><k>uniboRepos/maven-repo</k></a>  
+and the sub-directory <a href="../../unibolibs" target="web"><k>unibolibs</k></a> 
+(both copied from <a href="https://github.com/anatali/iss2021Lab" target="web"> https://github.com/anatali/iss2021Lab</a>).<br/>
+Within this new directory,  execute the command:
 <pre>
 gradle init  4  3  2 - -
 </pre>
+Among the others, this command generates :<br/><br/>
+	<ul>
+	<li>a file named <tt>plugin/src/main/kotlin/disiBuilderPluginPlugin.kt</tt> that includes a subclass of 
+	<tt>Plugin&lt;Project></tt> that registers a 'greeting' task.<hr/>
+	We rename this file as 
+	<a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>disiBuilderPlugin</ks></a>. 
+	It will include the registration of our generation-tasks (e.g. <tt>buildDisiTest</tt>, ..., <tt>buildQakSystem</tt>).<br/>
+	Our tasks are mainly defined as subclasses of 
+	<a href="https://docs.gradle.org/current/dsl/org.gradle.api.DefaultTask.html"  target="web">org.gradle.api.DefaultTask</a>
+	under the package named 
+	<a href="../plugin/src/main/kotlin/unibo/disi/builder" target="web"><ks>unibo.disi.builder</ks></a>.
+	<br/><br/>
+	</li>
+	<li>files for   
+	<a href="../plugin/src/test/kotlin/it/unibo/disiBuilderPlugin/ItUniboDisiBuilderPluginPluginTest.kt" target="web">testing the plugin</a> 
+	and for 
+	<a href="../plugin/src/functionalTest/kotlin/it/unibo/disiBuilderPlugin/ItUniboDisiBuilderPluginPluginFunctionalTest.kt" target="web">testing the functional behavior</a> 
+	 that we properly change according to our needs.<br/><br/>
+	</li>
+	<li>a file <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a>  in which we
+<kc>ADD</kc> some sentence and <kc>CHANGE</kc> some others.</li>
 
-This command generates a file <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a>  in which we
-ADD some sentence and CHANGE some others.
+	</ul>
+</li>
+
+</ol>
+ 
+<h3>Changing <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a></h3> 
+
+We add commands (see the code):
+<ol>
+<li>to publish the plugin in the <a href="../../uniboRepos/maven-repo" target="web"><k>uniboRepos/maven-repo</k></a> </li>
+<li>to exploit the DISI
+<a href="http://amsacta.unibo.it/5450/7/tuprolog-guide.pdf" target="web"><k>tuProlog</k></a> library
+for our model-based code-generation tasks. In fact, the models of our systems are written as a set of Prolog facts. 
+An example is given in section <a href="#kcodegen">Generation of Kotlin code</a>.
+
+</li> 
+<li>to properly define our plugin with name <k>unibo.disi.builder</k> and implementation class
+<a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>it.unibo.disiBuilderPlugin.disiBuilderPlugin</ks></a>
+</li>
+</ol>
+
+
+<h2>Defining code-generation tasks</h2>
+
+<h3 id="kcodegen">Generation of Kotlin code</h3>
+A task of class 
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" target="web"><ks>unibo.disi.builder.BuildActorTask.kt</ks></a>
+is registered with name <kc>buildActorDisi</kc>. It takes a system model given as input-argument named  <ks>model</ks> and
+generates the skeleton code for the actors inluded in the model.<br/><br/>
+
+The genration process is defined in the operation <tt>genCodeFromModel</tt> of the Kotlin object
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" target="web"><ks>unibo.disi.builder.Generator.kt</ks></a> 
+
+<pre>
+OUTPUT DIRECTORY
+GRADLE BUILD FILE
+SYSTEM RULES
+LOAD THE MODEL IN THE LOCAL KB
+msgdriven 	-> GeneratorMsgDrivenSystem.gen( )
+msgbased    -> generatorMsgBasedSystem.gen( modelFileName )
+</pre>
+
+<h4>Usage example</h4>
+<pre>
+gradle -q buildActorDisi --model demo0
+</pre>
+
+The model <tt>demo0</tt> could be defined as follows:
+<pre>
+system( demo0, msgdriven ).		<kc>//alternative: <ks>system( demo0, <k>msgbased</k> )</ks>.</kc>
+context(ctxdemo0, "localhost",  "TCP", "8095").
+qactor( demo0, ctxdemo0, _).
+</pre>
 
 
 
-Exclude the testing code for the moment ...
+<h3>Generation of Qak code</h3>
+  
 <br/>
- <a href="../plugin/build.gradle.kts" target="web">plugin/build.gradle.kts</a>  
-<br/>
-<a href="../../uniboRepos/maven-repo" target="web">../../uniboRepos/maven-repo</a>  
+
 
 
 <table style="width:98%">
  
 <tr>
 <td style="width:70%" >
-The generator code is defined in <br/
+The generator code is defined in <br/>
 <a href="../buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt" target="web">
 buildSrc/src/main/kotlin/unibo/disi/builder/utils.kt</a>
 <br/><br/>
@@ -316,7 +396,9 @@ project.plugins.forEach() {
  
 </table>
 
-
+<!--
+See https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3
+-->
 
 <h2>Tasks</h2>
  <table style="width:98%">

@@ -18,7 +18,6 @@ open class ProjectInfoTask @Inject constructor()  : DefaultTask() {
     @Option(option = "format", description = "Output format of the project information.")
     fun setFormat(myformat: Format) { this.format = myformat }
 
-
     @TaskAction
     fun projectInfo() {
         //println("format=$format")
