@@ -421,42 +421,106 @@ The code-generator <a href="../plugin/src/main/kotlin/unibo/disi/builder/Generat
 <ks>GeneratorMsgDrivenSystem.kt</ks></a> delegates to the object
 <a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" target="web">
 <ks>GeneratorActorsInContext.kt</ks></a> the following jobs: 
-:
+
 
 <ol>
-<li>generate the code for the unique context</li>
-<li>generate (in <k>msgdriven</k> style) some skeleton code (a sender and a receiver actor) all the actors in the contexts</li>
+<li>call the object 
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorMsgDrivenCode.kt" target="web">GeneratorActorMsgDrivenCode</a>
+to generate (in <k>msgdriven</k> style) the skeleton code of the actors
+</li>
+<li>generate a new directory for the system and a new file in it with the generated code</li>
 </ol>
+Example:
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:50%" >
+The file <tt>demo0.pl</tt> defines the model
+<pre>
+system( demo0, msgdriven ).
 
+context(ctxdemo0, "localhost",  "TCP", "8095").
+ qactor( sender,   ctxdemo0, _).
+ qactor( receiver, ctxdemo0, _).
+</pre> 
+
+</td>
+<td>The command <tt>gradle buildActorDisi --model demo0</tt> produces: 
+<pre>
+src	
+   it.unibo.demo0
+      demo0.kt
+</pre>
+<m>
+The generated file <tt>it.unibo.demo0.demo0.kt</tt> includes a main program.
+It can be executed by importing Kotlin coroutines and channels
+<pre>
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.channels.SendChannel
+</pre></m>
+</td>
+</tr>
+
+
+ </tbody>
+</table>
 
 <h4>Finite state-machine code</h4>
 The code-generator <a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorFsmSystem.kt" target="web">
-<ks>GeneratorFsmSystem.kt</ks></a> works as follows:
+<ks>GeneratorFsmSystem.kt</ks></a> collects all the contexts declared in the model and, for each context,  calls the object
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorCtx.kt" target="web"><ks>GeneratorCtx.kt</ks></a>  that:
 <ol>
-<li></li>
-<li></li>
+<li>generates a main program for the context </li>
+<li>generates  (by calling the object 
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorFsmCode.kt" target="web">GeneratorActorFsmCode</a>)
+the skeleton  code (in <k>finite state machine</k> style) for all the actors of that context and 
+generates a new directory for each actor that includes a new file with the actor-code.
+
+</li>
 </ol>
+Example:
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:50%" >
+The file <tt>demo1.pl</tt> defines the model
 <pre>
-OUTPUT DIRECTORY
-GRADLE BUILD FILE
-SYSTEM RULES
-LOAD THE MODEL IN THE LOCAL KB
-msgdriven 	-> GeneratorMsgDrivenSystem.gen( )
-msgbased    -> generatorMsgBasedSystem.gen( modelFileName )
-</pre>
+system( demo1, fsm  ).
 
-<h4>Usage example</h4>
+context(ctxdemo1, "localhost",  "TCP", "8095").	
+qactor( sender,   ctxdemo1, "it.unibo.sender.sender").		
+qactor( receiver, ctxdemo1, "it.unibo.receiver.receiver").
+<kc>//it.unibo.sender.sender     is the generated actor class</kc>
+<kc>//it.unibo.receiver.receiver is the generated actor class</kc>
+</pre> 
+<m>
+The model must now include the names of the generated actor class in order to make the generated code executable.
+In fact the main program <tt>Main_ctxdemo1.kt</tt> generates the system by consulting the model and by 
+using the Java reflection mechanism to create the instances of the actors.
+</m>
+</td>
+<td>The command <tt>gradle buildActorDisi --model demo1</tt> produces: 
 <pre>
-gradle -q buildActorDisi --model demo0
+src	
+   it.unibo
+     ctxdemo1
+        Main_ctxdemo1.kt
+     receiver	
+        receiver.kt
+     sender
+        sender.kt
 </pre>
-
-The model <tt>demo0</tt> could be defined as follows:
-<pre>
-system( demo0, msgdriven ).		<kc>//alternative: <ks>system( demo0, <k>fsm</k> )</ks>.</kc>
-context(ctxdemo0, "localhost",  "TCP", "8095").
-qactor( demo0, ctxdemo0, _).
-</pre>
-
+<m>
+The main program <tt>it.unibo.ctxdemo1.Main_ctxdemo1.kt</tt> requires the 
+<tt>it.unibo.kactor.QakContext</tt>  deployed in the DISI library <tt>it.unibo.qakactor-2.4.jar</tt>
+stored in  <a href="../../unibolibs" target="web">unibolibs</a>.
+</m>
+</td>
+</tr>
+ 
+ </tbody>
+</table>
 
 
 <h3>Generation of Qak code</h3>
@@ -495,6 +559,15 @@ project.plugins.forEach() {
 </tr>
  
 </table>
+Open Eclipse and import existing project <kc>C:\...\provaDisiBuilder</kc>. We will use Eclipse mainly for its editor capabilities.<br/>
+
+Open IntelliJ and import (as a Gradle project) existing project <kc>C:\...\provaDisiBuilder</kc>.<br/>
+
+Open prova0.qak (convert in Xtext)<br/>
+
+Add Kotlin nature to the project<br/>
+
+Execute <kc>C:\...\provaDisiBuilder\src\it\unibo\ctxprova0\MainCtxprova0.kt</kc>
 
 <!--
 See https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3
@@ -502,7 +575,7 @@ See https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-in
 
 
 
-<h2>Example</h2>
+<h2>Example of an user project</h2>
 https://docs.gradle.org/current/userguide/init_scripts.html
 <pre>
 In  <kc>C:\...\provaDisiBuilder</kc> execute:
@@ -534,15 +607,6 @@ Execute
 gradle -q buildQakSystem  --sysname prova0
 </pre>
 
-Open Eclipse and import existing project <kc>C:\...\provaDisiBuilder</kc>. We will use Eclipse mainly for its editor capabilities.<br/>
-
-Open IntelliJ and import (as a Gradle project) existing project <kc>C:\...\provaDisiBuilder</kc>.<br/>
-
-Open prova0.qak (convert in Xtext)<br/>
-
-Add Kotlin nature to the project<br/>
-
-Execute <kc>C:\...\provaDisiBuilder\src\it\unibo\ctxprova0\MainCtxprova0.kt</kc>
 
 
 <h2>CI</h2>

@@ -36,11 +36,14 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 
 	fun genDirectory( dirName: String ) {
 		val folder  = File(dirName)
-		if( folder.exists() ) return
-		else{
+		if( folder.exists() ){
+			println( "GenUtils | WARNING: directory $dirName ALREADY EXISTS"  )
+			folder.delete()
+		}
+		//else{
 			println( "GenUtils | genDirectory created dir=$dirName"  )
 			folder.mkdirs()
-		}
+		//}
 	}
 	
 	fun copyFile(sourcedir: String,  destdir: String, packageName: String,  name: String,  suffix:String){
@@ -82,6 +85,16 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 		}
 	}
 
+	fun getCtxNames( sysKb : Prolog ) : List<String>{
+		val sol = sysKb.solve("getCtxNames(CTXNAMES)." )
+		if(  sol.isSuccess  ) {
+			val ctxNames     = sol.getVarValue("CTXNAMES") 	//List
+ 			return strRepToList( ctxNames.toString() )
+		}else{
+			println("GenUtils | getActorNames  WARNING: no context found")
+			throw Exception("")
+		}
+	}
 
 
 }//Object GenUtils

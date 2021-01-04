@@ -32,8 +32,7 @@ QActor ${actorName} context ctx$sysName{
  				  whenRequest r1  -> handleRequest
                   whenEvent alarm -> handleAlarm
 
-	State handleTimeout{
-        printCurrentMessage
+	State handleTimeout{        
 		println("${actorName} handleTimeout")  
 	}
 
@@ -41,7 +40,7 @@ QActor ${actorName} context ctx$sysName{
   		println("${actorName} in handleDispatch")  
  		printCurrentMessage   
  		onMsg( msg1:msg1(ARG) ){
- 			println("${actorName} in s2 since msg1:msg1($dollar{payloadArg(0)})")
+ 			println("${actorName} msg1:msg1($dollar{payloadArg(0)})")
  			delay 1000  
  		}
     }

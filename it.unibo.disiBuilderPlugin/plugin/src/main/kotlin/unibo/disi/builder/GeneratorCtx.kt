@@ -36,20 +36,19 @@ fun main() = runBlocking {
 
     fun genMainCtxFile( ctxName: String, content: String ) {
         try {
-            //generate a new directory
             val dirName = GenUtils.genFilePathName(ctxName)
-            GenUtils.genDirectory(dirName)
             val mainfName = "$dirName/Main_${ctxName}.kt"
             println( "generator | genMainCtxFile mainfName=$mainfName"  )
             val mainf     = java.io.File( mainfName )
-            if( mainf.exists() ) return
+            if( mainf.exists() ){
+                return
+            }
+            GenUtils.genDirectory(dirName) //generate a new directory
             mainf.writeText( content )		//writeText creates the file
-            println("generator | done $mainfName")
+            println("GeneratorCtx | done $mainfName")
         }
         catch (e: Exception) {
             e.printStackTrace()
         }
     }
-
-
-}//generatorCtx
+}//GeneratorCtx

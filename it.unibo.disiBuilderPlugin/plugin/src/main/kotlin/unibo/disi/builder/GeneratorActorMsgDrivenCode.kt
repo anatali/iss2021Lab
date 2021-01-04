@@ -2,7 +2,7 @@ package unibo.disi.builder
 
 import alice.tuprolog.Prolog
 
-object generatorActorMsgDrivenCode {
+object GeneratorActorMsgDrivenCode {
     val dollar = "$"
 
     fun gen( systemName: String, ctxName: String, sysKb: Prolog ) : String{
