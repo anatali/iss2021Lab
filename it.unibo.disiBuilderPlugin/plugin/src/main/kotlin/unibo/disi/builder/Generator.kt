@@ -12,7 +12,7 @@ object Generator{
 	/*
      Generate the sysRules
     */
-	fun genSysRules(){	//WE GENERATE A LOCAL COPY (for our generation ) AND THE GLOBAL ONE (for the user appl)
+	fun genSysRules(){
 		//genUtils.genFileDir( outSrcDir,  "",  "sysRules" , "pl", builtin.sysRules )
 		GenUtils.genFileDir( "./",  "",  "sysRules" , "pl", Builtin.sysRules )
 		//TODO: copy sysRules.pl from the jar to the userDir

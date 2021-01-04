@@ -284,11 +284,14 @@ gradle init  4  3  2 - -
 Among the others, this command generates :<br/><br/>
 	<ul>
 	<li>a file named <tt>plugin/src/main/kotlin/disiBuilderPluginPlugin.kt</tt> that includes a subclass of 
-	<tt>Plugin&lt;Project></tt> that registers a 'greeting' task.<hr/>
+	<tt>Plugin&lt;Project></tt> that registers a 'greeting' task.
 	We rename this file as 
-	<a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>disiBuilderPlugin</ks></a>. 
-	It will include the registration of our generation-tasks (e.g. <tt>buildDisiTest</tt>, ..., <tt>buildQakSystem</tt>).<br/>
-	Our tasks are mainly defined as subclasses of 
+	<a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>disiBuilderPlugin</ks></a>
+	(and change the plugin <tt>implementationClass</tt> in <a href="../plugin/buildGradle.kt" target="web"><ks>plugin/buildGradle.kt</ks></a>). 
+	<hr/>
+	The class <a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>disiBuilderPlugin</ks></a>
+	includes the registration of our generation-tasks (e.g. <tt>buildDisiTest</tt>, ..., <tt>buildQakSystem</tt>).<br/>
+	Our tasks (see section <a href="#disitasks">Tasks</a>) are mainly defined as subclasses of 
 	<a href="https://docs.gradle.org/current/dsl/org.gradle.api.DefaultTask.html"  target="web">org.gradle.api.DefaultTask</a>
 	under the package named 
 	<a href="../plugin/src/main/kotlin/unibo/disi/builder" target="web"><ks>unibo.disi.builder</ks></a>.
@@ -326,15 +329,93 @@ An example is given in section <a href="#kcodegen">Generation of Kotlin code</a>
 
 
 <h2>Defining code-generation tasks</h2>
+The plugin implementation class
+<a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>it.unibo.disiBuilderPlugin.disiBuilderPlugin</ks></a>
+registers in the project a set of code-generation tasks.
+<h4 id="disitasks">The Tasks</h4>
+ <table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:35%" >
+<ks><k>buildDisiTest</k></ks><br/>
+<ks><k>projectInfo </k></ks>
+</td>
+<td>Tasks used for fast testing
+</td>
+</tr>
 
+<tr>
+<td>
+<ks><k>buildActorDisi</k>  --model &ltmodelName></ks>
+</td>
+<td>Generates Kotlin code for actors, by starting from the given <tt>&ltmodelName></tt> written as a set of Prolog facts. For example:
+<pre>
+system( demo0, msgdriven ).	  <kc>//alternative: <ks>system( demo0, <k>msgbased</k> )</ks>.</kc>
+context(ctxdemo0, "localhost",  "TCP", "8095").
+qactor( demo0, ctxdemo0, _).
+</pre>
+The generated code requires the DISI library  <ks>it.unibo.qakactor-2.4.jar</ks>
+stored in  <a href="../../unibolibs" target="web">unibolibs</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<ks><k>buildQakSystem</k>  --sysname &ltsystemName> </ks>
+
+</td>
+<td>Generates an example of a model written in the
+<a href="../../it.unibo.qakactor/userDocs/LabQakIntro2020.html" target="web">custom language Qak</a>. <br/>
+Once generated within an Eclipse-DSL workspace (with the <a href="../../it.unibo.issLabStart/resources/plugins" target="web">DISI-plugins</a>
+stored in <tt>it.unibo.issLabStart/resources</tt>), 
+this model generates, in its turn, Kotlin code for a distributed system with name <tt>&ltsystemName></tt>.
+
+ 
+
+</td>
+</tr>
+
+
+
+
+ </tbody>
+</table>
 <h3 id="kcodegen">Generation of Kotlin code</h3>
-A task of class 
-<a href="../plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" target="web"><ks>unibo.disi.builder.BuildActorTask.kt</ks></a>
-is registered with name <kc>buildActorDisi</kc>. It takes a system model given as input-argument named  <ks>model</ks> and
-generates the skeleton code for the actors inluded in the model.<br/><br/>
+The set of resources used to generate actor-driven or actor-based systems used by the
+<a href="../plugin/src/main/kotlin/it/unibo/disiBuilderPlugin/disiBuilderPlugin.kt" target="web"><ks>disiBuilderPlugin</ks></a>
+starts from the user-defined gradle-task of class 
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/BuildActorTask.kt" target="web"><ks>unibo.disi.builder.BuildActorTask.kt</ks></a>,
+that is registered with the name <k>buildActorDisi</k>. 
+<br/><br/>
+This task takes a system model given as input-argument named  <ks>model</ks> and
+generates the skeleton code for the actors included in the give  <tt>system model</tt>.<br/><br/>
 
-The genration process is defined in the operation <tt>genCodeFromModel</tt> of the Kotlin object
+The generation process is defined in the operation <tt>genCodeFromModel</tt> of the Kotlin object
 <a href="../plugin/src/main/kotlin/unibo/disi/builder/Generator.kt" target="web"><ks>unibo.disi.builder.Generator.kt</ks></a> 
+that works as follows (see the code):<br/><br/>
+
+<ol>
+<li>generates - if it does not exixts -  a directory <ks>src</ks> in the user-workspace;</li>
+<li>generates, in the main directory of the user-workspace, a file <ks>build.gradle</ks> that defines the dependencies required
+to compile the  code generated in the user-workspace <ks>src</ks> directory;</li>
+
+<li>generates, in the main directory of the user-workspace, a file named <ks>sysRules.pl</ks> that includes a set of Prolog-rules 
+that will be used to facilitate the code-generation process;
+</li>
+
+<li>loads the  <tt>system model</tt> and the <tt>sysRules</tt> in a local Prolog theory name <ks>sysKb</ks></li>
+
+<li>checks if the code to be generated must follow the 'messaged-driven' or the 'fsm' style.<br/> 
+If the specified behavior is <tt>msgdriven</tt>, it delegates the code-generation job to 
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" target="web">
+<ks>GeneratorMsgDrivenSystem.kt</ks></a>.<br/>
+If the specified behavior is <tt>fsm</tt>, it delegates the code-generation job to 
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" target="web">
+<ks>GeneratorMsgDrivenSystem.kt</ks></a>.
+ </li>
+
+<li>generates the code  
+</ol>
 
 <pre>
 OUTPUT DIRECTORY
@@ -400,42 +481,7 @@ project.plugins.forEach() {
 See https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3
 -->
 
-<h2>Tasks</h2>
- <table style="width:98%">
-<tbody>	
-<tr>
-<td style="width:20%" >
-buildDisiTest<br/>
-projectInfo 
 
-</td>
-<td>
-</td>
-</tr>
-
-<tr>
-<td>
-<ks>buildDisi  --model ...</ks>
-
-</td>
-<td>
-</td>
-</tr>
-
-<tr>
-<td>
-<ks>buildQakSystem  --sysname prova0 --projectdir C:\Didattica2018Work\iss2021Lab\provaDisiBuilder </ks>
-
-</td>
-<td> 
-</td>
-</tr>
-
-
-
-
- </tbody>
-</table>
 
 <h2>Example</h2>
 https://docs.gradle.org/current/userguide/init_scripts.html
