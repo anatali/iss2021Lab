@@ -43,13 +43,14 @@ object Generator{
 	//GET THE ACTOR BEHAVIOUR MODEL (msgdriven or  msgbased)
 		val sol = sysKb.solve("system(SYSNAME,BEHAVIOUR)." )
 		if(  sol.isSuccess  ) {
-			val behaviour = sol.getVarValue("BEHAVIOUR").toString()
+			val systemName = sol.getVarValue("SYSNAME").toString()
+			val behaviour  = sol.getVarValue("BEHAVIOUR").toString()
 			println("Generator | genCodeFromModel $modelFileName , behaviour=$behaviour")
 			msgdriven = (behaviour == "msgdriven")
 			if (msgdriven) {
-				GeneratorMsgDrivenSystem.gen( sysKb ) //ONE Context only
+				GeneratorMsgDrivenSystem.gen( systemName,sysKb ) //ONE Context only
 			} else {
-				GeneratorMsgBasedSystem.gen( modelFileName, sysKb ) //Many contexts possible
+				GeneratorFsmSystem.gen( systemName, modelFileName, sysKb ) //Many contexts possible
 			}
 		}//success
 		println("Generator | END")

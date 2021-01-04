@@ -2,13 +2,13 @@ package unibo.disi.builder
 
 import alice.tuprolog.Prolog
 
-object GeneratorMsgBasedSystem {
+object GeneratorFsmSystem {
 
-    fun gen( modelFileName : String, sysKb : Prolog){
+    fun gen( systemName: String, modelFileName : String, sysKb : Prolog){
         //For a msg-based actor system we might have N>1 contexts
         val ctxNamesList = getCtxNames(sysKb) //List<String>
         ctxNamesList.forEach{ ctxName ->
-            GeneratorCtx.genTheContextCode(ctxName, modelFileName, sysKb, false )
+            GeneratorCtx.genTheContextCode(systemName,ctxName, modelFileName, sysKb, false )
         }
     }
 

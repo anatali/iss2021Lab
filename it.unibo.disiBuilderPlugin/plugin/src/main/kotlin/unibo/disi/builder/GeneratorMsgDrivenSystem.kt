@@ -3,9 +3,9 @@ import alice.tuprolog.Prolog
 
 object  GeneratorMsgDrivenSystem {
 
-    fun gen(  sysKb : Prolog ){
+    fun gen(  systemName: String, sysKb : Prolog ){
         val ctxName = getFirstCtxName( sysKb )
-        GeneratorActorsInContext.gen(ctxName, sysKb, true )  //Gen the code of the actors
+        GeneratorActorsInContext.gen(systemName, ctxName, sysKb, true )  //Gen the code of the actors
      }
 
     private fun getFirstCtxName( sysKb : Prolog ) : String {

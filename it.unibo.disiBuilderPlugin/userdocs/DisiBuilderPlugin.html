@@ -350,7 +350,7 @@ registers in the project a set of code-generation tasks.
 </td>
 <td>Generates Kotlin code for actors, by starting from the given <tt>&ltmodelName></tt> written as a set of Prolog facts. For example:
 <pre>
-system( demo0, msgdriven ).	  <kc>//alternative: <ks>system( demo0, <k>msgbased</k> )</ks>.</kc>
+system( demo0, msgdriven ).	  <kc>//alternative: <ks>system( demo0, <k>fsm</k> )</ks>.</kc>
 context(ctxdemo0, "localhost",  "TCP", "8095").
 qactor( demo0, ctxdemo0, _).
 </pre>
@@ -405,18 +405,37 @@ that will be used to facilitate the code-generation process;
 
 <li>loads the  <tt>system model</tt> and the <tt>sysRules</tt> in a local Prolog theory name <ks>sysKb</ks></li>
 
-<li>checks if the code to be generated must follow the 'messaged-driven' or the 'fsm' style.<br/> 
+<li>checks if the code to be generated must follow the <k>msgdriven</k> or the <k>fsm</k> style.<br/> 
 If the specified behavior is <tt>msgdriven</tt>, it delegates the code-generation job to 
 <a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" target="web">
 <ks>GeneratorMsgDrivenSystem.kt</ks></a>.<br/>
 If the specified behavior is <tt>fsm</tt>, it delegates the code-generation job to 
-<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" target="web">
-<ks>GeneratorMsgDrivenSystem.kt</ks></a>.
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorFsmSystem.kt" target="web">
+<ks>GeneratorFsmSystem.kt</ks></a>.
  </li>
-
-<li>generates the code  
+ 
 </ol>
 
+<h4>Message-driven code</h4>
+The code-generator <a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorMsgDrivenSystem.kt" target="web">
+<ks>GeneratorMsgDrivenSystem.kt</ks></a> delegates to the object
+<a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorActorsInContext.kt" target="web">
+<ks>GeneratorActorsInContext.kt</ks></a> the following jobs: 
+:
+
+<ol>
+<li>generate the code for the unique context</li>
+<li>generate (in <k>msgdriven</k> style) some skeleton code (a sender and a receiver actor) all the actors in the contexts</li>
+</ol>
+
+
+<h4>Finite state-machine code</h4>
+The code-generator <a href="../plugin/src/main/kotlin/unibo/disi/builder/GeneratorFsmSystem.kt" target="web">
+<ks>GeneratorFsmSystem.kt</ks></a> works as follows:
+<ol>
+<li></li>
+<li></li>
+</ol>
 <pre>
 OUTPUT DIRECTORY
 GRADLE BUILD FILE
@@ -433,7 +452,7 @@ gradle -q buildActorDisi --model demo0
 
 The model <tt>demo0</tt> could be defined as follows:
 <pre>
-system( demo0, msgdriven ).		<kc>//alternative: <ks>system( demo0, <k>msgbased</k> )</ks>.</kc>
+system( demo0, msgdriven ).		<kc>//alternative: <ks>system( demo0, <k>fsm</k> )</ks>.</kc>
 context(ctxdemo0, "localhost",  "TCP", "8095").
 qactor( demo0, ctxdemo0, _).
 </pre>

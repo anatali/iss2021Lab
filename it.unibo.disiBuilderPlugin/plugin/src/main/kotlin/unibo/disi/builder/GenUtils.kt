@@ -71,5 +71,18 @@ fun genFileName( dir: String,  packageName: String,  name: String,  suffix:Strin
 		}
 	}
 
+	fun getActorNames(ctxName: String, sysKb : Prolog) : List<String>{
+		val sol = sysKb.solve("getActorNames(ACTORS,$ctxName).")
+		if (sol.isSuccess) {
+			val actorNames     = sol.getVarValue("ACTORS") //List
+ 			return strRepToList(actorNames.toString())
+		} else{
+			println("GenUtils | getActorNames  WARNING: no actors found")
+			return listOf()
+		}
+	}
+
+
+
 }//Object GenUtils
 

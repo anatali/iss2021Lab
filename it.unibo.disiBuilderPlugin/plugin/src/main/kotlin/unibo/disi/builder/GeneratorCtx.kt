@@ -4,11 +4,11 @@ import alice.tuprolog.Prolog
 
 object GeneratorCtx {
 
-    fun genTheContextCode( ctxName : String, modelFileName : String, sysKb : Prolog, msgdriven:Boolean) {
+    fun genTheContextCode( systemName: String, ctxName : String, modelFileName : String, sysKb : Prolog, msgdriven:Boolean) {
         genCtxMain(ctxName, modelFileName)
         //GENERATE THE SKELETON CODE OF ALL THE ACTORS IN THE CONTEXT
         //GeneratorMsgDrivenSystem.gen( ctxName  )
-        GeneratorActorsInContext.gen(ctxName, sysKb, msgdriven)
+        GeneratorActorsInContext.gen(systemName, ctxName, sysKb, msgdriven)
     }
 
     fun genCtxMain( ctxName : String, modelFileName : String ){
