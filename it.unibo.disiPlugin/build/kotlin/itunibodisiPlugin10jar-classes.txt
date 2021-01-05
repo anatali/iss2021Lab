@@ -1,1 +1,0 @@
-C:\Didattica2018Work\iss2021Lab\it.unibo.disiPlugin\build\classes\java\main\unibo\disi\plugins\MyPlugin.class;C:\Didattica2018Work\iss2021Lab\it.unibo.disiPlugin\build\classes\java\main\unibo\disi\plugins\MyTask.class

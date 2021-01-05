@@ -1,4 +1,0 @@
-unibo/disi/plugins/MyPlugin.java
- unibo.disi.plugins.MyPlugin
-unibo/disi/plugins/MyTask.java
- unibo.disi.plugins.MyTask
