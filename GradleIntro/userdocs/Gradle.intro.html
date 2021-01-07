@@ -2085,6 +2085,17 @@ Script plugins are self-resolving in that they are resolved from the specific fi
 From https://medium.com/decisionbrain/when-to-not-use-mavenlocal-in-your-gradle-build-script-6da03902f9df<br/>
 mavenLocal() repository is not the Gradle dependency cache. It is a repository where you can deploy components with ./gradlew publishToMavenLocal (assuming you use the maven-publish Gradle plugin).
 
+
+<h2>Continuos delivery</h2>
+
+
+<ul>
+<li>When launched with the -t option, Gradle re-runs the requested tasks every time something changes</li>
+<li>(In/Out)put markers are used to understand what to actually run again</li>
+</ul>
+
+See <a href="https://en.wikipedia.org/wiki/DevOpsIntro.html" target="web">DevOpsIntro.html</a>
+
 </div>
 <br/><br/>
 <div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">
