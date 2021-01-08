@@ -330,14 +330,79 @@ Now, 1,600 plug-ins span five areas: platforms, UI, administration, source code 
 
 </li>
 <a href="https://github.com/features/actions" target="web">GitHub Actions</a><br/><br/>
+<a href="https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions" target="web">
+Introduction to GitHub Actions</a><br/><br/>
+
+
 <li>
 </li>
 
 </ul>
  
+
+<h2>A project</h2>
+
+<center><img src="./img/cidemo.png" alt="cidemo" width="40%" height="40%"></center>
+<pre>
+<kc>In C:\...\cidemo:</kc>
+
+gradle init   2 4 1 2 - -
+</pre>
+
+<center><img src="./img/cidemoStartup.png" alt="cidemoStartup" width="40%" height="40%"></center>
+<pre>
+git status
+git add -A
+git commit -m "startup"
+git push origin main
+</pre>
+
+<center><img src="./img/cidemoGitStartup.png" alt="cidemoGitStartup" width="40%" height="40%"></center>
+
+From https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-java-with-gradle
+<pre>
+<kc>In https://github.com/.../cidemo/actions/new</kc>
+
+<ks>Skip this and set up a workflow yourself -></ks>
+
+name: CIdemoStart
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest    <kc># downloads a copy of your repository on the runner</kc>
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8  <kc>#configures the Java 1.8 JDK</kc>
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build with Gradle
+        run: ./gradlew build  
+        <m><kc>#runs the gradlew wrapper script to ensure that your code builds, tests pass, and a package can be created</kc></m>	
+</pre>
+
+<center><img src="./img/cidemoCIStart.png" alt="cidemoCIStart" width="80%" height="80%"></center>
+
+<pre>
+<ks>Start commit ... Commit new file</ks>		
+</pre>
+
+<center><img src="./img/cidemoCIworkflowsmain.png" alt="cidemoCIworkflowsmain.png" width="80%" height="80%"></center>
+
+<pre>
+git pull 			<kc>=> appears .github/workflows/main.yml</kc>
+</pre>
+
+<center><img src="./img/cidemoCIActions.png" alt="cidemoCIActions.png" width="80%" height="80%"></center>
+<br/>
+
+Build error: <k>./gradlew: Permission denied</k>
+<br/>
+<center><img src="./img/cidemoCIBuildError.png" alt="cidemoCIBuildError.png" width="80%" height="80%"></center>
  
-
-
 
  
 <h2>CI</h2>
