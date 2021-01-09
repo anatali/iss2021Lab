@@ -84,10 +84,10 @@ showSystemConfiguration :-
 	stdout <- println("&&&&&&&&&&&&&&&&&&SysRules&&&&&&&&&&&&&&&&&&&&"),
   	getTheContexts(CTXS),
 	stdout <- println('CONTEXTS IN THE SYSTEM:'),
-	showElements(CTXS),
+	showListOfElements(CTXS),
 	stdout <- println('ACTORS   IN THE SYSTEM:'),
 	getTheActors(ACTORS),
-	showElements(ACTORS),
+	showListOfElements(ACTORS),
 	stdout <- println("&&&&&&&&&&&&&&&&&&SysRules&&&&&&&&&&&&&&&&&&&&").
  
 showElements(ElementListString):- 

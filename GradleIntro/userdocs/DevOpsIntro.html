@@ -356,7 +356,23 @@ git add -A
 git commit -m "startup"
 git push origin main
 </pre>
+<!-- Starting from git
+<pre>
+git remote add origin  https://anatali:nat25650@github.com/anatali/reponame.git
+git remote rm origin
+git remote add origin  git@github.com:anatali/cidemoJava.git
+git push -u origin master
 
+
+echo "# cidemoJava" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/anatali/cidemoJava.git
+git push -u origin main
+</pre>
+-->
 <center><img src="./img/cidemoGitStartup.png" alt="cidemoGitStartup" width="40%" height="40%"></center>
 
 From https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-java-with-gradle
@@ -379,9 +395,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build with Gradle
-        run: ./gradlew build  
+     - name: Change wrapper permissions
+       run: chmod +x ./gradlew     #to gain gradlew run permission
+     - name: Build with Gradle
+       run: ./gradlew build  
         <m><kc>#runs the gradlew wrapper script to ensure that your code builds, tests pass, and a package can be created</kc></m>	
+	- uses: actions/upload-artifact@v2		#see https://github.com/actions/upload-artifact
+	  with:
+		name: Package
+		path: build/libs		
 </pre>
 
 <center><img src="./img/cidemoCIStart.png" alt="cidemoCIStart" width="80%" height="80%"></center>
@@ -399,7 +421,7 @@ git pull 			<kc>=> appears .github/workflows/main.yml</kc>
 <center><img src="./img/cidemoCIActions.png" alt="cidemoCIActions.png" width="80%" height="80%"></center>
 <br/>
 
-Build error: <k>./gradlew: Permission denied</k>
+Build error: <k>./gradlew: Permission denied</k>	(manca run: chmod +x ./gradlew)
 <br/>
 <center><img src="./img/cidemoCIBuildError.png" alt="cidemoCIBuildError.png" width="80%" height="80%"></center>
  
@@ -422,6 +444,34 @@ set JAVA_HOME="C:\Program Files\Java\jdk-11.0.9"
 https://vimeo.com/138873446	Xtext
 https://dl.bintray.com/jetbrains/kotlin/eclipse-plugin/0.8.18/
 eclipse -vm "C:\Program Files\Java\jdk-12.0.1\bin"
+
+
+GRADLE
+https://www.youtube.com/watch?v=kONQCIAcWeI
+https://www.youtube.com/watch?v=Nabjqv8KDgc
+
+TechWorld with Nana
+DOCKER
+https://www.youtube.com/watch?v=3c-iBn73dDE
+KUBERNETES	 
+https://www.youtube.com/watch?v=3c-iBn73dDE
+https://www.youtube.com/watch?v=X48VuDVv0do
+AWS container services
+https://www.youtube.com/watch?v=AYAh6YDXuho
+ISTIO
+https://www.youtube.com/watch?v=16fgzklcF7Y
+
+
+
+MICROSERVICES
+https://www.youtube.com/watch?v=BnknNTN8icw
+https://www.youtube.com/watch?v=xzJO03LpapI
+SPRING BOOT
+https://www.youtube.com/watch?v=27dPN4aMz30
+
+no more docker
+https://www.youtube.com/watch?v=7KUdmFyefSA
+
 </pre> 
 
 <!--
