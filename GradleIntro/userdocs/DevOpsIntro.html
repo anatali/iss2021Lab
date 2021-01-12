@@ -489,7 +489,10 @@ https://docs.docker.com/docker-hub/		DOCS
  
 </pre> 
 
- 
+<h3>Create an image using Docker commands</h3> 
+<pre>
+docker build -t xxx .
+</pre>
 
 <h3>Create and register an image using Docker commands</h3>
 A <k>Docker repository</k> is where you put different versions of a specific image, 
@@ -515,7 +518,9 @@ See <a href="https://docs.docker.com/engine/reference/commandline/login/" target
 type docker_password.txt | docker login --username natbodocker --password-stdin
 </pre>
 </li>
-<li>CREATE IMAGE FROM Dockerfile
+ 
+
+<li>CREATE IMAGE FROM <a href="Dockerfile" target="code">Dockerfile</a>
 
 <pre>
 <ks>docker build -t <your_username>/my-private-repo .</ks>
@@ -523,7 +528,9 @@ type docker_password.txt | docker login --username natbodocker --password-stdin
 docker build -t natbodocker/citest:1.0 .
 
 <kc>TEST the image locally</kc>
-docker run natbodocker/citest		
+docker run natbodocker/citest	
+docker run -it image  /bin/bash	
+docker cp ./demo0.pl 09d3ce1e3ea0:/app/bin/demo0.pl
 </pre>
 
 <li>
