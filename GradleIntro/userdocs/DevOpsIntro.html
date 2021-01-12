@@ -446,11 +446,22 @@ https://dl.bintray.com/jetbrains/kotlin/eclipse-plugin/0.8.18/
 eclipse -vm "C:\Program Files\Java\jdk-12.0.1\bin"
 
 
+GIT	(with DEVOPS intro)
+https://www.youtube.com/watch?v=hDxIdPxKt5w
+
+https://www.youtube.com/watch?v=N_bMCff8q6A			**
+
+GITHUB actions
+https://www.youtube.com/watch?v=R8_veQiYBjI&t=17s   **
+
 GRADLE
 https://www.youtube.com/watch?v=kONQCIAcWeI
 https://www.youtube.com/watch?v=Nabjqv8KDgc
 
 TechWorld with Nana
+DOCKERFILE
+https://www.youtube.com/watch?v=WmcdMiyqfZs
+
 DOCKER
 https://www.youtube.com/watch?v=3c-iBn73dDE
 KUBERNETES	 
@@ -472,7 +483,157 @@ https://www.youtube.com/watch?v=27dPN4aMz30
 no more docker
 https://www.youtube.com/watch?v=7KUdmFyefSA
 
+DOCKERHUB
+https://hub.docker.com/					SIGN IN
+https://docs.docker.com/docker-hub/		DOCS
+ 
 </pre> 
+
+ 
+
+<h3>Create and register an image using Docker commands</h3>
+A <k>Docker repository</k> is where you put different versions of a specific image, 
+whereas a <k>Docker registry</k> (e.g. <a href="https://hub.docker.com/" target="web"><ks>Docker Hub</ks></a>) is where those repositories live.
+<br/><br/>
+Steps:
+<ul>
+<li>Sign up for a Docker account</li>
+<li>Create your first repository</li>
+<li>Build a Docker container image on your computer</li>
+<li>Push it successfully to Docker Hub</li>
+</ul>
+<hr/>
+<ol>
+<li>Sign into the Docker Desktop application using the Docker ID
+<pre>
+<ks>docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"</ks>
+
+docker login -u="natbodocker" -p="...."		
+<kc>WARNING! Using --password via the CLI is insecure. Use --password-stdin. 
+See <a href="https://docs.docker.com/engine/reference/commandline/login/" target="web">Log in to a Docker registry</a></kc>
+
+type docker_password.txt | docker login --username natbodocker --password-stdin
+</pre>
+</li>
+<li>CREATE IMAGE FROM Dockerfile
+
+<pre>
+<ks>docker build -t <your_username>/my-private-repo .</ks>
+
+docker build -t natbodocker/citest:1.0 .
+
+<kc>TEST the image locally</kc>
+docker run natbodocker/citest		
+</pre>
+
+<li>
+TAG an image
+<pre>
+<ks>docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]</ks>
+</pre>
+</li>
+
+</li>
+<li>PUSH the image
+<pre>
+docker push natbodocker/citest
+<kc>1.0: digest: sha256:c6aae5e9db4ad74b7e419aa9e2430b1b8fddd58b27c2ba16f94f34f8fa78c858 size: 1372</kc>
+</pre>
+</li>
+<li>PULL an image
+<pre>
+<ks>docker pull [OPTIONS] NAME[:TAG|@DIGEST]</ks>
+ 
+docker pull  natbodocker/citest:1.0
+</pre>
+</li>
+
+<li></li>
+</ol>
+
+<h3>Create and register an image using Gradle</h3>
+https://tomgregory.com/automating-docker-builds-with-gradle/
+<pre>
+java -jar springbootify.jar
+http://localhost:8080/doit
+</pre>
+https://github.com/palantir/gradle-docker<br/>
+https://plugins.gradle.org/plugin/com.palantir.docker
+
+<pre>
+ /*
+ Gradle plugins for working with Docker containers
+ */
+plugins {
+    id "com.palantir.docker" version "0.25.0"
+	id "com.palantir.docker-run" version "0.25.0"
+}
+
+version '0.1.0'
+
+/*
+specify a configuration for the com.palantir.docker plugin to build the image
+*/
+
+docker {
+     name "${project.name}:${project.version}"
+     files 'springbootify.jar'
+}
+
+//gradlew docker 	builds the image
+
+/*
+A specific configuration for running the container
+configures the plugin to create a container with the given name, 
+using an image with the same name we configured in the docker configuration block
+
+connecting to port 8080 on the container as this is what our application uses, 
+and exposing that on the host also on port 8080.
+
+It’s useful to include the clean true property so that when you stop the container 
+it gets automatically removed as well.
+*/
+dockerRun {
+    name "${project.name}"
+    image "${project.name}:${project.version}"
+    ports '8080:8080'
+    clean true
+}
+
+//gradlew dockerRun		run the container
+//gradlew dockerStop	stop the application
+
+//gradlew build docker  build your application, generate a jar file, build your image
+
+/*
+Go to Docker Hub - Repositories and create a private repository called gradle-docker-example
+Docker’s mechanism to push an image to a central repository involves 
+first tagging the image with the repository name, then pushing it. 
+*/
+docker {
+    name "${project.name}:${project.version}"
+    files 'springbootify.jar'
+    tag 'DockerHub', "natbodocker/gradle-docker-example:${project.version}"
+}
+/*
+the DockerHub string we put in the tag configuration is used to dynamically generate 
+the tasks dockerTagDockerHub and dockerPushDockerHub.
+Run gradlew tasks
+*/
+//gradlew dockerTagDockerHub   		tags the image
+//AUTHENTICATE docker login
+//gradlew dockerPushDockerHub		Docker pushes are incremental.
+
+</pre>
+<ol>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+<h3>Create and register an image using GitHub Actions</h3>
 
 <!--
 You can create a separate project for your task class. 
