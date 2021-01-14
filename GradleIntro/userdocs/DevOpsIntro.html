@@ -452,7 +452,7 @@ https://www.youtube.com/watch?v=hDxIdPxKt5w
 https://www.youtube.com/watch?v=N_bMCff8q6A			**
 
 GITHUB actions
-https://www.youtube.com/watch?v=R8_veQiYBjI&t=17s   **
+https://www.youtube.com/watch?v=R8_veQiYBjI&t=17s   ***
 
 GRADLE
 https://www.youtube.com/watch?v=kONQCIAcWeI
@@ -464,11 +464,20 @@ https://www.youtube.com/watch?v=WmcdMiyqfZs
 
 DOCKER
 https://www.youtube.com/watch?v=3c-iBn73dDE
+
+DOCKER - DOCKER Compose	** (general, no yaml explaination)
+https://www.bing.com/videos/search?q=docker+compose+video&docid=608050950300107607&mid=E2BF30F99FEA101525DEE2BF30F99FEA101525DE&view=detail&FORM=VIRE
+https://www.bing.com/videos/search?q=docker+compose+video&docid=608046895837873695&mid=4CF92B5BD37B5846E8FA4CF92B5BD37B5846E8FA&view=detail&FORM=VIRE
+(Flask, Python)
+
+
 KUBERNETES	 
 https://www.youtube.com/watch?v=3c-iBn73dDE
 https://www.youtube.com/watch?v=X48VuDVv0do
+
 AWS container services
 https://www.youtube.com/watch?v=AYAh6YDXuho
+
 ISTIO
 https://www.youtube.com/watch?v=16fgzklcF7Y
 
@@ -477,6 +486,7 @@ https://www.youtube.com/watch?v=16fgzklcF7Y
 MICROSERVICES
 https://www.youtube.com/watch?v=BnknNTN8icw
 https://www.youtube.com/watch?v=xzJO03LpapI
+
 SPRING BOOT
 https://www.youtube.com/watch?v=27dPN4aMz30
 
@@ -486,12 +496,28 @@ https://www.youtube.com/watch?v=7KUdmFyefSA
 DOCKERHUB
 https://hub.docker.com/					SIGN IN
 https://docs.docker.com/docker-hub/		DOCS
- 
+
+----------------------------------------------------------
+Nana Janashia video
+Developing with Docker                     ►  <a href="https://youtu.be/6YisG2GcXaw" target="web">https://youtu.be/6YisG2GcXaw</a>  Js + MOngo
+Docker Compose                             ►  <a href="https://youtu.be/MVIcrmeV_6c" target="web">https://youtu.be/MVIcrmeV_6c</a>  MongoDb + MongoExpress
+Dockerfile                                 ►  <a href="https://youtu.be/WmcdMiyqfZs" target="web">https://youtu.be/WmcdMiyqfZs </a> 
+Private Repository                         ►  <a href="https://youtu.be/vWSRWpOPHws" target="web">https://youtu.be/vWSRWpOPHws </a>
+Deploy your containerized Application      ►  <a href="https://youtu.be/ZowjOhpAcIc" target="web">https://youtu.be/ZowjOhpAcIc </a> 
+Docker volumes                             ►  <a href="https://www.youtube.com/watch?v=p2PH_YPCsis" target="web">https://www.youtube.com/watch?v=p2PH_YPCsis</a> 
+
+You can check out my videos for the Pre-Requisites:
+ ✅ Basic Docker Concepts: https://youtu.be/GeqaTjKMWeY
+ ✅ Basic Commands: https://youtu.be/xGn7cFR3ARU
 </pre> 
+
+
+
 
 <h3>Create an image using Docker commands</h3> 
 <pre>
-docker build -t xxx .
+docker build -t xxx:1.2 .
+docker run -ti --rm xxx:1.2  /bin/bash
 </pre>
 
 <h3>Create and register an image using Docker commands</h3>
@@ -526,11 +552,12 @@ type docker_password.txt | docker login --username natbodocker --password-stdin
 <ks>docker build -t <your_username>/my-private-repo .</ks>
 
 docker build -t natbodocker/citest:1.0 .
+<kc>The dot "." at the end of the command denotes location of the Dockerfile.</kc>
 
 <kc>TEST the image locally</kc>
 docker run natbodocker/citest	
 docker run -it image  /bin/bash	
-docker cp ./demo0.pl 09d3ce1e3ea0:/app/bin/demo0.pl
+docker cp ./demo0.pl 09d3ce1e3ea0:/app/bin/demo0.pl	
 </pre>
 
 <li>
@@ -633,12 +660,38 @@ Run gradlew tasks
 
 </pre>
 <ol>
-<li></li>
+<li><pre>
+<k>docker run -it hub.docker.com/natbodocker/cidemo:1.1 /bin/bash</k>
+<ks>bash-4.2# ls</ks>
+app  app.bat  demo0.pl  sysRules.pl 
+<ks>bash-4.2# ./app</ks>
+Hello World with CI!
+UtilsInKotlin | loadRules userDirPath= /app/bin
+UtilsInKotlin | loadRules load sysRules.pl= yes.
+UtilsInKotlin | loadRules load demo0.pl= yes.
+App numOfActors=2
+numOfActors = 2 
+
+
+docker run --rm natbodocker/cidemoapp:1.2
+docker run -it --rm natbodocker/cidemoapp:1.2 /bin/bash
+
+</pre>
+
+</li>
 <li></li>
 <li></li>
 <li></li>
 <li></li>
 </ol>
+
+<h3>Using docker compose</h3>
+<pre>
+docker netwrok ls
+docker-compose -f app.yaml up -d
+
+docker-compose -f app.yaml down
+</pre>
 
 <h3>Create and register an image using GitHub Actions</h3>
 
