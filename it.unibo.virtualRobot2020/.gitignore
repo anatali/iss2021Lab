@@ -1,0 +1,10 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+#node
+node/WEnv/server/node_modules/
+node/WEnv/server/package-lock.json
+

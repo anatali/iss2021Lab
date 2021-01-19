@@ -123,7 +123,7 @@ h3 {
     font-size: 100%;
 }
 h4 {
-    background-color: #C0F0E0;
+    background-color: #ccffcc;
     font-size: 100%;
 	width: 95%;
 	border-radius: 5px;
@@ -256,7 +256,7 @@ function myFunction() {
     
 <head>
    
-<title>DisiBuilderPlugin</title></head>
+<title>Using_virtual_robot</title></head>
     
 <body>
 <div id="top">
@@ -266,22 +266,61 @@ function myFunction() {
 
 <div class="body"> 
 <h2>Introduction</h2>
-In this work, we create (with Kotlin) a custom Gradle plugin  that provides a set of actor-creation tasks.<br/><br/>
-Our work starts with the usage of option 4 of the <tt>gradle init</tt>  command within an empty directory.
-(The original result of the command is reported in the project <a href="../../provaPlugin" target="web">C:/.../iss2021Lab/provaPlugin</a>).
-<br/><br/>
-In our case, we procede as follows:
-<h3>Startup</h3>
-<ol>
-<li>Introduce a new (empty) directory named <ks>C:/.../iss2021Lab/it.unibo.disiBuilderPlugin</ks>. 
-The directory <tt>iss2021Lab</tt> must include the sub-directory <a href="../../uniboRepos/maven-repo" target="web"><k>uniboRepos/maven-repo</k></a>  
-and the sub-directory <a href="../../unibolibs" target="web"><k>unibolibs</k></a> 
-(both copied from <a href="https://github.com/anatali/iss2021Lab" target="web"> https://github.com/anatali/iss2021Lab</a>).<br/>
-Within this new directory,  execute the command:
+ 
+<h2>The components</h2>
+
+<h3>The <a href="../../it.unibo.virtualRobot2020" target="web"> Virtual robot</a> project</h3>
+
 <pre>
-gradle init  4  3  2 - -
+gradle build                            <kc>Create the distribution</kc>
+docker build -t virtualrobotdisi:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualRobot2020/Dockerfile" target="web">Dockerfile</a></kc>
+
+<kc>Tag the image</kc>
+docker tag virtualrobotdisi:1.0 natbodocker/virtualrobotdisi:1.0
+
+<kc>Login in DockerHub (get the password from a private file)</kc>
+type docker_password.txt | docker login --username natbodocker --password-stdin
+
+<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
+docker push natbodocker/virtualrobotdisi:1.0
 </pre>
 
+<h3>The <a href="../../it.unibo.virtualrobotclient" target="web">virtualrobotclient</a> project</h3>
+
+<pre>
+gradlew build                            <kc>Create the distribution</kc>
+docker build -t usingvirtualrobot:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotclient/Dockerfile" target="web">Dockerfile</a></kc>
+
+<kc>Tag the image</kc>
+docker tag usingvirtualrobot:1.0 natbodocker/usingvirtualrobot:1.0
+
+<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
+docker push natbodocker/usingvirtualrobot:1.0
+</pre>
+
+<h3>The <a href="../docker-compose.yaml" target="web">docker-compose.yaml</a> </h3>
+<div class="remark">The <a href="../docker-compose.yaml" target="web">docker-compose.yaml</a> defines two services:
+<ul>
+<li><k>wenv</k>: </li>
+<li><k>vrobotclient</k>;</li>
+</ul>
+</div>
+<pre>
+<h4>Run all</h4>
+docker-compose up -d	                    <kc>vrobotclient is not able to connect (we should retry ...) </kc>
+docker-compose run --rm vrobotclient		<kc>starts also wenv if there is dependency</kc>
+
+<h4>Run single services</h4>
+docker-compose run -d --service-ports wenv   <kc>starts wenv </kc>
+docker-compose run --rm vrobotclient		 <kc>attempts to re-create wenv if there is dependency</kc>
+docker-compose run --rm vrobotclient		 <kc>does not connect if there is NO dependency</kc>
+
+
+docker run --rm docker.io/natbodocker/usingvirtualrobot:1.0		<kc>does not connect</kc>
+
+</pre>
+
+ 
 
 <table style="width:98%">
 <tbody>	

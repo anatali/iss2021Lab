@@ -1,13 +1,12 @@
 ##FROM java:8
 FROM openjdk:12.0.2
 
-ADD ./build/distributions/app-1.0.tar  /
+ADD ./app/build/distributions/app-1.0.tar  /
 
 WORKDIR /app-1.0/bin
 
 ## COPY ./*.pl ./
 ## RUN ls
-
 
 CMD ["bash", "app"]
 

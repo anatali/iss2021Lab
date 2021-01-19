@@ -19,13 +19,20 @@ public class UsingConnTcp {
 		 	clientSocket = new Socket(localHostName, port);
 		 	outToServer  = new PrintWriter(clientSocket.getOutputStream());
 		}catch (Exception e1) {
-			try {
-				println("initClientConn attempt to connect in container "  );
-				clientSocket = new Socket(containerHostName, port);
-				outToServer  = new PrintWriter(clientSocket.getOutputStream());
-			}catch (Exception e) {
-				println("initClientConn ERROR: " + e.getMessage() );
-			}
+			//Perhaps we are in a container in which the virtualrobot is a service named containerHostName
+			for( int i=1; i<=5; i++ ) {
+				//we try several times, since the service wenv must be ready
+				//See https://docs.docker.com/compose/startup-order/
+				try {
+						println("initClientConn attempt to connect in container ");
+						clientSocket = new Socket(containerHostName, port);
+						outToServer  = new PrintWriter(clientSocket.getOutputStream());
+						break;
+				}catch (Exception e) {
+					println("initClientConn RETRY since ERROR: " + e.getMessage() );
+					Thread.sleep(1000);
+				}
+			}//for
 		}
 	}
 

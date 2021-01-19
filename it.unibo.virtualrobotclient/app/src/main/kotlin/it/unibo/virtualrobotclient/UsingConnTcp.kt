@@ -28,12 +28,16 @@ class UsingConnTcp {
             clientSocket = Socket(localHostName, port)
             outToServer = PrintWriter(clientSocket!!.getOutputStream())
         } catch (e1: Exception) {
-            try {
-                println("initClientConn attempt to connect in container ")
-                clientSocket = Socket(containerHostName, port)
-                outToServer = PrintWriter(clientSocket!!.getOutputStream())
-            } catch (e: Exception) {
-                println("initClientConn ERROR: " + e.message)
+            for (i in 1..10) { //See https://docs.docker.com/compose/startup-order/
+                try {
+                    println("initClientConn attempt $i to connect in container ")
+                    clientSocket = Socket(containerHostName, port)
+                    outToServer  = PrintWriter(clientSocket!!.getOutputStream())
+                    break
+                } catch (e: Exception) {
+                    println("initClientConn RETRY since ERROR ${e.message } " )
+                    Thread.sleep(1000)
+                }
             }
         }
     }
