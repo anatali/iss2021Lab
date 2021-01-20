@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class UsingConnTcp {
-	private static String localHostName    = "localhost";
+	private static String localHostName    = "192.168.1.7"; //"localhost";
 	private static String containerHostName= "wenv";
 	private static int port                = 8999;
 	private static String sep              =";";
@@ -76,12 +76,13 @@ public class UsingConnTcp {
 			Thread.sleep(1000);
 			mbotBackward();
 			Thread.sleep(1000);
-			/*
+
 			mbotLeft() ;
 			Thread.sleep(1000);
-			mbotForward();
-			Thread.sleep(1000);
 			mbotRight(  ) ;
+			Thread.sleep(1000);
+			/*
+			mbotForward();
 			Thread.sleep(1000);
 			mbotForward();
 			Thread.sleep(1000);

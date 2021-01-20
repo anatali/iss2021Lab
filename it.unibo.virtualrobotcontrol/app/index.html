@@ -1,0 +1,106 @@
+<html lang="en">
+<style>
+    .container {
+        margin: 40px auto;
+        width: 80%;
+    }
+    .button {
+        width: 160px;
+        height: 45px;
+        border-radius: 6px;
+        font-size: 15px;
+        margin-top: 20px;
+    }
+    img {
+        width: 328px;
+        height: 287px;
+        display: block;
+        margin-bottom: 20px;
+    }
+    hr {
+        width: 400px;
+        margin-left: 0;
+    }
+    h3 {
+        display: inline-block;
+    }
+    #container {
+        display: none;
+    }
+    #container-edit {
+        display: none;
+    }
+    #container-edit input {
+        height: 32px;
+    }
+    #container-edit hr {
+        margin: 25px 0;
+    }
+    #container-edit input {
+        width: 195px;
+        font-size: 15px;
+    }
+</style>
+
+<body>
+
+ <div style="background-color: #D2B4DE">
+  <h2>Robot Console</h2>
+  <center>
+   <table >
+    <tr>
+     <td></td>
+     <td></td>
+     <td align="center">
+      <form action="/w" method="post">
+       <input type="submit" style="font-size:30px;" value="forward" >
+      </form>
+     </td>
+     <td></td>
+     <td></td>
+    </tr>
+    <tr>
+     <td align="center">
+      <form action="/z" method="post">
+       <input type="submit" style="font-size:30px;"  value="z" >
+      </form>
+     </td>
+     <td align="center">
+      <form action="/l" method="post">
+       <input type="submit" style="font-size:30px;"  value="left" >
+      </form>
+     </td>
+     <td align="center">
+      <form action="/h" method="post">
+       <font size="3" color="red">
+        <input type="submit" style="font-size:40px;"  value="stop"  >
+       </font>
+      </form>
+     </td>
+     <td align="center">
+      <form action="/r" method="post">
+       <input type="submit" style="font-size:30px;" value="right"  >
+      </form>
+     </td>
+     <td align="center">
+      <form action="/x" method="post">
+       <input type="submit" style="font-size:30px;"  value="x" >
+      </form>
+     </td>
+    </tr>
+    <tr>
+     <td></td>
+     <td></td>
+     <td align="center">
+      <form action="/s" method="post">
+       <input type="submit" style="font-size:30px;"  value="backward"  >
+      </form>
+     </td>
+     <td></td>
+     <td></td>
+    </tr>
+   </table>
+  </center>
+
+</body>
+</html>

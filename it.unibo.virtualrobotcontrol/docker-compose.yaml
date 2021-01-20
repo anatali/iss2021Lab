@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vrobotcontrol:
+    image: docker.io/natbodocker/virtualrobotcontrol:1.0
+    ## image: virtualrobotcontrol:1.0
+    # build: ./
+    ports:
+    - 3000:3000
