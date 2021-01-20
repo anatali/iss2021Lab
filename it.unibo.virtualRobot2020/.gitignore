@@ -8,3 +8,4 @@ build
 node/WEnv/server/node_modules/
 node/WEnv/server/package-lock.json
 
+docker_password.txt

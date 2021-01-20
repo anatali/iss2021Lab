@@ -322,7 +322,6 @@ docker run --rm docker.io/natbodocker/usingvirtualrobot:1.0		<kc>does not connec
 
 <h3>The <a href="../../it.unibo.virtualrobotcontrol" target="web">virtualrobotcontrol</a> project</h3>
 <pre>
-gradlew build                              <kc>Create the distribution</kc>
 docker build -t virtualrobotcontrol:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotcontrol/Dockerfile" target="web">Dockerfile</a></kc>
 
 docker run -ti -p 3000:3000 --rm  virtualrobotcontrol:1.0 /bin/sh	<kc>local test</kc>

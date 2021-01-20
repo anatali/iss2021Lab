@@ -30,11 +30,13 @@ function handlePostMove( cmd, msg, req, res, next ){
         //jsonObject = JSON.stringify(payload);
         msg        = sep+payload+sep;
 
-const clients = net.connect(8999,"192.168.1.7", () => {
+const clients = net.connect(8999,"wenv", () => {
   // 'connect' listener
   console.log('connected to server to send:' + msg);
   clients.write(msg+'\r\n');
 });
+
+
 clients.on('data', (data) => {
   console.log("from wenv server: "+data.toString());
   //clients.end();
