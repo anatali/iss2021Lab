@@ -1,4 +1,9 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
+<title>Virtualrobot Controller</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="teastyle.css">
+
 <style>
     .container {
         margin: 40px auto;
@@ -41,6 +46,15 @@
         font-size: 15px;
     }
 </style>
+<script src="server.js"></script>
+<script>
+function sendTheMove(move){
+	console.log("sendTheMove " + move);
+	alert("sendTheMove " + move);
+	forward();
+    //stompClient.send("/app/move", {}, JSON.stringify({'name': move }));
+}
+</script>
 
 <body>
 
@@ -101,6 +115,26 @@
     </tr>
    </table>
   </center>
+
+  <div class="w3-half">
+   <h5>Controllo simulazione</h5>
+   </br>
+   <div class="grid-container">
+    <div class="grid-item w3-blue-gray w3-button w3-round-small hided" onclick="sendTheMove('p')">p</div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small" onclick="sendTheMove('stepAhead')">Step Ahead
+     <i class="fa fa-arrow-up w3-center w3-large"></i></div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small hided" onclick="sendTheMove('h')">h</div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small" onclick="sendTheMove('turnLeft')"><i
+            class="fa fa-arrow-left w3-center w3-large"></i> Turn Left</div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small" onclick="sendTheMove('returnHome')"><i
+            class="fa fa-home w3-center w3-large"></i> Return Home</div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small" onclick="sendTheMove('turnRight')">Turn Right
+     <i class="fa fa-arrow-right w3-center w3-large"></i></div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small hided" onclick="sendTheMove('z')">z</div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small hided"></div>
+    <div class="grid-item w3-blue-gray w3-button w3-round-small hided" onclick="sendTheMove('x')">x</div>
+   </div>
+  </div>
 
 </body>
 </html>

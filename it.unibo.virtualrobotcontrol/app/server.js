@@ -26,16 +26,20 @@ app.get('/profile-picture', function (req, res) {
 
 function handlePostMove( cmd, msg, req, res, next ){
         //result = "Web server done: " + cmd;
-        payload    =  "{ \"type\": \"" + cmd + "\", \"arg\": 800 }";
+        forward(cmd);
+}
+
+
+function forward( cmd ){
+    payload    =  "{ \"type\": \"" + cmd + "\", \"arg\": 800 }";
         //jsonObject = JSON.stringify(payload);
-        msg        = sep+payload+sep;
-
-const clients = net.connect(8999,"wenv", () => {
-  // 'connect' listener
-  console.log('connected to server to send:' + msg);
-  clients.write(msg+'\r\n');
-});
-
+    msg        = sep+payload+sep;
+    const clients = net.connect(8999,"wenv", () => {
+      // 'connect' listener
+      console.log('connected to server to send:' + msg);
+      clients.write(msg+'\r\n');
+    })
+}
 
 clients.on('data', (data) => {
   console.log("from wenv server: "+data.toString());
@@ -64,7 +68,7 @@ axios
 
 */
 
-}
+
 
 app.post("/w", function(req, res,next) { handlePostMove("moveForward","moving ahead",   req,res,next); });
 app.post("/s", function(req, res,next) { handlePostMove("moveBackward","moving back",   req,res,next); });

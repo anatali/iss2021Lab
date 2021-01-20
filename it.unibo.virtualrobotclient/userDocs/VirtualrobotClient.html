@@ -269,6 +269,12 @@ function myFunction() {
  
 <h2>The components</h2>
 
+<div class="remark">
+<kc>Login in DockerHub (get the password from a private file)</kc>
+<pre>
+type docker_password.txt | docker login --username natbodocker --password-stdin
+</pre>
+</div>
 <h3>The <a href="../../it.unibo.virtualRobot2020" target="web"> Virtual robot</a> project</h3>
 
 <pre>
@@ -277,9 +283,6 @@ docker build -t virtualrobotdisi:1.0 .  <kc>Create the image using the <a href="
 
 <kc>Tag the image</kc>
 docker tag virtualrobotdisi:1.0 natbodocker/virtualrobotdisi:1.0
-
-<kc>Login in DockerHub (get the password from a private file)</kc>
-type docker_password.txt | docker login --username natbodocker --password-stdin
 
 <kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
 docker push natbodocker/virtualrobotdisi:1.0
@@ -314,7 +317,6 @@ docker-compose run --rm vrobotclient		<kc>starts also wenv if there is dependenc
 docker-compose run -d --service-ports wenv   <kc>starts wenv </kc>
 docker-compose run --rm vrobotclient		 <kc>attempts to re-create wenv if there is dependency</kc>
 docker-compose run --rm vrobotclient		 <kc>does not connect if there is NO dependency</kc>
-
 
 docker run --rm docker.io/natbodocker/usingvirtualrobot:1.0		<kc>does not connect</kc>
 </pre>

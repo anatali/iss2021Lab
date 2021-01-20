@@ -9,6 +9,10 @@ services:
     image: docker.io/natbodocker/usingvirtualrobot:1.0
     depends_on:
       - wenv
+  vrobotcontrol:
+    image: docker.io/natbodocker/virtualrobotcontrol:1.0
+    ports:
+      - 3000:3000
 
 ## -------------------------------------------------------------
 ## TODO See https://docs.docker.com/compose/startup-order/
