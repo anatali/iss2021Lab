@@ -26,11 +26,9 @@ function forward( cmd, host="localhost" ){
     });
 }//forward
 
-
-
 //SIMULA UNA FORM che invia comandi POST
 function sendRequestData( params, method) {
-    console.log("sendRequestData " + params);
+    console.log("sendRequestData in jscode/utils " + params);
     method = method || "post"; // il metodo POST usato di default
     //console.log(" sendRequestData  params=" + params + " method=" + method);
     var form = document.createElement("form");
@@ -50,8 +48,8 @@ function sendRequestData( params, method) {
 }
 
 function sendTheMove(move){
-	console.log("sendTheMove in utils " + move);
-	forward( move );
+	console.log("sendTheMove in jscode/utils " + move);
+	forward( move );    //ERROR: no-net
     //stompClient.send("/app/move", {}, JSON.stringify({'name': move }));
 }
 

@@ -6,25 +6,31 @@ $(document).ready(function(){
 
 
 $(function () {
-     $("form").on('submit', function (e) {
-         e.preventDefault();
+//alert("????");
+     $("form").on('submit', function (event) {
+     console.log( event  )
+         event.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
+    $( "#connect" ).click(function() { alert("connect"); connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
 
 //USED BY SOCKET.IO-BASED GUI
+/*
     $( "#h" ).click(function() {  sendTheMove("h") });
     $( "#w" ).click(function() {  sendTheMove("w") });
     $( "#s" ).click(function() {  sendTheMove("s") });
     $( "#r" ).click(function() {  sendTheMove("r") });
-    $( "#l" ).click(function() {  alert("l");sendTheMove("l") });
+    $( "#l" ).click(function() {  sendTheMove("l") });
     $( "#x" ).click(function() {  sendTheMove("x") });
     $( "#z" ).click(function() {  sendTheMove("z") });
     $( "#p" ).click(function() {  sendTheMove("p") });
-
+*/
     //$( "#rr" ).click(function() { console.log("submit rr"); redirectPost("r") });
     //$( "#rrjo" ).click(function() { console.log("submit rr"); jqueryPost("r") });
+
+    $( "#r" ).click(function() {  sendRequestData("r") });
+    $( "#l" ).click(function() {  sendRequestData("l") });
 
 //USED BY POST-BASED GUI
     $( "#ww" ).click(function() { sendRequestData( "w") });
@@ -41,5 +47,6 @@ $(function () {
     $( "#stop" ).click(function()  { sendRequestData( "h") });
 
 	$( "#update" ).click(function() { sendUpdateRequest(  ) });
+
 
 });

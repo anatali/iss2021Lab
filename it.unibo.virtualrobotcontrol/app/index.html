@@ -13,13 +13,8 @@
 
  <script src="https://cdn.jsdelivr.net/webjars/org.webjars/jquery/2.1.0/jquery.js"></script>
  <script type="text/javascript" src="jqutils.js"></script>
- <!-- Your JavaScript file must be included below the jQuery library in the document or it will not work. -->
-  <script type="text/javascript" src="utils.js"></script>
-
-
-
-
-
+ <!--Your JavaScript file must be included below the jQuery library in the document or it will not work. -->
+ <script type="text/javascript" src="utils.js"></script>
 
  <script>
     function myIp() {
@@ -39,80 +34,84 @@
  enabled. Please enable Javascript and reload this page!</h2></noscript>
 
 <p>My server works on <span id="myIp"></span> and  I'm connected to it via <tt>socket.io</tt>.<br/></p>
-
+<h2>Robot Console</h2>
 
  <div style="background-color: #D2B4DE">
-  <h2>Robot Console</h2>
+
+  <h5>Using HTML-form with POST</h5>
+  <hr/>
   <center>
    <table >
     <tr>
      <td></td>
      <td></td>
      <td align="center">
-      <form action="/w" method="post">
-       <input type="submit" style="font-size:30px;" value="forward" >
-      </form>
+      <form action="/w" method="post"><input type="submit" style="font-size:30px;" value="forward" ></form>
      </td>
      <td></td>
      <td></td>
     </tr>
     <tr>
      <td align="center">
-      <form action="/z" method="post">
-       <input type="submit" style="font-size:30px;"  value="z" >
-      </form>
+      <form action="/z" method="post"><input type="submit" style="font-size:30px;"  value="z" ></form>
      </td>
      <td align="center">
-      <form action="/l" method="post">
-       <input type="submit" style="font-size:30px;"  value="left" >
+      <form method="post"> <!--  <input type="submit" style="font-size:30px;"  value="left" ></form> -->
+      <button id="l" class="btn btn-default" type="submit">left</button>
       </form>
      </td>
      <td align="center">
       <form action="/h" method="post">
-       <font size="3" color="red">
-        <input type="submit" style="font-size:40px;"  value="stop"  >
-       </font>
+       <font size="3" color="red"><input type="submit" style="font-size:40px;"  value="stop"  ></font>
       </form>
      </td>
      <td align="center">
-      <form action="/r" method="post">
-       <input type="submit" style="font-size:30px;" value="right"  >
-      </form>
+      <form action="/server.js" method="post"><input type="submit" style="font-size:30px;" value="right"></form>
      </td>
      <td align="center">
-      <form action="/x" method="post">
-       <input type="submit" style="font-size:30px;"  value="x" >
-      </form>
+      <form action="/x" method="post"><input type="submit" style="font-size:30px;"  value="x" ></form>
      </td>
     </tr>
     <tr>
      <td></td>
      <td></td>
      <td align="center">
-      <form action="/s" method="post">
-       <input type="submit" style="font-size:30px;"  value="backward"  >
-      </form>
+      <form action="/s" method="post"><input type="submit" style="font-size:30px;"  value="backward"  ></form>
      </td>
      <td></td>
      <td></td>
     </tr>
    </table>
   </center>
+ <hr/>
+
+  <h5>Using post with jQuery</h5>
+  <hr/>
+  <center>
+  <table style="width:50%">
+   <tbody>
+   <tr>
+    <td><form class="form-inline"><button id="ll" class="btn btn-default" type="submit">turnLeft</button></form></td>
+    <td><form class="form-inline"><button id="rr" class="btn btn-default" type="submit">turnRight</button></form></td>
+   </tr>
+   </tbody>
+  </table>
+  </center>
+  <hr/>
 
   <h5>Using socket.io</h5>
   <hr/>
+  <center>
   <table style="width:50%">
    <tbody>
-
    <tr>
     <td>
-     <form class="form-inline"><button id="r" class="btn btn-default" type="submit">r</button></form>
+     <form class="form-inline"><button id="rrr" class="btn btn-default" type="submit">r</button></form>
     </td>
     <td>
-     <form class="form-inline"><button id="l" class="btn btn-default" type="submit">l</button></form>
+     <form class="form-inline"><button id="lll" class="btn btn-default" type="submit">l</button></form>
     </td>
    </tr>
-
    <tr>
     <td>
      <form class="form-inline"><button id="p" class="btn btn-default" type="submit">p</button></form>
@@ -121,28 +120,11 @@
      <form class="form-inline"><button id="h" class="btn btn-default" type="submit">h</button></form>
     </td>
    </tr>
-
    </tbody>
   </table>
+  </center>
   <hr/>
 
-  <h5>Using post</h5>
-  <hr/>
-  <table style="width:50%">
-   <tbody>
-
-   <tr>
-    <td>
-     <form class="form-inline"><button id="rr" class="btn btn-default" type="submit">r</button></form>
-    </td>
-    <td>
-     <form class="form-inline"><button id="ll" class="btn btn-default" type="submit">l</button></form>
-    </td>
-   </tr>
-
-   </tbody>
-  </table>
-  <hr/>
 
   <div class="w3-half">
    <h5>Controllo simulazione</h5>
