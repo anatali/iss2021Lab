@@ -301,6 +301,35 @@ docker tag usingvirtualrobot:1.0 natbodocker/usingvirtualrobot:1.0
 docker push natbodocker/usingvirtualrobot:1.0
 </pre>
 
+
+
+
+<h3>The <a href="../../it.unibo.virtualrobotcontrol" target="web">virtualrobotcontrol</a> project</h3>
+<pre>
+docker build -t virtualrobotcontrol:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotcontrol/Dockerfile" target="web">Dockerfile</a></kc>
+
+docker run -ti -p 3000:3000 --rm  virtualrobotcontrol:1.0 /bin/sh	<kc>local test</kc>
+
+
+<kc>Tag the image</kc>
+docker tag virtualrobotcontrol:1.0 natbodocker/virtualrobotcontrol:1.0
+
+<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
+docker push natbodocker/virtualrobotcontrol:1.0
+</pre>
+
+<!--
+<h3>The <a href="../../it.unibo.virtualrobotcontrol/docker-compose.yaml" target="web">docker-compose.yaml</a> </h3>
+<div class="remark">The <a href="../../it.unibo.virtualrobotcontrol/docker-compose.yaml" target="web">docker-compose.yaml</a> defines one servicee:
+<ul>
+<li><k>vrobotcontrol</k>;</li>
+</ul>
+</div>
+<pre>
+</pre>
+-->
+
+
 <h3>The <a href="../docker-compose.yaml" target="web">docker-compose.yaml</a> </h3>
 <div class="remark">The <a href="../docker-compose.yaml" target="web">docker-compose.yaml</a> defines two services:
 <ul>
@@ -319,30 +348,6 @@ docker-compose run --rm vrobotclient		 <kc>attempts to re-create wenv if there i
 docker-compose run --rm vrobotclient		 <kc>does not connect if there is NO dependency</kc>
 
 docker run --rm docker.io/natbodocker/usingvirtualrobot:1.0		<kc>does not connect</kc>
-</pre>
-
-
-<h3>The <a href="../../it.unibo.virtualrobotcontrol" target="web">virtualrobotcontrol</a> project</h3>
-<pre>
-docker build -t virtualrobotcontrol:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotcontrol/Dockerfile" target="web">Dockerfile</a></kc>
-
-docker run -ti -p 3000:3000 --rm  virtualrobotcontrol:1.0 /bin/sh	<kc>local test</kc>
-
-
-<kc>Tag the image</kc>
-docker tag virtualrobotcontrol:1.0 natbodocker/virtualrobotcontrol:1.0
-
-<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
-docker push natbodocker/virtualrobotcontrol:1.0
-</pre>
-
-<h3>The <a href="../../it.unibo.virtualrobotcontrol/docker-compose.yaml" target="web">docker-compose.yaml</a> </h3>
-<div class="remark">The <a href="../../it.unibo.virtualrobotcontrol/docker-compose.yaml" target="web">docker-compose.yaml</a> defines one servicee:
-<ul>
-<li><k>vrobotcontrol</k>;</li>
-</ul>
-</div>
-<pre>
 </pre>
 
 <table style="width:98%">

@@ -3,10 +3,7 @@ let path       = require('path');
 let fs         = require('fs');
 let bodyParser = require('body-parser');
 let app        = express();
-//const axios    = require('axios')
-const net      = require('net');
-
-const sep      = ";"
+let utils      = require('./utils');
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -14,9 +11,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-	console.log("app get " + __dirname );
+	console.log("server get " + __dirname );
     res.sendFile(path.join(__dirname, "index.html"));
   });
+
+app.get('/info', function (req, res) {
+  res.send('This is the frontend-Unibo!')
+});
 
 app.get('/profile-picture', function (req, res) {
   let img = fs.readFileSync(path.join(__dirname, "images/profile-1.jpg"));
@@ -24,33 +25,9 @@ app.get('/profile-picture', function (req, res) {
   res.end(img, 'binary');
 });
 
-function handlePostMove( cmd, msg, req, res, next ){
-        //result = "Web server done: " + cmd;
-        forward(cmd);
-}
 
-
-function forward( cmd ){
-    payload    =  "{ \"type\": \"" + cmd + "\", \"arg\": 800 }";
-        //jsonObject = JSON.stringify(payload);
-    msg        = sep+payload+sep;
-    const clients = net.connect(8999,"wenv", () => {
-      // 'connect' listener
-      console.log('connected to server to send:' + msg);
-      clients.write(msg+'\r\n');
-    })
-}
-
-clients.on('data', (data) => {
-  console.log("from wenv server: "+data.toString());
-  //clients.end();
-});
-clients.on('end', () => {
-  console.log('disconnected from server');
-});
-
-
-
+//app.use(express.static(path.join(__dirname, './node_modules/net')));
+app.use(express.static(path.join(__dirname, './jscode')));
 /*
 //useful for HTTP requests
 axios
@@ -68,10 +45,14 @@ axios
 
 */
 
+function handlePostMove( cmd, msg, req, res, next ){
+        //result = "Web server done: " + cmd;
+        utils.forward(cmd, "localhost");
+}
 
 
-app.post("/w", function(req, res,next) { handlePostMove("moveForward","moving ahead",   req,res,next); });
-app.post("/s", function(req, res,next) { handlePostMove("moveBackward","moving back",   req,res,next); });
+app.post("/w", function(req, res,next) { handlePostMove("moveForward","moving ahead", req,res,next); });
+app.post("/s", function(req, res,next) { handlePostMove("moveBackward","moving back", req,res,next); });
 app.post("/r", function(req, res,next) { handlePostMove("turnRight","moving rigth",   req,res,next); });
 app.post("/l", function(req, res,next) { handlePostMove("turnLeft","moving left",     req,res,next); });
 app.post("/h", function(req, res,next) { handlePostMove("alarm","stop",               req,res,next); });

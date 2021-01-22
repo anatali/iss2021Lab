@@ -1,62 +1,45 @@
 <!DOCTYPE html>
 <html>
-<title>Virtualrobot Controller</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="teastyle.css">
+<head>
+ <meta charset="utf-8">
+ <title>Virtualrobot Controller</title>
 
-<style>
-    .container {
-        margin: 40px auto;
-        width: 80%;
-    }
-    .button {
-        width: 160px;
-        height: 45px;
-        border-radius: 6px;
-        font-size: 15px;
-        margin-top: 20px;
-    }
-    img {
-        width: 328px;
-        height: 287px;
-        display: block;
-        margin-bottom: 20px;
-    }
-    hr {
-        width: 400px;
-        margin-left: 0;
-    }
-    h3 {
-        display: inline-block;
-    }
-    #container {
-        display: none;
-    }
-    #container-edit {
-        display: none;
-    }
-    #container-edit input {
-        height: 32px;
-    }
-    #container-edit hr {
-        margin: 25px 0;
-    }
-    #container-edit input {
-        width: 195px;
-        font-size: 15px;
-    }
-</style>
-<script src="server.js"></script>
-<script>
-function sendTheMove(move){
-	console.log("sendTheMove " + move);
-	alert("sendTheMove " + move);
-	forward();
-    //stompClient.send("/app/move", {}, JSON.stringify({'name': move }));
-}
-</script>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="teastyle.css">
+ <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+ <script type="text/javascript" src="/net"></script>
+<script src="https://cdn.jsdelivr.net/webjars/org.webjars/stomp-websocket/stomp.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>  -->
 
-<body>
+ <script src="https://cdn.jsdelivr.net/webjars/org.webjars/jquery/2.1.0/jquery.js"></script>
+ <script type="text/javascript" src="jqutils.js"></script>
+ <!-- Your JavaScript file must be included below the jQuery library in the document or it will not work. -->
+  <script type="text/javascript" src="utils.js"></script>
+
+
+
+
+
+
+ <script>
+    function myIp() {
+      var ip = location.host;
+      document.getElementById("myIp").innerHTML = ip;
+      //document.getElementById("raspIp").innerHTML = "192.168.1.5";
+    }
+  </script>
+
+
+</head>
+
+<body onload="myIp()">
+
+<noscript><h2 style="color: #ff0000">
+ Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+ enabled. Please enable Javascript and reload this page!</h2></noscript>
+
+<p>My server works on <span id="myIp"></span> and  I'm connected to it via <tt>socket.io</tt>.<br/></p>
+
 
  <div style="background-color: #D2B4DE">
   <h2>Robot Console</h2>
@@ -115,6 +98,51 @@ function sendTheMove(move){
     </tr>
    </table>
   </center>
+
+  <h5>Using socket.io</h5>
+  <hr/>
+  <table style="width:50%">
+   <tbody>
+
+   <tr>
+    <td>
+     <form class="form-inline"><button id="r" class="btn btn-default" type="submit">r</button></form>
+    </td>
+    <td>
+     <form class="form-inline"><button id="l" class="btn btn-default" type="submit">l</button></form>
+    </td>
+   </tr>
+
+   <tr>
+    <td>
+     <form class="form-inline"><button id="p" class="btn btn-default" type="submit">p</button></form>
+    </td>
+    <td>
+     <form class="form-inline"><button id="h" class="btn btn-default" type="submit">h</button></form>
+    </td>
+   </tr>
+
+   </tbody>
+  </table>
+  <hr/>
+
+  <h5>Using post</h5>
+  <hr/>
+  <table style="width:50%">
+   <tbody>
+
+   <tr>
+    <td>
+     <form class="form-inline"><button id="rr" class="btn btn-default" type="submit">r</button></form>
+    </td>
+    <td>
+     <form class="form-inline"><button id="ll" class="btn btn-default" type="submit">l</button></form>
+    </td>
+   </tr>
+
+   </tbody>
+  </table>
+  <hr/>
 
   <div class="w3-half">
    <h5>Controllo simulazione</h5>
