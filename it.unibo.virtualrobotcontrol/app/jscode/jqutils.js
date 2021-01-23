@@ -2,37 +2,15 @@ $(document).ready(function(){
   $("p").click(function(){
     $(this).hide();
   });
-});
-
-
-$(function () {
-//alert("????");
-     $("form").on('submit', function (event) {
-     console.log( event  )
-         event.preventDefault();
-    });
-    $( "#connect" ).click(function() { alert("connect"); connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
 
 //USED BY SOCKET.IO-BASED GUI
-/*
-    $( "#h" ).click(function() {  sendTheMove("h") });
-    $( "#w" ).click(function() {  sendTheMove("w") });
-    $( "#s" ).click(function() {  sendTheMove("s") });
-    $( "#r" ).click(function() {  sendTheMove("r") });
-    $( "#l" ).click(function() {  sendTheMove("l") });
-    $( "#x" ).click(function() {  sendTheMove("x") });
-    $( "#z" ).click(function() {  sendTheMove("z") });
-    $( "#p" ).click(function() {  sendTheMove("p") });
-*/
-    //$( "#rr" ).click(function() { console.log("submit rr"); redirectPost("r") });
-    //$( "#rrjo" ).click(function() { console.log("submit rr"); jqueryPost("r") });
+    $( "#rsocket" ).click(function() {  doTheMove("r") });    //defined in webSocketUtils
+    $( "#lsocket" ).click(function() {  doTheMove("l") });
 
-    $( "#r" ).click(function() {  sendRequestData("r") });
-    $( "#l" ).click(function() {  sendRequestData("l") });
 
-//USED BY POST-BASED GUI
+});
+
+$(function () {
     $( "#ww" ).click(function() { sendRequestData( "w") });
     $( "#ss" ).click(function() { sendRequestData( "s") });
     $( "#rr" ).click(function() { sendRequestData( "r") });
@@ -42,11 +20,7 @@ $(function () {
     $( "#pp" ).click(function() { sendRequestData( "p") });
     $( "#hh" ).click(function() { sendRequestData( "h") });
 
-//USED BY POST-BASED BOUNDARY
-    $( "#start" ).click(function() { sendRequestData( "w") });
-    $( "#stop" ).click(function()  { sendRequestData( "h") });
 
-	$( "#update" ).click(function() { sendUpdateRequest(  ) });
 
 
 });

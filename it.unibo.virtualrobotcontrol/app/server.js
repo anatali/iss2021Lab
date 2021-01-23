@@ -5,6 +5,30 @@ let bodyParser = require('body-parser');
 let app        = express();
 let utils      = require('./serverutils');
 
+/*
+WebSockets
+*/
+const WebSocket = require('ws');
+
+const server    = new WebSocket.Server({ server: app.listen(8085) });
+server.on('connection', socket => {
+  //socket.send('Robot state INIT ...');
+
+  socket.on('message', message => {
+    console.log(`received from a client: ${message}`);
+    if( message=="r" || message=="l" || message=="h" || message=="w" || message=="s" ){
+        //utils.wsforward( message  );
+        //socket.send('Robot state UPDATED after: ' + message);
+            server.clients.forEach(client => {
+              //client.send('Robot state UPDATED after: ' + message);
+              client.send( message );
+            });
+    }
+  });
+
+});
+//-------------------------------------- WebSockets
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -39,8 +63,8 @@ function handlePostMove( cmd, msg, req, res, next ){
 
 app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
 app.post("/s", function(req, res,next)  { handlePostMove("moveBackward","moving back", req,res,next); });
-app.post("/rpost", function(req, res,next) { handlePostMove("turnRight","moving right",   req,res,next); });
-app.post("/l", function(req, res,next) { handlePostMove("turnLeft","moving left",     req,res,next); });
+app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving right",   req,res,next); });
+app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
 
 

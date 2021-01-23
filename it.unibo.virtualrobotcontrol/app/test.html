@@ -1,20 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-$(document).ready(function(){
-  $("p").click(function(){
-    $(this).hide();
-  });
-});
-</script>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <script src="https://cdn.jsdelivr.net/webjars/org.webjars/jquery/2.1.0/jquery.js"></script>
+
+    <style>
+a.test {
+    font-weight: bold;
+}
+</style>
+
 </head>
 <body>
+Goto <a href="http://jquery.com/">jQuery</a>
+<!--
+The jQuery library exposes its methods and properties via two properties of the window object called
+jQuery and $.
+$ is simply an alias for jQuery and it's often employed because it's shorter and faster to write.
+-->
+<script>
+    // Your code goes here.
+    $( document ).ready(function() {
+        //alert("ready");
+        $( "a" ).click(function( event ) {
+            alert( "The link will no longer take you to jquery.com" );
+            event.preventDefault();
+        });
+    });
 
-<p>If you click on me, I will disappear.</p>
-<p>Click me away!</p>
-<p>Click me too!</p>
-
+    </script>
 </body>
 </html>
