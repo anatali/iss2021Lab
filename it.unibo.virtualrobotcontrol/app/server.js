@@ -13,20 +13,19 @@ const WebSocket = require('ws');
 const server    = new WebSocket.Server({ server: app.listen(8085) });
 server.on('connection', socket => {
   //socket.send('Robot state INIT ...');
-
   socket.on('message', message => {
     console.log(`received from a client: ${message}`);
     if( message=="r" || message=="l" || message=="h" || message=="w" || message=="s" ){
-        //utils.wsforward( message  );
-        //socket.send('Robot state UPDATED after: ' + message);
-            server.clients.forEach(client => {
-              //client.send('Robot state UPDATED after: ' + message);
-              client.send( message );
-            });
+        //utils.forward( message  );   //DISCONNECT
+        //rimbalzo del comando al
+        server.clients.forEach(client => {
+            client.send(  message );
+        });
     }
   });
-
 });
+
+
 //-------------------------------------- WebSockets
 
 app.use(bodyParser.urlencoded({
@@ -55,10 +54,20 @@ THE CODE IN THIS DIR CAN be used in index.html
 //app.use(express.static(path.join(__dirname, './node_modules/net')));
 app.use(express.static(path.join(__dirname, './jscode')));
 
+
+function updateRobotState(message){
+    server.clients.forEach(client => {
+        client.send( message );
+    });
+}
 function handlePostMove( cmd, msg, req, res, next ){
     //result = "Web server done: " + cmd;
     console.log( "handlePostMove in server.js "  + cmd )
     utils.forward(cmd, "localhost");
+    updateRobotState(  cmd );
+    //res.sendFile(path.join(__dirname, "index.html"));  //
+    //res.sendStatus(200);
+
 }
 
 app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });

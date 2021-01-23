@@ -18,6 +18,7 @@
  <script type="text/javascript" src="utils.js"></script>
  <!-- <script type="text/javascript" src="stomp.js"></script>
   <script type="text/javascript" src="stompUtils.js"></script> -->
+ <script type="text/javascript" src="webSocketUtils.js"></script>
 
  <script>
     function myIp() {
@@ -106,10 +107,10 @@
    <tbody>
    <tr>
     <td>
-    <button id="rsocket" class="btn btn-default" type="submit">r</button>
+     <button id="lsocket" class="btn btn-default" type="submit">l</button>
     </td>
     <td>
-     <button id="lsocket" class="btn btn-default" type="submit">l</button>
+     <button id="rsocket" class="btn btn-default" type="submit">r</button>
     </td>
    </tr>
    <tr>
@@ -124,14 +125,17 @@
   </table>
   </center>
   <hr/>
+ </div>
+
 
 <h3>DISPLAY AREA</h3>
-<div id="display">
-  <p>Robot state ...</p>
-</div>
+<div style="background-color: #ffff80">
 
+ <hr/>
+  <span id="robotDisplay">Robot state ...</span>
+  <hr/>
+  </div>
 
-  <script type="text/javascript" src="webSocketUtils.js"></script>
 
 </body>
 </html>

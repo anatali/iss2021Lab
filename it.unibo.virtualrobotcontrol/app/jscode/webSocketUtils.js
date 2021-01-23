@@ -15,15 +15,14 @@ socket.addEventListener('message', event => {
   console.log(`Message from server: ${message}`);
   if( message=="r" || message=="l" || message=="h" || message=="w" || message=="s" ){
     sendRequestData( message )
+  }else{
+      //alert( $(document.display) );
+      $(document.getElementById('robotDisplay').innerHTML=message);
   }
 });
 
-
-function doTheMove(move){
-	console.log("sendTheMove in webSocketUtils/utils " + move);
-
-
-	socket.send( move );
-	//forward( move );    //ERROR: no-net
-    //stompClient.send("/app/move", {}, JSON.stringify({'name': move }));
+//Called by a click on r|lsocket
+function requestTodoTheMove(move){
+	console.log("requestTodoTheMove in webSocketUtils/utils " + move);
+	socket.send( move );     //towards the server
 }

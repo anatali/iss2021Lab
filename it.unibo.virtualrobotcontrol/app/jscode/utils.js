@@ -24,5 +24,6 @@ function sendRequestData( params, method) {
     form.submit();
     document.body.removeChild(form);
     console.log("body children num= "+document.body.children.length );
+
 }
 

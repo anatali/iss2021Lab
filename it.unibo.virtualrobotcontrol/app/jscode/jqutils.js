@@ -4,8 +4,8 @@ $(document).ready(function(){
   });
 
 //USED BY SOCKET.IO-BASED GUI
-    $( "#rsocket" ).click(function() {  doTheMove("r") });    //defined in webSocketUtils
-    $( "#lsocket" ).click(function() {  doTheMove("l") });
+    $( "#rsocket" ).click(function() {  requestTodoTheMove("r") });    //defined in webSocketUtils
+    $( "#lsocket" ).click(function() {  requestTodoTheMove("l") });
 
 
 });
