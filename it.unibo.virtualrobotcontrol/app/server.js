@@ -36,7 +36,7 @@ wsServer.on('request', function(request) {
 });
 */
 function updateRobotState(message){
-    history = history + "<br/"> + message;
+    history = history + "<br/>" + message;
     console.log(history);
     wsServer.clients.forEach(client => {
         client.send( history );
@@ -47,9 +47,10 @@ const server    = new WebSocket.Server({ server: app.listen(8085) });
 */
 wsServer.on('connection', socket => {
         var clients = wsServer.clients.size;
+        history = history + "<br/>" + "connection_connected=" + clients  ;
         //socket.emit('broadcast',{ description: clients + ' clients connected!'});
         wsServer.clients.forEach(client => {
-            client.send(  "connection_connected=" + clients );
+            client.send(   history );
         });
 /*
      socket.on('disconnection', function () {
@@ -76,7 +77,12 @@ wsServer.on('connection', socket => {
                 client.send(  "disconnection_connected=" + clients );
             });
             */
-            console.log(`client disconnected `);
+        var clients = wsServer.clients.size;
+        history = history + "<br/>" + "connection_connected=" + (clients-1)  ;
+        wsServer.clients.forEach(client => {
+              client.send(   history );
+        });
+        //console.log(`client disconnected `);
     }
   });
 });
@@ -104,7 +110,7 @@ app.get('/', function (req, res) {
   });
 
 app.get('/info', function (req, res) {
-  res.send('This is the frontend-Unibo!')
+  res.send( history );
 });
 
 app.get('/picture', function (req, res) {
@@ -117,7 +123,6 @@ app.get('/picture', function (req, res) {
 THE CODE IN THIS DIR CAN be used in index.html
 */
 app.use(express.static(path.join(__dirname, './jscode')));
-
 
 
 app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
@@ -143,7 +148,7 @@ app.use( function(req,res){
 	   };
 	   */
 	   //return res.render('index' );  //NO: we loose the message sent via socket.io
-	   //res.sendFile(path.join(__dirname, "index.html"));
+	   res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
 	}catch(e){console.info("SORRY ..." + e);}
 	}
 );
@@ -161,7 +166,7 @@ function handlePostMove( cmd, msg, req, res, next ){
     updateRobotState(  cmd );
     //res.sendFile(path.join(__dirname, "index.html"));  //
     //res.sendStatus(200);
-    next();
+    next();     //see REPRESENTATION
 }
 
 

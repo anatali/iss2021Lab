@@ -11,7 +11,7 @@ $(document).ready(function(){
 });
 
 $(function () {
-    $( "#ww" ).click(function() { sendRequestData( "w") });
+    $( "#ww" ).click(function() { sendRequestData( "w") });     //defined in utils
     $( "#ss" ).click(function() { sendRequestData( "s") });
     $( "#rr" ).click(function() { sendRequestData( "r") });
     $( "#ll" ).click(function() { sendRequestData( "l") });
