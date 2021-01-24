@@ -15,7 +15,7 @@ var counter = 0;
     var client = new net.Socket();
     client.connect(8999, host, () => {
           // 'connect' listener
-          console.log('connected to server ' + host + " counter=" + ++counter );
+          console.log('serverUtils | connected to virtual robot server on ' + host + " counter=" + ++counter );
           client.write(msg+'\r\n');
           //client.end();
     })

@@ -25,12 +25,19 @@
       var ip = location.host;
       document.getElementById("myIp").innerHTML = ip;
     }
+
+function byeFunction() {
+  //alert("Thank you for visiting W3Schools!");
+  console.log("bye");
+  socket.send("WebSocket close ");
+  //socket.close();
+}
   </script>
 
 
 </head>
 
-<body onload="myIp()">
+<body onload="myIp()"   onunload="byeFunction()">
 
 <noscript><h2 style="color: #ff0000">
  Seems your browser doesn't support Javascript! Websocket relies on Javascript being
@@ -132,7 +139,7 @@
 <div style="background-color: #ffff80">
 
  <hr/>
-  <span id="robotDisplay">Robot state ...</span>
+  <span id="robotDisplay"></span>
   <hr/>
   </div>
 
