@@ -42,16 +42,25 @@ function updateRobotState(message){
         client.send( history );
     });
 }
+
+function connectionHistory(){
+        var clients = wsServer.clients.size
+        history     = history + "<br/>" + "connections=" + clients
+        //socket.emit('broadcast',{ description: clients + ' clients connected!'});
+        displayHistory()
+}
+
+function displayHistory(){
+        wsServer.clients.forEach(client => {
+            client.send(   history )
+        })
+}
 /*
 const server    = new WebSocket.Server({ server: app.listen(8085) });
 */
 wsServer.on('connection', socket => {
-        var clients = wsServer.clients.size;
-        history = history + "<br/>" + "connection_connected=" + clients  ;
-        //socket.emit('broadcast',{ description: clients + ' clients connected!'});
-        wsServer.clients.forEach(client => {
-            client.send(   history );
-        });
+        console.log(`client connected `)
+        displayHistory()
 /*
      socket.on('disconnection', function () {
         clients--;
@@ -71,18 +80,14 @@ wsServer.on('connection', socket => {
             client.send(  message );
         });
     }else if( message.includes("close")) {
-            /*
-            var clients = wsServer.clients.size;
-            wsServer.clients.forEach(client => {
-                client.send(  "disconnection_connected=" + clients );
-            });
-            */
+        /*
         var clients = wsServer.clients.size;
         history = history + "<br/>" + "connection_connected=" + (clients-1)  ;
         wsServer.clients.forEach(client => {
               client.send(   history );
-        });
-        //console.log(`client disconnected `);
+        });*/
+        //connectionHistory();
+        console.log(`client disconnected `);
     }
   });
 });
@@ -132,6 +137,7 @@ app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
 
 
+app.post("/conns", function(req, res,next)  { console.log(" ..... conns"); connectionHistory(); next()  });
 
 /*
 * ====================== REPRESENTATION ================

@@ -8,8 +8,10 @@ $(document).ready(function(){
     $( "#lsocket" ).click(function() {  requestTodoTheMove("l") });
 
 
+
 });
 
+//USED BY POST with jQuery
 $(function () {
     $( "#ww" ).click(function() { sendRequestData( "w") });     //defined in utils
     $( "#ss" ).click(function() { sendRequestData( "s") });
@@ -20,7 +22,8 @@ $(function () {
     $( "#pp" ).click(function() { sendRequestData( "p") });
     $( "#hh" ).click(function() { sendRequestData( "h") });
 
-
+//USED BY the user
+    $( "#displayconns" ).click(function() {  sendRequestData( "conns") });
 
 
 });

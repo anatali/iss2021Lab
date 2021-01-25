@@ -26,7 +26,7 @@
       document.getElementById("myIp").innerHTML = ip;
 
       //chiedo history e la metto in robotDisplay area
-      document.getElementById("robotDisplay").innerHTML = "ask history";
+      //document.getElementById("robotDisplay").innerHTML = "ask history";
     }
 
 function byeFunction() {
@@ -123,20 +123,14 @@ function byeFunction() {
      <button id="rsocket" class="btn btn-default" type="submit">r</button>
     </td>
    </tr>
-   <tr>
-    <td>
-     <form class="form-inline"><button id="p" class="btn btn-default" type="submit">p</button></form>
-    </td>
-    <td>
-     <form class="form-inline"><button id="h" class="btn btn-default" type="submit">h</button></form>
-    </td>
-   </tr>
+
    </tbody>
   </table>
   </center>
   <hr/>
  </div>
 
+<button id="displayconns" type="submit">Show Connections</button>
 
 <h3>DISPLAY AREA</h3>
 <div style="background-color: #ffff80">
@@ -146,6 +140,12 @@ function byeFunction() {
   <hr/>
   </div>
 
+<h3>Wenv</h3>
 
+<!-- RICARICA OGNI VOLTA
+<iframe src="http://192.168.1.132:8090" width="100%" height="100%" scrolling="yes" style="border:1px solid black; title="wenv">
+</iframe>
+-->
+<br/><br/>
 </body>
 </html>
