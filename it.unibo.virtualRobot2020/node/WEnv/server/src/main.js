@@ -17,7 +17,7 @@ const webpageServer = new WebpageServer(webpageCallbacks)
 const server        = new TCPServer( {
     port: portNumber,
     onClientConnected: ()      => { if(isWebpageRead()) webpageCallbacks.onWebpageReady() },
-    onMessage:         command => { 
+    onMessage:         command => {  
 console.log("server | onMessage " + command.type + " " + command.arg + " | " + webpageServer[command.type] ); // 
 //server | onMessage moveForward 800 | duration => Object.keys(sockets).forEach( key => sockets[key].emit('moveForward', duration) )
                                     webpageServer[command.type](command.arg) }
