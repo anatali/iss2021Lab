@@ -10,6 +10,8 @@ const socketIO = require('socket.io')(http)
 const sockets   = {}
 let socketCount = -1
 
+var alreadyConnected = false
+
 let webpageReady = false
 
 function WebpageServer(callbacks) {
@@ -31,7 +33,17 @@ function startServer(callbacks) {
 
 function startHttpServer() {
     app.use(express.static('./../../WebGLScene'))
-    app.get('/', (req, res) => { res.sendFile('index.html', { root: './../../WebGLScene' })  })
+    app.get('/', (req, res) => { 
+	     console.log("WebpageServer | GET socketCount="+socketCount)
+             if( ! alreadyConnected ){
+		alreadyConnected = true;
+		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
+             }else if( socketCount == 0 ) {	//the alreadyConnected is still on
+		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
+             }else{
+		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
+	     }
+    })
 
 //EXPERIMENT Jan 2021
     app.get("/r", (req, res ) => { 	 

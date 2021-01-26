@@ -1,3 +1,7 @@
+/*
+PlayerControlMirror
+*/
+
 import * as THREE from '../../node_modules/three/build/three.module.js'
 
 export default (mesh, camera, config, collisionManager) => {
@@ -30,7 +34,7 @@ export default (mesh, camera, config, collisionManager) => {
     }
 
     function onKeyUp(keyCode) {
-//alert("PlayerContyrols | onKeyUp " + (keyCode) )
+    alert("PlayerContyrols | onKeyUp " + (keyCode) )
         if(keyCode === keycodes.W)
             forward = false
         else if(keyCode === keycodes.S)
