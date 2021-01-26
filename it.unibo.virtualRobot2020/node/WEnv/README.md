@@ -54,9 +54,13 @@ As mentioned before the scene is built with Three.js (WebGL) and runs into your 
 
 ### Scene configuration
 
-In order to adapt the scene for different use cases, users don't need any knowledge of Javascript or Three.js, instead they can edit a simple configuration file that is used to set up the scene.
+In order to adapt the scene for different use cases, users don't need any knowledge of Javascript or Three.js, 
+instead they can edit a simple configuration file that is used to set up the scene.
 
-The configuration file can be found here [`.\WebGLScene\sceneConfig.js`](https://github.com/PierfrancescoSoffritti/ConfigurableThreejsApp/blob/master/WebGLScene/sceneConfig.js). It is a node module, it contains a Javascript object saved into a variable. This Javascript object contains all the information needed to create the scene.
+The configuration file can be found here [`.\WebGLScene\sceneConfig.js`]
+(https://github.com/PierfrancescoSoffritti/ConfigurableThreejsApp/blob/master/WebGLScene/sceneConfig.js). 
+It is a node module, it contains a Javascript object saved into a variable. 
+This Javascript object contains all the information needed to create the scene.
 
 In particulare: it contains one object for every scene componenet.
 
@@ -76,7 +80,8 @@ This floor is a square of size 40 in the x axis and 40 in the y axis.
 #### Player
 The player object has two properties: position and speed.
 
-- The position can only be expressed with values between 0 and 1 and is relative to the floor. (0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
+- The position can only be expressed with values between 0 and 1 and is relative to the floor. 
+(0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
 - The speed determines how fast the player object moves on the floor, it's not bounded (I suggest keeping it between 0 and 1 though).
 
 ```
@@ -91,7 +96,8 @@ Sonars is an array, each element in the array is a sonar.
 Each sonar has three properties: name, position and senseAxis.
 
 - The name is a string.
-- The position can only be expressed with values between 0 and 1 and is relative to the floor. (0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
+- The position can only be expressed with values between 0 and 1 and is relative to the floor. 
+(0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
 - senseAxis determines in which direction this sonar will sense the player. It can be only x, y, or both.
 
 ```
@@ -109,7 +115,8 @@ MovingObstacles is an array, each element in the array is a moving obstacle.
 Each moving obstacle has five properties: name, position, directionAxis, speed and range.
 
 - The name is a string.
-- The position can only be expressed with values between 0 and 1 and is relative to the floor. (0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
+- The position can only be expressed with values between 0 and 1 and is relative to the floor. 
+(0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
 - directionAxis determines the direction of the periodic movement of the obstacle. It can be only x, y, or both.
 - speed determines how fast the obstacle moves.
 - range determines the range of the periodic movement.
@@ -131,7 +138,8 @@ StaticObstacles is an array, each element in the array is a static obstacle.
 Each static obstacle has three properties: name, centerPosition and size.
 
 - The name is a string.
-- The centerPosition can only be expressed with values between 0 and 1 and is relative to the floor. (0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
+- The centerPosition can only be expressed with values between 0 and 1 and is relative to the floor. 
+(0,0) is the top left corner of the floor, (1, 1) is the bottom right corner.
 - The size can only be expressed with values between 0 and 1 and is relative to the floor. If x = 1 the static obstacle will have the same x dimension of the floor. 
 
 ```
@@ -193,7 +201,8 @@ Changes made here won't be permanent. You alwyas need to manually update the val
 
 It's possible to send and receive messages from the server with a TCP connection.
 
-In order to connect to the server you need to establish a simple TCP connection with it using the server ip an port (the ip is the ip of the machine on which it is running, the port is the one you have decided when starting the server).
+In order to connect to the server you need to establish a simple TCP connection with it using the server ip an port
+ (the ip is the ip of the machine on which it is running, the port is the one you have decided when starting the server).
 
 ### IO interface
 The server sends and expects specific messages. The messages are simple JSON strings, each string has to start and finish with a `;` symbol.
@@ -203,22 +212,37 @@ Message format: `;{ json };`.
 #### Server output
 Messages from the server to the client have this format: `;{ "type": "event-type", "arg": { ... } };`.
 
-- webpage-ready - `{ "type": "webpage-ready, "arg": {} }`: This message is sent by the server to its clients when the webapp is ready. If a client connects after the page is ready, it will receive the message anyway. Therefore a client connecting to the server can always expect a webpage-ready message.
+- webpage-ready - `{ "type": "webpage-ready, "arg": {} }`: 
+This message is sent by the server to its clients when the webapp is ready. If a client connects after the page is ready, 
+it will receive the message anyway. Therefore a client connecting to the server can always expect a webpage-ready message.
 
-- sonar-activated - `{ "type:" "sonar-activated", "arg": { "sonarName": "sonarName", "distance": 1, "axis": "x" } }`: This message is sent by the server to its clients when a sonar is sensing the player. `sonarName` is the name of the sonar that is sensing the player. `distance` is the distance of the player from the sonar. `axis` is the axis on which the sonar is sensing the player.
+- sonar-activated - `{ "type:" "sonar-activated", "arg": { "sonarName": "sonarName", "distance": 1, "axis": "x" } }`: 
+This message is sent by the server to its clients when a sonar is sensing the player. 
+`sonarName` is the name of the sonar that is sensing the player. `distance` is the distance of the player from the sonar. 
+`axis` is the axis on which the sonar is sensing the player.
 
-- collision - `{ "type": "collision", "arg": { "objectName": "obstacle-1" } }`: This message is sent by the server to its clients when the player collides with an obstacle in the scene. `objectName` is the name of the object the player is colliding with.
+- collision - `{ "type": "collision", "arg": { "objectName": "obstacle-1" } }`: 
+This message is sent by the server to its clients when the player collides with an obstacle in the scene. 
+`objectName` is the name of the object the player is colliding with.
 
 #### Server input
 Messages from the client to the server.
 
-- moveForward - `{ "type": "moveForward", "arg": 300 }`: This message is used to move the player in its current forward direction. `arg` is the duration in seconds of the movement. The duration can be negative, in that case the player will move until in encouters an obstacle.
+- moveForward - `{ "type": "moveForward", "arg": 300 }`: 
+This message is used to move the player in its current forward direction. `arg` is the duration in seconds of the movement. 
+The duration can be negative, in that case the player will move until in encouters an obstacle.
 
-- moveBackward - `{ "type": "moveBackward", "arg": 300 }`: This message is used to move the player in its current backward direction. `arg` is the duration in seconds of the movement. The duration can be negative, in that case the player will move until in encouters an obstacle.
+- moveBackward - `{ "type": "moveBackward", "arg": 300 }`: 
+This message is used to move the player in its current backward direction. `arg` is the duration in seconds of the movement. 
+The duration can be negative, in that case the player will move until in encouters an obstacle.
 
-- turnRight - `{ "type": "turnRight", "arg": 300 }`: This message is used to rotate the player. The player will always make a 90° rotation. `arg` is the amount of time the 90° rotation will require.
+- turnRight - `{ "type": "turnRight", "arg": 300 }`: 
+This message is used to rotate the player. The player will always make a 90° rotation. 
+`arg` is the amount of time the 90° rotation will require.
 
-- turnLeft - `{ "type": "turnLeft", "arg": 300 }`: This message is used to rotate the player. The player will always make a 90° rotation. `arg` is the amount of time the 90° rotation will require.
+- turnLeft - `{ "type": "turnLeft", "arg": 300 }`: 
+This message is used to rotate the player. The player will always make a 90° rotation. 
+`arg` is the amount of time the 90° rotation will require.
 
 - alarm - `{ "type": "alarm" }`: This message will stop the player's movement. Rotations aren't stoppable.
 

@@ -1,3 +1,7 @@
+/*
+Scene
+*/
+
 import SceneManager from './SceneManager.js'
 import initSocketIO from './SocketIO.js'
 

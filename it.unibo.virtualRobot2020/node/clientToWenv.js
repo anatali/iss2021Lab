@@ -2,10 +2,15 @@ const net = require('net')
 
 const SEPARATOR = ";"
 
-const client = new Client({ip: readIpFromArguments(), port: readPortNumberFromArguments()})
-const msg = `{ "type": "moveForward", "arg": 1000 }`
-client.send( msg )
+//const client = new Client({ip: readIpFromArguments(), port: readPortNumberFromArguments()})
+const client   = new Client({ip: "localhost", port: 8999})
 
+const ahead = `{ "type": "moveForward",  "arg": 800 }`
+const back  = `{ "type": "moveBackward", "arg": 800 }`
+
+client.send( ahead )	//wait 800
+setTimeout(() => {  client.send( back ); }, 1000); 
+setTimeout(() => {  client.finish( ); },    2000); 
 //-------------------------------------------------------------------
 function Client({ port, ip }) {
     const self = this
@@ -25,24 +30,26 @@ function Client({ port, ip }) {
             console.log(`\tConnected`)
             flushOutQueue()
         })
-
-        client.on('data', message => {
+ 
+        client.on('data', message => {	//receiving from 8999
+	    //console.log( message)	//message is byteArray	     
             String(message)
                     .split(SEPARATOR)
                     .map( string => string.trim() )
-                    .filter( string => string.length !== 0  )
-                    .map( JSON.parse )
-                    .forEach( message => console.log(message) )
+                    .filter( string => string.length != 0  )
+                    //.map( JSON.parse )
+                    .forEach( msg => console.log( msg ) )
         })
         
         client.on('close', () =>  console.log(`\tConnection closed`) )
-        client.on('error', () => console.log(`\tConnection error`) )
+        client.on('error', () =>  console.log(`\tConnection error`) )
     }
 
     this.send = function(message) {
-        if(!clientSocket.connecting)
+        if(!clientSocket.connecting){
+	    console.log(`\tsend ` + message)
             clientSocket.write(SEPARATOR +message +SEPARATOR)
-        else {
+        }else {
             console.log(`\tSocket not created, message added to queue`)
             outQueue.push(message)
         }

@@ -3,7 +3,7 @@ RUN mkdir -p /home/node
 
 COPY ./node/WEnv /home/node/WEnv
 COPY ./node/WEnv/WebGLScene /home/node/WEnv/WebGLScene
-COPY ./node/WEnv/WebGLScene /home/node/WEnv/WebGLScene
+## COPY ./node/WEnv/WebGLScene /home/node/WEnv/WebGLScene
 
 # set default dir so that next commands executes in it
 WORKDIR /home/node/WEnv/WebGLScene
