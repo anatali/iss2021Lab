@@ -11,7 +11,7 @@ var stompClient = null;
 var host    = "localhost";
 var counter = 0;
 
-    function connectAndSend( msg ){
+    function connectAndSend( msg  ){
     var client = new net.Socket();
     client.connect(8999, host, () => {
           // 'connect' listener
@@ -21,21 +21,16 @@ var counter = 0;
     })
 
     client.on('error', () => {
-      console.log('ERROR with host=' + host);
+      console.log('serverUtils | ERROR with host=' + host);
       //if( host="localhost" ) forward( cmd, "wenv")  //in the case of docker-compose
     });
     client.on('data', (data) => {
       var v = data.toString();
-      console.log("from wenv server: "+ v);
-      /*
-      if( v.includes("webpage-ready")){
-            client.write(msg+'\r\n');
-            console.log('end the client ???'  );
-            client.destroy(); // kill client after server's response
-      }*/
+      console.log("serverUtils | from wenv server: "+ v);
+      //addToHistory(v);
     });
     client.on('end', () => {
-      console.log('disconnected from server counter=' + counter );
+      console.log('serverUtils | disconnected from server counter=' + counter );
     });
 }
 

@@ -47,19 +47,28 @@ function startHttpServer() {
 }
 
 function initSocketIOServer(callbacks) {
+	console.log("WebpageServer | initSocketIOServer socketCount="+socketCount)
     socketIO.on('connection', socket => {
         socketCount++
+        console.log("WebpageServer connection | socketCount="+socketCount)
         const key    = socketCount
         sockets[key] = socket
         
         callbacks.onWebpageReady()
         webpageReady = true
-        console.log("webpage ready")
+        console.log("WebpageServer | webpage ready")
 
         socket.on( 'sonarActivated', callbacks.onSonarActivated )
         socket.on( 'collision',      callbacks.onCollision )
-        socket.on( 'disconnect',     () => { delete sockets[key]; webpageReady = false; console.log("webpage disconnected") } )
+        socket.on( 'disconnect',     () => { 
+        		delete sockets[key]; 
+        		webpageReady = false; 
+          		socketCount--
+        		console.log("WebpageServer disconnect | socketCount="+socketCount)
+        		})
     })
+    
+
 }
 
 function isWebpageRead() {

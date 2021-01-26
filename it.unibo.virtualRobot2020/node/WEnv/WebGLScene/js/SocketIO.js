@@ -4,22 +4,22 @@ import eventBusEvents from './eventBus/events.js'
 import { parseConfiguration, 
    updateSceneConstants, getinitialsceneConstants } from './utils/SceneConfigUtils.js' //DEC 2019
 import sceneConfiguration from '../sceneConfig.js'                                     //DEC 2019
-//import SceneManager from './SceneManager.js'                                           //DEC 2019
+import SceneManager from './SceneManager.js'                                           //no mre DEC 2019
 
 export default (onKeyUp, onKeyDown) => {
     const socket = io()
-        
+        //RECEIVED VIA TCP
     socket.on( 'moveForward',  duration => moveForward(duration) )
     socket.on( 'moveBackward', duration => moveBackward(duration) )
-    socket.on( 'turnRight',    duration => turnRight(duration) )
+    socket.on( 'turnRight',    duration => { console.log("SocketIO | turnRight " + duration); turnRight(duration)} )
     socket.on( 'turnLeft',     duration => turnLeft(duration) )
     socket.on( 'alarm',        stopMoving   )
     socket.on( 'remove',       name => remove( name )  )   //DEC 2019  See WebpageServer.js
     
-    socket.on( 'disconnect', () => console.log("server disconnected") )
+    socket.on( 'disconnect', () => console.log("SocketIO | server disconnected") )
 
     eventBus.subscribe( eventBusEvents.sonarActivated, sonarId => socket.emit('sonarActivated', sonarId))
-    eventBus.subscribe( eventBusEvents.collision, objectName => { console.log(`collision: ${objectName}`); socket.emit('collision', objectName); stopMoving(); })
+    eventBus.subscribe( eventBusEvents.collision, objectName => { console.log(`SocketIO | collision: ${objectName} socket=` + Object(socket) ); socket.emit('collision', objectName); stopMoving(); })
 
     const keycodes = {
         W: 87,

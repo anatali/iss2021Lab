@@ -2,6 +2,7 @@ function EventBus() {
     const eventCallbacksPairs = []
     
     function subscribe( eventType, callback ) {
+    	console.log("EventBus | subscribe eventType=" + eventType )
         const eventCallbacksPair = findEventCallbacksPair(eventType)
 
         if(eventCallbacksPair)
@@ -12,13 +13,17 @@ function EventBus() {
 
     function post( eventType, args ) {
         const eventCallbacksPair = findEventCallbacksPair(eventType)
-        
+     	console.log("EventBus | post eventType=" + eventType + " " + Object(eventCallbacksPair.callbacks)  )
+       
         if(!eventCallbacksPair) {
-            console.error(`no subscribers for event ${eventType}`)
+            console.error(`EventBus | no subscribers for event ${eventType}`)
             return;
         }
 
-        eventCallbacksPair.callbacks.forEach( callback => callback(args) )
+        eventCallbacksPair.callbacks.forEach( callback => {
+        	console.log("EventBus | post callback= " + callback )
+        	callback(args)
+        	} )
     }
 
     function findEventCallbacksPair(eventType) {

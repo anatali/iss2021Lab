@@ -3,7 +3,8 @@ let path       = require('path');
 let fs         = require('fs');
 let bodyParser = require('body-parser');
 let app        = express();
-let utils      = require('./serverutils');
+//let utils      = require('./serverutils');
+const net      = require('net');
 
 var history    = "";
 /*
@@ -16,25 +17,8 @@ var clients = 0;
 const WebSocket   = require('ws');
 
 const wsServer    = new WebSocket.Server({ server: app.listen(8085) });
-/*
-wsServer.on('request', function(request) {
-    alert(request );
-    var connection = request.accept(null, request.origin);
 
-    connection.on('message', function(message) {
-        // Metodo eseguito alla ricezione di un messaggio
-        console.log(`received from a client: ${message}`);
-        if (message.type === 'utf8') {
-            // Se il messaggio è una stringa, possiamo leggerlo come segue:
-            console.log(`received from a client: ${message.utf8Data}`);
-        }
-    });
-    connection.on('close', function(connection) {
-        // Metodo eseguito alla chiusura della connessione
-        console.log(`connection closed `);
-    });
-});
-*/
+
 function updateRobotState(message){
     history = history + "<br/>" + message;
     console.log(history);
@@ -49,7 +33,10 @@ function connectionHistory(){
         //socket.emit('broadcast',{ description: clients + ' clients connected!'});
         displayHistory()
 }
-
+function addToHistory( msg ){
+        history     = history + "<br/>" + msg
+        displayHistory()
+}
 function displayHistory(){
         wsServer.clients.forEach(client => {
             client.send(   history )
@@ -143,16 +130,16 @@ app.post("/conns", function(req, res,next)  { console.log(" ..... conns"); conne
 * ====================== REPRESENTATION ================
 */
 app.use( function(req,res){
-	console.info("SENDING THE ANSWER " + res  + " json:" + req.accepts('josn') );
+	//console.info("SENDING THE ANSWER " + res  + " json:" + req.accepts('json') );
 	try{
-	    console.log("answer> "+ res  );
-	    /*
+	    //console.log("answer> "+ Object(res)  );
+/*
 	   if (req.accepts('json')) {
-	       return res.send(result);		//give answer to curl / postman
+	       res.send(history);		//give answer to curl / postman
 	   } else {
-	       return res.render('index' );
+	       res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
 	   };
-	   */
+*/
 	   //return res.render('index' );  //NO: we loose the message sent via socket.io
 	   res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
 	}catch(e){console.info("SORRY ..." + e);}
@@ -168,14 +155,55 @@ app.use( function(req,res){
 function handlePostMove( cmd, msg, req, res, next ){
     //result = "Web server done: " + cmd;
     console.log( "handlePostMove in server.js "  + cmd )
-    utils.forward(cmd, "localhost");
+    forward(cmd, "localhost");
     updateRobotState(  cmd );
     //res.sendFile(path.join(__dirname, "index.html"));  //
     //res.sendStatus(200);
     next();     //see REPRESENTATION
 }
 
+/*
+========================================================================
+*/
+const sep      = ";"
 
+var stompClient = null;
+var host    = "localhost";
+var counter = 0;
+
+    function connectAndSend( msg  ){
+    var client = new net.Socket();
+    client.connect(8999, host, () => {
+          // 'connect' listener
+          console.log('serverUtils | connected to virtual robot server on ' + host + " counter=" + ++counter );
+          client.write(msg+'\r\n');
+          //client.end();
+    })
+
+    client.on('error', () => {
+      console.log('serverUtils | ERROR with host=' + host);
+      //if( host="localhost" ) forward( cmd, "wenv")  //in the case of docker-compose
+    });
+    client.on('data', (data) => {
+
+      var v = data.toString().replace(";","").replace(";","")
+      if( v.includes("webpage-ready") ) return;
+      console.log("serverUtils | from wenv server: "+ v);   // {"type":"collision","arg":{"objectName":"bottle1"}}
+      const ev     = JSON.parse( v )
+      const target = JSON.parse( JSON.stringify( ev.arg ) )
+      addToHistory( "EVENT:" + ev.type + " TARGET:" + target.objectName );
+    })
+    client.on('end', () => {
+      console.log('serverUtils | disconnected from server counter=' + counter );
+    });
+}
+
+function forward( cmd  ){
+    payload    =  "{ \"type\": \"" + cmd + "\", \"arg\": 800 }";
+    msg        = sep+payload+sep;
+    console.log('serverUtils | forward ' + msg ); //+ " client=" + client
+    connectAndSend(msg);
+}//forward
 
 
 /*
