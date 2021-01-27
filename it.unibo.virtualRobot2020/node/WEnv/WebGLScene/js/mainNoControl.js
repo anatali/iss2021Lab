@@ -2,20 +2,20 @@
 Scene mainNoControl.js
 */
 
-import SceneManager from './SceneManagerMirror.js'
+import SceneManager from './SceneManager.js'
 import initSocketIO from './SocketIO.js'
 
 initSocketIO(onKeyUp, onKeyDown)
 
-const canvas = document.getElementById('canvas')
-const sceneManager = SceneManager(canvas)
+const canvas       = document.getElementById('canvas')
+const sceneManager = SceneManager(canvas, true)		//true is mirror
 
 bindEventListeners()
 startRenderLoop()
 
 function bindEventListeners() {
 	window.onresize = resizeCanvas
-	window.onkeydown = onKeyDown
+	//window.onkeydown = onKeyDown	//EXCLUDE USER CONTROL
 	window.onkeyup = onKeyUp
 	resizeCanvas()
 }
@@ -31,7 +31,7 @@ function resizeCanvas() {
 }
 
 function onKeyDown(event, duration) {
-	sceneManager.onKeyDown(event.keyCode, duration)
+	sceneManager.onKeyDown(event.keyCode, duration, true)
 }
 
 function onKeyUp(event) {
@@ -45,6 +45,7 @@ function startRenderLoop(time) {
 }
 
 (function initPlugHTML() {
+ 
 	const plugDiv = document.getElementById('plug')
 	const meaninglessIcons = [
 		document.getElementById('forklift-icon'),
@@ -56,4 +57,5 @@ function startRenderLoop(time) {
 		document.getElementById('carrot-icon'),
 	]
 	plugDiv.insertBefore(meaninglessIcons[getRandomInt(0, meaninglessIcons.length-1)], plugDiv.children[1])
+ 
 })()

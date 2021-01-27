@@ -1,8 +1,11 @@
+/*
+PlayerControls
+*/
 import * as THREE from '../../node_modules/three/build/three.module.js'
 
-export default (mesh, camera, config, collisionManager) => {
+export default (mesh, camera, config, collisionManager, mirror) => {
 	
-	const keycodes = {
+    const keycodes = {
         W: 87,
         A: 65,
         S: 83,
@@ -17,7 +20,8 @@ export default (mesh, camera, config, collisionManager) => {
 
     setCameraPositionRelativeToMesh(camera, mesh)
 	
-    function onKeyDown(keyCode, duration) {
+    function onKeyDown(keyCode, duration, remote ) {
+ console.log("PlayerControls | onKeyDown from remote=" + remote + " keyCode=" + keyCode)
         if(keyCode === keycodes.W)
             forward = true
         else if(keyCode === keycodes.S)
@@ -30,7 +34,7 @@ export default (mesh, camera, config, collisionManager) => {
     }
 
     function onKeyUp(keyCode) {
-//alert("PlayerContyrols | onKeyUp " + (keyCode) )
+
         if(keyCode === keycodes.W)
             forward = false
         else if(keyCode === keycodes.S)
@@ -59,17 +63,18 @@ export default (mesh, camera, config, collisionManager) => {
         const directionVector = new THREE.Vector3( 0, 0, -1 )
         directionVector.applyMatrix4(matrix)
     
-		if(forward || backward) {
+	if(forward || backward) {
             const direction = backward ? 1 : -1
             const stepVector = directionVector.multiplyScalar( config.speed * direction )
-            const tPosition = mesh.position.clone().add(stepVector)
-            
-            const collision = collisionManager.checkCollision(tPosition)
-
-            if(!collision) {
-                mesh.position.add(stepVector)
-                camera.position.add(stepVector)
-             }            
+            const tPosition  = mesh.position.clone().add(stepVector)
+console.log("PlayerControls | update mirror=" + mirror)
+            //if( !mirror ){
+            	const collision = collisionManager.checkCollision(tPosition, mirror)		
+            	if( !collision ) {
+               		 mesh.position.add(stepVector)
+                	 camera.position.add(stepVector)
+             	}  
+	   // }//mirror          
         } else 
             collisionManager.checkCollision(mesh.position)
     }

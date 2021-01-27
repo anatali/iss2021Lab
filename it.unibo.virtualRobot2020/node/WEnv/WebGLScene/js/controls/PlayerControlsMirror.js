@@ -22,7 +22,9 @@ export default (mesh, camera, config, collisionManager) => {
     setCameraPositionRelativeToMesh(camera, mesh)
 	
     function onKeyDown(keyCode, duration) {
-        if(keyCode === keycodes.W)
+ //alert("PlayerControlsMirror | onKeyDown: " + (keyCode) )
+ console.log("onKeyDown from PlayerControlsMirror")
+       if(keyCode === keycodes.W)
             forward = true
         else if(keyCode === keycodes.S)
             backward = true
@@ -34,7 +36,6 @@ export default (mesh, camera, config, collisionManager) => {
     }
 
     function onKeyUp(keyCode) {
-    alert("PlayerContyrols | onKeyUp " + (keyCode) )
         if(keyCode === keycodes.W)
             forward = false
         else if(keyCode === keycodes.S)
@@ -63,19 +64,20 @@ export default (mesh, camera, config, collisionManager) => {
         const directionVector = new THREE.Vector3( 0, 0, -1 )
         directionVector.applyMatrix4(matrix)
     
-		if(forward || backward) {
+	if(forward || backward) {
             const direction = backward ? 1 : -1
             const stepVector = directionVector.multiplyScalar( config.speed * direction )
             const tPosition = mesh.position.clone().add(stepVector)
-            
+            /*
             const collision = collisionManager.checkCollision(tPosition)
 
             if(!collision) {
                 mesh.position.add(stepVector)
                 camera.position.add(stepVector)
-             }            
+             }   */         
         } else 
             collisionManager.checkCollision(mesh.position)
+
     }
     
     function resetPosition() {

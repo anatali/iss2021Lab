@@ -4,19 +4,19 @@ Scene
 
 import SceneManager from './SceneManager.js'
 import initSocketIO from './SocketIO.js'
-
-initSocketIO(onKeyUp, onKeyDown)
+ 
+initSocketIO(onKeyUp, onKeyDownRemote)
 
 const canvas = document.getElementById('canvas')
-const sceneManager = SceneManager(canvas)
+const sceneManager = SceneManager(canvas, false)	//false is mirror
 
 bindEventListeners()
 startRenderLoop()
 
 function bindEventListeners() {
-	window.onresize = resizeCanvas
+	window.onresize  = resizeCanvas
 	window.onkeydown = onKeyDown
-	window.onkeyup = onKeyUp
+	window.onkeyup   = onKeyUp
 	resizeCanvas()
 }
 
@@ -30,8 +30,14 @@ function resizeCanvas() {
     sceneManager.onWindowResize()
 }
 
-function onKeyDown(event, duration) {
-	sceneManager.onKeyDown(event.keyCode, duration)
+function onKeyDown(event, duration, remote) { 
+console.log("onKeyDown from main event.keyCode=" + event.keyCode)
+	sceneManager.onKeyDown(event.keyCode, duration, false)	 
+}
+
+function onKeyDownRemote(event, duration, remote) { 
+console.log("onKeyDown from main event.keyCode=" + event.keyCode)
+	sceneManager.onKeyDown(event.keyCode, duration, true)	 
 }
 
 function onKeyUp(event) {

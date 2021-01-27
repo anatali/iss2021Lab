@@ -34,15 +34,22 @@ function startServer(callbacks) {
 function startHttpServer() {
     app.use(express.static('./../../WebGLScene'))
     app.get('/', (req, res) => { 
-	     console.log("WebpageServer | GET socketCount="+socketCount)
+	     console.log("WebpageServer | GET socketCount="+socketCount + " alreadyConnected =" + alreadyConnected )
              if( ! alreadyConnected ){
 		alreadyConnected = true;
 		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
-             }else if( socketCount == 0 ) {	//the alreadyConnected is still on
+	     }else{
+		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
+                alreadyConnected = true;
+	     }
+/*
+             }else if( socketCount > 1 ) {	//the alreadyConnected is still on
 		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
              }else{
 		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
+                alreadyConnected = true;
 	     }
+*/
     })
 
 //EXPERIMENT Jan 2021
@@ -68,14 +75,15 @@ function initSocketIOServer(callbacks) {
         
         callbacks.onWebpageReady()
         webpageReady = true
-        console.log("WebpageServer | webpage ready")
+        if( socketCount == 0) console.log("WebpageServer | MASTER webpage ready")
 
         socket.on( 'sonarActivated', callbacks.onSonarActivated )
         socket.on( 'collision',      callbacks.onCollision )
         socket.on( 'disconnect',     () => { 
         		delete sockets[key]; 
         		webpageReady = false; 
-          		socketCount--
+          		socketCount--;
+			alreadyConnected = ( socketCount == 0 )
         		console.log("WebpageServer disconnect | socketCount="+socketCount)
         		})
     })

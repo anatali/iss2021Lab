@@ -14,7 +14,9 @@ import { parseConfiguration, mapConfigurationToGUI } from './utils/SceneConfigUt
 import {injectsceneConstants} from './utils/SceneConfigUtils.js'  					//DEC 2019
 import dat from '../node_modules/dat.gui/build/dat.gui.module.js'
 
-export default canvas => {
+export default (canvas, mirror) => {
+alert("SceneManager | mirror= " + mirror)
+	 
     const clock = new THREE.Clock()
     
     const screenDimensions = {
@@ -24,21 +26,22 @@ export default canvas => {
 
     const sceneConstants = parseConfiguration(sceneConfiguration)
 
-    const scene = buildScene()
+    const scene    = buildScene()
     const renderer = buildRender(screenDimensions)
-    const camera = buildCamera(screenDimensions)
+    const camera   = buildCamera(screenDimensions)
     const {sceneSubjects, controls} = createSceneSubjects(scene, sceneConstants, camera)
 
-    const datGui = new dat.GUI()
+    const datGui   = new dat.GUI()
     /*
     	Open a console on the GUI (by AN)
     */
-    mapConfigurationToGUI(sceneConstants, sceneConfiguration, controls, datGui, sceneConfiguration)
+ 
+    if( !mirror ) mapConfigurationToGUI(sceneConstants, sceneConfiguration, controls, datGui, sceneConfiguration)
     
     injectsceneConstants(sceneConstants)		//DEC 2019
   
     function buildScene() {
-        const scene = new THREE.Scene()
+        const scene      = new THREE.Scene()
         scene.background = new THREE.Color('#000')
         return scene
     }
@@ -84,7 +87,7 @@ export default canvas => {
         const sonars = Sonars(scene, sonarsConfig)
 
         const collisionManager = CollisionManager([floor, staticObstacles, movingObstacles, sonars])        
-        const controls = PlayerControls(player.mesh, camera, playerConfig, collisionManager)
+        const controls = PlayerControls(player.mesh, camera, playerConfig, collisionManager, mirror)
 
         const sceneSubjects = [
             GeneralLights(scene),
@@ -121,8 +124,10 @@ export default canvas => {
         renderer.setSize(width, height)
     }
 
-    function onKeyDown(keyCode, duration) {
-        controls.onKeyDown(keyCode, duration)
+
+    function onKeyDown(keyCode, duration, remote) {
+console.log("onKeyDown from SceneManager keyCode=" + keyCode + " remote=" + remote)
+        controls.onKeyDown(keyCode, duration, remote)
     }
 
     function onKeyUp(keyCode) {

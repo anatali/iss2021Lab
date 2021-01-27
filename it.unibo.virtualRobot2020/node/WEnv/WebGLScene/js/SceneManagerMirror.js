@@ -37,7 +37,7 @@ export default canvas => {
     /*
     	Open a console on the GUI (by AN)
     */
-    mapConfigurationToGUI(sceneConstants, sceneConfiguration, controls, datGui, sceneConfiguration)
+    //mapConfigurationToGUI(sceneConstants, sceneConfiguration, controls, datGui, sceneConfiguration)
     
     injectsceneConstants(sceneConstants)		//DEC 2019
   
@@ -88,7 +88,7 @@ export default canvas => {
         const sonars = Sonars(scene, sonarsConfig)
 
         const collisionManager = CollisionManager([floor, staticObstacles, movingObstacles, sonars])        
-        const controls = PlayerControls(player.mesh, camera, playerConfig, collisionManager)
+        const controls         = PlayerControls(player.mesh, camera, playerConfig, collisionManager)
 
         const sceneSubjects = [
             GeneralLights(scene),
@@ -126,6 +126,7 @@ export default canvas => {
     }
 
     function onKeyDown(keyCode, duration) {
+console.log("turnRight from SceneManagerMirror")
         controls.onKeyDown(keyCode, duration)
     }
 

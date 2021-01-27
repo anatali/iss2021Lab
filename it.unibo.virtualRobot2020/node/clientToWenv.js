@@ -3,18 +3,19 @@ const net = require('net')
 const SEPARATOR = ";"
 
 //const client = new Client({ip: readIpFromArguments(), port: readPortNumberFromArguments()})
-const client   = new Client({ip: "localhost", port: 8999})
+const client   = new Client({ip: "192.168.1.22", port: 8999})
 
-const ahead = `{ "type": "moveForward",  "arg": 800 }`
+const ahead = `{ "type": "moveForward",  "arg": 850 }`
 const back  = `{ "type": "moveBackward", "arg": 800 }`
 
-client.send( ahead )	//wait 800
-setTimeout(() => {  client.send( back ); }, 1000); 
-setTimeout(() => {  client.finish( ); },    2000); 
+//client.send( ahead )	//wait 800
+//setTimeout(() => {  client.send( back ); }, 500); 
+setTimeout(() => {  client.send( ahead ); }, 500); 
+setTimeout(() => {  client.finish( ); },    2500); 
 //-------------------------------------------------------------------
-function Client({ port, ip }) {
+function Client({ ip, port }) {
     const self = this
-
+	console.log(`\tClient ` + ip)
     let clientSocket
     const outQueue = []
 
@@ -23,8 +24,8 @@ function Client({ port, ip }) {
     function connectTo(port, ip) {
         const client = net.Socket()
         clientSocket = client
-
-        client.connect({ port, ip }, () => console.log(`\tConnecting...`) )
+	console.log(`\tConnecting ... ` + ip)
+        client.connect( port, ip , function() { console.log(`\tConnecting...` + ip) } )
 
         client.on('connect', () => {
             console.log(`\tConnected`)
@@ -41,8 +42,8 @@ function Client({ port, ip }) {
                     .forEach( msg => console.log( msg ) )
         })
         
-        client.on('close', () =>  console.log(`\tConnection closed`) )
-        client.on('error', () =>  console.log(`\tConnection error`) )
+        client.on('close', ()  =>  console.log(`\tConnection closed`) )
+        client.on('error', (v) =>  console.log(`\tConnection error ` + v) )
     }
 
     this.send = function(message) {
