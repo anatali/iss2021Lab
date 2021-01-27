@@ -3,14 +3,14 @@ const net = require('net')
 const SEPARATOR = ";"
 
 //const client = new Client({ip: readIpFromArguments(), port: readPortNumberFromArguments()})
-const client   = new Client({ip: "192.168.1.22", port: 8999})
+const client   = new Client({ip: "192.168.1.132", port: 8999})
 
 const ahead = `{ "type": "moveForward",  "arg": 850 }`
 const back  = `{ "type": "moveBackward", "arg": 800 }`
 
 //client.send( ahead )	//wait 800
 //setTimeout(() => {  client.send( back ); }, 500); 
-setTimeout(() => {  client.send( ahead ); }, 500); 
+setTimeout(() => {  client.send( ahead ); }, 800); 
 setTimeout(() => {  client.finish( ); },    2500); 
 //-------------------------------------------------------------------
 function Client({ ip, port }) {

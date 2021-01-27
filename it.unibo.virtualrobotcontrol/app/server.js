@@ -124,8 +124,13 @@ app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
 
 
-app.post("/conns", function(req, res,next)  { console.log(" ..... conns"); connectionHistory(); next()  });
+app.post("/conns", function(req, res,next)  { connectionHistory(); next()  });
+app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()  });
 
+function clearDisplayArea(){
+    history = ""
+    //document.getElementById("robotDisplay").innerHTML = history;
+}
 /*
 * ====================== REPRESENTATION ================
 */

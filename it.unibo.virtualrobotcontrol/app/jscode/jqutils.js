@@ -22,7 +22,7 @@ $(function () {
 
 //USED BY the human user
     $( "#displayconns" ).click(function() {  sendRequestData( "conns") });  //defined here
-    $( "#clear" ).click(function() {  document.getElementById("robotDisplay").innerHTML = "";  });
+    $( "#clear" ).click(function() {  sendRequestData( "clearHistory") });
 
 });
 
@@ -48,3 +48,4 @@ function sendRequestData( params, method) {
     console.log("body children num= "+document.body.children.length );
 
 }
+
