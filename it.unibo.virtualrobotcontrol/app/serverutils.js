@@ -52,9 +52,18 @@ axios
   .post(URL, {
     robotmove: move
   })
-  .then(res => {
-    console.log(`statusCode: ${res.statusCode}`)
-    //console.log(res)
+  .then(response => {
+    console.log("serverutils postTo8090 | statusCode: " + response.status  )
+    console.log("serverutils postTo8090 | data:       " + response.data)
+    console.log("serverutils postTo8090 | statusText: " + response.statusText);
+/*
+    	    var data = ""
+    	    res.on('data', function (chunk) { data += chunk; }); //accumulate data sent by POST
+                req.on('end', function () {	//elaborate data received JSon: { robotmove: turnLeft | turnRight | ... }
+         		//var moveTodo = JSON.parse(data).robotmove
+        		console.log('serverutils postTo8090 | ' + data  );
+       	   });
+*/
   })
   .catch(error => {
     console.error(error)

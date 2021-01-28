@@ -3,17 +3,24 @@ Server
 */
 
 const { WebpageServer, isWebpageRead } = require('./WebpageServer')
-const TCPServer                        = require('./TCPServer')
+//const TCPServer                        = require('./TCPServer')
 
 const portNumber = 8999 //readPortNumberFromArguments()
 
 const webpageCallbacks = {
+	/*
     onWebpageReady:   ()          => server.send( { type: 'webpage-ready ..... ',   arg: {} } ),
     onSonarActivated: object      => server.send( { type: 'sonar-activated', arg: object } ),
     onCollision:      objectName  => server.send( { type: 'collision',       arg: { objectName } } )
+	*/
+    onWebpageReady:   ()          => console.log( "webpageCallbacks { type: 'webpage-ready ..... ',   arg: {} }" ),
+    onSonarActivated: object      => console.log( "webpageCallbacks { type: 'sonar-activated', arg: {"+object+"}" ),
+    onCollision:      objectName  => console.log( "webpageCallbacks { type: 'collision',       arg: {   "+objectName+"}" )
+
 }
 
 const webpageServer = new WebpageServer(webpageCallbacks)
+/*
 const server        = new TCPServer( {
     port: portNumber,
     onClientConnected: ()      => { if(isWebpageRead()) webpageCallbacks.onWebpageReady() },
@@ -32,3 +39,4 @@ function readPortNumberFromArguments() {
 
     return port
 }
+*/

@@ -37,11 +37,19 @@ THE CODE IN THIS DIR CAN be used in index.html
 app.use(express.static(path.join(__dirname, './jscode')));
 
 //HANDLE POST from 'conventional' HTML GUI
+/*
 app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
 app.post("/s", function(req, res,next)  { handlePostMove("moveBackward","moving back", req,res,next); });
 app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving right",   req,res,next); });
 app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
+*/
+app.post("/w", function(req, res,next)  { postTo8090("moveForward");  next(); });
+app.post("/s", function(req, res,next)  { postTo8090("moveBackward"); next(); });
+app.post("/r", function(req, res,next)  { postTo8090("turnRight");    next(); });
+app.post("/l", function(req, res,next)  { postTo8090("turnLeft");     next(); });
+app.post("/h", function(req, res,next)  { postTo8090("alarm");        next(); });
+
 
 //HANDLE  utility commands
 app.post("/conns", function(req, res,next)         { connectionHistory(); next()  });
@@ -77,7 +85,7 @@ function clearDisplayArea(){
 
 function handlePostMove( cmd, msg, req, res, next ){
     console.log( "server |  handlePostMove in server.js "  + cmd )
-    forward(cmd, "localhost");
+    forward(cmd, "localhost");  //via TCP: NO MORE
     updateRobotState(  cmd );
     //res.sendFile(path.join(__dirname, "index.html"));  //
     //res.sendStatus(200);
@@ -137,9 +145,9 @@ wsServer.on('connection', socket => {
      });
 */
   socket.on('message', message => {
-    console.log("server | socket-on received from a client: "+message);
-    if( message=="r" || message=="l" || message=="h" || message=="w" || message=="s" ){
-        forward( message  );   //DISCONNECT
+    console.log("server | socket-on received: "+message);
+    if( message=="turnRight" || message=="turnLeft" || message=="alarm" || message=="moveForward" || message=="moveBackward" ){
+        postTo8090(message);
         //rimbalzo del comando al
         //wsServer.clients.forEach(client => { client.send(  message ); });
     }else if( message.includes("close")) {

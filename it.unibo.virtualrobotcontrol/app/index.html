@@ -40,12 +40,17 @@ function byeFunction() {
  Seems your browser doesn't support Javascript! Websocket relies on Javascript being
  enabled. Please enable Javascript and reload this page!</h2></noscript>
 
-<p>My server works on <span id="myIp"></span> and  I'm connected to it via <tt>socket.io</tt>.<br/></p>
+<pre>The server works on <span id="myIp"></span> and exploits <tt>socket.io</tt></pre>
 <h2>Robot Console</h2>
 
  <div style="background-color: #D2B4DE">
 
   <h5>Using HTML-form with POST</h5>
+
+  <pre>Example:
+&lt;form action="/w" method="post">&lt;input type="submit" style="font-size:20px;" value="forward" >&lt;/form>
+  </pre>
+  <pre>click --> POST --> server </pre>
   <hr/>
   <center>
    <table >
@@ -53,35 +58,35 @@ function byeFunction() {
      <td></td>
      <td></td>
      <td align="center">
-      <form action="/w" method="post"><input type="submit" style="font-size:30px;" value="forward" ></form>
+       <form action="/w" method="post"><input type="submit" style="font-size:20px;" value="forward" ></form>
      </td>
      <td></td>
      <td></td>
     </tr>
     <tr>
      <td align="center">
-      <form action="/z" method="post"><input type="submit" style="font-size:30px;"  value="z" ></form>
+      <form action="/z" method="post"><input type="submit" style="font-size:20px;"  value="z" ></form>
      </td>
      <td align="center">
-      <form action="/l" method="post">  <input type="submit" style="font-size:30px;"  value="left" ></form>
+      <form action="/l" method="post">  <input type="submit" style="font-size:20px;"  value="left" ></form>
      </td>
      <td align="center">
       <form action="/h" method="post">
-       <font size="3" color="red"><input type="submit" style="font-size:40px;"  value="stop"  ></font>
+       <font size="3" color="red"><input type="submit" style="font-size:30px"  value="stop"  ></font>
       </form>
      </td>
      <td align="center">
-      <form action="/r" method="post"><input type="submit" style="font-size:30px;" value="right"></form>
+      <form action="/r" method="post"><input type="submit" style="font-size:20px;" value="right"></form>
      </td>
      <td align="center">
-      <form action="/x" method="post"><input type="submit" style="font-size:30px;"  value="x" ></form>
+      <form action="/x" method="post"><input type="submit" style="font-size:20px;"  value="x" ></form>
      </td>
     </tr>
     <tr>
      <td></td>
      <td></td>
      <td align="center">
-      <form action="/s" method="post"><input type="submit" style="font-size:30px;"  value="backward"  ></form>
+      <form action="/s" method="post"><input type="submit" style="font-size:20px;"  value="backward"  ></form>
      </td>
      <td></td>
      <td></td>
@@ -91,13 +96,17 @@ function byeFunction() {
  <hr/>
 
   <h5>Using post with jQuery to 8090</h5>
+  <pre>click --> jqutils in the page --> doPostToWenv (creates a HTML form) --> server </pre>
   <hr/>
   <center>
    <table style="width:50%">
     <tbody>
     <tr>
-     <td><button id="lpost8090">turnLeft8090</button></td>
-     <td><button id="rpost8090">turnRight8090</button></td>
+     <td><button id="lpost8090">l8090</button></td>
+     <td><button id="rpost8090">r8090</button></td>
+     <td><button id="wpost8090">w8090</button></td>
+     <td><button id="spost8090">s8090</button></td>
+     <td><button id="hpost8090">h8090</button></td>
     </tr>
     </tbody>
    </table>
@@ -105,13 +114,18 @@ function byeFunction() {
   <hr/>
 
   <h5>Using post with jQuery</h5>
+  <pre>click --> jqutils in the page --> doPostToWenv (dynamically creates a HTML form) </pre>
   <hr/>
   <center>
   <table style="width:50%">
    <tbody>
    <tr>
-    <td><button id="ll">turnLeft</button></td>
-    <td><button id="rr">turnRight</button></td>
+    <td><button id="ljquery">ljquery</button></td>
+    <td><button id="rjquery">rjquery</button></td>
+    <td><button id="wjquery">wjquery</button></td>
+    <td><button id="sjquery">sjquery</button></td>
+    <td><button id="hjquery">hjquery</button></td>
+
    </tr>
    </tbody>
   </table>
@@ -124,12 +138,11 @@ function byeFunction() {
   <table style="width:50%">
    <tbody>
    <tr>
-    <td>
-     <button id="lsocket" class="btn btn-default" type="submit">l</button>
-    </td>
-    <td>
-     <button id="rsocket" class="btn btn-default" type="submit">r</button>
-    </td>
+    <td> <button id="lsocket" >l</button> </td>
+    <td> <button id="rsocket" >r</button> </td>
+    <td> <button id="wsocket" >w</button> </td>
+    <td> <button id="ssocket" >s</button> </td>
+    <td> <button id="hsocket" >h</button> </td>
    </tr>
 
    </tbody>

@@ -52,20 +52,25 @@ function startHttpServer() {
             req.on('end', function () {	//elaborate data received JSon: { robotmove: turnLeft | turnRight | ... }
      		var moveTodo = JSON.parse(data).robotmove
     		console.log('POST moveTodo  ' + moveTodo  );
-	   	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, 800) );	//execute the command on the scene
+	   	    Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, 800) );	//execute the command on the scene
 		//Configure the answer
     		res.writeHead(200, {
       			'Content-Type': 'text/json'
     		});
     		res.statusCode=200;
-    		res.write(JSON.stringify(data));
-    		res.end();
+    		//res.write(JSON.stringify(data));	
+			//WE must wait for a collision
+			
+			setTimeout(function() { res.write(  target  ); target = "notarget"; res.end();}, 1500);			//maxtime for a move	
+    		
   	   });
 	});
 
 
     http.listen(8090)
 }
+
+var target = "notarget"
 
 function initSocketIOServer(callbacks) {
 	console.log("WebpageServer | initSocketIOServer socketCount="+socketCount)
@@ -80,7 +85,11 @@ function initSocketIOServer(callbacks) {
         if( socketCount == 0) console.log("WebpageServer | MASTER webpage ready")
 
         socket.on( 'sonarActivated', callbacks.onSonarActivated )
-        socket.on( 'collision',      callbacks.onCollision )
+        socket.on( 'collision',     (obj) => { 
+		    console.log( "collision detected " + obj ); 
+		    target = obj;
+			//callbacks.onCollision
+			} )
         socket.on( 'disconnect',     () => { 
         		delete sockets[key]; 
         		webpageReady = false; 

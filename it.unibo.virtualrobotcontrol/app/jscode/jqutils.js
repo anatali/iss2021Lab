@@ -3,29 +3,30 @@ jscode/jqutils.js
 */
 
 $(document).ready(function(){
-  $("p").click(function(){
-    $(this).hide();
-  });
+  $("pre").click(function(){ $(this).hide(); });
 
 //USED BY SOCKET.IO-BASED GUI
-    $( "#rsocket" ).click(function() {  requestTodoTheMove("r") });    //defined in webSocketUtils
-    $( "#lsocket" ).click(function() {  requestTodoTheMove("l") });
+    $( "#rsocket" ).click(function() {  requestTodoTheMove("turnRight") });    //defined in webSocketUtils
+    $( "#lsocket" ).click(function() {  requestTodoTheMove("turnLeft") });
+    $( "#wsocket" ).click(function() {  requestTodoTheMove("moveForward") });
+    $( "#ssocket" ).click(function() {  requestTodoTheMove("moveBackward") });
+    $( "#hsocket" ).click(function() {  requestTodoTheMove("alarm") });
 
 });
 
 //USED BY POST with jQuery
 $(function () {
-    $( "#ww" ).click(function() { doPostToWenv( "w") });     //defined here
-    $( "#ss" ).click(function() { doPostToWenv( "s") });
-    $( "#rr" ).click(function() { doPostToWenv( "r") });
-    $( "#ll" ).click(function() { doPostToWenv( "l") });
-    $( "#zz" ).click(function() { doPostToWenv( "z") });
-    $( "#xx" ).click(function() { doPostToWenv( "x") });
-    $( "#pp" ).click(function() { doPostToWenv( "p") });
-    $( "#hh" ).click(function() { doPostToWenv( "h") });
+    $( "#wjquery" ).click(function() { doPostToWenv( "w") });     //defined here
+    $( "#sjquery" ).click(function() { doPostToWenv( "s") });
+    $( "#rjquery" ).click(function() { doPostToWenv( "r") });
+    $( "#ljquery" ).click(function() { doPostToWenv( "l") });
+    $( "#hjquery" ).click(function() { doPostToWenv( "h") });
 
-    $( "#lpost8090").click(function() { doPostToWenv( "l8090") })
+    $( "#lpost8090").click(function() { doPostToWenv( "l8090") })   //defined here
     $( "#rpost8090").click(function() { doPostToWenv( "r8090") })
+    $( "#wpost8090").click(function() { doPostToWenv( "w8090") })
+    $( "#spost8090").click(function() { doPostToWenv( "s8090") })
+    $( "#hpost8090").click(function() { doPostToWenv( "h8090") })
 
 //USED BY the human user
     $( "#displayconns" ).click(function() {  doPostToWenv( "conns") });  //defined here

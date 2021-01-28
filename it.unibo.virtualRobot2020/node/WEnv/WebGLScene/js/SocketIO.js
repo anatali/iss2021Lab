@@ -1,4 +1,4 @@
-import eventBus from './eventBus/EventBus.js'
+import eventBus       from './eventBus/EventBus.js'
 import eventBusEvents from './eventBus/events.js'
 
 import { parseConfiguration, 
@@ -19,7 +19,11 @@ export default (onKeyUp, onKeyDown, myonKeyDown) => {
     socket.on( 'disconnect', () => console.log("server disconnected") )
 
     eventBus.subscribe( eventBusEvents.sonarActivated, sonarId => socket.emit('sonarActivated', sonarId))
-    eventBus.subscribe( eventBusEvents.collision, objectName => { console.log(`collision: ${objectName}`); socket.emit('collision', objectName); stopMoving(); })
+    eventBus.subscribe( eventBusEvents.collision, objectName => { 
+		console.log(`collision: ${objectName}`); 
+		socket.emit('collision', objectName); 	//va al callback del main.js
+		stopMoving(); 
+	})
 
     const keycodes = {
         W: 87,
