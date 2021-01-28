@@ -40,50 +40,30 @@ function startHttpServer() {
 		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
 	     }else{
 		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
-                alreadyConnected = true;
+                //See socket.on( 'disconnect' ...
 	     }
-/*
-             }else if( socketCount > 1 ) {	//the alreadyConnected is still on
-		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
-             }else{
-		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
-                alreadyConnected = true;
-	     }
-*/
     })
 
-//EXPERIMENT Jan 2021
-    app.get("/r", (req, res ) => { 	 
-	   Object.keys(sockets).forEach( key => sockets[key].emit('turnRight', 800) );  //non può mantenere la pagina
-           //res.sendFile('index.html', { root: './../../WebGLScene' }) 
-	});
+	//USING POST: by AN Jan 2021
 
-    app.post("/api/move", function(req, res,next)  {  
-		var data = ""
-	    
-		  req.on('data', function (chunk) {
-    			data += chunk;
-  		   });
-  req.on('end', function () {
-    console.log('POST data received ' + data);
-    var moveTodo = JSON.parse(data).robotmove
-    console.log('POST moveTodo  ' + moveTodo  );
-	   Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, 800) );
-
-    res.writeHead(200, {
-      'Content-Type': 'text/json'
-    });
-    res.statusCode=200;
-    res.write(JSON.stringify(data));
-    res.end();
-  });
-	   //Object.keys(sockets).forEach( key => sockets[key].emit('turnLeft', 800) );
-           //res.statusCode=200; 
-	   //res.end("WebpageServer | l done");  
+    	app.post("/api/move", function(req, res,next)  {  
+	    var data = ""	    
+	    req.on('data', function (chunk) { data += chunk; }); //accumulate data sent by POST
+            req.on('end', function () {	//elaborate data received JSon: { robotmove: turnLeft | turnRight | ... }
+     		var moveTodo = JSON.parse(data).robotmove
+    		console.log('POST moveTodo  ' + moveTodo  );
+	   	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, 800) );	//execute the command on the scene
+		//Configure the answer
+    		res.writeHead(200, {
+      			'Content-Type': 'text/json'
+    		});
+    		res.statusCode=200;
+    		res.write(JSON.stringify(data));
+    		res.end();
+  	   });
 	});
 
 
-//END EXPERIMENT
     http.listen(8090)
 }
 
@@ -107,7 +87,7 @@ function initSocketIOServer(callbacks) {
           		socketCount--;
 			alreadyConnected = ( socketCount == 0 )
         		console.log("WebpageServer disconnect | socketCount="+socketCount)
-        		})
+        	})
     })
     
 

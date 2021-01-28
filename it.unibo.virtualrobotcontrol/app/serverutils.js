@@ -2,15 +2,17 @@
 serverUtils.js
 */
 
-//const axios    = require('axios')
+const axios    = require('axios')
 const net      = require('net');
 
 const sep      = ";"
 
-var stompClient = null;
 var host    = "localhost";
 var counter = 0;
 
+/*
+Invia su TCP
+*/
     function connectAndSend( msg  ){
     var client = new net.Socket();
     client.connect(8999, host, () => {
@@ -41,6 +43,24 @@ function forward( cmd  ){
     connectAndSend(msg);
 }//forward
 
+/*
+*/
+function postTo8090(move){
+const URL = 'http://localhost:8090/api/move' ;
+
+axios
+  .post(URL, {
+    robotmove: move
+  })
+  .then(res => {
+    console.log(`statusCode: ${res.statusCode}`)
+    //console.log(res)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+}
 
 
-exports.forward   = forward;
+//exports.forward   = forward;
+module.exports = { forward, connectAndSend, postTo8090 }

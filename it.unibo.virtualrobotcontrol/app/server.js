@@ -3,14 +3,91 @@ let path       = require('path');
 let fs         = require('fs');
 let bodyParser = require('body-parser');
 let app        = express();
-//let utils      = require('./serverutils');
-const net      = require('net');
+//const net      = require('net');
 //const request  = require('request') //deprecated
-const axios    = require('axios')
 
+const { forward, connectAndSend, postTo8090 } = require('./serverutils')
 var history    = "";
+
+// view engine setup;
+app.set('views', path.join(__dirname, './', 'views'));
+app.set('view engine', 'ejs');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.get('/', function (req, res) {
+	console.log("server get " + __dirname );
+    res.sendFile(path.join(__dirname, "index.html"));
+  });
+
+app.get('/info', function (req, res) {
+  res.send( history );
+});
+
+app.get('/picture', function (req, res) {
+  let img = fs.readFileSync(path.join(__dirname, "images/profile-1.jpg"));
+  res.writeHead(200, {'Content-Type': 'image/jpg' });
+  res.end(img, 'binary');
+});
+
 /*
-WebSockets
+THE CODE IN THIS DIR CAN be used in index.html
+*/
+app.use(express.static(path.join(__dirname, './jscode')));
+
+//HANDLE POST from 'conventional' HTML GUI
+app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
+app.post("/s", function(req, res,next)  { handlePostMove("moveBackward","moving back", req,res,next); });
+app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving right",   req,res,next); });
+app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
+app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
+
+//HANDLE  utility commands
+app.post("/conns", function(req, res,next)         { connectionHistory(); next()  });
+app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()   });
+
+//HANDLE POST from HTML GUI to send a POST to Wenv 8090
+app.post("/l8090", function(req, res,next)  { postTo8090('turnLeft'); next()  });
+app.post("/r8090", function(req, res,next)  { postTo8090('turnRight'); next()  });
+app.post("/w8090", function(req, res,next)  { postTo8090('moveForward'); next()  });
+app.post("/s8090", function(req, res,next)  { postTo8090('moveBackward'); next()  });
+app.post("/h8090", function(req, res,next)  { postTo8090('alarm'); next()  });
+
+
+/*
+* ====================== REPRESENTATION ================
+*/
+app.use( function(req,res){
+	console.log("server | SENDING THE ANSWER " + res  + " json:" + req.accepts('json') );
+	try{
+// if (req.accepts('json')) { res.send(history);		//give answer to curl / postman } else
+	  //return res.render('index' );  //NO: we loose the message sent via socket.io
+	   res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
+	}catch(e){
+	    console.log("server | SORRY ..." + e);}
+	}
+);
+
+
+
+function clearDisplayArea(){
+    history = ""
+}
+
+function handlePostMove( cmd, msg, req, res, next ){
+    console.log( "server |  handlePostMove in server.js "  + cmd )
+    forward(cmd, "localhost");
+    updateRobotState(  cmd );
+    //res.sendFile(path.join(__dirname, "index.html"));  //
+    //res.sendStatus(200);
+    next();     //see REPRESENTATION
+}
+
+/*
+============================================================================================
+WebSockets SECTION
+============================================================================================
 See https://www.ably.io/topic/websockets
 https://medium.com/hackernoon/implementing-a-websocket-server-with-node-js-d9b78ec5ffa8
 See https://www.html.it/pag/54040/websocket-server-con-node-js/
@@ -19,7 +96,6 @@ var clients = 0;
 const WebSocket   = require('ws');
 
 const wsServer    = new WebSocket.Server({ server: app.listen(8085) });
-
 
 function updateRobotState(message){
     history = history + "<br/>" + message;
@@ -48,7 +124,7 @@ function displayHistory(){
 const server    = new WebSocket.Server({ server: app.listen(8085) });
 */
 wsServer.on('connection', socket => {
-        console.log(`server | client connected `)
+        console.log("server | client connected ")
         displayHistory()
 /*
      socket.on('disconnection', function () {
@@ -61,13 +137,11 @@ wsServer.on('connection', socket => {
      });
 */
   socket.on('message', message => {
-    console.log(`server | socket-on received from a client: ${message}`);
+    console.log("server | socket-on received from a client: "+message);
     if( message=="r" || message=="l" || message=="h" || message=="w" || message=="s" ){
-        //utils.forward( message  );   //DISCONNECT
+        forward( message  );   //DISCONNECT
         //rimbalzo del comando al
-        wsServer.clients.forEach(client => {
-            client.send(  message );
-        });
+        //wsServer.clients.forEach(client => { client.send(  message ); });
     }else if( message.includes("close")) {
         /*
         var clients = wsServer.clients.size;
@@ -76,103 +150,15 @@ wsServer.on('connection', socket => {
               client.send(   history );
         });*/
         //connectionHistory();
-        console.log(`server | socket-on - the client is disconnected `);
+        console.log("server | socket-on - the client is disconnected ");
     }
   });
 });
-/*
-wsServer.on('close', () => {
-    alert("disconnection")
-});
-*/
-
-//-------------------------------------- WebSockets
-
-// view engine setup;
-app.set('views', path.join(__dirname, './', 'views'));
-app.set('view engine', 'ejs');
-
-
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-
-app.get('/', function (req, res) {
-	console.log("server get " + __dirname );
-    res.sendFile(path.join(__dirname, "index.html"));
-  });
-
-app.get('/info', function (req, res) {
-  res.send( history );
-});
-
-app.get('/picture', function (req, res) {
-  let img = fs.readFileSync(path.join(__dirname, "images/profile-1.jpg"));
-  res.writeHead(200, {'Content-Type': 'image/jpg' });
-  res.end(img, 'binary');
-});
-
-/*
-THE CODE IN THIS DIR CAN be used in index.html
-*/
-app.use(express.static(path.join(__dirname, './jscode')));
-
-app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
-app.post("/s", function(req, res,next)  { handlePostMove("moveBackward","moving back", req,res,next); });
-app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving right",   req,res,next); });
-app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
-app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
-
-
-app.post("/conns", function(req, res,next)  { connectionHistory(); next()  });
-app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()  });
-
-app.post("/l8090", function(req, res,next)  { postTo8090('turnLeft'); next()  });
-app.post("/r8090", function(req, res,next)  { postTo8090('turnRight'); next()  });
-
-function clearDisplayArea(){
-    history = ""
-    //document.getElementById("robotDisplay").innerHTML = history;
-}
-/*
-* ====================== REPRESENTATION ================
-*/
-app.use( function(req,res){
-	console.log("SENDING THE ANSWER " + res  + " json:" + req.accepts('json') );
-	try{
-/*
-	   if (req.accepts('json')) {
-	       res.send(history);		//give answer to curl / postman
-	   } else {
-	       res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
-	   };
-*/
-	   //return res.render('index' );  //NO: we loose the message sent via socket.io
-	   res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
-	}catch(e){console.info("SORRY ..." + e);}
-	}
-);
-
-/*
- * ============ ERROR HANDLING =======
- */
-
-
-
-function handlePostMove( cmd, msg, req, res, next ){
-    //result = "Web server done: " + cmd;
-    console.log( "handlePostMove in server.js "  + cmd )
-    forward(cmd, "localhost");
-    updateRobotState(  cmd );
-    //res.sendFile(path.join(__dirname, "index.html"));  //
-    //res.sendStatus(200);
-    next();     //see REPRESENTATION
-}
+//-------------------------------------- WebSockets SECTION END
 
 /*
 ========================================================================
-*/
+
 const sep      = ";"
 
 var stompClient = null;
@@ -212,6 +198,27 @@ function forward( cmd  ){
     console.log('serverUtils | forward ' + msg ); //+ " client=" + client
     connectAndSend(msg);
 }//forward
+*/
+/*
+ * POST request to Wenv server on 8090 using axios
+ * since request is deprecated
+
+function postTo8090(move){
+const URL = 'http://localhost:8090/api/move' ;
+
+axios
+  .post(URL, {
+    robotmove: move
+  })
+  .then(res => {
+    console.log(`statusCode: ${res.statusCode}`)
+    //console.log(res)
+  })
+  .catch(error => {
+    console.error(error)
+  })
+}
+*/
 
 //HTTP POST request to 8090
 /*
@@ -235,27 +242,27 @@ request.post(
 )
 }
 */
-function postTo8090(move){
 
-const URL = 'http://localhost:8090/api/move' ;
+/*
+ * ============ ERROR HANDLING =======
+ */
+ // catch 404 and forward to error handler;
+ app.use(function(req, res, next) {
+   var err = new Error('Not Found');
+   err.status = 404;
+   next(err);
+ });
 
+ // error handler;
+ app.use(function(err, req, res, next) {
+   // set locals, only providing error in development
+   res.locals.message = err.message;
+   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//HTTP requests
-axios
-  .post(URL, {
-    robotmove: move
-  })
-  .then(res => {
-    console.log(`statusCode: ${res.statusCode}`)
-    //console.log(res)
-  })
-  .catch(error => {
-    console.error(error)
-  })
-
-
-}
-
+   // render the error page;
+   res.status(err.status || 500);
+   res.render('error');
+ });
 
 
 app.listen(3000, function () {

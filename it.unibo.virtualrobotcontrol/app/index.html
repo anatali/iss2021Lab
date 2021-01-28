@@ -13,27 +13,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>  -->
 
  <script src="https://cdn.jsdelivr.net/webjars/org.webjars/jquery/2.1.0/jquery.js"></script>
- <script type="text/javascript" src="jqutils.js"></script>
  <!--Your JavaScript file must be included below the jQuery library in the document or it will not work. -->
-
- <!--
-  <script type="text/javascript" src="utils.js"></script>
-  <script type="text/javascript" src="stomp.js"></script>
-  <script type="text/javascript" src="stompUtils.js"></script>
-  -->
+ <script type="text/javascript" src="jqutils.js"></script>
  <script type="text/javascript" src="webSocketUtils.js"></script>
 
  <script>
     function myIp() {
       var ip = location.host;
       document.getElementById("myIp").innerHTML = ip;
-
-      //chiedo history e la metto in robotDisplay area
-      //document.getElementById("robotDisplay").innerHTML = "ask history";
     }
 
 function byeFunction() {
-  //alert("Thank you for visiting W3Schools!");
+  //alert("Thank you for visiting  ");
   console.log("bye");
   socket.send("WebSocket close ");
   //socket.close();
