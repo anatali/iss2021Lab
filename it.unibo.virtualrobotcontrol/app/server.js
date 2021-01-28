@@ -5,6 +5,8 @@ let bodyParser = require('body-parser');
 let app        = express();
 //let utils      = require('./serverutils');
 const net      = require('net');
+//const request  = require('request') //deprecated
+const axios    = require('axios')
 
 var history    = "";
 /*
@@ -46,7 +48,7 @@ function displayHistory(){
 const server    = new WebSocket.Server({ server: app.listen(8085) });
 */
 wsServer.on('connection', socket => {
-        console.log(`client connected `)
+        console.log(`server | client connected `)
         displayHistory()
 /*
      socket.on('disconnection', function () {
@@ -59,7 +61,7 @@ wsServer.on('connection', socket => {
      });
 */
   socket.on('message', message => {
-    console.log(`server | received from a client: ${message}`);
+    console.log(`server | socket-on received from a client: ${message}`);
     if( message=="r" || message=="l" || message=="h" || message=="w" || message=="s" ){
         //utils.forward( message  );   //DISCONNECT
         //rimbalzo del comando al
@@ -74,7 +76,7 @@ wsServer.on('connection', socket => {
               client.send(   history );
         });*/
         //connectionHistory();
-        console.log(`client disconnected `);
+        console.log(`server | socket-on - the client is disconnected `);
     }
   });
 });
@@ -116,7 +118,6 @@ THE CODE IN THIS DIR CAN be used in index.html
 */
 app.use(express.static(path.join(__dirname, './jscode')));
 
-
 app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
 app.post("/s", function(req, res,next)  { handlePostMove("moveBackward","moving back", req,res,next); });
 app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving right",   req,res,next); });
@@ -127,6 +128,9 @@ app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",        
 app.post("/conns", function(req, res,next)  { connectionHistory(); next()  });
 app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()  });
 
+app.post("/l8090", function(req, res,next)  { postTo8090('turnLeft'); next()  });
+app.post("/r8090", function(req, res,next)  { postTo8090('turnRight'); next()  });
+
 function clearDisplayArea(){
     history = ""
     //document.getElementById("robotDisplay").innerHTML = history;
@@ -135,9 +139,8 @@ function clearDisplayArea(){
 * ====================== REPRESENTATION ================
 */
 app.use( function(req,res){
-	//console.info("SENDING THE ANSWER " + res  + " json:" + req.accepts('json') );
+	console.log("SENDING THE ANSWER " + res  + " json:" + req.accepts('json') );
 	try{
-	    //console.log("answer> "+ Object(res)  );
 /*
 	   if (req.accepts('json')) {
 	       res.send(history);		//give answer to curl / postman
@@ -210,23 +213,48 @@ function forward( cmd  ){
     connectAndSend(msg);
 }//forward
 
-
+//HTTP POST request to 8090
 /*
-//useful for HTTP requests
+//DEPRECATED
+function postTo8090(move){
+request.post(
+  'http://localhost:8090/api/'+move,
+  {
+    json: {
+      move: ''+move,
+    },
+  },
+  (error, res, body) => {
+    if (error) {
+      console.error(error)
+      return
+    }
+    console.log(`statusCode: ${res.statusCode}`)
+    console.log(body)
+  }
+)
+}
+*/
+function postTo8090(move){
+
+const URL = 'http://localhost:8090/api/move' ;
+
+
+//HTTP requests
 axios
-  .post('http://192.168.1.7:8999', {
-    todo: msg
+  .post(URL, {
+    robotmove: move
   })
   .then(res => {
     console.log(`statusCode: ${res.statusCode}`)
-    console.log(res)
+    //console.log(res)
   })
   .catch(error => {
     console.error(error)
   })
-  		res.end(result, 'text')
 
-*/
+
+}
 
 
 

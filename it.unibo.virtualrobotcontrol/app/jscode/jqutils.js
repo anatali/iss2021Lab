@@ -20,6 +20,9 @@ $(function () {
     $( "#pp" ).click(function() { sendRequestData( "p") });
     $( "#hh" ).click(function() { sendRequestData( "h") });
 
+    $( "#lpost8090").click(function() { sendRequestData( "l8090") })
+    $( "#rpost8090").click(function() { sendRequestData( "r8090") })
+
 //USED BY the human user
     $( "#displayconns" ).click(function() {  sendRequestData( "conns") });  //defined here
     $( "#clear" ).click(function() {  sendRequestData( "clearHistory") });
@@ -27,14 +30,24 @@ $(function () {
 });
 
 
-function sendRequestData( params, method) {
-    console.log("sendRequestData in jscode/utils " + params);
+function sendRequestData( params, method ) {
+     var myip = location.host;
+     var url = "http://"+myip+"/"+params
+     doPost(params, method, url);
+}
+function sendRequestDataTo8090( params, method ) {
+     var url = "http://localhost:8090/api/"+params;
+     console.log("jqutils ! sendRequestData8090 url=" + url);
+     doPost(params, "post", url);
+}
+
+function doPost( params, method, url ) {
+    console.log("sendRequestData in jscode/jqutils " + params);
     method = method || "post"; // il metodo POST usato di default
     //console.log(" sendRequestData  params=" + params + " method=" + method);
     var form = document.createElement("form");
     form.setAttribute("method", method);
-    myip = location.host;
-    form.setAttribute("action", "http://"+myip+"/"+params);
+    form.setAttribute("action", url);
     var hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", "move");
@@ -46,6 +59,6 @@ function sendRequestData( params, method) {
     form.submit();
     document.body.removeChild(form);
     console.log("body children num= "+document.body.children.length );
-
 }
+
 

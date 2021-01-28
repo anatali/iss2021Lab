@@ -26,7 +26,7 @@ var counter = 0;
     });
     client.on('data', (data) => {
       var v = data.toString();
-      console.log("serverUtils | from wenv server: "+ v);
+      console.log("serverUtils | receives from wenv server: "+ v);
       //addToHistory(v);
     });
     client.on('end', () => {

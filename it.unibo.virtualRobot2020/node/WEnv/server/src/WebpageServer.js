@@ -6,7 +6,6 @@ const app      = require('express')()
 const express  = require('express')
 const http     = require('http').Server(app)
 const socketIO = require('socket.io')(http)
-const nocache  = require('nocache');
 
 const sockets   = {}
 let socketCount = -1
@@ -34,19 +33,14 @@ function startServer(callbacks) {
 
 function startHttpServer() {
     app.use(express.static('./../../WebGLScene'))
-	
-	app.use(nocache()); 
-	
-	
     app.get('/', (req, res) => { 
 	     console.log("WebpageServer | GET socketCount="+socketCount + " alreadyConnected =" + alreadyConnected )
              if( ! alreadyConnected ){
-				alreadyConnected = true;
-				res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
+		alreadyConnected = true;
+		res.sendFile('indexOk.html', { root: './../../WebGLScene' }) 
 	     }else{
-			    //alreadyConnected = true;
-		        res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
-                
+		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' }) 
+                alreadyConnected = true;
 	     }
 /*
              }else if( socketCount > 1 ) {	//the alreadyConnected is still on
@@ -64,9 +58,31 @@ function startHttpServer() {
            //res.sendFile('index.html', { root: './../../WebGLScene' }) 
 	});
 
-    app.get("/l", (req, res ) => { Object.keys(sockets).forEach( key => sockets[key].emit('turnLeft', 800) );
-           //res.sendFile('index.html', { root: './../../WebGLScene' }) 
+    app.post("/api/move", function(req, res,next)  {  
+		var data = ""
+	    
+		  req.on('data', function (chunk) {
+    			data += chunk;
+  		   });
+  req.on('end', function () {
+    console.log('POST data received ' + data);
+    var moveTodo = JSON.parse(data).robotmove
+    console.log('POST moveTodo  ' + moveTodo  );
+	   Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, 800) );
+
+    res.writeHead(200, {
+      'Content-Type': 'text/json'
+    });
+    res.statusCode=200;
+    res.write(JSON.stringify(data));
+    res.end();
+  });
+	   //Object.keys(sockets).forEach( key => sockets[key].emit('turnLeft', 800) );
+           //res.statusCode=200; 
+	   //res.end("WebpageServer | l done");  
 	});
+
+
 //END EXPERIMENT
     http.listen(8090)
 }
@@ -89,8 +105,8 @@ function initSocketIOServer(callbacks) {
         		delete sockets[key]; 
         		webpageReady = false; 
           		socketCount--;
-			    alreadyConnected = ( socketCount == 0 )
-        		console.log("WebpageServer disconnect | socketCount="+socketCount + " alreadyConnected=" + alreadyConnected)
+			alreadyConnected = ( socketCount == 0 )
+        		console.log("WebpageServer disconnect | socketCount="+socketCount)
         		})
     })
     
