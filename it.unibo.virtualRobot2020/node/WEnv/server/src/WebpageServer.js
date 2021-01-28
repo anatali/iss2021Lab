@@ -59,9 +59,8 @@ function startHttpServer() {
     		});
     		res.statusCode=200;
     		//res.write(JSON.stringify(data));	
-			//WE must wait for a collision
-			
-			setTimeout(function() { res.write(  target  ); target = "notarget"; res.end();}, 1500);			//maxtime for a move	
+			//WE must wait, since we could have a collision			
+			setTimeout(function() { res.write(  target  ); target = "notarget"; res.end();}, 800);	//maxtime for a move	
     		
   	   });
 	});
