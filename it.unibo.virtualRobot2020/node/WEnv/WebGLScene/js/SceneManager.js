@@ -15,7 +15,7 @@ import {injectsceneConstants} from './utils/SceneConfigUtils.js'  					//DEC 201
 import dat from '../node_modules/dat.gui/build/dat.gui.module.js'
 
 export default (canvas, mirror) => {  //
-alert("SceneManager | mirror= " + mirror)
+//alert("SceneManager | mirror= " + mirror)
 	 
     const clock = new THREE.Clock()
     
