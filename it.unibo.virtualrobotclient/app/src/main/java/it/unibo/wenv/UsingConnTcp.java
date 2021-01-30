@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class UsingConnTcp {
-	private static String localHostName    = "192.168.1.7"; //"localhost";
+	private static String localHostName    = "localhost"; //"localhost"; 192.168.1.7
 	private static String containerHostName= "wenv";
 	private static int port                = 8999;
 	private static String sep              =";";

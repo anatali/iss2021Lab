@@ -67,7 +67,8 @@ function startHttpServer() {
 			setTimeout(function() { 
 				const collision = target != 'notarget'
 				console.log('POST collision  ' + collision  );
-				const answer =  JSON.stringify( "{ \"collision\" : " +  collision + ", \"move\": \"" + moveTodo + "\"}" )
+				const answer = '{ "collision" : "' +  collision + '", "move": "' + moveTodo + '"}'
+				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
 				
 				res.write(  answer  ); 
 				target = "notarget"; 	//reset
