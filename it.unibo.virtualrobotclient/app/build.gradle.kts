@@ -63,7 +63,8 @@ dependencies {
 //HTTP
     // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
-
+//SOCKET.IO
+    implementation("com.github.nkzawa:socket.io-client:0.6.0")
 }
 
 application {

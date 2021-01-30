@@ -15,7 +15,7 @@ var alreadyConnected = false
 let webpageReady = false
 const moveTime   = 800
 const serverPort = 8090
-var target = "notarget"
+var target       = "notarget"
 
 function WebpageServer(callbacks) {
     startServer(callbacks)
@@ -66,11 +66,11 @@ function startHttpServer() {
 			//WE must wait, since we could have a collision			
 			setTimeout(function() { 
 				const collision = target != 'notarget'
-				console.log('POST collision  ' + collision  );
-				const answer = '{ "collision" : "' +  collision + '", "move": "' + moveTodo + '"}'
-				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
 				
-				res.write(  answer  ); 
+				const answer = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
+				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
+				console.log('WebpageServer | /api/move  answer= ' + JSON.stringify(answer)  );
+				res.write(  JSON.stringify(answer)  ); 
 				target = "notarget"; 	//reset
 				res.end();
 				}, 
@@ -99,9 +99,10 @@ function initSocketIOServer(callbacks) {
 
         socket.on( 'sonarActivated', callbacks.onSonarActivated )
         socket.on( 'collision',     (obj) => { 
-		    console.log( "collision detected " + obj ); 
+		    console.log( "collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length ); 
 		    target = obj;
-			//callbacks.onCollision
+			callbacks.onCollision
+			
 			} )
         socket.on( 'disconnect',     () => { 
         		delete sockets[key]; 
