@@ -56,10 +56,8 @@ function startHttpServer() {
      		var moveTodo = JSON.parse(data).robotmove
     		console.log('POST moveTodo  ' + moveTodo  );
 	   	    Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	//execute the command on the scene
-		//Configure the answer
-    		res.writeHead(200, {
-      			'Content-Type': 'text/json'
-    		});
+		    //Configure the answer
+    		res.writeHead(200, { 'Content-Type': 'text/json' });
     		res.statusCode=200
 			 
     		//res.write(JSON.stringify(data));	
@@ -71,10 +69,9 @@ function startHttpServer() {
 				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
 				console.log('WebpageServer | /api/move  answer= ' + JSON.stringify(answer)  );
 				res.write(  JSON.stringify(answer)  ); 
-				target = "notarget"; 	//reset
+				target = "notarget"; 	//reset target
 				res.end();
-				}, 
-				moveTime);	 	
+			}, moveTime);	 	
     		
   	   });
 	});
@@ -95,13 +92,13 @@ function initSocketIOServer(callbacks) {
         
         callbacks.onWebpageReady()
         webpageReady = true
-        if( socketCount == 0) console.log("WebpageServer | MASTER webpage ready")
+        if( socketCount == 0) console.log("WebpageServer connection | MASTER webpage ready")
 
         socket.on( 'sonarActivated', callbacks.onSonarActivated )
         socket.on( 'collision',     (obj) => { 
-		    console.log( "collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length ); 
+		    console.log( "WebpageServer connection | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length ); 
 		    target = obj;
-			callbacks.onCollision
+			callbacks.onCollision(obj)
 			
 			} )
         socket.on( 'disconnect',     () => { 

@@ -1,9 +1,12 @@
+/*
+webguiServer.js
+*/
+
 let express    = require('express');
 let path       = require('path');
 let fs         = require('fs');
 let bodyParser = require('body-parser');
 let app        = express();
-//const net      = require('net');
 //const request  = require('request') //deprecated
 
 const { forward, connectAndSend, postTo8090 } = require('./serverutils')
@@ -44,11 +47,11 @@ app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving rig
 app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
 */
-app.post("/w", function(req, res,next)  { postTo8090("moveForward");  next(); });
-app.post("/s", function(req, res,next)  { postTo8090("moveBackward"); next(); });
-app.post("/r", function(req, res,next)  { postTo8090("turnRight");    next(); });
-app.post("/l", function(req, res,next)  { postTo8090("turnLeft");     next(); });
-app.post("/h", function(req, res,next)  { postTo8090("alarm");        next(); });
+app.post("/w", function(req, res,next)  { postTo8090("moveForward",addToHistory ); next(); });
+app.post("/s", function(req, res,next)  { postTo8090("moveBackward",addToHistory); next(); });
+app.post("/r", function(req, res,next)  { postTo8090("turnRight",addToHistory);    next(); });
+app.post("/l", function(req, res,next)  { postTo8090("turnLeft",addToHistory);     next(); });
+app.post("/h", function(req, res,next)  { postTo8090("alarm",addToHistory);        next(); });
 
 
 //HANDLE  utility commands
@@ -56,11 +59,11 @@ app.post("/conns", function(req, res,next)         { connectionHistory(); next()
 app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()   });
 
 //HANDLE POST from HTML GUI to send a POST to Wenv 8090
-app.post("/l8090", function(req, res,next)  { postTo8090('turnLeft'); next()  });
-app.post("/r8090", function(req, res,next)  { postTo8090('turnRight'); next()  });
-app.post("/w8090", function(req, res,next)  { postTo8090('moveForward'); next()  });
-app.post("/s8090", function(req, res,next)  { postTo8090('moveBackward'); next()  });
-app.post("/h8090", function(req, res,next)  { postTo8090('alarm'); next()  });
+app.post("/l8090", function(req, res,next)  { postTo8090('turnLeft',addToHistory); next()  });
+app.post("/r8090", function(req, res,next)  { postTo8090('turnRight',addToHistory); next()  });
+app.post("/w8090", function(req, res,next)  { postTo8090('moveForward',addToHistory); next()  });
+app.post("/s8090", function(req, res,next)  { postTo8090('moveBackward',addToHistory); next()  });
+app.post("/h8090", function(req, res,next)  { postTo8090('alarm',addToHistory); next()  });
 
 
 /*
@@ -145,9 +148,10 @@ wsServer.on('connection', socket => {
      });
 */
   socket.on('message', message => {
-    console.log("server | socket-on received: "+message);
+    console.log("server | socket-on received: "+message)
+    //addToHistory( message )
     if( message=="turnRight" || message=="turnLeft" || message=="alarm" || message=="moveForward" || message=="moveBackward" ){
-        postTo8090(message);
+        postTo8090(message, addToHistory);
         //rimbalzo del comando al
         //wsServer.clients.forEach(client => { client.send(  message ); });
     }else if( message.includes("close")) {
@@ -163,93 +167,6 @@ wsServer.on('connection', socket => {
   });
 });
 //-------------------------------------- WebSockets SECTION END
-
-/*
-========================================================================
-
-const sep      = ";"
-
-var stompClient = null;
-var host    = "localhost";
-var counter = 0;
-
-    function connectAndSend( msg  ){
-    var client = new net.Socket();
-    client.connect(8999, host, () => {
-          // 'connect' listener
-          console.log('serverUtils | connected to virtual robot server on ' + host + " counter=" + ++counter );
-          client.write(msg+'\r\n');
-          //client.end();
-    })
-
-    client.on('error', () => {
-      console.log('serverUtils | ERROR with host=' + host);
-      //if( host="localhost" ) forward( cmd, "wenv")  //in the case of docker-compose
-    });
-    client.on('data', (data) => {
-
-      var v = data.toString().replace(";","").replace(";","")
-      if( v.includes("webpage-ready") ) return;
-      console.log("serverUtils | from wenv server: "+ v);   // {"type":"collision","arg":{"objectName":"bottle1"}}
-      const ev     = JSON.parse( v )
-      const target = JSON.parse( JSON.stringify( ev.arg ) )
-      addToHistory( "EVENT:" + ev.type + " TARGET:" + target.objectName );
-    })
-    client.on('end', () => {
-      console.log('serverUtils | disconnected from server counter=' + counter );
-    });
-}
-
-function forward( cmd  ){
-    payload    =  "{ \"type\": \"" + cmd + "\", \"arg\": 800 }";
-    msg        = sep+payload+sep;
-    console.log('serverUtils | forward ' + msg ); //+ " client=" + client
-    connectAndSend(msg);
-}//forward
-*/
-/*
- * POST request to Wenv server on 8090 using axios
- * since request is deprecated
-
-function postTo8090(move){
-const URL = 'http://localhost:8090/api/move' ;
-
-axios
-  .post(URL, {
-    robotmove: move
-  })
-  .then(res => {
-    console.log(`statusCode: ${res.statusCode}`)
-    //console.log(res)
-  })
-  .catch(error => {
-    console.error(error)
-  })
-}
-*/
-
-//HTTP POST request to 8090
-/*
-//DEPRECATED
-function postTo8090(move){
-request.post(
-  'http://localhost:8090/api/'+move,
-  {
-    json: {
-      move: ''+move,
-    },
-  },
-  (error, res, body) => {
-    if (error) {
-      console.error(error)
-      return
-    }
-    console.log(`statusCode: ${res.statusCode}`)
-    console.log(body)
-  }
-)
-}
-*/
 
 /*
  * ============ ERROR HANDLING =======

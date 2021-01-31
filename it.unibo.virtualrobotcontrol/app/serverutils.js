@@ -11,9 +11,39 @@ var host    = "localhost";
 var counter = 0;
 
 /*
+POST HTTP a Wenv
+*/
+async function postTo8090(move, updateHistory){
+const URL = 'http://localhost:8090/api/move' ;
+
+await axios({
+            url: URL,
+            data: { robotmove: move },
+            method: 'POST',
+            timeout: 1000,
+            headers: { 'Content-Type': 'application/json' }
+/*
+  .post(URL, {
+    robotmove: move
+*/
+    }).then(response => {
+    console.log("serverutils postTo8090 | statusCode: " + response.status  )
+    console.log(response.data)  //"collision": "false", "move": "turnLeft" }
+    const collision = JSON.parse( response.data ).collision
+    //console.log(  "collision=" + collision  )
+    console.log("serverutils postTo8090 | statusText: " + response.statusText);
+    if( response.status == "200")  updateHistory( move + " | collision=" + collision )
+    else updateHistory( move + " | response.status=" + response.status )
+ })
+  .catch(error => {
+    console.error(error)
+  })
+}
+
+/*
 Invia su TCP
 */
-    function connectAndSend( msg  ){
+function connectAndSend( msg  ){
     var client = new net.Socket();
     client.connect(8999, host, () => {
           // 'connect' listener
@@ -42,43 +72,6 @@ function forward( cmd  ){
     console.log('serverUtils | forward ' + msg ); //+ " client=" + client
     connectAndSend(msg);
 }//forward
-
-/*
-POST HTTP a Wenv
-*/
-async function postTo8090(move){
-const URL = 'http://localhost:8090/api/move' ;
-
-await axios({
-            url: URL,
-            data: { robotmove: move },
-            method: 'POST',
-            timeout: 1000,
-            headers: { 'Content-Type': 'application/json' }
-/*
-  .post(URL, {
-    robotmove: move
-*/
-    }).then(response => {
-    console.log("serverutils postTo8090 | statusCode: " + response.status  )
-    console.log(response.data)  //"collision": "false", "move": "turnLeft" }
-    const collision = JSON.parse( response.data ).collision
-    console.log(  collision  )
-    console.log("serverutils postTo8090 | statusText: " + response.statusText);
-    /*
-    	    var data = ""
-    	    response.on('data', function (chunk) { data += chunk; }); //accumulate data sent by POST
-                response.on('end', function () {	//elaborate data received JSon: { robotmove: turnLeft | turnRight | ... }
-         		//var moveTodo = JSON.parse(data).robotmove
-        		console.log('serverutils postTo8090 | ' + data  );
-       	   });
-    */
-  })
-  .catch(error => {
-    console.error(error)
-  })
-}
-
 
 //exports.forward   = forward;
 module.exports = { forward, connectAndSend, postTo8090 }

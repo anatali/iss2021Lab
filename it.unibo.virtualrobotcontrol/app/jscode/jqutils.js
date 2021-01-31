@@ -16,12 +16,13 @@ $(document).ready(function(){
 
 //USED BY POST with jQuery
 $(function () {
-    $( "#wjquery" ).click(function() { doPostToWenv( "w") });     //defined here
-    $( "#sjquery" ).click(function() { doPostToWenv( "s") });
-    $( "#rjquery" ).click(function() { doPostToWenv( "r") });
-    $( "#ljquery" ).click(function() { doPostToWenv( "l") });
-    $( "#hjquery" ).click(function() { doPostToWenv( "h") });
-
+/*  USED WITH TCPServer (version before Jan 2021)
+    $( "#wjquery" ).click(function() { sendRequestData( "w") });     //defined here
+    $( "#sjquery" ).click(function() { sendRequestData( "s") });
+    $( "#rjquery" ).click(function() { sendRequestData( "r") });
+    $( "#ljquery" ).click(function() { sendRequestData( "l") });
+    $( "#hjquery" ).click(function() { sendRequestData( "h") });
+*/
     $( "#lpost8090").click(function() { doPostToWenv( "l8090") })   //defined here
     $( "#rpost8090").click(function() { doPostToWenv( "r8090") })
     $( "#wpost8090").click(function() { doPostToWenv( "w8090") })

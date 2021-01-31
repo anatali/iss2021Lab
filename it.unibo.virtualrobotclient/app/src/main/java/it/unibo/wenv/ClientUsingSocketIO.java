@@ -20,11 +20,6 @@ public class ClientUsingSocketIO {
 	private Emitter.Listener handleCollision = new Emitter.Listener() {
 		@Override
 		public void call(final Object... args) {
-			/* new Thread() {
-				public void run() {
-					System.out.println(" ... " + args);
-				}
-			}.start();*/
 			System.out.println("handleCollision " + args);
 		}
 	};

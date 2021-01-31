@@ -40,17 +40,22 @@ function byeFunction() {
  Seems your browser doesn't support Javascript! Websocket relies on Javascript being
  enabled. Please enable Javascript and reload this page!</h2></noscript>
 
-<pre>The server works on <span id="myIp"></span> and exploits <tt>socket.io</tt></pre>
-<h2>Robot Console</h2>
+<h2>Virtual Robot Console</h2>
+<pre style="background-color: #ffffb3; color:blue;">
+The <i>webguiServer</i> works on <span id="myIp"></span> and exploits <i>socket.io</i>
+to intereact with the virtual environment server (<i>WEnv</i>) on port 8090.
+------------------------------------------------------------------------------------------
+The server <i>WEnv</i> sends over <i>socket.io</i>
+information about the current state of the virtual world.
+</pre>
+
 
  <div style="background-color: #D2B4DE">
 
-  <h5>Using HTML-form with POST</h5>
+  <h5 style="color:blue;">HTML-form with POST</h5>
 
-  <pre>Example:
-&lt;form action="/w" method="post">&lt;input type="submit" style="font-size:20px;" value="forward" >&lt;/form>
-  </pre>
-  <pre>click --> POST --> server </pre>
+  <pre style="background-color: #ffffb3;">
+click --> POST --> webguiServer (postTo8090 --> WEnv) </pre>
   <hr/>
   <center>
    <table >
@@ -95,8 +100,9 @@ function byeFunction() {
   </center>
  <hr/>
 
-  <h5>Using post with jQuery to 8090</h5>
-  <pre>click --> jqutils in the page --> doPostToWenv (creates a HTML form) --> server </pre>
+  <h5 style="color:blue;">Create a FORM with jQuery</h5>
+  <pre style="background-color: #ffffb3">
+click --> jqutils --> doPostToWenv (creates a FORM) --> webguiServer (postTo8090 --> WEnv)</pre>
   <hr/>
   <center>
    <table style="width:50%">
@@ -113,26 +119,9 @@ function byeFunction() {
   </center>
   <hr/>
 
-  <h5>Using post with jQuery</h5>
-  <pre>click --> jqutils in the page --> doPostToWenv (dynamically creates a HTML form) </pre>
-  <hr/>
-  <center>
-  <table style="width:50%">
-   <tbody>
-   <tr>
-    <td><button id="ljquery">ljquery</button></td>
-    <td><button id="rjquery">rjquery</button></td>
-    <td><button id="wjquery">wjquery</button></td>
-    <td><button id="sjquery">sjquery</button></td>
-    <td><button id="hjquery">hjquery</button></td>
-
-   </tr>
-   </tbody>
-  </table>
-  </center>
-  <hr/>
-
-  <h5>Using socket.io</h5>
+  <h5 style="color:blue;">Send message (<i>move</i>) via socket</h5>
+  <pre style="background-color: #ffffb3">
+click --> jqutils --> webSocketUtils.requestTodoTheMove (send on socket.io) --> WEnv (socket) </pre>
   <hr/>
   <center>
   <table style="width:50%">
@@ -155,13 +144,10 @@ function byeFunction() {
 <button id="clear" type="submit">ClearHistory</button>
 
 <h3>DISPLAY AREA</h3>
-<div style="background-color: #ffff80">
-
- <hr/>
-  <span id="robotDisplay"></span>
-  <hr/>
-  </div>
-
+<hr/>
+<div><pre style="background-color: #ffffb3; color:blue;" id="robotDisplay"></pre></div>
+<!-- <textarea id="robotDisplay" rows="4" cols="80"> -->
+<hr/>
 <h3>Wenv</h3>
 
 <!-- RICARICA OGNI VOLTA
@@ -171,3 +157,27 @@ function byeFunction() {
 <br/><br/>
 </body>
 </html>
+
+<!--
+USED WITH TCPServer (version before Jan 2021)
+
+<h5>Using post with jQuery</h5>
+<pre style="background-color: #ffffb3">click  -> jqutils in the page  -> doPostToWenv (dynamically creates a HTML form) </pre>
+<hr/>
+<center>
+<table style="width:50%">
+ <tbody>
+ <tr>
+  <td><button id="ljquery">ljquery</button></td>
+  <td><button id="rjquery">rjquery</button></td>
+  <td><button id="wjquery">wjquery</button></td>
+  <td><button id="sjquery">sjquery</button></td>
+  <td><button id="hjquery">hjquery</button></td>
+
+ </tr>
+ </tbody>
+</table>
+</center>
+<hr/>
+-->
+
