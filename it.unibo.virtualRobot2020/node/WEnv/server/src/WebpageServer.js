@@ -19,26 +19,38 @@ const moveTime   = 800
 const serverPort = 8090
 var target       = "notarget"
 
-
+/*
+Execute a robotmove command and sends the result on the wssockets on 8091
+*/
 function doMove(moveTodo, res){
 	console.log('$$$$$ WebpageServer doMove |  moveTodo=' + moveTodo  );
-	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	//execute the command on the scene
-
-			setTimeout(function() { 
+	//Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	//execute the command on the scene
+	execMoveOnAllConnectedScenes(moveTodo)
+			setTimeout(function() { 	//wait for the moveTime before sending the answer (collision or not)
 				const collision = target != 'notarget'				
 				const answer = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
 				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
 				const answerJson = answer //JSON.stringify(answer) 	
-				console.log('WebpageServer | /api/move  answer= ' + answerJson  );			
+				console.log('WebpageServer | doMove  answer= ' + answerJson  );			
 				target = "notarget"; 	//reset target
 				if( res != null ){
 					res.write( answerJson  ); 
 					res.end();
-				}else{
-					Object.keys(wssockets).forEach( key => wssockets[key].send( answerJson ) )					
-				}
+				}//else{
+					//Object.keys(wssockets).forEach( key => wssockets[key].send( answerJson ) )	
+					sendMoveResultToAllConnectedControls(answerJson)					
+				//}
 			}, moveTime);	 	
 
+}
+
+function execMoveOnAllConnectedScenes(moveTodo){	//connected to 8090
+	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	 
+}
+
+function sendMoveResultToAllConnectedControls(msgJson){	//connected to 8091
+    //console.log('WebpageServer | sendMoveResultToAllConnectedControls   '    );		
+	Object.keys(wssockets).forEach( key => wssockets[key].send( msgJson ) )	
 }
 
 /*
@@ -156,7 +168,9 @@ function startHttpServer() {
     http.listen(serverPort)
 }
  
-
+/*
+Used by the scene
+*/
 function initSocketIOServer(callbacks, clientMySock) {
 	console.log("WebpageServer | initSocketIOServer socketCount="+socketCount)
     socketIO.on('connection', socket => {
@@ -172,9 +186,12 @@ function initSocketIOServer(callbacks, clientMySock) {
 
         //socket.on( 'sonarActivated', callbacks.onSonarActivated )  //see main.js
 		socket.on( 'sonarActivated', (obj) => {
-			console.log( "&&& WebpageServer | sonarActivated " ); console.log(obj) 
+			console.log( "&&& WebpageServer | sonarActivated " ); 
+			console.log(obj) 
 			//propagate to the connected 
-			clientMySock.send(  JSON.stringify(obj) )
+			//clientMySock.send(  JSON.stringify(obj) )
+			sendMoveResultToAllConnectedControls( JSON.stringify(obj) )
+			
 		})
          socket.on( 'collision',     (obj) => { 
 		    console.log( "WebpageServer connection | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length ); 
@@ -186,7 +203,7 @@ function initSocketIOServer(callbacks, clientMySock) {
         		delete sockets[key]; 
         		webpageReady = false; 
           		socketCount--;
-			alreadyConnected = ( socketCount == 0 )
+			    alreadyConnected = ( socketCount == 0 )
         		console.log("WebpageServer disconnect | socketCount="+socketCount)
         	})
     })

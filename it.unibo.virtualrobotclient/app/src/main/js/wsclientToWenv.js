@@ -20,6 +20,7 @@ function doJob(){
       console.log("doJob moveTodo:" + moveTodo);
      //doMove("{\"robotmove\":\"turnLeft\"}");
      doMove( "moveForward" )
+     setTimeout( () => doMove( "moveBackward" ), 800 )
 }
 
 client.on('connectFailed', function(error) {
@@ -36,14 +37,15 @@ var conn8091
 
         });
         connection.on('close', function() {
-            console.log('echo-protocol Connection Closed');
+            console.log('Connection Closed');
         });
         connection.on('message', function(message) {
             if (message.type === 'utf8') {
                 const msg = message.utf8Data
                 console.log("Received: " + msg  )
                 const msgJson = JSON.parse( msg )
-                console.log("Received: " + msgJson.collision)
+                if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
+                if(msgJson.sonarName) console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
             }
     });
 /*

@@ -2,8 +2,9 @@
 serverUtils.js
 */
 
-const axios    = require('axios')
-const net      = require('net');
+const axios             = require('axios')
+const net               = require('net');
+const WebSocketClient   = require('websocket').client;
 
 const sep      = ";"
 
@@ -38,6 +39,40 @@ await axios({
     console.error(error)
   })
 }
+
+/* */
+//Is it useful to receive state data? Yes if this embeds some control logic
+
+
+var conn8091
+
+var client = new WebSocketClient();
+client.on('connectFailed', function(error) {
+    console.log('Connect Error: ' + error.toString());
+});
+
+    client.on('connect', function(connection) {
+        console.log('WebSocket Client Connected')
+        conn8091 = connection
+
+        connection.on('error', function(error) {
+            console.log("Connection Error: " + error.toString());
+
+        });
+        connection.on('close', function() {
+            console.log('echo-protocol Connection Closed');
+        });
+        connection.on('message', function(message) {
+            if (message.type === 'utf8') {
+                const msg = message.utf8Data
+                console.log("Received: " + msg  )
+                const msgJson = JSON.parse( msg )
+                if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
+                if(msgJson.sonarName) console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+            }
+    });
+});
+client.connect('ws://localhost:8091', ''); //'echo-protocol'
 
 /*
 Invia su TCP (obsoleto da Jan 2021)
