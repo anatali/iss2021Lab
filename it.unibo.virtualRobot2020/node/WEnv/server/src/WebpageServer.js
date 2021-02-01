@@ -7,8 +7,10 @@ const express  = require('express')
 const http     = require('http').Server(app)
 const socketIO = require('socket.io')(http)
 
-const sockets   = {}
-let socketCount = -1
+const sockets       = {}
+const wssockets     = {}
+let socketCount     = -1
+let wssocketCount   = -1
 
 var alreadyConnected = false
 
@@ -16,6 +18,48 @@ let webpageReady = false
 const moveTime   = 800
 const serverPort = 8090
 var target       = "notarget"
+
+
+
+/*
+============================================================================================
+WebSockets SECTION
+============================================================================================
+*/
+const WebSocket = require('ws');
+
+const wsServer  = new WebSocket.Server({ server: app.listen(8091) });
+
+wsServer.on('connection', (ws) => {
+  wssocketCount++
+  console.log("$$$$$ WebpageServer socket | client connected wssocketCount=" + wssocketCount)
+  const key      = wssocketCount
+  wssockets[key] = ws
+  ws.on('message', msg => {
+    console.log("$$$$$ WebpageServer socket |  wssocketCount=" +  wssocketCount + " received: "  )
+	console.log( msg )
+	Object.keys(wssockets).forEach( key => wssockets[key].send( msg ) )
+  });
+  
+  ws.onerror = (error) => {
+	  console.log(`$$$$$ WebpageServer  socket |  error: ${error}`)
+	  delete sockets[key]; 
+	  console.log( "disconnect" )
+	  wssocketCount--
+  }
+  
+  ws.on('disconnect', ()=>{
+	  delete sockets[key]; 
+	  console.log( "disconnect" )
+	  wssocketCount--
+  })
+  
+});
+
+const clientMySock = new WebSocket("ws://localhost:8091")
+console.log("WebpageServer | clientMySock="+clientMySock)
+
+//-------------------------------------- WebpageServer socket SECTION END
 
 function WebpageServer(callbacks) {
     startServer(callbacks)
@@ -29,9 +73,11 @@ function WebpageServer(callbacks) {
     this.remove        = name => Object.keys(sockets).forEach( key => sockets[key].emit('remove', name) )
 }
 
+
+
 function startServer(callbacks) {
     startHttpServer()
-    initSocketIOServer(callbacks)
+    initSocketIOServer(callbacks, clientMySock)
 }
 
 function startHttpServer() {
@@ -77,14 +123,18 @@ function startHttpServer() {
 	});
 
 
+ 
+
+
+//STARTING
     http.listen(serverPort)
 }
+ 
 
-
-
-function initSocketIOServer(callbacks) {
+function initSocketIOServer(callbacks, clientMySock) {
 	console.log("WebpageServer | initSocketIOServer socketCount="+socketCount)
     socketIO.on('connection', socket => {
+		//Sockets : interact with 8999 (MASTER and mirror)
         socketCount++
         console.log("WebpageServer connection | socketCount="+socketCount)
         const key    = socketCount
@@ -94,8 +144,13 @@ function initSocketIOServer(callbacks) {
         webpageReady = true
         if( socketCount == 0) console.log("WebpageServer connection | MASTER webpage ready")
 
-        socket.on( 'sonarActivated', callbacks.onSonarActivated )
-        socket.on( 'collision',     (obj) => { 
+        //socket.on( 'sonarActivated', callbacks.onSonarActivated )  //see main.js
+		socket.on( 'sonarActivated', (obj) => {
+			console.log( "&&& WebpageServer | sonarActivated " ); console.log(obj) 
+			//propagate to the connected 
+			clientMySock.send(  JSON.stringify(obj) )
+		})
+         socket.on( 'collision',     (obj) => { 
 		    console.log( "WebpageServer connection | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length ); 
 		    target = obj;
 			callbacks.onCollision(obj)

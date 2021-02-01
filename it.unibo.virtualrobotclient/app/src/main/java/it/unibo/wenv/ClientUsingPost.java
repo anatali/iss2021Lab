@@ -7,8 +7,10 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.JSONObject;			//used to convert String in JSON obj
+import org.json.simple.parser.JSONParser;	//used to convert String in JSON obj
+
 
 import javax.json.Json;
 import java.io.InputStreamReader;
@@ -36,33 +38,8 @@ public class ClientUsingPost {
 					.setEntity(entity)
 					.build();
 			CloseableHttpResponse response = httpclient.execute(httppost);
-			System.out.println( "ClientUsingPost | sendCmd response= " + response );
-			//System.out.println( "ClientUsingPost | sendCmd response= " + response.getEntity().getContent() );
-			boolean collision = false;
-			javax.json.stream.JsonParser parser = Json.createParser(
-						new InputStreamReader((response.getEntity().getContent())));
-			//System.out.println( "ClientUsingPost | sendCmd parser= " + parser  );
-			parser.next();    //START_OBJECT
-			System.out.println( "ClientUsingPost | sendCmd START_OBJECT= " + parser.getString() );
-			//{ "collision" : "false", "move": "turnLeft"}
-
-			try{
-				JSONParser simpleparser = new JSONParser();
-				JSONObject jsonObj = (JSONObject) simpleparser.parse(parser.getString());
-				System.out.println( "ClientUsingPost | jsonObj= " + jsonObj.get("collision") );
-				collision = jsonObj.get("collision").equals("true");
-			}catch(Exception e){
-				System.out.println("JSONParser ERROR:" + e.getMessage());
- 			}
-/*
-			parser.next();    // KEY_NAME (collision)
-			System.out.println( "ClientUsingPost | sendCmd KEY_NAME= " + parser.getString() );
-
-			parser.next();  // value
-			collision = parser.getString().equals("true");
-			response.close();
-			System.out.println( move + " collision=" + collision);
-*/
+			//System.out.println( "ClientUsingPost | sendCmd response= " + response );
+			boolean collision = checkCollision(response);
 			return collision;
 		} catch(Exception e){
 			System.out.println("ERROR:" + e.getMessage());
@@ -70,6 +47,47 @@ public class ClientUsingPost {
 		}
 	}
 
+	protected boolean checkCollision(CloseableHttpResponse response) throws Exception {
+		boolean collision = false;
+		javax.json.stream.JsonParser parser = Json.createParser(
+				new InputStreamReader((response.getEntity().getContent())));
+		//System.out.println( "ClientUsingPost | sendCmd parser= " + parser  );
+		parser.next();    //START_OBJECT
+		System.out.println( "ClientUsingPost | sendCmd START_OBJECT= " + parser.getString() );
+		//{ "collision" : "false", "move": "turnLeft"}
+		try{
+			JSONParser simpleparser = new JSONParser();
+			JSONObject jsonObj = (JSONObject) simpleparser.parse(parser.getString());
+			collision = jsonObj.get("collision").equals("true");
+			//System.out.println( "ClientUsingPost | collision= " +  collision );
+			return collision;
+		}catch(Exception e){
+			System.out.println("ClientUsingPost | JSONParser ERROR:" + e.getMessage());
+			throw(e);
+		}
+	}
+
+	//TODO: explain this case
+	protected boolean checkCollisionNotWorking(CloseableHttpResponse response) throws Exception {
+		try{
+			String jsonStr = EntityUtils.toString( response.getEntity() );
+			System.out.println( "ClientUsingPost | sendCmd jsonStr= " + jsonStr );
+			org.json.simple.parser.JSONParser simpleparser = new JSONParser();
+			org.json.simple.JSONObject jsonObj = (JSONObject) simpleparser.parse( jsonStr );
+			/*
+			class java.lang.String cannot be cast to class org.json.simple.JSONObject
+			(java.lang.String is in module java.base of loader 'bootstrap';
+			org.json.simple.JSONObject is in unnamed module of loader 'app')
+			 */
+			boolean collision = jsonObj.get("collision").equals("true");
+			System.out.println( "ClientUsingPost | collision= " +  collision );
+			return collision;
+		}catch(Exception e){
+			System.out.println("ClientUsingPost | checkCollision ERROR:" + e.getMessage());
+			throw(e);
+		}
+
+	}
 	public boolean moveForward()  { return sendCmd("moveForward");  }
 	public boolean moveBackward() { return sendCmd("moveBackward"); }
 	public boolean moveLeft()     { return sendCmd("turnLeft");     }
@@ -95,17 +113,38 @@ public class ClientUsingPost {
 		}
 
 	}
+
+	protected void testAhead() {
+		try {
+			System.out.println("STARTING testAhead ... ");
+			boolean collision = false;
+			while( ! collision ) {
+				Thread.sleep(500);
+				collision = moveForward();
+			}
+			//Return to home
+			Thread.sleep(1000);
+			collision = false;
+			while( ! collision ) {
+				collision = moveBackward();
+				Thread.sleep(500);
+			}
+			System.out.println("END testAhead");
+		}catch (Exception e) {
+			System.out.println( "ERROR " + e.getMessage());
+		}
+	}
 	protected void test() {
 		try {
 			System.out.println("STARTING test ... ");
 			boolean b = moveLeft();
-			System.out.println("END");
+ 			System.out.println("END");
 		}catch (Exception e) {
 			System.out.println( "ERROR " + e.getMessage());
 		}
 	}
 	public static void main(String[] args)   {
-		new ClientUsingPost().test();
+		new ClientUsingPost().testAhead();
 		//new ClientUsingPost().boundary();
 	}
 	

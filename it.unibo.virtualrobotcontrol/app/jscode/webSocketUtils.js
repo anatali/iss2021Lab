@@ -1,18 +1,21 @@
 /*
 webSocketUtils (to be loaded within the virtualrobotcontrol web-page index.html)
 */
-const wspath  = ("ws://"+location.host).replace("3000","")+'8085';
+
+
+const wspath  = ("ws://"+location.host).replace("3000","")+'3001';
+//const wspath  = ("ws://localhost:3001';
 const socket  = new WebSocket(wspath);
 
-socket.addEventListener('open', () => {
-  socket.send('webSocketUtils | Robot Gui is on');
+socket.addEventListener('connection', () => {
+  socket.send('webSocketUtils | Robot WebGui is on');
 });
 socket.addEventListener('close', () => {
-  socket.send('webSocketUtils | Robot Gui is closed');
+  socket.send('webSocketUtils | Robot WebGui is closed');
 });
 socket.addEventListener('message', event => {
   var message = event.data;
-       document.getElementById("robotDisplay").innerHTML= message;
+  document.getElementById("robotDisplay").innerHTML= message;
 });
 
 /*
@@ -24,3 +27,4 @@ function requestTodoTheMove(move){
 }
 
 
+//node webSocketUtils

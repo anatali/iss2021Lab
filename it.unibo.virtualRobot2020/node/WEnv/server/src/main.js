@@ -5,7 +5,7 @@ Server
 const { WebpageServer, isWebpageRead } = require('./WebpageServer')
 //const TCPServer                        = require('./TCPServer')
 
-const portNumber = 8999 //readPortNumberFromArguments()
+//const portNumber = 8999 //readPortNumberFromArguments()
 
 const webpageCallbacks = {
 	/*
@@ -13,9 +13,10 @@ const webpageCallbacks = {
     onSonarActivated: object      => server.send( { type: 'sonar-activated', arg: object } ),
     onCollision:      objectName  => server.send( { type: 'collision',       arg: { objectName } } )
 	*/
-    onWebpageReady:   ()          => console.log( "webpageCallbacks { type: 'webpage-ready ..... ',   arg: {} }" ),
-    onSonarActivated: object      => console.log( "webpageCallbacks { type: 'sonar-activated', arg: {"+object+"}" ),
-    onCollision:      objectName  => console.log( "webpageCallbacks { type: 'collision',       arg: {   "+objectName+"}" )
+    onWebpageReady:   ()          => console.log( " %%% webpageCallbacks { type: 'webpage-ready ..... ',   arg: {} }" ),
+    onSonarActivated: object      => { console.log( "%%% webpageCallbacks  'sonar-activated' " )
+							console.log(  object ) },
+    onCollision:      objectName  => console.log( "%%% webpageCallbacks { type: 'collision',  arg:  "+objectName+" " )
 
 }
 

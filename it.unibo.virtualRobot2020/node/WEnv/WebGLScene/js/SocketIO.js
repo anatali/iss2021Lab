@@ -9,13 +9,17 @@ import SceneManager from './SceneManager.js'                                    
 export default (onKeyUp, onKeyDown, myonKeyDown) => {
     const socket = io()
         
-    socket.on( 'moveForward',  duration => moveForward(duration) )
+    socket.on( 'moveForward',  duration => {console.log("ffffffffffffffffffffffffff"); moveForward(duration)} )
+	 
     socket.on( 'moveBackward', duration => moveBackward(duration) )
     socket.on( 'turnRight',    duration => turnRight(duration) )
     socket.on( 'turnLeft',     duration => turnLeft(duration) )
     socket.on( 'alarm',        stopMoving   )
     socket.on( 'remove',       name => remove( name )  )   //DEC 2019  See WebpageServer.js
     
+	socket.on( 'xxx',        obj => console.log("SocketIO xxxxxxxxxxxxxxxxxxxxxxxx")   )
+		 
+	
     socket.on( 'disconnect', () => console.log("server disconnected") )
 
     eventBus.subscribe( eventBusEvents.sonarActivated, sonarId => socket.emit('sonarActivated', sonarId))

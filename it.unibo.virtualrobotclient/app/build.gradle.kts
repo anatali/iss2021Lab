@@ -68,6 +68,10 @@ dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
 //SOCKET.IO
     implementation("com.github.nkzawa:socket.io-client:0.6.0")
+// https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api
+    implementation("javax.websocket:javax.websocket-api:1.1")
+
+    //implementation ("io.socket:socket.io-client:2.0.0")
 }
 
 application {
