@@ -20,6 +20,26 @@ const serverPort = 8090
 var target       = "notarget"
 
 
+function doMove(moveTodo, res){
+	console.log('$$$$$ WebpageServer doMove |  moveTodo=' + moveTodo  );
+	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	//execute the command on the scene
+
+			setTimeout(function() { 
+				const collision = target != 'notarget'				
+				const answer = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
+				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
+				const answerJson = answer //JSON.stringify(answer) 	
+				console.log('WebpageServer | /api/move  answer= ' + answerJson  );			
+				target = "notarget"; 	//reset target
+				if( res != null ){
+					res.write( answerJson  ); 
+					res.end();
+				}else{
+					Object.keys(wssockets).forEach( key => wssockets[key].send( answerJson ) )					
+				}
+			}, moveTime);	 	
+
+}
 
 /*
 ============================================================================================
@@ -38,20 +58,22 @@ wsServer.on('connection', (ws) => {
   ws.on('message', msg => {
     console.log("$$$$$ WebpageServer socket |  wssocketCount=" +  wssocketCount + " received: "  )
 	console.log( msg )
-	Object.keys(wssockets).forEach( key => wssockets[key].send( msg ) )
+	//Object.keys(wssockets).forEach( key => wssockets[key].send( msg ) )		//echo
+	var moveTodo = JSON.parse(msg).robotmove
+	doMove(moveTodo, null)
   });
   
   ws.onerror = (error) => {
-	  console.log(`$$$$$ WebpageServer  socket |  error: ${error}`)
+	  console.log("$$$$$ WebpageServer  socket |  error: ${error}")
 	  delete sockets[key]; 
-	  console.log( "disconnect" )
 	  wssocketCount--
+	  console.log( "$$$$$ WebpageServer  socket |  disconnect wssocketCount=" +  wssocketCount )
   }
   
   ws.on('disconnect', ()=>{
 	  delete sockets[key]; 
-	  console.log( "disconnect" )
 	  wssocketCount--
+	  console.log( "$$$$$ WebpageServer  socket |  disconnect wssocketCount=" +  wssocketCount )
   })
   
 });
@@ -99,18 +121,20 @@ function startHttpServer() {
 	    var data = ""	    
 	    req.on('data', function (chunk) { data += chunk; }); //accumulate data sent by POST
             req.on('end', function () {	//elaborate data received JSon: { robotmove: turnLeft | turnRight | ... }
+			console.log('POST /api/move data ' + data  );
      		var moveTodo = JSON.parse(data).robotmove
-    		console.log('POST moveTodo  ' + moveTodo  );
-	   	    Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	//execute the command on the scene
+    		//console.log('POST moveTodo  ' + moveTodo  );
+	   	   // Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	//execute the command on the scene
 		    //Configure the answer
     		res.writeHead(200, { 'Content-Type': 'text/json' });
     		res.statusCode=200
+			doMove(moveTodo, res)
 			 
     		//res.write(JSON.stringify(data));	
 			//WE must wait, since we could have a collision			
+			/*
 			setTimeout(function() { 
-				const collision = target != 'notarget'
-				
+				const collision = target != 'notarget'				
 				const answer = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
 				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
 				console.log('WebpageServer | /api/move  answer= ' + JSON.stringify(answer)  );
@@ -118,12 +142,14 @@ function startHttpServer() {
 				target = "notarget"; 	//reset target
 				res.end();
 			}, moveTime);	 	
-    		
+    		*/
   	   });
 	});
 
 
  
+
+
 
 
 //STARTING

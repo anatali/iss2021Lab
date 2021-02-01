@@ -1,40 +1,22 @@
 package it.unibo.wenv;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javax.websocket.ClientEndpointConfig;
-import javax.websocket.CloseReason;
-import javax.websocket.ContainerProvider;
-import javax.websocket.Decoder;
-import javax.websocket.Encoder;
-import javax.websocket.EndpointConfig;
-import javax.websocket.Extension;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
-
-import java.net.URI;
-import javax.websocket.ClientEndpoint;
-import javax.websocket.CloseReason;
-import javax.websocket.ContainerProvider;
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.WebSocketContainer;
+import javax.websocket.*;
 
 /**
- * ChatServer Client
+ * ClientWebsockJavax
  *
- * @author Jiji_Sasidharan
+ * @author AN - DISI - Unibo
  */
 @ClientEndpoint
-public class WebsocketClientEndpoint {
+public class ClientWebsockJavax {
 
     Session userSession = null;
     private MessageHandler messageHandler;
 
-    public WebsocketClientEndpoint(URI endpointURI) {
+    public ClientWebsockJavax(URI endpointURI) {
         try {
+            System.out.println("ClientWebsockJavax | opening websocket");
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
             container.connectToServer(this, endpointURI);
         } catch (Exception e) {
@@ -49,7 +31,7 @@ public class WebsocketClientEndpoint {
      */
     @OnOpen
     public void onOpen(Session userSession) {
-        System.out.println("opening websocket");
+        System.out.println("ClientWebsockJavax | opening websocket");
         this.userSession = userSession;
     }
 
@@ -61,7 +43,7 @@ public class WebsocketClientEndpoint {
      */
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
-        System.out.println("closing websocket");
+        System.out.println("ClientWebsockJavax | closing websocket");
         this.userSession = null;
     }
 
@@ -83,6 +65,7 @@ public class WebsocketClientEndpoint {
      * @param msgHandler
      */
     public void addMessageHandler(MessageHandler msgHandler) {
+
         this.messageHandler = msgHandler;
     }
 
@@ -92,13 +75,14 @@ public class WebsocketClientEndpoint {
      * @param message
      */
     public void sendMessage(String message) {
+
         this.userSession.getAsyncRemote().sendText(message);
     }
 
     /**
      * Message handler.
      *
-     * @author Jiji_Sasidharan
+     * @author AN - DISI - Unibo
      */
     public static interface MessageHandler {
 
@@ -109,25 +93,27 @@ public class WebsocketClientEndpoint {
     public static void main(String[] args) {
         try {
             // open websocket
-            final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("wss://real.okcoin.cn:10440/websocket/okcoinapi"));
+            final ClientWebsockJavax clientEndPoint =
+                    new ClientWebsockJavax(new URI("ws://localhost:8091"));
 
             // add listener
-            clientEndPoint.addMessageHandler(new WebsocketClientEndpoint.MessageHandler() {
+            clientEndPoint.addMessageHandler(new ClientWebsockJavax.MessageHandler() {
                 public void handleMessage(String message) {
+                    System.out.println("ClientWebsockJavax | handleMessage ...");
                     System.out.println(message);
                 }
             });
 
             // send message to websocket
-            clientEndPoint.sendMessage("{'event':'addChannel','channel':'ok_btccny_ticker'}");
+            clientEndPoint.sendMessage("{\"robotmove\":\"turnLeft\"}");
 
             // wait 5 seconds for messages from websocket
-            Thread.sleep(5000);
+            Thread.sleep(3000);
 
         } catch (InterruptedException ex) {
-            System.err.println("InterruptedException exception: " + ex.getMessage());
+            System.err.println("ClientWebsockJavax | InterruptedException exception: " + ex.getMessage());
         } catch (URISyntaxException ex) {
-            System.err.println("URISyntaxException exception: " + ex.getMessage());
+            System.err.println("ClientWebsockJavax | URISyntaxException exception: " + ex.getMessage());
         }
     }
 
