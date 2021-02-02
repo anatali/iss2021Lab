@@ -2,11 +2,12 @@
 webguiServer.js
 */
 
-let express    = require('express');
-let path       = require('path');
-let fs         = require('fs');
-let bodyParser = require('body-parser');
-let app        = express();
+let express             = require('express');
+let path                = require('path');
+let fs                  = require('fs');
+let bodyParser          = require('body-parser');
+let app                 = express();
+const WebSocketClient   = require('websocket').client
 //const request  = require('request') //deprecated
 
 const { forward, connectAndSend, postTo8090 } = require('./webguiServerutils')
@@ -24,9 +25,27 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
   });
 
-app.get('/info', function (req, res) {
-  res.send( history );
-});
+app.get('/guisimple', function (req, res) {
+	console.log("webguiServer guisimple get " + __dirname );
+	res.render("indexSimple.ejs", {})
+  });
+
+app.post('/guisimple', function (req, res) { res.render("indexSimple.ejs", {})  });
+
+app.get('/guiJquery', function (req, res) {
+	console.log("webguiServer guiJquery get " + __dirname );
+	res.render("indexJquery.ejs", {})
+  });
+app.post('/guiJquery', function (req, res) { res.render("indexJquery.ejs", {})    });
+
+app.get('/guisock', function (req, res) {
+	console.log("webguiServer guisock get " + __dirname );
+	res.render("indexSock.ejs", {})
+  });
+app.post('/guisock', function (req, res) { res.render("indexSock.ejs", {})  });
+
+
+app.get('/info', function (req, res) { res.send( history ); });
 
 app.get('/picture', function (req, res) {
   let img = fs.readFileSync(path.join(__dirname, "images/profile-1.jpg"));
@@ -47,11 +66,11 @@ app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving rig
 app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
 */
-app.post("/w", function(req, res,next)  { postTo8090("moveForward",addToHistory ); next(); });
-app.post("/s", function(req, res,next)  { postTo8090("moveBackward",addToHistory); next(); });
-app.post("/r", function(req, res,next)  { postTo8090("turnRight",addToHistory);    next(); });
-app.post("/l", function(req, res,next)  { postTo8090("turnLeft",addToHistory);     next(); });
-app.post("/h", function(req, res,next)  { postTo8090("alarm",addToHistory);        next(); });
+app.post("/w", function(req, res,next)  { req.gui="guisimple"; postTo8090("moveForward",addToHistory ); next(); });
+app.post("/s", function(req, res,next)  { req.gui="guisimple"; postTo8090("moveBackward",addToHistory); next(); });
+app.post("/r", function(req, res,next)  { req.gui="guisimple"; postTo8090("turnRight",addToHistory);    next(); });
+app.post("/l", function(req, res,next)  { req.gui="guisimple"; postTo8090("turnLeft",addToHistory);     next(); });
+app.post("/h", function(req, res,next)  { req.gui="guisimple"; postTo8090("alarm",addToHistory);        next(); });
 
 
 //HANDLE  utility commands
@@ -59,31 +78,51 @@ app.post("/conns", function(req, res,next)         { connectionHistory(); next()
 app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()   });
 
 //HANDLE POST from HTML GUI to send a POST to Wenv 8090
-app.post("/l8090", function(req, res,next)  { postTo8090('turnLeft',addToHistory); next()  });
-app.post("/r8090", function(req, res,next)  { postTo8090('turnRight',addToHistory); next()  });
-app.post("/w8090", function(req, res,next)  { postTo8090('moveForward',addToHistory); next()  });
-app.post("/s8090", function(req, res,next)  { postTo8090('moveBackward',addToHistory); next()  });
-app.post("/h8090", function(req, res,next)  { postTo8090('alarm',addToHistory); next()  });
-
+app.post("/l8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('turnLeft',addToHistory); next()  });
+app.post("/r8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('turnRight',addToHistory); next()  });
+app.post("/w8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('moveForward',addToHistory); next()  });
+app.post("/s8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('moveBackward',addToHistory); next()  });
+app.post("/h8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('alarm',addToHistory); next()  });
 
 /*
 * ====================== REPRESENTATION ================
 */
 app.use( function(req,res){
 	console.log("webguiServer | SENDING THE ANSWER " + res  + " json:" + req.accepts('json') )
-	//console.log(req)
 	try{
-// if (req.accepts('json')) { res.send(history);		//give answer to curl / postman } else
+      // if (req.accepts('json')) { res.send(history);		//give answer to curl / postman } else
 	  //return res.render('index' );  //NO: we loose the message sent via socket.io
-	   res.sendFile(path.join(__dirname, "index.html"));    //with robotDisplay area set with history
+	  console.log( req.gui )
+	  if( req.gui=="guisimple" )  res.render("indexSimple.ejs", {})
+	  else if( req.gui=="guiJquery" )  res.render("indexJquery.ejs", {})
+      else if( req.gui=="guisock" )  res.render("indexSock.ejs", {})
+	  res.sendFile(path.join(__dirname, "index.html"))    //with robotDisplay area set with history
 	}catch(e){
 	    console.log("webguiServer | SORRY ..." + e);}
 	}
 );
+/*
+ * ============ ERROR HANDLING =======
+ */
+ // catch 404 and forward to error handler;
+ app.use(function(req, res, next) {
+   var err = new Error('Not Found');
+   err.status = 404;
+   next(err);
+ });
 
-function clearDisplayArea(){
-    history = ""
-}
+ // error handler;
+ app.use(function(err, req, res, next) {
+   // set locals, only providing error in development
+   res.locals.message = err.message;
+   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+   // render the error page;
+   res.status(err.status || 500);
+   res.render('error');
+ });
+
+
 
 function handlePostMove( cmd, msg, req, res, next ){
     console.log( "webguiServer |  handlePostMove in webguiServer.js "  + cmd )
@@ -105,15 +144,15 @@ See https://www.html.it/pag/54040/websocket-webguiServer-con-node-js/
 var clients = 0;
 const WebSocket   = require('ws');
 
-const wsServer    = new WebSocket.Server({ server: app.listen(3001) }); //.listen(3001)
+const wsServer    = new WebSocket.Server({ server: app.listen(3001) });
 //wsServer.on('open', socket => { console.log("webguiServer | socket open ") });
 
 wsServer.on('connection', (ws) => {
     console.log("webguiServer | client connected ")
     //postTo8090("turnLeft",  addToHistory);
     //postTo8090("turnRight", addToHistory);
-    //displayHistory()
-    ws.send("welcome")
+    displayHistory()
+    //ws.send("welcome")
   ws.on('message', message => {
     console.log("webguiServer | socket-on received : "+message)
     //addToHistory( message )
@@ -122,7 +161,6 @@ wsServer.on('connection', (ws) => {
         //rimbalzo del comando al
         //wsServer.clients.forEach(client => { client.send(  message ); });
     }else if( message.includes("close")) {
-
         //connectionHistory();
         console.log("webguiServer | socket-on - the client is disconnected ");
     }
@@ -139,6 +177,12 @@ wsServer.on('connection', (ws) => {
                 //io.sockets.emit('broadcast',{ description: clients + ' clients connected!'});
      });
 */
+//-------------------------------------- WebSockets SECTION END
+
+function clearDisplayArea(){
+    history = ""
+}
+
 function updateRobotState(message){
     history = history + "<br/>" + message;
     console.log(history);
@@ -147,43 +191,65 @@ function updateRobotState(message){
     });
 }
 
-function connectionHistory(){
-        var clients = wsServer.clients.size
-        history     = history + "<br/>" + "connections=" + clients
-        //socket.emit('broadcast',{ description: clients + ' clients connected!'});
-        displayHistory()
-}
-function addToHistory( msg ){
-        history     = history + "<br/>" + msg
-        displayHistory()
-}
 function displayHistory(){
         wsServer.clients.forEach(client => {
             client.send(   history )
         })
 }
-//-------------------------------------- WebSockets SECTION END
+
+function addToHistory( msg ){
+        history     = history + "<br/>" + msg
+        displayHistory()
+}
+
+function connectionHistory(){
+        addToHistory( history + "<br/>" + "connections=" + wsServer.clients.size )
+        //var clients =
+        //history     = history + "<br/>" + "connections=" + clients
+        //socket.emit('broadcast',{ description: clients + ' clients connected!'});
+        //displayHistory()
+}
 
 /*
- * ============ ERROR HANDLING =======
- */
- // catch 404 and forward to error handler;
- app.use(function(req, res, next) {
-   var err = new Error('Not Found');
-   err.status = 404;
-   next(err);
- });
+============================================================================================
+ws8091 SECTION
+Is it useful to receive state data, in order to update the GUI and define some business logic
+============================================================================================
+*/
 
- // error handler;
- app.use(function(err, req, res, next) {
-   // set locals, only providing error in development
-   res.locals.message = err.message;
-   res.locals.error = req.app.get('env') === 'development' ? err : {};
+var conn8091
 
-   // render the error page;
-   res.status(err.status || 500);
-   res.render('error');
- });
+var client = new WebSocketClient();
+client.on('connectFailed', function(error) {
+    console.log('Connect Error: ' + error.toString());
+});
+
+    client.on('connect', function(connection) {
+        console.log('WebSocket Client Connected')
+        conn8091 = connection
+
+        connection.on('error', function(error) {
+            console.log("Connection Error: " + error.toString());
+
+        });
+        connection.on('close', function() {
+            console.log('echo-protocol Connection Closed');
+        });
+        connection.on('message', function(message) {
+            if (message.type === 'utf8') {
+                const msg = message.utf8Data
+                console.log("Received: " + msg  )
+                const msgJson = JSON.parse( msg )
+                if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
+                if(msgJson.sonarName) console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                addToHistory( JSON.stringify( msgJson ) )
+            }
+    });
+});
+client.connect('ws://localhost:8091', ''); //'echo-protocol'
+
+//-------------------------------------- ws8091 SECTION END
+
 
 
 app.listen(3000, function () {

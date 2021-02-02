@@ -108,7 +108,7 @@ public class ClientWebsockJavax {
             clientEndPoint.sendMessage("{\"robotmove\":\"turnLeft\"}");
 
             // wait 5 seconds for messages from websocket
-            Thread.sleep(3000);
+            Thread.sleep(30000);
 
         } catch (InterruptedException ex) {
             System.err.println("ClientWebsockJavax | InterruptedException exception: " + ex.getMessage());

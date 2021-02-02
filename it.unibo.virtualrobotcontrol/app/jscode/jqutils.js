@@ -3,9 +3,14 @@ jscode/jqutils.js
 */
 
 $(document).ready(function(){
-  $("pre").click(function(){ $(this).hide(); });
+  $("p").click(function(){ $(this).hide(); });
 
-//USED BY SOCKET.IO-BASED GUI
+//USED BY index (console selection)
+$( "#guisimple" ).click(function() {  loadGui( "guisimple") });
+$( "#guiJquery" ).click(function() {  loadGui( "guiJquery") });
+$( "#guisock" ).click(function()   {  loadGui( "guisock") });
+
+//USED BY SOCKET.IO-BASED GUI (guisock)
     $( "#rsocket" ).click(function() {  requestTodoTheMove("turnRight") });    //defined in webSocketUtils
     $( "#lsocket" ).click(function() {  requestTodoTheMove("turnLeft") });
     $( "#wsocket" ).click(function() {  requestTodoTheMove("moveForward") });
@@ -14,7 +19,7 @@ $(document).ready(function(){
 
 });
 
-//USED BY POST with jQuery
+//USED BY POST with jQuery  (guiJquery)
 $(function () {
 /*  USED WITH TCPServer (version before Jan 2021)
     $( "#wjquery" ).click(function() { sendRequestData( "w") });     //defined here
@@ -38,6 +43,13 @@ $(function () {
 /*
 ======================================================================
 */
+
+function loadGui(gui, method){
+     var myip = location.host;
+     var url = "http://"+myip+"/"+gui
+     doPost(gui, method, url);
+}
+
 function doPostToWenv( params, method ) {
      var myip = location.host;
      var url = "http://"+myip+"/"+params
@@ -65,3 +77,19 @@ function doPost( params, method, url ) {
 }
 
 
+/*
+function getGui(gui){
+fetch("http://"+location.host+"/"+gui)
+  .then(function (response) {
+    console.log( response )
+    //$(document).load( response )  //???
+    return response ;
+  })
+  .then(function (myJson) {
+    console.log(myJson );
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+}
+*/

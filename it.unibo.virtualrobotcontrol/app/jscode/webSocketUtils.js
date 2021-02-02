@@ -22,32 +22,8 @@ socket.addEventListener('message', event => {
 /*
 
 //IMPORTANT: https://www.pegaxchange.com/2018/03/23/websocket-client/
-//const WebSocketClient = require('websocket').client;
-const wsWenvpath  = ("ws://"+location.host).replace("3000","")+'8091';
-//const wspath  = ("ws://localhost:Wenv';
-const client = new WebSocket(wsWenvpath);
 
-    client.on('open', function(connection) {
-        console.log('WebSocketClient |  Connected')
-        conn8091 = connection
-        connection.on('error', function(error) {
-            console.log("WebSocketClient | Error: " + error.toString());
-        });
-        connection.on('close', function() {
-            console.log('WebSocketClient | Connection Closed');
-        });
-        connection.on('message', function(message) {
-            if (message.type === 'utf8') {
-                const msg = message.utf8Data
-                console.log("Received: " + msg  )
-                const msgJson = JSON.parse( msg )
-                if(msgJson.collision) console.log("WebSocketClient | Received: collision=" + msgJson.collision)
-                if(msgJson.sonarName) console.log("WebSocketClient | Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
-            }
-        });
-    });
-//client.connect(wsWenvpath, ''); //'echo-protocol'
-*/
+
 
 /*
 Called by a click on rsocket|lsocket|... Communicates with server.js by using the socket
@@ -57,5 +33,9 @@ function requestTodoTheMove(move){
 	socket.send( move );     //towards server.js (see
 }
 
+function openGui(gui){
+	console.log("webSocketUtils | openGui in webSocketUtils/utils " + gui);
+	socket.send( move );     //towards server.js (see
+}
 
 //node webSocketUtils

@@ -10,11 +10,16 @@ Using callbacks, no global state
 */
 
 function ahead(numOfSteps){
+     domove("moveForward", numOfSteps, goon, ko)
+}
+
+function goon(numOfSteps){
      domove("moveForward", numOfSteps, ahead, ko)
 }
 
 function ko(numOfSteps){
-    if( numOfSteps++ < 4 )  domove("turnLeft", numOfSteps, ahead, ko)
+console.log("...............................................ko numOfSteps=" + numOfSteps  )
+    if( numOfSteps++ < 4 )  domove("turnLeft", numOfSteps, goon, ko)
     else  domove("turnLeft", numOfSteps, terminate, terminate)  //just to return to initial state
 }
 
@@ -32,10 +37,14 @@ function domove(move, numOfSteps, callbackOk, callbackCollision)  {
             method: 'POST',
             timeout: 900,
             headers: { 'Content-Type': 'application/json' }
-    }).then(response => {
-        //console.log("axiosClientToWenv domove | data: " + response.data)
-        const collision = JSON.parse( response.data ).collision
-        console.log( "domove move=" + move + " numOfSteps=" + numOfSteps + " collision= " + collision )
+    }).then(response => {   //continues when the action has been done
+        console.log("axiosClientToWenv domove | response.data: " )
+        console.log( response.data )
+        var collision = JSON.parse( response.data ).collision == "true"
+        console.log( "domove move=" + move + " numOfSteps=" + numOfSteps + " collision= " + collision  )
+        //setTimeout( () => {
+        //    if( collision ) callbackCollision(numOfSteps); else callbackOk(numOfSteps)
+        //    },800)
         if( collision ) callbackCollision(numOfSteps); else callbackOk(numOfSteps)
   })
   .catch(error => {

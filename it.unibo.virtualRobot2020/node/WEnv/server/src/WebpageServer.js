@@ -30,7 +30,7 @@ function doMove(moveTodo, res){
 				const collision = target != 'notarget'				
 				const answer = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
 				//const answer =  JSON.stringify( "{ \"collision\" : \"" +  collision + "\",  \"move\": \"" + moveTodo + "\"}" )
-				const answerJson = answer //JSON.stringify(answer) 	
+				const answerJson = JSON.stringify(answer) 		//answer //
 				console.log('WebpageServer | doMove  answer= ' + answerJson  );			
 				target = "notarget"; 	//reset target
 				if( res != null ){

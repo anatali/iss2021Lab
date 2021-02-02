@@ -5,6 +5,8 @@
 <title>ResourceAccess</title>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <!--
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 <script>
@@ -25,18 +27,40 @@ socket.on( 'message', function(v){
 });
 </script>
  -->
+  <script src="https://cdn.jsdelivr.net/webjars/org.webjars/jquery/2.1.0/jquery.js"></script>
+  <!--Your JavaScript file must be included below the jQuery library in the document or it will not work. -->
+  <script type="text/javascript" src="jqutils.js"></script>
+  <script type="text/javascript" src="webSocketUtils.js"></script>
+
+ <script>
+     function myIp() {
+       var ip = location.host;
+       document.getElementById("myIp").innerHTML = ip;
+     }
+
+ function byeFunction() {
+   //alert("Thank you for visiting  ");
+   console.log("bye");
+   socket.send("WebSocket close ");
+   //socket.close();
+ }
+   </script>
 </head>
 
-<body>
-<!--
-===============================================================================
-Commands elaborated by frontend/uniboSupports/applCode
-that calls changeResourceModelCoap that exec a coap.put
-that emits modelChange
-===============================================================================
---> 
+<body onload="myIp()"   onunload="byeFunction()>
+
+
+<h2>Virtual Robot Console (guisimple)</h2>
+<pre style="background-color: #ffffb3; color:blue;">
+The <i>webguiServer</i> works on <span id="myIp"></span>
+</pre>
+
 <div style="background-color: #D2B4DE">
-<h2>Robot Console</h2>   
+  <h5 style="color:blue;">HTML-form with POST</h5>
+
+  <pre style="background-color: #ffffb3;">
+click --> POST --> webguiServer (postTo8090 --> WEnv) </pre>
+
 <center>
 			<table >
 					<tr>
@@ -93,38 +117,12 @@ that emits modelChange
 				</table>
 </center>
 
+ </div>
+
+ <button id="displayconns" type="submit">Show Connections</button>
+ <button id="clear" type="submit">ClearHistory</button>
 
 
- 
-<!--
-<h2>Application console</h2>   
-<center>
-			<table >	
-					<tr>
-						<td align="center">
-							<form action="/0" method="post">
-							  	<input type="submit" style="font-size:30px;"  value="reset" >
-							</form>
- 						</td>
-						<td align="center">
-							<form action="/p" method="post">
-							  	<input type="submit" style="font-size:30px;"  value="step" >
-							</form>
- 						</td>
-						<td align="center">							
-							<form action="/k" method="post">							    
-							  	<input type="submit" style="font-size:30px; color:red;"  value="STOP"  >							  	 
-							</form>
-						</td>
-						<td align="center">
-							<form action="/b" method="post">
-							  	<input type="submit" style="font-size:30px;"  value="boundary">
-							</form>
-						</td>
-				</table>
-</center>
--->
-</div>
 <div style="background-color: #FAF19C">
 	<div>
  		<b>ROBOT STATE</b>: <span id="robotDisplay"></span>
