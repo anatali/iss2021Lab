@@ -9,15 +9,17 @@ const { WebpageServer, isWebpageRead } = require('./WebpageServer')
 
 const webpageCallbacks = {
 	/*
+	//NO MORE USED since the is no more the TCPServer
     onWebpageReady:   ()          => server.send( { type: 'webpage-ready ..... ',   arg: {} } ),
     onSonarActivated: object      => server.send( { type: 'sonar-activated', arg: object } ),
     onCollision:      objectName  => server.send( { type: 'collision',       arg: { objectName } } )
 	*/
+	/*
     onWebpageReady:   ()          => console.log( " %%% webpageCallbacks { type: 'webpage-ready ..... ',   arg: {} }" ),
     onSonarActivated: object      => { console.log( "%%% webpageCallbacks  'sonar-activated' " )
 							console.log(  object ) },
     onCollision:      objectName  => console.log( "%%% webpageCallbacks { type: 'collision',  arg:  "+objectName+" " )
-
+    */
 }
 
 const webpageServer = new WebpageServer(webpageCallbacks)

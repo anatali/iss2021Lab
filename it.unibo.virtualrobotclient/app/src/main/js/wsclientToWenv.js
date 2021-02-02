@@ -20,7 +20,10 @@ function doJob(){
       console.log("doJob moveTodo:" + moveTodo);
      //doMove("{\"robotmove\":\"turnLeft\"}");
      doMove( "moveForward" )
-     setTimeout( () => doMove( "moveBackward" ), 800 )
+     setTimeout( () => {
+        doMove( "moveBackward" );
+        console.log("now workign as an observer  ... " );
+     }, 800 )
 }
 
 client.on('connectFailed', function(error) {
@@ -45,26 +48,16 @@ var conn8091
                 console.log("Received: " + msg  )
                 const msgJson = JSON.parse( msg )
                 if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
-                if(msgJson.sonarName) console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                if(msgJson.sonarName){
+                  console.log('\u0007');  //RING THE BELL
+                 console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                }
             }
     });
-/*
-    function doMove(move) {
-        if (connection.connected) {
-            connection.send(move)
-        }
-    }
-*/
-    //doMove("{\"robotmove\":\"turnLeft\"}");
+
 });
 
 
-/*
-setTimeout( () => {
-        doMove("{\"robotmove\":\"turnLeft\"}");
-        conn8091.disconnect()
-    } , 1000);
-*/
 
 
 client.connect('ws://localhost:8091', ''); //'echo-protocol'

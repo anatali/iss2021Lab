@@ -149,12 +149,9 @@ const wsServer    = new WebSocket.Server({ server: app.listen(3001) });
 
 wsServer.on('connection', (ws) => {
     console.log("webguiServer | client connected ")
-    //postTo8090("turnLeft",  addToHistory);
-    //postTo8090("turnRight", addToHistory);
     displayHistory()
-    //ws.send("welcome")
   ws.on('message', message => {
-    console.log("webguiServer | socket-on received : "+message)
+    //console.log("webguiServer | socket-on received : "+message)
     //addToHistory( message )
     if( message=="turnRight" || message=="turnLeft" || message=="alarm" || message=="moveForward" || message=="moveBackward" ){
         postTo8090(message, addToHistory);

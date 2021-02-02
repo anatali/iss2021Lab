@@ -29,10 +29,10 @@ await axios({
 */
     }).then(response => {
     console.log("serverutils postTo8090 | statusCode: " + response.status  )
-    console.log(response.data)  //"collision": "false", "move": "turnLeft" }
+    //console.log(response.data)  //"collision": "false", "move": "turnLeft" }
     const collision = JSON.parse( response.data ).collision
     //console.log("serverutils postTo8090 | statusText: " + response.statusText);
-    if( response.status == "200")  updateHistory( move + " | collision=" + collision )
+    if( response.status == "200")  updateHistory( "postTo8090:" + move + " | collision=" + collision )
     else updateHistory( move + " | response.status=" + response.status )
  })
   .catch(error => {
