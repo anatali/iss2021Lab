@@ -5,7 +5,7 @@
 build
 
 #node
-node/node_modules/
-node/package-lock.json
+node_modules/
+package-lock.json/
 
 docker_password.txt
