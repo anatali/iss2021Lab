@@ -82,13 +82,13 @@ function doMove(moveTodo, res){
     }, moveTime);
 }
 //Updates the mirrors
-function execMoveOnAllConnectedScenes(moveTodo){	//connected to 8090
+function execMoveOnAllConnectedScenes(moveTodo){
     console.log('$$$ WebpageServer doMove |  updates the mirrors'   );
 	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	 
 }
 //Updates the controls
-function sendMoveResultToAllConnectedControls(msgJson){	//connected to 8091
-    console.log("WebpageServer | updates the controls  "    );
+function sendMoveResultToAllConnectedControls(msgJson){
+    console.log("WebpageServer | updates the controls: " + msgJson   );
 	Object.keys(wssockets).forEach( key => wssockets[key].send( msgJson ) )	
 }
 

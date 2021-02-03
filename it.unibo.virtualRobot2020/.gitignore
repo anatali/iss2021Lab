@@ -5,7 +5,7 @@
 build
 
 #node
-node/WEnv/server/node_modules/
-node/WEnv/server/package-lock.json
+./node/node_modules/
+./node/package-lock.json
 
 docker_password.txt

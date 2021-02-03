@@ -96,7 +96,7 @@ app.use( function(req,res){
 	  if( req.gui=="guisimple" )  res.render("indexSimple.ejs", {})
 	  else if( req.gui=="guiJquery" )  res.render("indexJquery.ejs", {})
       else if( req.gui=="guisock" )  res.render("indexSock.ejs", {})
-	  res.sendFile(path.join(__dirname, "index.html"))    //with robotDisplay area set with history
+	  //res.sendFile(path.join(__dirname, "index.html"))    //with robotDisplay area set with history
 	}catch(e){
 	    console.log("webguiServer | SORRY ..." + e);}
 	}

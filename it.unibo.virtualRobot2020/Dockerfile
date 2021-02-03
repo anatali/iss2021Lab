@@ -13,7 +13,8 @@ WORKDIR /home/node/WEnv/server
 RUN npm install
 
 WORKDIR /home/node/WEnv/server/src
-CMD ["node", "main"]
+##CMD ["node", "main"]
+CMD ["node", "WebpageServer"]
 
 
 #### docker build -t virtualrobotdisi:1.0 .
