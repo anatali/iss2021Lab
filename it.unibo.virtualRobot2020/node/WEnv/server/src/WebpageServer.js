@@ -20,22 +20,9 @@ const serverPort = 8090
 var target       = "notarget"   //the current virtual object that collides
 
 //global to be set by startHttpServer
-var doRobotMove
-var updateObservers
+//var doRobotMove
+//var updateObservers
 
-function startServer() { //callbacks OLD
-    startHttpServer()
-    initWs()
-    initSocketIOHandling() //clientMySock, callbacks OLD
-}
-/*
------------------------------------------------------------------------------
-Defines how to handle GET from browser and POST from external controls
------------------------------------------------------------------------------
-*/
-function startHttpServer() {
-    doRobotMove     = doMove
-    updateObservers = sendMoveResultToAllConnectedControls
     app.use(express.static('./../../WebGLScene'))
 
     app.get('/', (req, res) => {
@@ -60,15 +47,14 @@ function startHttpServer() {
   	   });
 	}); //app.post
 
-/*
-Execute a robotmove command and sends info about collision
-*/
+//Execute a robotmove command and sends info about collision
 function doMove(moveTodo, res){
 	console.log('$$$ WebpageServer doMove |  moveTodo=' + moveTodo  );
 	execMoveOnAllConnectedScenes(moveTodo)
 	setTimeout(function() { //wait for the moveTime before sending the answer (collision or not)
         const collision = target != 'notarget'
-        const answer     = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
+        //const answer     = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
+        const answer     = "{ 'collision' : '"  +  collision +  "', 'move': '"  + moveTodo + "'}"
         const answerJson = JSON.stringify(answer) 		//answer //
         console.log('WebpageServer | doMove  answer= ' + answerJson  );
         target = "notarget"; 	//reset target
@@ -78,33 +64,43 @@ function doMove(moveTodo, res){
             res.write( answerJson  ); res.end();
         }
         //IN ANY CASE update all the controls / observers
-        sendMoveResultToAllConnectedControls(answerJson)
+        updateObservers(answerJson)
     }, moveTime);
 }
 //Updates the mirrors
 function execMoveOnAllConnectedScenes(moveTodo){
     console.log('$$$ WebpageServer doMove |  updates the mirrors'   );
-	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );	 
+	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );
 }
-//Updates the controls
-function sendMoveResultToAllConnectedControls(msgJson){
+//Updates the controls and the observers
+function updateObservers(msgJson){
     console.log("WebpageServer | updates the controls: " + msgJson   );
-	Object.keys(wssockets).forEach( key => wssockets[key].send( msgJson ) )	
+	Object.keys(wssockets).forEach( key => wssockets[key].send( msgJson ) )
 }
 
-//STARTING
-    http.listen(serverPort)
-}
-
-
-function initWs(){
 /*
-============================================================================================
-Interact with clients (controls that send commands over ws or observers)
-============================================================================================
+-----------------------------------------------------------------------------
+Defines how to handle GET from browser and POST from external controls
+-----------------------------------------------------------------------------
 */
+function startHttpServer() {
+    //doRobotMove     = doMove
+    //updateObservers = sendMoveResultToAllConnectedControls
+
+//STARTS THE SERVER
+    http.listen(serverPort)
+
+}//startHttpServer
+
+
+/*
+-------------------------------------------------------------------------------------
+Interact with clients over ws (controls that send commands or observers)
+-------------------------------------------------------------------------------------
+*/
+function initWs(){
 const WebSocket = require('ws');
-const wsServer  = new WebSocket.Server({ server: app.listen(8091) });
+const wsServer  = new WebSocket.Server( { port: 8091 } );   //{ server: app.listen(8091) }
 
 wsServer.on('connection', (ws) => {
   wssocketIndex++
@@ -115,7 +111,7 @@ wsServer.on('connection', (ws) => {
     console.log("$$$ WebpageServer wssocket |  wssocketIndex=" +  wssocketIndex + " received: "  )
 	console.log( msg )
 	var moveTodo = JSON.parse(msg).robotmove
-	doRobotMove(moveTodo, null)
+	doMove(moveTodo, null)  //doRobotMove
   });
 
   ws.onerror = (error) => {
@@ -130,42 +126,50 @@ wsServer.on('connection', (ws) => {
 	  wssocketIndex--
 	  console.log( "$$$ WebpageServer wssocket | disconnect wssocketIndex=" +  wssocketIndex )
   })
-});//initWs
-}
+}); //wsServer.on('connection'
+}//initWs
 /*
 -------------------------------------------------------------------------------------
-Interact with 8999 MASTER (the mirrors do not send any info)
+Interact with the MASTER (the mirrors do not send any info)
 -------------------------------------------------------------------------------------
 */
-function initSocketIOHandling() {
-	console.log("WebpageServer | initSocketIOHandling socketIndex="+socketIndex)
+function initSocketIOWebGLScene() {
+	console.log("WebpageServer WebGLScene |  socketIndex="+socketIndex)
     socketIO.on('connection', socket => {
         socketIndex++
-        console.log("WebpageServer WebGLScene connection | socketIndex="+socketIndex)
+        console.log("WebpageServer WebGLScene  | connection socketIndex="+socketIndex)
         const key    = socketIndex
         sockets[key] = socket
-        if( socketIndex == 0) console.log("WebpageServer connection | MASTER-webpage ready")
+        if( socketIndex == 0) console.log("WebpageServer WebGLScene | MASTER-webpage ready")
 
 		socket.on( 'sonarActivated', (obj) => {
-			console.log( "&&& WebpageServer WebGLScene connection | sonarActivated " );
+			console.log( "&&& WebpageServer WebGLScene | sonarActivated " );
 			console.log(obj) 
 			updateObservers( JSON.stringify(obj) )
 		})
         socket.on( 'collision',     (obj) => { 
-		    console.log( "WebpageServer WebGLScene connection | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length );
+		    console.log( "WebpageServer WebGLScene  | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length );
 		    target = obj;
+		    const info     = "{ 'collision' : 'true ', 'move': 'unknown'}"
+		    console.log(info) 
+		    updateObservers( JSON.stringify(info) )
  		} )
         socket.on( 'disconnect',     () => { 
         		delete sockets[key]; 
         		//webpageReady = false;
           		socketIndex--;
 			    alreadyConnected = ( socketIndex == 0 )
-        		console.log("WebpageServer WebGLScene connection | disconnect socketIndex="+socketIndex)
+        		console.log("WebpageServer WebGLScene  | disconnect socketIndex="+socketIndex)
         	})
     })
-}//initSocketIOHandling
+}//initSocketIOWebGLScene
 
-
+function startServer() {
+    //startHttpServer()
+    initWs()
+    initSocketIOWebGLScene()
+    http.listen(serverPort)
+}
 //MAIN
 startServer()
 

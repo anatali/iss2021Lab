@@ -5,8 +5,6 @@
 <script type="text/javascript" src="../css/issStyle.js"></script>
 -->
 <style type="text/css">
-<!--
-
 body
 {
     margin-left:  30px;
@@ -23,6 +21,7 @@ a, a:visited, a:active, a:link, a:hover {
     text-decoration: underline;
     color: #545454;
     background-color: transparent;
+	font-size: 93%;
 }
 
 a:hover {
@@ -41,38 +40,23 @@ h1, h2, h3 {
     color: #242424;
     clear: left;
     font: 100% Tahoma, Helvetica, Arial, sans-serif;
-    margin: 10;
-    margin-right: 15px;
     margin-bottom: 0.5em;
     padding-top: 0.5em;
-    border-bottom: 1px solid #242424;
+	border-radius: 10px;
+	padding: 5px;
 }
 
-h1 {
-    font-size: 150%;
-    background-color: #b2c0ff;
+top {
+	width: 100%;
 }
 
-h2 {
-    background-color: #d9fbff;
-    font-size: 110%;
-}
 
-h3 {
-	background-color: #e6ccff;
-    font-size: 80%;
-}
-h4 {
-    background-color: #99ffcc;
-    font-size: 100%;
-	width: 750px;
-}
 #i {
     color: #ff1010;
 }
 tt{
 	font-family: "Arial";
-    font-size: 80%;
+    font-size: 90%;
 	color: #006600;
 }
 em{
@@ -80,31 +64,76 @@ em{
     font-size: 80%;
 	font-weight: bold;
 	border-style:solid;
-	border-color: #ccffff;
-    color: #0033cc;
+	border-color: #abe876;
+    color: #1632cc;
 }
 bc{
 	font-family: "Arial";
-	font-size: 80%;
+	font-size: 90%;
 	font-weight: bold;
     color: #990000;
 	background-color: #fcf8c7;
 }
-pre{
-	font-family: "Helvetica";
-	font-size: 70%;
-	background-color: #fcf8c7; 
+ks{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #0000CD	;
+	font-size: 90%;
 }
- 
+kc{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #008000	;
+	font-size: 90%;
+}
+pre{
+	font-family: "Consolas";
+	font-size: 85%;
+	background-color: #f5f5f5;
+	border: 1.5px solid silver;
+	padding: 5px;
+}
 m{
 	font-family: "Helvetica";
 	line-height: 100%;
  	font-size: 75%;
 }
 div.body{
-	width: 800px;
+	 
     font-size: 18px;
-}    
+}
+k{
+    color: #990000;
+	font-weight: bold;
+	font-size: 90%;
+}
+h1 {
+    font-size: 150%;
+    background-color: #b2c0ff;
+	padding: 10px;
+}
+
+h2 {
+    background-color: #9ed8ff;
+    font-size: 130%;
+}
+
+h3 {
+	background-color: #e6ccff;
+    font-size: 100%;
+}
+h4 {
+    background-color: #ccffcc;
+    font-size: 100%;
+	width: 95%;
+	border-radius: 5px;
+	padding: 2px;
+}
+h5 {
+    background-color: #d5ffb0;
+    font-size: 100%;
+
+}
 div.req{
 	background-color: #d9ffb3;
     font-size: 18px;
@@ -112,24 +141,127 @@ div.req{
     border: 3px solid green;
     padding: 15px;
     margin: 10px;
-}    
-
+}
+div.remark{
+	background-color: #E3F2FD;
+    border: 1.5px solid #d5f2ed;
+    padding: 15px;
+    margin: 10px;
+	border-radius: 25px;
+}
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-  -->
+ol, ul, li {
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  padding-bottom: 5px;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+img {
+	border: 1.5px solid #d5f2ed
+
+}
+
+a, a:visited, a:active, a:link, a:hover {
+    text-decoration: underline;
+    color: #545454;
+    background-color: transparent;
+}
+
+div.wrapdesc{
+	width: 90%;
+	margin: auto;
+}
+
+div.imagedesc{
+	width: 85%;
+	margin: auto;
+}
 </style>
+
+<style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 260px;
+  background-color: #F3F781;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+</style>
+
+<script>
+// When the user clicks on <div>, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
 <head>
    
-<title>Lab9ISS</title></head>
+<title>WEnv2021</title></head>
     
 <body>
 
 <div class="body"> 
 
-<h1>72939 - LAB9 | Interacting with a virtual robot</h1> 
+<h1>Interacting with a virtual robot</h1> 
 <a href="http://htmlpreview.github.com/?https://github.com/anatali/iss2019Lab/blob/master/LectureBologna1819.html" target="isslm">LabISS-lectures site</a></font> 
 
 <h2>INTRODUCTION</h2>
@@ -267,18 +399,50 @@ Let us report an example of a client written in Node.js that sends some command 
 
 <tr>
 <td style="width:40%">
-<a href="../src/main/kotlin/it/unibo/robots19/basic/clientWenvTcp.kt" target="code">clientWenvTcp.kt</a>
+<a href="../node/clients/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
 </td>
-<td><m><em>Client Node for interaction with WEnv</em></m></td>
+<td> 
+The client first moves forward and then backward. Afterwards, it works as an observer that:
+<ul>
+<li>show information emitted by some sonar</li>
+<li>rings a bell if the virtual robot collides with some virtual obstacle </li>
+</ul>
+The client uses the  <a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a>
+</td>
 </tr>
  
-
-
 </tbody>	
 </table></center>
 
 
+<h2>About <a href="https://en.wikipedia.org/wiki/WebSocket" target="web">websockets</a></h2>
 
+<h3><a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a></h3>
+ WebSocket server e client per node.js. 
+Una delle librerie più veloci se non la più veloce.
+This module does not work in the browser. Browser clients must use the native 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> object.
+
+<h3><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a></h3>
+Browser clients must use the native 
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> object.
+
+
+<h3><a href="https://github.com/socketio/socket.io" target="web">socket.io</a></h3>
+ ( <a href="https://github.com/socketio/engine.io-client-java" target="web">socket.io for java</a>)
+Server e client WebSocket per node.js + client 
+per browser + (v0 ha fallback più recenti o meno recenti, v1 di Socket.io utilizza engine.io) 
++ canali - utilizzati in stack.io. 
+La libreria client tenta di riconnettersi al momento della disconnessione.
+
+<!--
+ABOUT WEB SOCKETS
+using websocket :   (see https://www.npmtrends.com/socket.io-vs-websocket-vs-ws)
+https://medium.com/@denizozger/finding-the-right-node-js-websocket-implementation-b63bfca0539
+https://www.codecademy.com/register
+https://www.npmjs.com/package/strong-agent
+-->
 
 </div>  
 <div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">

@@ -1,9 +1,5 @@
 /*
 wsclientToWenv
-using websocket :   (see https://www.npmtrends.com/socket.io-vs-websocket-vs-ws)
-https://medium.com/@denizozger/finding-the-right-node-js-websocket-implementation-b63bfca0539
-https://www.codecademy.com/register
-https://www.npmjs.com/package/strong-agent
     performs forward - backward
     and then works as an observer
         rings a bell if there is a collision
