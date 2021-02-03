@@ -50,7 +50,7 @@ var conn8091
                 if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
                 if(msgJson.sonarName){
                   console.log('\u0007');  //RING THE BELL
-                 console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                  console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
                 }
             }
     });

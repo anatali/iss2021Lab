@@ -357,36 +357,35 @@ export default config;
 </pre>
 
 <h3>INTERACTION</h3> 
-	
+<!--
+OLD PART BASED ON THE WORK of  Soffritti
+-----------------------------------------------------	
 The virtual robot accepts commands sent on a <tt>TCP</tt> connection on port <tt>8999</tt>.
-The commands are described in the file <tt>README.md</tt>.
+-->
+The virtual robot uses the Node library <a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a> 
+to accept commands sent on a websocket at port <tt>8999</tt>. 
+<br/>
+The commands are described in the file <a href="../node/WEnv/README.md" target="web">README.md</a>.
 
  For example:
 <pre>
-moveForward : `{ "type": "moveForward", "arg": 300 }`
+moveForward :  `{ "type": "moveForward", "arg": 300 }`
 moveBackward : `{ "type": "moveBackward", "arg": 300 }`
  
-turnRight : `{ "type": "turnRight", "arg": 300 }`
-turnLeft : `{ "type": "turnLeft", "arg": 300 }`
+turnRight :    `{ "type": "turnRight", "arg": 300 }`
+turnLeft :     `{ "type": "turnLeft", "arg": 300 }` 
 
-stop : `{ "type": "alarm" }`
+stop :         `{ "type": "alarm" }`
 </pre>
-Moreover, the virtual environment <em>sends</em> to the connected client (via <tt>TCP</tt> on port <tt>8999</tt>):
+Moreover, the virtual environment <em>sends</em> to the  clients connected on the ws port <tt>8091</tt>):
 <ul>
 <li>Data emitted by the sonars included in the scene when they detect the robot </li>
-<li>Data emitted by the sonars on board of the robot, when they detect an obstacle (fixed or mobile) </li>
+<li>Data emitted by the impact sensors put in front and in the rear of the robot, when they detect an obstacle (fixed or mobile) </li>
 </ul>
 
-<pre>
-webpage-ready : `{ "type": "webpage-ready, "arg": {} }`
-sonar-activated : `{
-	"type:" "sonar-activated",
-	"arg": { "sonarName": "sonarName", "distance": 1, "axis": "x" }
-}`
-collision : `{
-	"type": "collision",
-	"arg": { "objectName": "obstacle-1" }
-}`
+<pre>{ "sonarName": "sonarName", "distance": 1, "axis": "x" }
+
+collision : "{ \"collision\" : \"false\", \"move\": \"moveForward\"}"
 </pre>
 
 
@@ -443,6 +442,22 @@ https://medium.com/@denizozger/finding-the-right-node-js-websocket-implementatio
 https://www.codecademy.com/register
 https://www.npmjs.com/package/strong-agent
 -->
+
+<!-- file:///C:/Didattica2018Work/iss2021Lab/it.unibo.virtualrobotclient/userDocs/VirtualrobotClient.html -->
+
+<h2>Docker</h2>
+<pre>
+gradle build                            <kc>Create the distribution</kc>
+docker build -t virtualrobotdisi:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualRobot2020/Dockerfile" target="web">Dockerfile</a></kc>
+
+docker run -ti -p 8090:8090 -p 8091:8091 --rm  virtualrobotdisi:1.0 /bin/sh	<kc>local test</kc>
+
+<kc>Tag the image</kc>
+docker tag virtualrobotdisi:1.0 natbodocker/virtualrobotdisi:1.0
+
+<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
+docker push natbodocker/virtualrobotdisi:1.0
+</pre>
 
 </div>  
 <div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">
