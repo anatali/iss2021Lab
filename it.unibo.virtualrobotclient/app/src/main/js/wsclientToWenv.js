@@ -1,5 +1,8 @@
 /*
 wsclientToWenv
+    performs forward - backward
+    and then works as an observer
+        rings a bell if there is a collision
 */
 const WebSocketClient = require('websocket').client;
 
@@ -56,8 +59,6 @@ var conn8091
     });
 
 });
-
-
 
 
 client.connect('ws://localhost:8091', ''); //'echo-protocol'

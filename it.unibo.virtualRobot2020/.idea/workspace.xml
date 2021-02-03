@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/axiosClientToWenv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/axiosClientToWenv.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +66,7 @@
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualRobot2020\node\WEnv\clients" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualRobot2020" />
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualRobot2020\node\clients" />
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualRobot2020\node" />
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualRobot2020\node\WEnv" />
@@ -93,9 +97,17 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612383774430">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.690@0.0.1280.690" timestamp="1612383774430" />
     <state x="422" y="87" key="FileChooserDialogImpl" timestamp="1612340396788">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="422" y="87" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1612340396788" />
+    <state x="349" y="77" width="581" height="534" key="find.popup" timestamp="1612386495740">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="349" y="77" width="581" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1612386495740" />
   </component>
 </project>

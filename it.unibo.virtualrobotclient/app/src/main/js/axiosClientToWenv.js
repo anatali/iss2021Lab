@@ -1,5 +1,6 @@
 /*
 axiosClientToWenv
+walks along the boundary
 */
 const axios = require('axios')
 const URL   = 'http://localhost:8090/api/move' ;
@@ -39,18 +40,10 @@ function domove(move, numOfSteps, callbackOk, callbackCollision)  {
             headers: { 'Content-Type': 'application/json' }
     }).then(response => {   //continues when the action has been done
         console.log("axiosClientToWenv domove | response.data: " )
-        var answer = response.data //JSON.stringify(response.data)  //"{ 'collision' : 'false', 'move': 'moveForward'}"
-        console.log(  answer   )
-        //var answer = "\"" + response.data + "\""
-        //console.log(  answer  )
-        console.log( JSON.parse( answer ) )
-        var msgJson = JSON.parse( answer ) //== 'true'
-        console.log( msgJson )
-        console.log( msgJson.collision )
-        console.log( "domove move=" + move + " numOfSteps=" + numOfSteps + " collision= " + collision  )
-        //setTimeout( () => {
-        //    if( collision ) callbackCollision(numOfSteps); else callbackOk(numOfSteps)
-        //    },800)
+        var answer = response.data
+        console.log(  answer )
+        collision = ( answer.collision )
+        console.log(  "collision=" + collision )
         if( collision ) callbackCollision(numOfSteps); else callbackOk(numOfSteps)
   })
   .catch(error => {

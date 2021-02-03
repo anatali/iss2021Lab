@@ -53,9 +53,8 @@ function doMove(moveTodo, res){
 	execMoveOnAllConnectedScenes(moveTodo)
 	setTimeout(function() { //wait for the moveTime before sending the answer (collision or not)
         const collision = target != 'notarget'
-        //const answer     = '{ "collision" : "'  +  collision +  '", "move": "' + moveTodo + '"}'
-        const answer     = "{ 'collision' : '"  +  collision +  "', 'move': '"  + moveTodo + "'}"
-        const answerJson = JSON.stringify(answer) 		//answer //
+        const answer     = { 'collision' : collision , 'move' : moveTodo }  //JSON obj
+        const answerJson = JSON.stringify(answer)
         console.log('WebpageServer | doMove  answer= ' + answerJson  );
         target = "notarget"; 	//reset target
         if( res != null ){  //give info about collision to the POST sender
@@ -142,7 +141,7 @@ function initSocketIOWebGLScene() {
         sockets[key] = socket
         if( socketIndex == 0) console.log("WebpageServer WebGLScene | MASTER-webpage ready")
 
-		socket.on( 'sonarActivated', (obj) => {
+		socket.on( 'sonarActivated', (obj) => {  //Obj is a JSON object
 			console.log( "&&& WebpageServer WebGLScene | sonarActivated " );
 			console.log(obj) 
 			updateObservers( JSON.stringify(obj) )
@@ -150,8 +149,8 @@ function initSocketIOWebGLScene() {
         socket.on( 'collision',     (obj) => { 
 		    console.log( "WebpageServer WebGLScene  | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length );
 		    target = obj;
-		    const info     = "{ 'collision' : 'true ', 'move': 'unknown'}"
-		    console.log(info) 
+		    const info     = { 'collision' : 'true ', 'move': 'unknown'}
+		    //console.log(info)
 		    updateObservers( JSON.stringify(info) )
  		} )
         socket.on( 'disconnect',     () => { 
