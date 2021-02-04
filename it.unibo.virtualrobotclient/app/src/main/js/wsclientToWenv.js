@@ -1,5 +1,5 @@
 /*
-wsclientToWenv
+wsclientToWenv.js
 ===============================================================
     performs forward - backward
     and then works as an observer

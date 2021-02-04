@@ -52,15 +52,16 @@ function doMove(moveTodo, res){
 	console.log('$$$ WebpageServer doMove |  moveTodo=' + moveTodo  );
 	execMoveOnAllConnectedScenes(moveTodo)
 	setTimeout(function() { //wait for the moveTime before sending the answer (collision or not)
-        const collision = target != 'notarget'
+        const collision  = target != 'notarget'
         const answer     = { 'collision' : collision , 'move' : moveTodo }  //JSON obj
         const answerJson = JSON.stringify(answer)
         console.log('WebpageServer | doMove  answer= ' + answerJson  );
-        target = "notarget"; 	//reset target
+        target           = "notarget"; 	//reset target
         if( res != null ){  //give info about collision to the POST sender
     		res.writeHead(200, { 'Content-Type': 'text/json' });
     		res.statusCode=200
-            res.write( answerJson  ); res.end();
+            res.write( answerJson  );
+            res.end();
         }
         //IN ANY CASE update all the controls / observers
         updateObservers(answerJson)
@@ -149,7 +150,7 @@ function initSocketIOWebGLScene() {
         socket.on( 'collision',     (obj) => { 
 		    console.log( "WebpageServer WebGLScene  | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length );
 		    target = obj;
-		    const info     = { 'collision' : 'true ', 'move': 'unknown'}
+		    const info     = { 'collision' : 'true', 'move': 'unknown'}
 		    //console.log(info)
 		    updateObservers( JSON.stringify(info) )
  		} )

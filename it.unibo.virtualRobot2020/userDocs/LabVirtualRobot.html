@@ -377,15 +377,15 @@ turnLeft :     `{ "type": "turnLeft", "arg": 300 }`
 
 stop :         `{ "type": "alarm" }`
 </pre>
-Moreover, the virtual environment <em>sends</em> to the  clients connected on the ws port <tt>8091</tt>):
+Moreover, the virtual environment <em>sends</em> to the  clients connected on the ws port <tt>8091</tt>:
 <ul>
-<li>Data emitted by the sonars included in the scene when they detect the robot </li>
+<li>Data emitted by the sonars included in the scene when they detect some object (the moving robot) </li>
 <li>Data emitted by the impact sensors put in front and in the rear of the robot, when they detect an obstacle (fixed or mobile) </li>
 </ul>
 
 <pre>{ "sonarName": "sonarName", "distance": 1, "axis": "x" }
 
-collision : "{ \"collision\" : \"false\", \"move\": \"moveForward\"}"
+{ "collision" : "false", "move": "moveForward"}
 </pre>
 
 
@@ -401,10 +401,13 @@ Examples of clients are reported in project <a href="../../it.unibo.virtualrobot
 <tbody>	
 
 <tr>
-<td style="width:40%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/axiosclientToWenv.js" target="code">axiosclientToWenv.js</a></td>
-<td>The client interacts via HTTP  with the WEnv by using the  
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/axiosclientToWenv.js" target="code">axiosclientToWenv.js</a></td>
+<td>
+The client  <i>walks along the boundary</i> of the room.
+<br/><br/>
+The client interacts via <em> HTTP</em>  with the WEnv by using the  
 <a href="https://www.npmjs.com/package/axios" target="web">axios</a>  library for Node.js. <br/> 
-The client  walks along the boundary of the room.
+
 </td>
 </tr>
 
@@ -413,14 +416,16 @@ The client  walks along the boundary of the room.
 <a href="../../it.unibo.virtualrobotclient/app/src/main/js/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
 </td>
 <td> 
-The client interacts with the WEnv by using the  
-<a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
-<br/>
-The client first moves forward and then backward. Afterwards, it works as an observer that:
+The client first <i>moves forward and backward</i>. Afterwards, it works as an <em>observer</em> that:
 <ul>
 <li>show information emitted by some sonar</li>
 <li>rings a bell if the virtual robot collides with some virtual obstacle </li>
 </ul>
+<br/> 
+The client interacts with the WEnv via <em>web-scokets</em>, by using the  
+<a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
+
+
 
 <!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
 </td>
@@ -436,11 +441,30 @@ The client first moves forward and then backward. Afterwards, it works as an obs
 <tbody>	
 
 <tr>
-<td style="width:40%">
-<a href="../node/clients/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
+<td style="width:30%">
+<a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" target="code">ClientUsingPost.java</a>
 </td>
+<td>The client <i>walks along the boundary</i> of the room. 
+<br/><br/>
+It exploits the library 
+<a href="https://hc.apache.org/httpcomponents-client-ga/tutorial/html/index.html " target="web">org.apache.http.client</a> (see also 
+<a href="https://www.vogella.com/tutorials/ApacheHttpClient/article.html" target="web">HttpClient - Tutorial</a>)
+to implement <em> HTTP</em>  requests.
+<br/><br/>
+The handling of <em>JSON</em> answers is done using the library 
+<a href="https://javaee.github.io/javaee-spec/javadocs/javax/json/stream/JsonParser.html" target="web">javax.json.stream.JsonParser</a>
+or the library 
+<a href="https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple" target="web">org.json.simple.parser</a>
+(see also <a href="https://www.tutorialspoint.com/json_simple/json_simple_quick_guide.htm" target="web">JSON.simple - Quick Guide</a>)
+</td>
+</tr>
 
-<td>
+<tr>
+<td><a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" target="code">ClientWebsockJavax.java</a></td>
+<td>The client  <i>walks along the boundary</i> of the room.
+<br/><br/>
+The client interacts with the WEnv via <em>web-scokets</em>, by using the  
+<a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library . <br/> 
 </td>
 </tr>
  
