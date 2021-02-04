@@ -13,9 +13,13 @@ WORKDIR /home/node/WEnv/server
 RUN npm install
 
 WORKDIR /home/node/WEnv/server/src
-##CMD ["node", "main"]
 CMD ["node", "WebpageServer"]
 
+## Tag the image
+## docker tag usingvirtualrobot:1.0 natbodocker/usingvirtualrobot:1.0
+
+## Register the image on DockerHub
+## docker push natbodocker/usingvirtualrobot:1.0
 
 #### docker build -t virtualrobotdisi:1.0 .
 #### docker run -ti -p 8090:8090  -p 8091:8091 --rm virtualrobotdisi:1.0 /bin/sh

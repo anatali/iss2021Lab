@@ -390,9 +390,48 @@ collision : "{ \"collision\" : \"false\", \"move\": \"moveForward\"}"
 
 
 
-<h3>USING THE WENV ROBOT</h3>
+<h2>USING THE VIRTUAL ROBOT</h2>
 
-Let us report an example of a client written in Node.js that sends some command to the robot:
+Examples of clients are reported in project <a href="../../it.unibo.virtualrobotclient" target="code">it.unibo.virtualrobotclient</a>
+
+<h3>Clients written in Node.js </h3>
+
+ 
+<center><table style="width:95%">
+<tbody>	
+
+<tr>
+<td style="width:40%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/axiosclientToWenv.js" target="code">axiosclientToWenv.js</a></td>
+<td>The client interacts via HTTP  with the WEnv by using the  
+<a href="https://www.npmjs.com/package/axios" target="web">axios</a>  library for Node.js. <br/> 
+The client  walks along the boundary of the room.
+</td>
+</tr>
+
+<tr>
+<td >
+<a href="../../it.unibo.virtualrobotclient/app/src/main/js/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
+</td>
+<td> 
+The client interacts with the WEnv by using the  
+<a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
+<br/>
+The client first moves forward and then backward. Afterwards, it works as an observer that:
+<ul>
+<li>show information emitted by some sonar</li>
+<li>rings a bell if the virtual robot collides with some virtual obstacle </li>
+</ul>
+
+<!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
+</td>
+</tr>
+
+
+ 
+</tbody>	
+</table></center>
+
+<h3>Clients written in Java </h3>
 <center><table style="width:95%">
 <tbody>	
 
@@ -400,21 +439,13 @@ Let us report an example of a client written in Node.js that sends some command 
 <td style="width:40%">
 <a href="../node/clients/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
 </td>
-<td> 
-The client first moves forward and then backward. Afterwards, it works as an observer that:
-<ul>
-<li>show information emitted by some sonar</li>
-<li>rings a bell if the virtual robot collides with some virtual obstacle </li>
-</ul>
-The client uses the  <a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a>
+
+<td>
 </td>
 </tr>
  
 </tbody>	
 </table></center>
-
-
 <h2>About <a href="https://en.wikipedia.org/wiki/WebSocket" target="web">websockets</a></h2>
 
 <h3><a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a></h3>
@@ -455,9 +486,19 @@ docker run -ti -p 8090:8090 -p 8091:8091 --rm  virtualrobotdisi:1.0 /bin/sh	<kc>
 <kc>Tag the image</kc>
 docker tag virtualrobotdisi:1.0 natbodocker/virtualrobotdisi:1.0
 
+<kc>Login in DockerHub (get the password from a private file)</kc>
+type docker_password.txt | docker login --username natbodocker --password-stdin
+
 <kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
 docker push natbodocker/virtualrobotdisi:1.0
+
+<kc>Use <a href="../docker-compose.yaml" target="code">docker-compose.yaml</a></kc>
+docker-compose up -d  <kc>or</kc> docker-compose run -d --service-ports wenv
+
+
 </pre>
+
+
 
 </div>  
 <div style="background-color:rgba(86, 56, 253, 0.9); width:100%;text-align:center;font-size:small;color:white">

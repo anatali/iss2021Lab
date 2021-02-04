@@ -1,14 +1,12 @@
 /*
 axiosClientToWenv
-walks along the boundary
+===============================================================
+walks along the boundary bysing callbacks, no global state
+===============================================================
 */
 const axios = require('axios')
 const URL   = 'http://localhost:8090/api/move' ;
 const path = ['sud', 'east', 'north', 'west']
-
-/*
-Using callbacks, no global state
-*/
 
 function ahead(numOfSteps){
      domove("moveForward", numOfSteps, goon, ko)
@@ -19,7 +17,7 @@ function goon(numOfSteps){
 }
 
 function ko(numOfSteps){
-console.log("...............................................ko numOfSteps=" + numOfSteps  )
+    //console.log("ko numOfSteps=" + numOfSteps  )
     if( numOfSteps++ < 4 )  domove("turnLeft", numOfSteps, goon, ko)
     else  domove("turnLeft", numOfSteps, terminate, terminate)  //just to return to initial state
 }
@@ -27,8 +25,6 @@ console.log("...............................................ko numOfSteps=" + nu
 function terminate(){
     console.log("Buoundary explored"   )
 }
-
-ahead(1)
 
 //------------------------------------------------------------
 function domove(move, numOfSteps, callbackOk, callbackCollision)  {
@@ -43,10 +39,14 @@ function domove(move, numOfSteps, callbackOk, callbackCollision)  {
         var answer = response.data
         console.log(  answer )
         collision = ( answer.collision )
-        console.log(  "collision=" + collision )
+        //console.log(  "collision=" + collision )
         if( collision ) callbackCollision(numOfSteps); else callbackOk(numOfSteps)
   })
   .catch(error => {
     console.error(error)
   })
 }
+
+
+//main
+ahead(1)

@@ -1,42 +1,39 @@
 /*
 wsclientToWenv
+===============================================================
     performs forward - backward
     and then works as an observer
         rings a bell if there is a collision
+===============================================================
 */
 const WebSocketClient = require('websocket').client;
 
 var client = new WebSocketClient();
 
-    function doMove(move) {
+    function doMove(move, connection) {
 
         const moveJson = '{"robotmove":"'+ move +'"}'
         console.log("doMove moveJson:" + moveJson);
-        //const moveJsonStr = JSON.stringify( moveJson )
-        //console.log("doMove moveJsonStr:" + moveJsonStr);
-
-        if (conn8091) { conn8091.send(moveJson) }
+        if (connection) { connection.send(moveJson) }
     }
 
-function doJob(){
+function doJob(connection){
       const moveTodo = "{\"robotmove\":\"turnLeft\"}"
       console.log("doJob moveTodo:" + moveTodo);
      //doMove("{\"robotmove\":\"turnLeft\"}");
-     doMove( "moveForward" )
+     doMove( "moveForward", connection )
      setTimeout( () => {
         doMove( "moveBackward" );
-        console.log("now workign as an observer  ... " );
+        console.log("now working as an observer  ... " );
      }, 800 )
 }
 
-client.on('connectFailed', function(error) {
-    console.log('Connect Error: ' + error.toString());
-});
-var conn8091
+
+
     client.on('connect', function(connection) {
         console.log('WebSocket Client Connected')
-        conn8091 = connection
-        doJob()
+        //conn8091 = connection
+        doJob(connection)
 
         connection.on('error', function(error) {
             console.log("Connection Error: " + error.toString());
@@ -50,12 +47,17 @@ var conn8091
                 const msg = message.utf8Data
                 console.log("Received: " + msg  )
                 const msgJson = JSON.parse( msg )
-                if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
+                if(msgJson.collision) {
+                   console.log("Received: collision=" + msgJson.collision)
+                   console.log('\u0007');  //RING THE BELL
+                }
                 if(msgJson.sonarName){
-                  console.log('\u0007');  //RING THE BELL
-                  console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                   console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
                 }
             }
+    });
+    client.on('connectFailed', function(error) {
+        console.log('Connect Error: ' + error.toString());
     });
 
 });
