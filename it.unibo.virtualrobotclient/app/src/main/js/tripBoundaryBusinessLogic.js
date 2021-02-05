@@ -1,9 +1,9 @@
 /*
 tripBoundaryBusinessLogic.js
-
-===============================================================
-
-===============================================================
+===============================================================================
+Business logic for a robot that walks along a boundary in a event-driven way
+abstracting from the technical details about (websocket) connections
+===============================================================================
 */
  /*
 BUSINESS LOGIC

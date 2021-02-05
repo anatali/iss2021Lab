@@ -1,11 +1,15 @@
 /*
+==========================================================================
 WebpageServer.js
+
+==========================================================================
 */
 
-const app      = require('express')()
-const express  = require('express')
-const http     = require('http').Server(app)
-const socketIO = require('socket.io')(http)
+const app       = require('express')()
+const express   = require('express')
+const http      = require('http').Server(app)
+const socketIO  = require('socket.io')(http)        //interaction with WebGLScene
+const WebSocket = require('ws');                    //interaction with external cliinets
 
 const sockets       = {}    //interaction with WebGLScene
 const wssockets     = {}    //interaction with clients
@@ -19,28 +23,34 @@ const moveTime   = 800
 const serverPort = 8090
 var target       = "notarget"   //the current virtual object that collides
 
-//global to be set by startHttpServer
-//var doRobotMove
-//var updateObservers
+
 
     app.use(express.static('./../../WebGLScene'))
 
+/*
+-----------------------------------------------------------------------------
+Defines how to handle GET from browser and from external controls
+-----------------------------------------------------------------------------
+*/
     app.get('/', (req, res) => {
-	     console.log("WebpageServer | GET socketIndex="+socketIndex + " alreadyConnected =" + alreadyConnected )
-             if( ! alreadyConnected ){
-		alreadyConnected = true;
-		res.sendFile('indexOk.html', { root: './../../WebGLScene' })
+	    console.log("WebpageServer | GET socketIndex="+socketIndex + " alreadyConnected =" + alreadyConnected )
+        if( ! alreadyConnected ){
+            alreadyConnected = true;
+            res.sendFile('indexOk.html', { root: './../../WebGLScene' })
 	     }else{
-		res.sendFile('indexNoControl.html', { root: './../../WebGLScene' })
-                //See socket.on( 'disconnect' ...
+		    res.sendFile('indexNoControl.html', { root: './../../WebGLScene' })
 	     }
     }); //app.get
 
-	//USING POST : by AN Jan 2021
+/*
+-----------------------------------------------------------------------------
+Defines how to handle POST from browser and from external controls
+-----------------------------------------------------------------------------
+*/	//USING POST : by AN Jan 2021
     app.post("/api/move", function(req, res,next)  {
 	    var data = ""
 	    req.on('data', function (chunk) { data += chunk; }); //accumulate data sent by POST
-            req.on('end', function () {	//elaborate data received JSon: { robotmove: turnLeft | turnRight | ... }
+            req.on('end', function () {	//elaborate data received { robotmove: turnLeft | turnRight | ... }
 			console.log('POST /api/move data ' + data  );
      		var moveTodo = JSON.parse(data).robotmove
 			doMove(moveTodo, res)
@@ -73,34 +83,18 @@ function execMoveOnAllConnectedScenes(moveTodo){
     console.log('$$$ WebpageServer doMove |  updates the mirrors'   );
 	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );
 }
-//Updates the controls and the observers
+//Updates the controls and the observers (Jan 2021)
 function updateObservers(msgJson){
     console.log("WebpageServer | updates the controls: " + msgJson   );
 	Object.keys(wssockets).forEach( key => wssockets[key].send( msgJson ) )
 }
 
 /*
------------------------------------------------------------------------------
-Defines how to handle GET from browser and POST from external controls
------------------------------------------------------------------------------
-*/
-function startHttpServer() {
-    //doRobotMove     = doMove
-    //updateObservers = sendMoveResultToAllConnectedControls
-
-//STARTS THE SERVER
-    http.listen(serverPort)
-
-}//startHttpServer
-
-
-/*
 -------------------------------------------------------------------------------------
-Interact with clients over ws (controls that send commands or observers)
+Interact with clients over ws (controls that send commands or observers) Jan 2021
 -------------------------------------------------------------------------------------
 */
 function initWs(){
-const WebSocket = require('ws');
 const wsServer  = new WebSocket.Server( { port: 8091 } );   //{ server: app.listen(8091) }
 
 wsServer.on('connection', (ws) => {
@@ -108,11 +102,12 @@ wsServer.on('connection', (ws) => {
   console.log("$$$ WebpageServer wssocket | client connected wssocketIndex=" + wssocketIndex)
   const key      = wssocketIndex
   wssockets[key] = ws
+
   ws.on('message', msg => {
     console.log("$$$ WebpageServer wssocket |  wssocketIndex=" +  wssocketIndex + " received: "  )
 	console.log( msg )
 	var moveTodo = JSON.parse(msg).robotmove
-	doMove(moveTodo, null)  //doRobotMove
+	doMove(moveTodo, null)
   });
 
   ws.onerror = (error) => {
@@ -122,12 +117,12 @@ wsServer.on('connection', (ws) => {
 	  console.log( "$$$ WebpageServer wssocket | disconnect wssocketIndex=" +  wssocketIndex )
   }
 
-  ws.on('disconnect', ()=>{
+  ws.on('close', ()=>{
 	  delete sockets[key];
 	  wssocketIndex--
 	  console.log( "$$$ WebpageServer wssocket | disconnect wssocketIndex=" +  wssocketIndex )
   })
-}); //wsServer.on('connection'
+}); //wsServer.on('connection' ...
 }//initWs
 /*
 -------------------------------------------------------------------------------------
@@ -152,12 +147,10 @@ function initSocketIOWebGLScene() {
 		    console.log( "WebpageServer WebGLScene  | collision detected " + obj + " numOfSockets=" + Object.keys(sockets).length );
 		    target = obj;
 		    const info     = { 'collision' : true, 'move': 'unknown'}
-		    //console.log(info)
 		    updateObservers( JSON.stringify(info) )
  		} )
         socket.on( 'disconnect',     () => { 
-        		delete sockets[key]; 
-        		//webpageReady = false;
+        		delete sockets[key];
           		socketIndex--;
 			    alreadyConnected = ( socketIndex == 0 )
         		console.log("WebpageServer WebGLScene  | disconnect socketIndex="+socketIndex)
@@ -166,7 +159,6 @@ function initSocketIOWebGLScene() {
 }//initSocketIOWebGLScene
 
 function startServer() {
-    //startHttpServer()
     initWs()
     initSocketIOWebGLScene()
     http.listen(serverPort)

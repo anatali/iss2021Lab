@@ -1,3 +1,8 @@
+/*
+ClientUsingPost.java
+===============================================================
+===============================================================
+*/
 package it.unibo.wenv;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,12 +15,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;				//used to convert String in JSON obj
 import org.json.simple.parser.JSONParser;	    //used to convert String in JSON obj
-/*
-ClientUsingPost.java
-===============================================================
-===============================================================
-*/
-
 import javax.json.Json;
 import java.io.InputStreamReader;
 import java.net.URI;
@@ -57,7 +56,7 @@ public class ClientUsingPost {
 		boolean collision = false;
 		javax.json.stream.JsonParser parser = Json.createParser(
 				new InputStreamReader((response.getEntity().getContent())));
-		//{ "collision" : "false", "move": "turnLeft"}
+		//{"endmove":true,"move":"turnLeft"}
 		parser.next();    //START_OBJECT
 		//System.out.println( "ClientUsingPost checkCollision | response START_OBJECT= "   );
 		parser.next();
@@ -73,12 +72,15 @@ public class ClientUsingPost {
 		try{
 			//response.getEntity().getContent() is an InputStream
 			String jsonStr = EntityUtils.toString( response.getEntity() );
-			//System.out.println( "ClientUsingPost | checkCollision_simple jsonStr= " +  jsonStr );
-			//jsonStr = {"collision":false,"move":"moveForward"}
+			System.out.println( "ClientUsingPost | checkCollision_simple jsonStr= " +  jsonStr );
+			//jsonStr = {"endmove":true,"move":"moveForward"}
 			org.json.simple.parser.JSONParser simpleparser = new JSONParser();
 			org.json.simple.JSONObject jsonObj              = (JSONObject) simpleparser.parse( jsonStr );
-			boolean collision = jsonObj.get("collision").toString().equals("true");
-			System.out.println( "ClientUsingPost | checkCollision_simple collision=" +  collision );
+			boolean collision = false;
+			if( jsonObj.get("endmove") != null ) {
+				collision = ! jsonObj.get("endmove").toString().equals("true");
+				System.out.println("ClientUsingPost | checkCollision_simple collision=" + collision);
+			}
 			return collision;
 		}catch(Exception e){
 			System.out.println("ClientUsingPost | checkCollision_simple ERROR:" + e.getMessage());
@@ -97,12 +99,12 @@ public class ClientUsingPost {
 			System.out.println("STARTING boundary ... ");
 			for( int i = 1; i<=4 ; i++ ) {
 				boolean b = false;
-				while (!b) {
+				while (!b ) {
 					b = moveForward();
-					Thread.sleep(500);
+					Thread.sleep(300);
 				}
- 				b = moveLeft();
-				Thread.sleep(500);
+ 				moveLeft();
+				Thread.sleep(300);
 			}
 			//Thread.sleep(3000);	//avoids premature termination (in docker-compose)
 			System.out.println("END");

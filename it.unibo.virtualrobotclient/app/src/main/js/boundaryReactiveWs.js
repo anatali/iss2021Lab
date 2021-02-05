@@ -1,5 +1,5 @@
 /*
-wsBoundaryReactive.js
+boundaryReactiveWs.js
 https://www.npmjs.com/package/ws
 ===============================================================
     walks along the boundary of the room
@@ -11,12 +11,10 @@ const { walkAlongBoundary } = require('./tripBoundaryBusinessLogic')
 
 const url        = 'ws://localhost:8091'    
 var tripdone     = false
-var stepCount    = 0
 
 const connection = new WebSocket(url)
 
     function initMoving(connection){
-         //stepCount = 0;
          isObserver   = false
          doMove( "moveForward", connection )
     }
@@ -37,7 +35,10 @@ connection.onopen = () => {
   initMoving( connection )
 }
 connection.onmessage = (msg) => {
-    if( tripdone ) console.log("wsBoundaryReactive as OBSERVER | " + msg.data   )
+    if( tripdone ) {
+        console.log("wsBoundaryReactive tripdone | BYE "    )
+        connection.close()
+    }
     else   tripdone = walkAlongBoundary(msg.data, connection, doMove)
  }
 

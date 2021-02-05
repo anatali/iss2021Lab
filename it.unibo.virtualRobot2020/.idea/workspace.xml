@@ -20,17 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryBusinessLogic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWebsocket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/wsBoundaryReactive.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/axiosClientToWenv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/axiosClientToWenv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/clientToWenvControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/clientToWenvControl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/wsclientToWenv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/clientToWenvWebsocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/wsclientToWenvControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/wsclientToWenvControl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWebsocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWebsocket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/tripBoundaryBusinessLogic.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/tripBoundaryBusinessLogic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/wsBoundaryReactive.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,17 +99,18 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612471248995">
+    <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612383774430">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.690@0.0.1280.690" timestamp="1612471248995" />
+    <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.690@0.0.1280.690" timestamp="1612383774430" />
     <state x="422" y="87" key="FileChooserDialogImpl" timestamp="1612340396788">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="422" y="87" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1612340396788" />
-    <state x="349" y="77" width="581" height="534" key="find.popup" timestamp="1612386495740">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state x="419" y="103" width="698" height="712" key="find.popup" timestamp="1612536807759">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state x="349" y="77" width="581" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1612386495740" />
+    <state x="419" y="103" width="698" height="712" key="find.popup/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1612536807759" />
   </component>
 </project>

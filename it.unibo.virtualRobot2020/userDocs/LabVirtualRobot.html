@@ -403,7 +403,7 @@ Examples of clients are reported in project <a href="../../it.unibo.virtualrobot
 
 <tr>
 <td style="width:30%">
-<a href="../../it.unibo.virtualrobotclient/app/src/main/js/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/js/clientToWenvWebsocket.js" target="code">clientToWenvWebsocket.js</a>
 </td>
 <td> 
 The client first <i>moves forward and backward</i>. Afterwards, it works as an <em>observer</em> that:
@@ -413,7 +413,7 @@ The client first <i>moves forward and backward</i>. Afterwards, it works as an <
 </ul>
 <br/> 
 The client interacts with the WEnv via <em>web-scokets</em>, by using the  
-<a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
+<a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. 
 </td>
 </tr>
 
@@ -423,7 +423,8 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 The client  <i>walks along the boundary</i> of the room.
 <br/><br/>
 The client interacts via <em> HTTP</em>  with the WEnv by using the  
-<a href="https://www.npmjs.com/package/axios" target="web">axios</a>  library for Node.js. <br/> 
+<a href="https://www.npmjs.com/package/axios" target="web">axios</a>  library for Node.js. 
+ 
 
 </td>
 </tr>
@@ -435,8 +436,12 @@ The client interacts via <em> HTTP</em>  with the WEnv by using the
 The client  <i>walks along the boundary</i> of the room in a event-driven way
 <br/><br/>
 The client interacts with the WEnv via <em>web-scokets</em>, by using the  
-<a href="https://www.npmjs.com/package/websocket" target="web">websocket</a>  library for Node.js. <br/> 
- 
+<a href="https://www.npmjs.com/package/websocket" target="web">websocket</a>  library for Node.js. 
+<br/> <br/> 
+The <em>business logic</em> for a robot that walks along a boundary in a event-driven way is defined in
+<a href="../../it.unibo.virtualrobotclient/app/src/main/js/tripBoundaryBusinessLogic.js" target="code">tripBoundaryBusinessLogic.js</a>,
+by abstracting from the technical details about (websocket) connections.
+
 <!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
 </td>
 </tr>
@@ -446,10 +451,12 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 The client  <i>walks along the boundary</i> of the room in a event-driven way
 <br/><br/>
 The client interacts with the WEnv via <em>web-scokets</em>, by using the  
-<a href="https://www.npmjs.com/package/ws" target="web">ws</a>  library for Node.js 
-see
-<a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a>
- <br/> 
+<a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a> library for Node.js 
+(see also <a href="https://www.npmjs.com/package/ws" target="web">ws: a Node.js WebSocket library</a>)
+ <br/> <br/> 
+The <em>business logic</em> for a robot that walks along a boundary in a event-driven way is defined in
+<a href="../../it.unibo.virtualrobotclient/app/src/main/js/tripBoundaryBusinessLogic.js" target="code">tripBoundaryBusinessLogic.js</a>,
+by abstracting from the technical details about (websocket) connections.
  
 <!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
 </td>
@@ -505,8 +512,11 @@ Browser clients must use the native
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> object.
 
 
-<h3><a href="https://github.com/socketio/socket.io" target="web">socket.io</a></h3>
- ( <a href="https://github.com/socketio/engine.io-client-java" target="web">socket.io for java</a>)
+<h3><a href="https://github.com/socketio/socket.io" target="web">socket.io</a> 
+ ( <a href="https://github.com/socketio/engine.io-client-java" target="web">socket.io for java</a>) </h3>
+ Usata in WEnv per le interazioni tra 
+ <a href="../node/WEnv/server/src/WebpageServer.js" target="code">WebpageServer.js</a>
+  e  <a href="../node/WEnv/server/src/WebpageServer.js" target="code">WebpageServer.js</a>
 Server e client WebSocket per node.js + client 
 per browser + (v0 ha fallback più recenti o meno recenti, v1 di Socket.io utilizza engine.io) 
 + canali - utilizzati in stack.io. 

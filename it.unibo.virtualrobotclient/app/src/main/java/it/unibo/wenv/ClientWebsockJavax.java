@@ -20,7 +20,6 @@ public class ClientWebsockJavax {
 
     Session userSession    = null;
     private MessageHandler messageHandler;
-    //private WebSocketContainer container;
     private org.json.simple.parser.JSONParser simpleparser ;
     /**
      * Message handler.

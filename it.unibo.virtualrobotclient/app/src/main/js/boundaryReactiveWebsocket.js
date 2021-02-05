@@ -1,6 +1,5 @@
 /*
 boundaryReactiveWebsocket.js
-https://www.youtube.com/watch?v=JxdPunrO084
 ===============================================================
     walks along the boundary of the room
     and then works as an observer
