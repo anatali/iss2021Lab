@@ -5,14 +5,19 @@ services:
     ports:
       - 8090:8090
       - 8091:8091
+  vrobotcontrol:
+    image: virtualrobotcontrol:1.0
+    ports:
+      - 3001:3001
+      - 3000:3000
+    depends_on:
+      - wenv
+
     ##    vrobotclient:
     ##      image: docker.io/natbodocker/usingvirtualrobot:1.0
     ##          depends_on:
     ##            - wenv
-  vrobotcontrol:
-    image: virtualrobotcontrol:1.0
-    ports:
-      - 3000:3000
+
 
 ## -------------------------------------------------------------
 ## TODO See https://docs.docker.com/compose/startup-order/

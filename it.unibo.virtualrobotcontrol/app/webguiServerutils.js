@@ -11,7 +11,7 @@ var counter = 0;
 /*
 POST HTTP a Wenv
 */
-async function postTo8090(host, move, updateHistory){
+async function postTo8090(host, move, addToHistory){
 const URL = "http://"+ host + ":8090/api/move" ;
 
 await axios({
@@ -30,7 +30,7 @@ await axios({
     const answer = response.data
     //console.log( "serverutils postTo8090 | answer" + answer)  //"endmove": "false", "move": "turnLeft" }
     const collision = ! answer.endmove
-    //updateHistory is in ...
+    //addToHistory is given as argument
     if( response.status == "200")  addToHistory( "postTo8090:" + move + " | collision=" + collision )
     else addToHistory( move + " | response.status=" + response.status )
  })

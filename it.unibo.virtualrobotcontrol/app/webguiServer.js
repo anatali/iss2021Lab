@@ -92,11 +92,11 @@ app.use( function(req,res){
 	try{
       // if (req.accepts('json')) { res.send(history);		//give answer to curl / postman } else
 	  //return res.render('index' );  //NO: we loose the message sent via socket.io
-	  console.log( "req.gui=" + req.gui )
+	  console.log( "webguiServer | req.gui=" + req.gui )
 	  if( req.gui=="guisimple" )       res.render("indexSimple.ejs", {})
 	  else if( req.gui=="guiJquery" )  res.render("indexJquery.ejs", {})
       else if( req.gui=="guisock" )    res.render("indexSock.ejs", {})
-	  //res.sendFile(path.join(__dirname, "index.html"))    //with robotDisplay area set with history
+      else res.sendFile(path.join(__dirname, "index.html"))
 	}catch(e){
 	    console.log("webguiServer | SORRY ..." + e);}
 	}
@@ -233,18 +233,21 @@ client.on('connectFailed', function(error) {
             console.log('WebSocketClient | Connection Closed');
         });
         connection.on('message', function(message) {
+        // { type: 'utf8', utf8Data: '{"endmove":true,"move":"turnRight"}' }
             if (message.type === 'utf8') {
                 const msg = message.utf8Data
-                console.log("Received: " + msg  )
+                console.log("WebSocketClient | Received: " + msg  )
                 const msgJson = JSON.parse( msg )
+                if(msgJson.endmove)   console.log("WebSocketClient | Received: endmove=" + msgJson.endmove)
                 if(msgJson.collision) console.log("WebSocketClient | Received: collision=" + msgJson.collision)
-                if(msgJson.sonarName) console.log("WebSocketClient | Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                if(msgJson.sonarName)
+     console.log("WebSocketClient | Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
                 addToHistory( JSON.stringify( msgJson ) )
             }
     });
 });
 
-const wenvHost = "wenv" //"localhost"
+const wenvHost = "wenv" //"wenv" //"localhost"
 const url      = "ws://"+wenvHost+":8091"
 client.connect( url , ''); //'echo-protocol'
 //client.connect('ws://wenv:8091', '');
