@@ -38,8 +38,8 @@ function domove(move, numOfSteps, callbackOk, callbackCollision)  {
         console.log("axiosClientToWenv domove | response.data: " )
         var answer = response.data
         console.log(  answer )
-        collision = ( answer.collision )
-        //console.log(  "collision=" + collision )
+        collision =  ! answer.endmove
+        console.log(  "collision=" + collision )
         if( collision ) callbackCollision(numOfSteps); else callbackOk(numOfSteps)
   })
   .catch(error => {

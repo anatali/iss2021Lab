@@ -400,19 +400,9 @@ Examples of clients are reported in project <a href="../../it.unibo.virtualrobot
 <center><table style="width:95%">
 <tbody>	
 
-<tr>
-<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/axiosclientToWenv.js" target="code">axiosclientToWenv.js</a></td>
-<td>
-The client  <i>walks along the boundary</i> of the room.
-<br/><br/>
-The client interacts via <em> HTTP</em>  with the WEnv by using the  
-<a href="https://www.npmjs.com/package/axios" target="web">axios</a>  library for Node.js. <br/> 
-
-</td>
-</tr>
 
 <tr>
-<td >
+<td style="width:30%">
 <a href="../../it.unibo.virtualrobotclient/app/src/main/js/wsclientToWenv.js" target="code">wsclientToWenv.js</a>
 </td>
 <td> 
@@ -424,14 +414,46 @@ The client first <i>moves forward and backward</i>. Afterwards, it works as an <
 <br/> 
 The client interacts with the WEnv via <em>web-scokets</em>, by using the  
 <a href="https://www.npmjs.com/package/websocket" target="web">WebSocket</a>  library for Node.js. <br/> 
+</td>
+</tr>
 
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/axiosclientToWenv.js" target="code">axiosclientToWenv.js</a></td>
+<td>
+The client  <i>walks along the boundary</i> of the room.
+<br/><br/>
+The client interacts via <em> HTTP</em>  with the WEnv by using the  
+<a href="https://www.npmjs.com/package/axios" target="web">axios</a>  library for Node.js. <br/> 
 
-
-<!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
 </td>
 </tr>
 
 
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWebsocket.js" target="code">boundaryReactiveWebsocket.js</a></td>
+<td>
+The client  <i>walks along the boundary</i> of the room in a event-driven way
+<br/><br/>
+The client interacts with the WEnv via <em>web-scokets</em>, by using the  
+<a href="https://www.npmjs.com/package/websocket" target="web">websocket</a>  library for Node.js. <br/> 
+ 
+<!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
+</td>
+</tr>
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/wsBoundaryReactive.js" target="code">wsBoundaryReactive.js</a></td>
+<td>
+The client  <i>walks along the boundary</i> of the room in a event-driven way
+<br/><br/>
+The client interacts with the WEnv via <em>web-scokets</em>, by using the  
+<a href="https://www.npmjs.com/package/ws" target="web">ws</a>  library for Node.js 
+see
+<a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a>
+ <br/> 
+ 
+<!-- <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket" target="web">WebSocket</a> -->
+</td>
+</tr>
  
 </tbody>	
 </table></center>

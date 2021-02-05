@@ -1,5 +1,5 @@
 /*
-wsclientToWenv.js
+clientToWenvWebsocket.js
 ===============================================================
     performs forward - backward
     and then works as an observer
@@ -11,33 +11,30 @@ const WebSocketClient = require('websocket').client;
 var client = new WebSocketClient();
 
     function doMove(move, connection) {
-
         const moveJson = '{"robotmove":"'+ move +'"}'
         console.log("doMove moveJson:" + moveJson);
         if (connection) { connection.send(moveJson) }
     }
 
 function doJob(connection){
-      const moveTodo = "{\"robotmove\":\"turnLeft\"}"
-      console.log("doJob moveTodo:" + moveTodo);
+      //const moveTodo = "{\"robotmove\":\"turnLeft\"}"
+      //console.log("doJob moveTodo:" + moveTodo);
      //doMove("{\"robotmove\":\"turnLeft\"}");
      doMove( "moveForward", connection )
      setTimeout( () => {
-        doMove( "moveBackward" );
+        doMove( "moveBackward", connection );
         console.log("now working as an observer  ... " );
-     }, 800 )
+     }, 1000 )
 }
 
 
 
     client.on('connect', function(connection) {
-        console.log('WebSocket Client Connected')
-        //conn8091 = connection
+        console.log('Client Connected')
         doJob(connection)
 
         connection.on('error', function(error) {
             console.log("Connection Error: " + error.toString());
-
         });
         connection.on('close', function() {
             console.log('Connection Closed');
@@ -47,6 +44,9 @@ function doJob(connection){
                 const msg = message.utf8Data
                 console.log("Received: " + msg  )
                 const msgJson = JSON.parse( msg )
+                if(msgJson.endmove) {
+                    console.log("Received: endmove=" + msgJson.endmove)
+                }
                 if(msgJson.collision) {
                    console.log("Received: collision=" + msgJson.collision)
                    console.log('\u0007');  //RING THE BELL

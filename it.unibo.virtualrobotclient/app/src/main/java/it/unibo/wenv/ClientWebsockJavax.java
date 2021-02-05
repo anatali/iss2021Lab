@@ -101,7 +101,6 @@ public class ClientWebsockJavax {
      */
     public void sendMessage(String message ) throws Exception {
         System.out.println("ClientWebsockJavax | sendMessage " + message);
-        //Thread.sleep(1000);
         //this.userSession.getAsyncRemote().sendText(message);
         this.userSession.getBasicRemote().sendText(message);    //synch: blocks until the message has been transmitted
     }
@@ -121,15 +120,21 @@ public interface IGoon  {
                     //{"collision":"true ","move":"..."} or {"sonarName":"sonar2","distance":19,"axis":"x"}
                     System.out.println("ClientWebsockJavax | handleMessage:" + message);
                     org.json.simple.JSONObject jsonObj = (JSONObject) simpleparser.parse(message);
-                    if (jsonObj.get("collision") != null) {
+                    if (jsonObj.get("endmove") != null) {
+                        boolean endmove = jsonObj.get("endmove").toString().equals("true");
+                        String  move    = jsonObj.get("move").toString();
+                        System.out.println("ClientWebsockJavax | handleMessage " + move + " endmove=" + endmove);
+                        if( endmove ) goon.nextStep(false);
+                    } else if (jsonObj.get("collision") != null) {
                         boolean collision = jsonObj.get("collision").toString().equals("true");
                         String move = jsonObj.get("move").toString();
                         System.out.println("ClientWebsockJavax | handleMessage collision=" + collision + " move=" + move);
-                        if( ! move.equals("unknown") )  goon.nextStep(collision);
+                        //if( ! move.equals("unknown") )
+                        goon.nextStep(collision);
                     } else if (jsonObj.get("sonarName") != null) {
                         String sonarNAme = jsonObj.get("sonarName").toString();
                         String distance = jsonObj.get("distance").toString();
-                        //System.out.println("ClientWebsockJavax | handleMessage sonaraAme=" + sonarNAme + " distance=" + distance);
+                        System.out.println("ClientWebsockJavax | handleMessage sonaraAme=" + sonarNAme + " distance=" + distance);
                     }
 
                 } catch (Exception e) {
@@ -145,14 +150,14 @@ public interface IGoon  {
             public void nextStep( boolean collision ) throws Exception {
                 //System.out.println(" %%% nextStep collision=" + collision + " count=" + count);
                 if (count > 4) {
-                    System.out.println(" %%% nextStep ENDS &&&&&&&&&&&&&&&&&&&&&&&& " );
+                    System.out.println("ClientWebsockJavax | BYE (from nextStep)" );
                     return;
                 }
-                //Thread.sleep(2000) ;
-                System.out.println(" %%% nextStep RESUMES collision=" + collision + " count=" + count);
-                if( collision ) {
-                    if (count <= 4) {
-                        count++;
+                //Thread.sleep(500) ;   //interval before the next move
+                //System.in.read();
+                 if( collision ) {
+                    if (count++ <= 4) {
+                        //count++;
                         sendMessage("{\"robotmove\":\"turnLeft\"}");
                     }
                 } else {  //no collision

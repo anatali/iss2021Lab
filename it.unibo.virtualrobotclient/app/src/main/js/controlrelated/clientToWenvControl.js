@@ -34,6 +34,6 @@ client.on('connect', function(connection) {
     doMove("turnLeft");
 });
 
-client.connect('ws://localhost:3000', ''); //'echo-protocol'
+client.connect('ws://localhost:3000 ', ''); //'echo-protocol'
 
 
