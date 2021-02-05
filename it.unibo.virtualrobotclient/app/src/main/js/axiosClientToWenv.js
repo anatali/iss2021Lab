@@ -6,7 +6,7 @@ walks along the boundary bysing callbacks, no global state
 */
 const axios = require('axios')
 const URL   = 'http://localhost:8090/api/move' ;
-const path = ['sud', 'east', 'north', 'west']
+
 
 function ahead(numOfSteps){
      domove("moveForward", numOfSteps, goon, ko)

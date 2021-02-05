@@ -1,5 +1,5 @@
 /*
-frontend/uniboSupports/applCode
+app/applCode.js
 */
 const express     	= require('express');
 const path         	= require('path');

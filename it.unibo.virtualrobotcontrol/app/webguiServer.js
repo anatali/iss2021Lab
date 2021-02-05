@@ -66,11 +66,11 @@ app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving rig
 app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
 app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
 */
-app.post("/w", function(req, res,next)  { req.gui="guisimple"; postTo8090("moveForward",addToHistory ); next(); });
-app.post("/s", function(req, res,next)  { req.gui="guisimple"; postTo8090("moveBackward",addToHistory); next(); });
-app.post("/r", function(req, res,next)  { req.gui="guisimple"; postTo8090("turnRight",addToHistory);    next(); });
-app.post("/l", function(req, res,next)  { req.gui="guisimple"; postTo8090("turnLeft",addToHistory);     next(); });
-app.post("/h", function(req, res,next)  { req.gui="guisimple"; postTo8090("alarm",addToHistory);        next(); });
+app.post("/w", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "moveForward",addToHistory ); next(); });
+app.post("/s", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "moveBackward",addToHistory); next(); });
+app.post("/r", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "turnRight",addToHistory);    next(); });
+app.post("/l", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "turnLeft",addToHistory);     next(); });
+app.post("/h", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "alarm",addToHistory);        next(); });
 
 
 //HANDLE  utility commands
@@ -78,11 +78,11 @@ app.post("/conns", function(req, res,next)         { connectionHistory(); next()
 app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()   });
 
 //HANDLE POST from HTML GUI to send a POST to Wenv 8090
-app.post("/l8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('turnLeft',addToHistory); next()  });
-app.post("/r8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('turnRight',addToHistory); next()  });
-app.post("/w8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('moveForward',addToHistory); next()  });
-app.post("/s8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('moveBackward',addToHistory); next()  });
-app.post("/h8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090('alarm',addToHistory); next()  });
+app.post("/l8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost,'turnLeft',addToHistory);    next()  });
+app.post("/r8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'turnRight',addToHistory);   next()  });
+app.post("/w8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'moveForward',addToHistory); next()  });
+app.post("/s8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'moveBackward',addToHistory);next()  });
+app.post("/h8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'alarm',addToHistory);       next()  });
 
 /*
 * ====================== REPRESENTATION ================
@@ -92,10 +92,10 @@ app.use( function(req,res){
 	try{
       // if (req.accepts('json')) { res.send(history);		//give answer to curl / postman } else
 	  //return res.render('index' );  //NO: we loose the message sent via socket.io
-	  console.log( req.gui )
-	  if( req.gui=="guisimple" )  res.render("indexSimple.ejs", {})
+	  console.log( "req.gui=" + req.gui )
+	  if( req.gui=="guisimple" )       res.render("indexSimple.ejs", {})
 	  else if( req.gui=="guiJquery" )  res.render("indexJquery.ejs", {})
-      else if( req.gui=="guisock" )  res.render("indexSock.ejs", {})
+      else if( req.gui=="guisock" )    res.render("indexSock.ejs", {})
 	  //res.sendFile(path.join(__dirname, "index.html"))    //with robotDisplay area set with history
 	}catch(e){
 	    console.log("webguiServer | SORRY ..." + e);}
@@ -154,7 +154,7 @@ wsServer.on('connection', (ws) => {
     //console.log("webguiServer | socket-on received : "+message)
     //addToHistory( message )
     if( message=="turnRight" || message=="turnLeft" || message=="alarm" || message=="moveForward" || message=="moveBackward" ){
-        postTo8090(message, addToHistory);
+        postTo8090(wenvHost, message, addToHistory);
         //rimbalzo del comando al
         //wsServer.clients.forEach(client => { client.send(  message ); });
     }else if( message.includes("close")) {
@@ -165,7 +165,7 @@ wsServer.on('connection', (ws) => {
 });
 
 /*
-     ws.on('disconnection', function () {
+     ws.on('close', function () {
         clients--;
         alert("client disconnected");
           wsServer.clients.forEach(client => {
@@ -178,6 +178,7 @@ wsServer.on('connection', (ws) => {
 
 function clearDisplayArea(){
     history = ""
+    displayHistory()  //done by
 }
 
 function updateRobotState(message){
@@ -214,37 +215,46 @@ Is it useful to receive state data, in order to update the GUI and define some b
 ============================================================================================
 */
 
-var conn8091
+//var conn8091
 
 var client = new WebSocketClient();
 client.on('connectFailed', function(error) {
-    console.log('Connect Error: ' + error.toString());
+    console.log('WebSocketClient | Connect Error: ' + error.toString());
 });
 
     client.on('connect', function(connection) {
-        console.log('WebSocket Client Connected')
-        conn8091 = connection
+        console.log('WebSocketClient | Connected')
+        //conn8091 = connection
 
         connection.on('error', function(error) {
-            console.log("Connection Error: " + error.toString());
-
+            console.log("WebSocketClient | Error: " + error.toString());
         });
         connection.on('close', function() {
-            console.log('echo-protocol Connection Closed');
+            console.log('WebSocketClient | Connection Closed');
         });
         connection.on('message', function(message) {
             if (message.type === 'utf8') {
                 const msg = message.utf8Data
                 console.log("Received: " + msg  )
                 const msgJson = JSON.parse( msg )
-                if(msgJson.collision) console.log("Received: collision=" + msgJson.collision)
-                if(msgJson.sonarName) console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                if(msgJson.collision) console.log("WebSocketClient | Received: collision=" + msgJson.collision)
+                if(msgJson.sonarName) console.log("WebSocketClient | Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
                 addToHistory( JSON.stringify( msgJson ) )
             }
     });
 });
-client.connect('ws://localhost:8091', ''); //'echo-protocol'
 
+const wenvHost = "wenv" //"localhost"
+const url      = "ws://"+wenvHost+":8091"
+client.connect( url , ''); //'echo-protocol'
+//client.connect('ws://wenv:8091', '');
+/*
+try{
+    client.connect('ws://localhost:8091', ''); //'echo-protocol'
+}catch(e){
+    client.connect('ws://wenv:8091', '');
+}
+*/
 //-------------------------------------- ws8091 SECTION END
 
 

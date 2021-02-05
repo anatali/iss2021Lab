@@ -499,6 +499,23 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
  
 </tbody>	
 </table></center>
+
+<h3>Virtualrobot control</h3>
+<a href="../../it.unibo.virtualrobotcontrol/app/webguiServer.js" target="code">webguiServer.js</a>
+
+<pre>
+docker build -t virtualrobotcontrol:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotcontrol/Dockerfile" target="web">Dockerfile</a></kc>
+
+docker run -ti -p 3000:3000 --rm  virtualrobotcontrol:1.0 /bin/sh	<kc>local test</kc>
+
+
+<kc>Tag the image</kc>
+docker tag virtualrobotcontrol:1.0 natbodocker/virtualrobotcontrol:1.0
+
+<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
+docker push natbodocker/virtualrobotcontrol:1.0
+</pre>
+
 <h2>About <a href="https://en.wikipedia.org/wiki/WebSocket" target="web">websockets</a></h2>
 
 <h3><a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a></h3>
@@ -516,7 +533,7 @@ Browser clients must use the native
  ( <a href="https://github.com/socketio/engine.io-client-java" target="web">socket.io for java</a>) </h3>
  Usata in WEnv per le interazioni tra 
  <a href="../node/WEnv/server/src/WebpageServer.js" target="code">WebpageServer.js</a>
-  e  <a href="../node/WEnv/server/src/WebpageServer.js" target="code">WebpageServer.js</a>
+  e  <a href="" target="code">WebGLScene</a> 
 Server e client WebSocket per node.js + client 
 per browser + (v0 ha fallback più recenti o meno recenti, v1 di Socket.io utilizza engine.io) 
 + canali - utilizzati in stack.io. 

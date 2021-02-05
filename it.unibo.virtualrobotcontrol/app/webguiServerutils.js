@@ -2,20 +2,17 @@
 webguiserverUtils.js
 */
 
-const axios             = require('axios')
-const net               = require('net')
-//const WebSocketClient   = require('websocket').client
-//const webGuiServer      = require('./webGuiServer');
-const sep      = ";"
+const axios    = require('axios')
+//const net      = require('net')       //for TCP (obsolete)
 
-var host    = "localhost";
+//var host    = "localhost"; //"wenv";
 var counter = 0;
 
 /*
 POST HTTP a Wenv
 */
-async function postTo8090(move, updateHistory){
-const URL = 'http://localhost:8090/api/move' ;
+async function postTo8090(host, move, updateHistory){
+const URL = "http://"+ host + ":8090/api/move" ;
 
 await axios({
             url: URL,
@@ -29,14 +26,16 @@ await axios({
 */
     }).then(response => {
     console.log("serverutils postTo8090 | statusCode: " + response.status  )
-    //console.log(response.data)  //"collision": "false", "move": "turnLeft" }
-    const collision = JSON.parse( response.data ).collision
     //console.log("serverutils postTo8090 | statusText: " + response.statusText);
-    if( response.status == "200")  updateHistory( "postTo8090:" + move + " | collision=" + collision )
-    else updateHistory( move + " | response.status=" + response.status )
+    const answer = response.data
+    //console.log( "serverutils postTo8090 | answer" + answer)  //"endmove": "false", "move": "turnLeft" }
+    const collision = ! answer.endmove
+    //updateHistory is in ...
+    if( response.status == "200")  addToHistory( "postTo8090:" + move + " | collision=" + collision )
+    else addToHistory( move + " | response.status=" + response.status )
  })
   .catch(error => {
-    console.error(error)
+    console.error("postTo8090 error:" + error)
   })
 }
 
@@ -44,7 +43,8 @@ await axios({
 
 /*
 Invia su TCP (obsoleto da Jan 2021)
-*/
+
+const sep      = ";"
 function connectAndSend( msg  ){
     var client = new net.Socket();
     client.connect(8999, host, () => {
@@ -74,6 +74,7 @@ function forward( cmd  ){
     console.log('serverUtils | forward ' + msg ); //+ " client=" + client
     connectAndSend(msg);
 }//forward
+*/
 
-//exports.forward   = forward;
-module.exports = { forward, connectAndSend, postTo8090 }
+exports.postTo8090   = postTo8090;
+//module.exports = { forward, connectAndSend, postTo8090 }
