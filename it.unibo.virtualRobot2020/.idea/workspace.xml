@@ -19,18 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/wsclientToWenvControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/wsclientToWenvControl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/webSocketUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/webSocketUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/views/indexJquery.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/views/indexJquery.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/views/indexSimple.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/views/indexSimple.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/views/indexSock.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/views/indexSock.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/docker-compose.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
