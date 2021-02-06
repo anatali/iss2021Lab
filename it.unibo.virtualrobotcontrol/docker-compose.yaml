@@ -2,21 +2,18 @@ version: '3'
 services:
   wenv:
     image: docker.io/natbodocker/virtualrobotdisi:1.0
+    ## image: virtualrobotdisi:1.0
     ports:
       - 8090:8090
       - 8091:8091
   vrobotcontrol:
-    image: virtualrobotcontrol:1.0
+    image: docker.io/natbodocker/virtualrobotcontrol:1.0
+    ## image: virtualrobotcontrol:1.0
     ports:
-      - 3001:3001
       - 3000:3000
     depends_on:
       - wenv
 
-    ##    vrobotclient:
-    ##      image: docker.io/natbodocker/usingvirtualrobot:1.0
-    ##          depends_on:
-    ##            - wenv
 
 
 ## -------------------------------------------------------------

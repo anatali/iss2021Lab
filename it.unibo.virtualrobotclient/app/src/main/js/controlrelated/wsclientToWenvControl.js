@@ -1,5 +1,6 @@
 /*
 wsclientToWenvControl
+works as observer
 */
 const WebSocketClient = require('websocket').client;
 
@@ -18,6 +19,7 @@ client.on('connect', function(connection) {
         console.log('echo-protocol Connection Closed');
     });
     connection.on('message', function(message) {
+        //console.log("Received: %s" , message  );
         if (message.type === 'utf8') {
             console.log("Received: '" + message.utf8Data + "'");
         }
@@ -25,13 +27,10 @@ client.on('connect', function(connection) {
 
     function doMove(move) {
         if (connection.connected) {
-            //var number = Math.round(Math.random() * 0xFFFFFF);
-            //connection.sendUTF(number.toString());
-            //setTimeout(sendNumber, 1000);
             connection.send(move)
         }
     }
-    doMove("turnLeft");
+    //doMove("turnLeft");
 });
 
 client.connect('ws://localhost:3000', ''); //'echo-protocol'

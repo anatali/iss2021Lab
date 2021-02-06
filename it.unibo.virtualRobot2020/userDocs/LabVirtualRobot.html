@@ -500,21 +500,6 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 </tbody>	
 </table></center>
 
-<h3>Virtualrobot control</h3>
-<a href="../../it.unibo.virtualrobotcontrol/app/webguiServer.js" target="code">webguiServer.js</a>
-
-<pre>
-docker build -t virtualrobotcontrol:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotcontrol/Dockerfile" target="web">Dockerfile</a></kc>
-
-docker run -ti -p 3000:3000 --rm  virtualrobotcontrol:1.0 /bin/sh	<kc>local test</kc>
-
-
-<kc>Tag the image</kc>
-docker tag virtualrobotcontrol:1.0 natbodocker/virtualrobotcontrol:1.0
-
-<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
-docker push natbodocker/virtualrobotcontrol:1.0
-</pre>
 
 <h2>About <a href="https://en.wikipedia.org/wiki/WebSocket" target="web">websockets</a></h2>
 
@@ -571,6 +556,21 @@ docker-compose up -d  <kc>or</kc> docker-compose run -d --service-ports wenv
 
 </pre>
 
+<h3>Virtualrobot control</h3>
+<a href="../../it.unibo.virtualrobotcontrol/app/webguiServer.js" target="code">webguiServer.js</a>
+
+<pre>
+docker build -t virtualrobotcontrol:1.0 .  <kc>Create the image using the <a href="../../it.unibo.virtualrobotcontrol/Dockerfile" target="web">Dockerfile</a></kc>
+
+docker run -ti -p 3000:3000 --rm  virtualrobotcontrol:1.0 /bin/sh	<kc>local test</kc>
+
+
+<kc>Tag the image</kc>
+docker tag virtualrobotcontrol:1.0 natbodocker/virtualrobotcontrol:1.0
+
+<kc>Register the image on <a href="https://hub.docker.com/?ref=login" target="web">DockerHub</a></kc>
+docker push natbodocker/virtualrobotcontrol:1.0
+</pre>
 
 
 </div>  

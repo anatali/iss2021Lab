@@ -9,7 +9,7 @@ const app       = require('express')()
 const express   = require('express')
 const http      = require('http').Server(app)
 const socketIO  = require('socket.io')(http)        //interaction with WebGLScene
-const WebSocket = require('ws');                    //interaction with external cliinets
+const WebSocket = require('ws');                    //interaction with external clients
 
 const sockets       = {}    //interaction with WebGLScene
 const wssockets     = {}    //interaction with clients
@@ -22,8 +22,6 @@ var alreadyConnected = false
 const moveTime   = 800
 const serverPort = 8090
 var target       = "notarget"   //the current virtual object that collides
-
-
 
     app.use(express.static('./../../WebGLScene'))
 

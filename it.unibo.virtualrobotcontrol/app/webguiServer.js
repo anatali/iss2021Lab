@@ -1,17 +1,22 @@
 /*
 webguiServer.js
 */
-
+const http      = require('http')
 let express             = require('express');
 let path                = require('path');
 let fs                  = require('fs');
 let bodyParser          = require('body-parser');
-let app                 = express();
-const WebSocketClient   = require('websocket').client
+
+const WebSocketClient   = require('websocket').client   //interaction with 8091
+const WebSocket         = require('ws');
+
 //const request  = require('request') //deprecated
 
 const { forward, connectAndSend, postTo8090 } = require('./webguiServerutils')
-var history    = "";
+const app        = express();
+const server     = http.createServer(app);  //initialize a simple http server
+
+var   history    = "";
 
 // view engine setup;
 app.set('views', path.join(__dirname, './', 'views'));
@@ -123,7 +128,7 @@ app.use( function(req,res){
  });
 
 
-
+/*
 function handlePostMove( cmd, msg, req, res, next ){
     console.log( "webguiServer |  handlePostMove in webguiServer.js "  + cmd )
     forward(cmd, "localhost");  //via TCP: NO MORE
@@ -132,23 +137,25 @@ function handlePostMove( cmd, msg, req, res, next ){
     //res.sendStatus(200);
     next();     //see REPRESENTATION
 }
+*/
 
 /*
 ============================================================================================
 WebSockets SECTION
+require('ws');
+receives commands and sends updates
 ============================================================================================
 See https://www.ably.io/topic/websockets
 https://medium.com/hackernoon/implementing-a-websocket-webguiServer-with-node-js-d9b78ec5ffa8
 See https://www.html.it/pag/54040/websocket-webguiServer-con-node-js/
 */
 var clients = 0;
-const WebSocket   = require('ws');
 
-const wsServer    = new WebSocket.Server({ server: app.listen(3001) });
+const wsServer  = new WebSocket.Server({ server }); //server: app.listen(3001)
 //wsServer.on('open', socket => { console.log("webguiServer | socket open ") });
 
 wsServer.on('connection', (ws) => {
-    console.log("webguiServer | client connected ")
+    console.log("webguiServer | client connected using ws ")
     displayHistory()
   ws.on('message', message => {
     //console.log("webguiServer | socket-on received : "+message)
@@ -180,7 +187,7 @@ function clearDisplayArea(){
     history = ""
     displayHistory()  //done by
 }
-
+/*
 function updateRobotState(message){
     history = history + "<br/>" + message;
     console.log(history);
@@ -188,39 +195,38 @@ function updateRobotState(message){
         client.send( history );
     });
 }
-
+*/
 function displayHistory(){
-        wsServer.clients.forEach(client => {
-            client.send(   history )
-        })
+   wsServer.clients.forEach(client => {
+        client.send(   history )
+   })
+    //socket.emit('broadcast',{ description: clients + ' clients connected!'});
 }
 
 function addToHistory( msg ){
-        history     = history + "<br/>" + msg
-        displayHistory()
+   history     = history + "<br/>" + msg
+   displayHistory()
 }
 
 function connectionHistory(){
-        addToHistory( history + "<br/>" + "connections=" + wsServer.clients.size )
-        //var clients =
-        //history     = history + "<br/>" + "connections=" + clients
-        //socket.emit('broadcast',{ description: clients + ' clients connected!'});
-        //displayHistory()
+    addToHistory( history + "<br/>" + "connections=" + wsServer.clients.size )
 }
 
 /*
 ============================================================================================
 ws8091 SECTION
+require('websocket')
 Is it useful to receive state data, in order to update the GUI and define some business logic
 ============================================================================================
 */
-
-//var conn8091
-
 var client = new WebSocketClient();
-client.on('connectFailed', function(error) {
-    console.log('WebSocketClient | Connect Error: ' + error.toString());
-});
+    client.on('connectFailed', function(error) {
+        console.log('WebSocketClient | connectFailed: ' + error.toString());
+                if( wenvHost == "wenv" ) {
+                    wenvHost = "localhost"      //change needed for postTo8090
+                    client.connect( "ws://"+wenvHost+":8091" , '')
+                }
+    });
 
     client.on('connect', function(connection) {
         console.log('WebSocketClient | Connected')
@@ -237,19 +243,21 @@ client.on('connectFailed', function(error) {
             if (message.type === 'utf8') {
                 const msg = message.utf8Data
                 console.log("WebSocketClient | Received: " + msg  )
-                const msgJson = JSON.parse( msg )
+                const msgJson = JSON.parse( msg ) //{"endmove":true,"move":"turnRight"}
+                /*
                 if(msgJson.endmove)   console.log("WebSocketClient | Received: endmove=" + msgJson.endmove)
                 if(msgJson.collision) console.log("WebSocketClient | Received: collision=" + msgJson.collision)
                 if(msgJson.sonarName)
      console.log("WebSocketClient | Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
+                */
                 addToHistory( JSON.stringify( msgJson ) )
             }
     });
 });
 
-const wenvHost = "wenv" //"wenv" //"localhost"
+var wenvHost = "wenv" //"wenv" //"localhost"
 const url      = "ws://"+wenvHost+":8091"
-client.connect( url , ''); //'echo-protocol'
+client.connect( url , '') //'echo-protocol'
 //client.connect('ws://wenv:8091', '');
 /*
 try{
@@ -262,6 +270,7 @@ try{
 
 
 
-app.listen(3000, function () {
-  console.log("app listening on port 3000 with __dirname=" + __dirname);
+server.listen(3000, function () {
+    //Template literals are enclosed by the back-tick (` `) (grave accent)
+  console.log(`server listening on port ${server.address().port} with __dirname=${__dirname}`  );
 });

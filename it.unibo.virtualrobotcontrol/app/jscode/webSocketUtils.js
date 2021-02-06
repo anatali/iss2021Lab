@@ -1,9 +1,7 @@
 /*
 webSocketUtils (to be loaded within the virtualrobotcontrol web-page index.html)
 */
-
-
-const wspath  = ("ws://"+location.host).replace("3000","") +'3001';    //+'3001';
+const wspath  = ("ws://"+location.host)
 //const wspath  = ("ws://localhost:3001';
 const socket  = new WebSocket(wspath);
 //alert(WebSocket)
