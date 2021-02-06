@@ -364,18 +364,23 @@ The virtual robot accepts commands sent on a <tt>TCP</tt> connection on port <tt
 -->
 The virtual robot uses the Node library <a href="https://github.com/websockets/ws" target="web">https://github.com/einaros/ws</a> 
 to accept commands sent on a websocket at port <tt>8091</tt>. 
-<br/>
-The commands are described in the file <a href="../node/WEnv/README.md" target="web">README.md</a>.
 
- For example:
 <pre>
-moveForward :  `{ "type": "moveForward", "arg": 300 }`
-moveBackward : `{ "type": "moveBackward", "arg": 300 }`
- 
-turnRight :    `{ "type": "turnRight", "arg": 300 }`
-turnLeft :     `{ "type": "turnLeft", "arg": 300 }` 
+ {"robotmove":"<ks>MOVE</ks>"} 	with <ks>MOVE</ks> = <kc>turnLeft | turnRight | moveForward | moveBackward | alarm</kc>
+</pre>
 
-stop :         `{ "type": "alarm" }`
+These commands are redirected (using <a href="https://github.com/socketio/socket.io" target="web">socket.io</a>) 
+to the <tt>WebGLScene</tt> , once translated in the language described in the file 
+<a href="../node/WEnv/README.md" target="web">README.md</a>:
+
+<pre>
+<kc>moveForward :</kc>   `{ "type": "moveForward", "arg": 300 }`
+<kc>moveBackward :</kc>  `{ "type": "moveBackward", "arg": 300 }`
+ 
+<kc>turnRight : </kc>     `{ "type": "turnRight", "arg": 300 }`
+<kc>turnLeft : </kc>      `{ "type": "turnLeft", "arg": 300 }` 
+
+<kc>alarm (stop) : </kc>  `{ "type": "alarm" }`
 </pre>
 Moreover, the virtual environment <em>sends</em> to the  clients connected on the ws port <tt>8091</tt>:
 <ul>
@@ -446,7 +451,7 @@ by abstracting from the technical details about (websocket) connections.
 </td>
 </tr>
 <tr>
-<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/wsBoundaryReactive.js" target="code">wsBoundaryReactive.js</a></td>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWs.js" target="code">boundaryReactiveWs.js</a></td>
 <td>
 The client  <i>walks along the boundary</i> of the room in a event-driven way
 <br/><br/>

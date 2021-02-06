@@ -27,7 +27,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 //JUNIT
  	// https://mvnrepository.com/artifact/junit/junit
-    //testCompile group: 'junit', name: 'junit', version: '4.13'	//not required for building or running the project’s runtime code
+    //testCompile group: 'junit', name: 'junit', version: '4.13'	//not required for building or running the projectï¿½s runtime code
     //testCompile "org.jetbrains.kotlin:kotlin-test-junit:1.3.71"
 //COROUTINE
     compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core-common', version: '1.1.0'
@@ -38,7 +38,10 @@ dependencies {
 //JSON 
     // https://mvnrepository.com/artifact/org.json/json
     compile group: 'org.json', name: 'json', version: '20190722'
-    
+
+//HTTP
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
     // Use the Kotlin test library.
 //     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
@@ -57,7 +60,7 @@ compileTestKotlin {
 
 //KEEP DIRECTORIES SEPARATED 
 sourceSets.main.java.srcDirs = ["src"]
-sourceSets.test.java.srcDirs = ["test"]
+//sourceSets.test.java.srcDirs = ["test"]
  
 mainClassName = 'robotAppl.SensorObserverKt'    //Must start with Upcase and end with Kt!!
 //mainClassName = 'stepper.StepperKt'    //Must start with Upcase and end with Kt!!

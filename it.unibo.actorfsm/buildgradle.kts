@@ -36,10 +36,6 @@ dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:29.0-jre")
 
-    //COROUTINE
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
-
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
@@ -49,7 +45,7 @@ dependencies {
 //JSON
 
     // https://mvnrepository.com/artifact/org.json/json
-    implementation("org.json:json:20190722" )
+    //implementation("org.json:json:20160810" )
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     //implementation("com.fasterxml.jackson.core:jackson-core:2.12.1")

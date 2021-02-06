@@ -142,11 +142,11 @@ suspend fun demoLocal( scope: CoroutineScope){
 @kotlinx.coroutines.ObsoleteCoroutinesApi
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 fun main() = runBlocking{
-	utils.mqtttraceOn = true
+	//utils.mqtttraceOn = true
   
-	//demoLocal( this )
+	demoLocal( this )
 	
-	demoUsingMqtt( this )
+	//demoUsingMqtt( this )
 	
 	println("main ends")
 }
