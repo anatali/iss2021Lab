@@ -9,7 +9,7 @@ import SceneManager from './SceneManager.js'                                    
 export default (onKeyUp, onKeyDown, myonKeyDown) => {
     const socket = io()
         
-    socket.on( 'moveForward',  duration => {console.log("ffffffffffffffffffffffffff"); moveForward(duration)} )
+    socket.on( 'moveForward',  duration => {console.log("moveForward " + duration); moveForward(duration)} )
 	 
     socket.on( 'moveBackward', duration => moveBackward(duration) )
     socket.on( 'turnRight',    duration => turnRight(duration) )

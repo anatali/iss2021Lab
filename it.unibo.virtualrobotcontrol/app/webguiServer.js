@@ -1,7 +1,7 @@
 /*
 webguiServer.js
 */
-const http      = require('http')
+const http              = require('http')
 let express             = require('express');
 let path                = require('path');
 let fs                  = require('fs');
@@ -16,6 +16,8 @@ const { forward, connectAndSend, postTo8090 } = require('./webguiServerutils')
 const app        = express();
 const server     = http.createServer(app);  //initialize a simple http server
 
+var   moveTime   = 600
+var   turnTime   = 300
 var   history    = "";
 
 // view engine setup;
@@ -64,30 +66,34 @@ THE CODE IN THIS DIR CAN be used in index.html
 app.use(express.static(path.join(__dirname, './jscode')));
 
 //HANDLE POST from 'conventional' HTML GUI
-/*
-app.post("/w", function(req, res,next)  { handlePostMove("moveForward","moving ahead", req,res,next); });
-app.post("/s", function(req, res,next)  { handlePostMove("moveBackward","moving back", req,res,next); });
-app.post("/r", function(req, res,next)  { handlePostMove("turnRight","moving right",   req,res,next); });
-app.post("/l", function(req, res,next)  { handlePostMove("turnLeft","moving left",     req,res,next); });
-app.post("/h", function(req, res,next)  { handlePostMove("alarm","stop",               req,res,next); });
-*/
-app.post("/w", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "moveForward",addToHistory ); next(); });
-app.post("/s", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "moveBackward",addToHistory); next(); });
-app.post("/r", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "turnRight",addToHistory);    next(); });
-app.post("/l", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "turnLeft",addToHistory);     next(); });
-app.post("/h", function(req, res,next)  { req.gui="guisimple"; postTo8090(wenvHost, "alarm",addToHistory);        next(); });
+app.post("/w", function(req, res,next)  {
+    req.gui="guisimple"; postTo8090(wenvHost, "moveForward",addToHistory,moveTime ); next(); });
+app.post("/s", function(req, res,next)  {
+    req.gui="guisimple"; postTo8090(wenvHost, "moveBackward",addToHistory, moveTime); next(); });
+app.post("/r", function(req, res,next)  {
+    req.gui="guisimple"; postTo8090(wenvHost, "turnRight",addToHistory, turnTime);    next(); });
+app.post("/l", function(req, res,next)  {
+    req.gui="guisimple"; postTo8090(wenvHost, "turnLeft",addToHistory, turnTime);     next(); });
+app.post("/h", function(req, res,next)  {
+    req.gui="guisimple"; postTo8090(wenvHost, "alarm",addToHistory, 0);        next(); });
 
 
 //HANDLE  utility commands
 app.post("/conns", function(req, res,next)         { connectionHistory(); next()  });
 app.post("/clearHistory", function(req, res,next)  { clearDisplayArea(); next()   });
+//app.post("/duration", function(req, res,next)      { console.log("DDDD " ); moveTime=600; next()  });
 
 //HANDLE POST from HTML GUI to send a POST to Wenv 8090
-app.post("/l8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost,'turnLeft',addToHistory);    next()  });
-app.post("/r8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'turnRight',addToHistory);   next()  });
-app.post("/w8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'moveForward',addToHistory); next()  });
-app.post("/s8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'moveBackward',addToHistory);next()  });
-app.post("/h8090", function(req, res,next)  { req.gui="guiJquery"; postTo8090(wenvHost, 'alarm',addToHistory);       next()  });
+app.post("/l8090", function(req, res,next)  {
+    req.gui="guiJquery"; postTo8090(wenvHost,'turnLeft',addToHistory, turnTime);    next()  });
+app.post("/r8090", function(req, res,next)  {
+    req.gui="guiJquery"; postTo8090(wenvHost, 'turnRight',addToHistory, turnTime);   next()  });
+app.post("/w8090", function(req, res,next)  {
+    req.gui="guiJquery"; postTo8090(wenvHost, 'moveForward',addToHistory, moveTime); next()  });
+app.post("/s8090", function(req, res,next)  {
+    req.gui="guiJquery"; postTo8090(wenvHost, 'moveBackward',addToHistory, moveTime);next()  });
+app.post("/h8090", function(req, res,next)  {
+    req.gui="guiJquery"; postTo8090(wenvHost, 'alarm',addToHistory,0);       next()  });
 
 /*
 * ====================== REPRESENTATION ================
@@ -151,23 +157,27 @@ See https://www.html.it/pag/54040/websocket-webguiServer-con-node-js/
 */
 var clients = 0;
 
-const wsServer  = new WebSocket.Server({ server }); //server: app.listen(3001)
+const wsServer  = new WebSocket.Server({ server });
 //wsServer.on('open', socket => { console.log("webguiServer | socket open ") });
+
 
 wsServer.on('connection', (ws) => {
     console.log("webguiServer | client connected using ws ")
     displayHistory()
-  ws.on('message', message => {
-    //console.log("webguiServer | socket-on received : "+message)
-    //addToHistory( message )
-    if( message=="turnRight" || message=="turnLeft" || message=="alarm" || message=="moveForward" || message=="moveBackward" ){
-        postTo8090(wenvHost, message, addToHistory);
-        //rimbalzo del comando al
-        //wsServer.clients.forEach(client => { client.send(  message ); });
-    }else if( message.includes("close")) {
-        //connectionHistory();
-        console.log("webguiServer | socket-on - the client is disconnected ");
-    }
+/*
+HANDLE messages sent from the browser
+*/
+    ws.on('message', message => {
+        //console.log("webguiServer | socket-on received : "+message)
+        if( message=="turnRight" || message=="turnLeft" || message=="alarm" || message=="moveForward" || message=="moveBackward" ){
+            postTo8090(wenvHost, message, addToHistory, moveTime);
+        }else if( message.includes("duration-") ){
+            moveTime = message.replace("duration-", "")
+            console.log("webguiServer | socket-on - duration=" + moveTime);
+        }
+        else if( message.includes("close")) {
+            console.log("webguiServer | socket-on - the client is disconnected ");
+        }
   });
 });
 
@@ -223,14 +233,13 @@ var client = new WebSocketClient();
     client.on('connectFailed', function(error) {
         console.log('WebSocketClient | connectFailed: ' + error.toString());
                 if( wenvHost == "wenv" ) {
-                    wenvHost = "localhost"      //change needed for postTo8090
+                    wenvHost = "localhost"      //change needed since required by postTo8090
                     client.connect( "ws://"+wenvHost+":8091" , '')
                 }
     });
 
     client.on('connect', function(connection) {
         console.log('WebSocketClient | Connected')
-        //conn8091 = connection
 
         connection.on('error', function(error) {
             console.log("WebSocketClient | Error: " + error.toString());
@@ -239,7 +248,8 @@ var client = new WebSocketClient();
             console.log('WebSocketClient | Connection Closed');
         });
         connection.on('message', function(message) {
-        // { type: 'utf8', utf8Data: '{"endmove":true,"move":"turnRight"}' }
+            console.log("WebSocketClient | Received  : " + message  )
+             // { type: 'utf8', utf8Data: '{"endmove":true,"move":"turnRight"}' }
             if (message.type === 'utf8') {
                 const msg = message.utf8Data
                 console.log("WebSocketClient | Received: " + msg  )
@@ -251,6 +261,8 @@ var client = new WebSocketClient();
      console.log("WebSocketClient | Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)
                 */
                 addToHistory( JSON.stringify( msgJson ) )
+            }else{
+                console.log("WebSocketClient | Received NO utf8: "   )
             }
     });
 });

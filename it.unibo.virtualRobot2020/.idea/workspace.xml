@@ -20,35 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/buildgradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/VirtualrobotUsageSupport.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/clientWenvTcpObj.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/05b0fe8524860bd73cbb07ef30fb34cc/segments.gen" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/05b0fe8524860bd73cbb07ef30fb34cc/segments.gen" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/830bc118332e77292949ed1e6d2fabe0/segments.gen" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.core/nexus/830bc118332e77292949ed1e6d2fabe0/segments.gen" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/version.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/version.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/src/robotAppl/basicrobot.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/src/robotAppl/basicrobot.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/src/utils/connQakBase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/backup/connQakBase.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/src/utils/connQakHttp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/backup/connQakHttp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/App.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/userDocs/debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/WEnv/WebGLScene/js/SocketIO.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/WebGLScene/js/SocketIO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/jqutils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/jqutils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/webSocketUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/webSocketUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServerutils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServerutils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

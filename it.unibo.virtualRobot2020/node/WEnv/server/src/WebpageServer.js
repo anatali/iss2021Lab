@@ -19,7 +19,7 @@ let wssocketIndex   = -1
 var alreadyConnected = false
 
 //let webpageReady = false
-const moveTime   = 800
+//const moveTime   = 800
 const serverPort = 8090
 var target       = "notarget"   //the current virtual object that collides
 
@@ -48,18 +48,21 @@ Defines how to handle POST from browser and from external controls
     app.post("/api/move", function(req, res,next)  {
 	    var data = ""
 	    req.on('data', function (chunk) { data += chunk; }); //accumulate data sent by POST
-            req.on('end', function () {	//elaborate data received { robotmove: turnLeft | turnRight | ... }
+            req.on('end', function () {	//elaborate data received
+			//{ robotmove: move, time:duration } - robotmove: turnLeft | turnRight | ...
 			console.log('POST /api/move data ' + data  );
-     		var moveTodo = JSON.parse(data).robotmove
-			doMove(moveTodo, res)
+			var jsonData = JSON.parse(data)
+     		var moveTodo = jsonData.robotmove
+     		var duration = jsonData.time
+			doMove(moveTodo, duration, res)
   	   });
 	}); //app.post
 
 //Execute a robotmove command and sends info about collision
-function doMove(moveTodo, res){
-	console.log('$$$ WebpageServer doMove |  moveTodo=' + moveTodo  );
-	execMoveOnAllConnectedScenes(moveTodo)
-	setTimeout(function() { //wait for the moveTime before sending the answer (collision or not)
+function doMove(moveTodo, duration, res){
+	console.log('$$$ WebpageServer doMove |  moveTodo=' + moveTodo + " duration=" + duration);
+	execMoveOnAllConnectedScenes(moveTodo, duration)
+	setTimeout(function() { //wait for the duration before sending the answer (collision or not)
         const nocollision  = target == 'notarget'
         const answer     = { 'endmove' : nocollision , 'move' : moveTodo }  //JSON obj
         const answerJson = JSON.stringify(answer)
@@ -74,10 +77,10 @@ function doMove(moveTodo, res){
         }
         //IN ANY CASE: update all the controls / observers
         updateObservers(answerJson)
-    }, moveTime);
+    }, duration);
 }
 //Updates the mirrors
-function execMoveOnAllConnectedScenes(moveTodo){
+function execMoveOnAllConnectedScenes(moveTodo, moveTime){
     console.log('$$$ WebpageServer doMove |  updates the mirrors'   );
 	Object.keys(sockets).forEach( key => sockets[key].emit(moveTodo, moveTime) );
 }

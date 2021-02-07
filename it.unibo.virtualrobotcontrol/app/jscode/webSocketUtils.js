@@ -21,19 +21,17 @@ socket.addEventListener('message', event => {
 
 //IMPORTANT: https://www.pegaxchange.com/2018/03/23/websocket-client/
 
-
-
 /*
-Called by a click on rsocket|lsocket|... Communicates with server.js by using the socket
+Called by a click on rsocket|lsocket|... Communicates with webguiServer.js by using the socket
 */
 function requestTodoTheMove(move){
 	console.log("webSocketUtils | requestTodoTheMove in webSocketUtils/utils " + move);
-	socket.send( move );     //towards server.js (see
+	socket.send( move );     //towards webguiServer.js
 }
 
 function openGui(gui){
 	console.log("webSocketUtils | openGui in webSocketUtils/utils " + gui);
-	socket.send( move );     //towards server.js (see
+	socket.send( move );     //towards webguiServer.js
 }
 
 //node webSocketUtils

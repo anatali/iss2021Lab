@@ -11,12 +11,12 @@ var counter = 0;
 /*
 POST HTTP a Wenv
 */
-async function postTo8090(host, move, addToHistory){
+async function postTo8090(host, move, addToHistory, duration ){
 const URL = "http://"+ host + ":8090/api/move" ;
-
+if( duration == null ) duration = 800
 await axios({
             url: URL,
-            data: { robotmove: move },
+            data: { robotmove: move, time:duration },   //JSON msg
             method: 'POST',
             timeout: 1000,
             headers: { 'Content-Type': 'application/json' }

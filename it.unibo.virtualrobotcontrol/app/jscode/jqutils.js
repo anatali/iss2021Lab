@@ -10,8 +10,11 @@ $( "#guisimple" ).click(function() {  loadGui( "guisimple") });
 $( "#guiJquery" ).click(function() {  loadGui( "guiJquery") });
 $( "#guisock" ).click(function()   {  loadGui( "guisock") });
 
-//USED BY SOCKET.IO-BASED GUI (guisock)
-    $( "#rsocket" ).click(function() {  requestTodoTheMove("turnRight") });    //defined in webSocketUtils
+//MOVETIME
+$( "#duration" ).dblclick(function() {  requestTodoTheMove("duration-"+$(this).val())  }); //console.log( $(this).val() )
+
+//USED BY SOCKET.IO-BASED GUI (guisock) - requestTodoTheMove defined in webSocketUtils
+    $( "#rsocket" ).click(function() {  requestTodoTheMove("turnRight") });
     $( "#lsocket" ).click(function() {  requestTodoTheMove("turnLeft") });
     $( "#wsocket" ).click(function() {  requestTodoTheMove("moveForward") });
     $( "#ssocket" ).click(function() {  requestTodoTheMove("moveBackward") });
