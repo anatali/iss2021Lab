@@ -4,15 +4,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import java.util.concurrent.TimeUnit
+//https://square.github.io/okhttp/4.x/okhttp/okhttp3/-web-socket/
+import okhttp3.OkHttpClient //A non-blocking interface to a web socket
+import okhttp3.Request
+import okhttp3.WebSocket
+
+//Si potrebbe usare ancora avax.websocket ?
 
 fun main() = runBlocking {
     try {
         println("WssTest | START ")
         val sys = WssTest()
-        sys.connect()
+        sys.connect( this )
         sys.receiver(this)
         delay(1000)
         sys.sender(this)
@@ -25,6 +29,7 @@ fun main() = runBlocking {
 
 
 public class WssTest() {
+    var webSocket8091: WebSocket?  = null
 
     suspend fun receiver(scope : CoroutineScope) {
         val receiver = scope.launch {
@@ -51,7 +56,7 @@ public class WssTest() {
         }
     }//sender
 
-    fun connect() {
+    fun connect( scope : CoroutineScope ) {
         val client = OkHttpClient.Builder()
                 .readTimeout(3, TimeUnit.SECONDS)
                 //.sslSocketFactory() - ? нужно ли его указывать дополнительно
@@ -61,9 +66,8 @@ public class WssTest() {
                 .url("ws://localhost:8091")
                 .build()
         println("WssTest | doJob ${request}"  )
-        val wsListener = MyWebSocketListener()
-        val webSocket = client.newWebSocket(request, wsListener)  // this provide to make 'Open ws connection'
-
+        val wsListener = MyWebSocketListener( scope )
+        webSocket8091  = client.newWebSocket(request, wsListener)  // this provide to make 'Open ws connection'
 
     }
 
