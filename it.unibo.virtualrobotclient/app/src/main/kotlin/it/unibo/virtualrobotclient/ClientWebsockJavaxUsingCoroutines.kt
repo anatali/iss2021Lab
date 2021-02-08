@@ -1,5 +1,13 @@
+/*
+ClientWebsockJavaxUsingCoroutines.js
+===============================================================
+
+See https://www.websocket.org/echo.html
+===============================================================
+*/
+
 package virtualRobotUsage
-//clientWenvTcpObj.kt in it.unibo.kotlinIntro\src\virtualRobotUsage\clientWenvTcpObj.kt
+//ClientWebsockJavaxUsingCoroutines.kt in it.unibo.kotlinIntro\src\virtualRobotUsage\ClientWebsockJavaxUsingCoroutines.kt
  
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,9 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import org.json.simple.parser.JSONParser
 import java.net.URI
 import java.net.URISyntaxException
-import javax.websocket.ContainerProvider
-import javax.websocket.DeploymentException
-import javax.websocket.Session
+import javax.websocket.*
+
 
 object clientWenvTcpObj {
     private var hostName = "localhost"
@@ -28,24 +35,10 @@ object clientWenvTcpObj {
 
     var userSession: Session? = null
 
-    /*
-        fun initClientConn( hostNameStr: String = hostName, portStr: String = "$port"  ) {
-            hostName         = hostNameStr
-            port             = Integer.parseInt(portStr)
-             try {
-                 val clientSocket = Socket(hostName, port)
-                 println("clientWenvTcp |  CONNECTION DONE")
-                 inFromServer = BufferedReader(InputStreamReader(clientSocket.getInputStream()))
-                 outToServer  = PrintWriter(clientSocket.getOutputStream())
-                 startTheReader( )
-             }catch( e:Exception ){
-                 println("clientWenvTcp | ERROR $e")
-             }
-        }
-*/
-    fun initClientConn(addr: String) {
+    suspend fun initClientConn(addr: String) {
         try {
             //simpleparser = JSONParser()
+            println("initClientConn $addr")
             val container = ContainerProvider.getWebSocketContainer()
             container.connectToServer(this, URI("ws://$addr"))
         } catch (ex: URISyntaxException) {
@@ -70,11 +63,7 @@ object clientWenvTcpObj {
 		outToServer?.println(msg)
 	}
 */
-    fun sendMessage(message: String) {
-        println("VirtualrobotUsageSupport | sendMessage $message")
-        //userSession!!.getAsyncRemote().sendText(message);
-        userSession!!.basicRemote.sendText(message) //synch: blocks until the message has been transmitted
-    }
+
 
 /*
 //Launch a coroutine that waits for data from the TCP connection
@@ -114,17 +103,21 @@ object clientWenvTcpObj {
          }//startTheReader
 }//clientWenvTcpObj
 */
+    suspend fun sendMessage(message: String) {
+        println("VirtualrobotUsageSupport | sendMessage $message")
+        //userSession!!.getAsyncRemote().sendText(message);
+        userSession!!.basicRemote.sendText(message) //synch: blocks until the message has been transmitted
+    }
 
     suspend fun sendSomeCommand() {
-        initClientConn("localhost:8091")
         var jsonString: String
         //val time = 1300
-        for (i in 1..2) {
-            jsonString = "{ 'robotmove': 'moveForward'  }"
+        for (i in 1..1) {
+            jsonString = "{ 'robotmove': 'moveForward' , 'time' :  600 }"
             sendMessage(jsonString)
             delay(1000)
 
-            jsonString = "{ 'robotmove': 'moveBackward' }"
+            jsonString = "{ 'robotmove': 'moveBackward' , 'time' :  600 }"
             sendMessage(jsonString)
             delay(1000)
         }
@@ -135,6 +128,7 @@ fun main( ) = runBlocking {
     println("==============================================")
     println("PLEASE, ACTIVATE WENV ")
     println("==============================================")
+    clientWenvTcpObj.initClientConn("localhost:8091")
     clientWenvTcpObj.sendSomeCommand(   )
     println("BYE")
 }

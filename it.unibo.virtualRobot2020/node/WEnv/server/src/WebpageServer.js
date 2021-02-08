@@ -108,18 +108,19 @@ wsServer.on('connection', (ws) => {
     console.log("$$$ WebpageServer wssocket |  wssocketIndex=" +  wssocketIndex + " received: "  )
 	console.log( msg )
 	var moveTodo = JSON.parse(msg).robotmove
-	doMove(moveTodo, null)
+	var duration = JSON.parse(msg).time
+	doMove(moveTodo, duration)
   });
 
   ws.onerror = (error) => {
 	  console.log("$$$ WebpageServer wssocket | error: ${error}")
-	  delete sockets[key];
+	  delete wssockets[key];
 	  wssocketIndex--
 	  console.log( "$$$ WebpageServer wssocket | disconnect wssocketIndex=" +  wssocketIndex )
   }
 
   ws.on('close', ()=>{
-	  delete sockets[key];
+	  delete wssockets[key];
 	  wssocketIndex--
 	  console.log( "$$$ WebpageServer wssocket | disconnect wssocketIndex=" +  wssocketIndex )
   })

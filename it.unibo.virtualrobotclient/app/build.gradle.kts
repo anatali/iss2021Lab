@@ -21,11 +21,12 @@ repositories {
 
 version="1.0"
 
+/*
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
-
+*/
 dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -39,6 +40,11 @@ dependencies {
     //COROUTINE
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
+
+    //OkHttp library for websockets with Kotlin
+    implementation( "com.squareup.okhttp3:okhttp:4.9.0" )
+    //Ktor is a framework for quickly creating web applications in Kotlin with minimal effort.
+    implementation("io.ktor:ktor:1.5.1")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")

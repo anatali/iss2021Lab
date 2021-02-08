@@ -157,10 +157,12 @@ public interface IGoon  {
                  if( collision ) {
                     if (count++ <= 4) {
                         //count++;
-                        sendMessage("{\"robotmove\":\"turnLeft\"}");
+                        String cmd = "{\"robotmove\":\"turnLeft\" , \"time\": 300}";
+                        sendMessage( cmd );
                     }
                 } else {  //no collision
-                    sendMessage("{\"robotmove\":\"moveForward\"}");
+                     String cmd = "{\"robotmove\":\"moveForward\" , \"time\": 600}";
+                     sendMessage(cmd);
                 };
 
                 }

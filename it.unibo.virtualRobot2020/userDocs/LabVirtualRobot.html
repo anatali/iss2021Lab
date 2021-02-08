@@ -366,12 +366,12 @@ The virtual robot uses the Node library <a href="https://github.com/websockets/w
 to accept commands sent on a websocket at port <tt>8091</tt>. 
 
 <pre>
- {"robotmove":"<ks>MOVE</ks>"} 	with <ks>MOVE</ks> = <kc>turnLeft | turnRight | moveForward | moveBackward | alarm</kc>
+ {"robotmove":"<ks>MOVE</ks>", "time":<ks>T</ks>} 	with <ks>MOVE</ks> = <kc>turnLeft | turnRight | moveForward | moveBackward | alarm</kc>, <ks>T</ks> = naturalNum
 </pre>
 
 These commands are redirected (using <a href="https://github.com/socketio/socket.io" target="web">socket.io</a>) 
-to the <tt>WebGLScene</tt> , once translated in the language described in the file 
-<a href="../node/WEnv/README.md" target="web">README.md</a>:
+to the <tt>WebGLScene</tt>.
+<!--  , once translated in the language described in the file  <a href="../node/WEnv/README.md" target="web">README.md</a>:
 
 <pre>
 <kc>moveForward :</kc>   `{ "type": "moveForward", "arg": 300 }`
@@ -381,17 +381,21 @@ to the <tt>WebGLScene</tt> , once translated in the language described in the fi
 <kc>turnLeft : </kc>      `{ "type": "turnLeft", "arg": 300 }` 
 
 <kc>alarm (stop) : </kc>  `{ "type": "alarm" }`
-</pre>
-Moreover, the virtual environment <em>sends</em> to the  clients connected on the ws port <tt>8091</tt>:
+
+</pre>-->
+<br/><br/>
+Moreover, the virtual environment <em>sends</em> to the  clients connected to the ws port <tt>8091</tt>:
 <ul>
 <li>Data emitted by the sonars included in the scene when they detect some object (the moving robot) </li>
-<li>Data emitted by the impact sensors put in front and in the rear of the robot, when they detect an obstacle (fixed or mobile) </li>
-</ul>
-
+<li>Data emitted by the impact sensors put in front and in the rear of the robot, 
+when they detect an obstacle (fixed or mobile). For example:
 <pre>{ "sonarName": "sonarName", "distance": 1, "axis": "x" }
 
 { "collision" : "false", "move": "moveForward"}
-</pre>
+</pre> </li>
+</ul>
+
+
 
 
 
@@ -495,6 +499,29 @@ or the library
 
 <tr>
 <td><a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" target="code">ClientWebsockJavax.java</a></td>
+<td>The client  <i>walks along the boundary</i> of the room.
+<br/><br/>
+The client interacts with the WEnv via <em>web-scokets</em>, by using the  
+<a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library . <br/> 
+</td>
+</tr>
+ 
+</tbody>	
+</table></center>
+
+<h3>Clients written in Kotlin </h3>
+<center><table style="width:95%">
+<tbody>	
+
+ 
+
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" target="code">
+ClientWebsockJavax.kt</a>
+<br/><br/>
+<m>It is the Kotlin version of 
+<a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" target="code">ClientWebsockJavax.java</a>
+</m></td>
 <td>The client  <i>walks along the boundary</i> of the room.
 <br/><br/>
 The client interacts with the WEnv via <em>web-scokets</em>, by using the  

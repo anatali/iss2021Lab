@@ -11,15 +11,13 @@ const WebSocketClient = require('websocket').client;
 var client = new WebSocketClient();
 
     function doMove(move, connection) {
-        const moveJson = '{"robotmove":"'+ move +'"}'
-        console.log("doMove moveJson:" + moveJson);
-        if (connection) { connection.send(moveJson) }
+        const moveJson =  {robotmove : move, time : 600}
+        const moveStr  = JSON.stringify(moveJson)
+        console.log("doMove connection:" + connection + " moveStr=" + moveStr);
+        if (connection) { connection.send( moveStr ) }
     }
 
 function doJob(connection){
-      //const moveTodo = "{\"robotmove\":\"turnLeft\"}"
-      //console.log("doJob moveTodo:" + moveTodo);
-     //doMove("{\"robotmove\":\"turnLeft\"}");
      doMove( "moveForward", connection )
      setTimeout( () => {
         doMove( "moveBackward", connection );
@@ -44,12 +42,11 @@ function doJob(connection){
                 const msg = message.utf8Data
                 console.log("Received: " + msg  )
                 const msgJson = JSON.parse( msg )
-                if(msgJson.endmove) {
-                    console.log("Received: endmove=" + msgJson.endmove)
-                }
+                //if(msgJson.endmove) { console.log("Received: endmove=" + msgJson.endmove) }
                 if(msgJson.collision) {
                    console.log("Received: collision=" + msgJson.collision)
-                   console.log('\u0007');  //RING THE BELL
+                   console.log('\u0007')  //RING THE BELL
+                   connection.close()   //send 'disconnect'
                 }
                 if(msgJson.sonarName){
                    console.log("Received: sonar=" + msgJson.sonarName + " distance=" + msgJson.distance)

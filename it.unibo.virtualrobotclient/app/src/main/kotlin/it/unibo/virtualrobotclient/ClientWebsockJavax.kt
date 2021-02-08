@@ -2,6 +2,7 @@
  * ClientWebsockJavax
  * @author AN - DISI - Unibo
 ===============================================================
+Kotlin version of the Java version
 walks along the boundary of the room
 and then works as an observer
 ===============================================================
@@ -153,16 +154,17 @@ BUSINESS LOGIC
                 //System.in.read();
                 if (collision) {
                     if (count++ <= 4) {
-                        //count++;
-                        sendMessage("{\"robotmove\":\"turnLeft\"}")
+                        var cmd = "{\"robotmove\":\"turnLeft\" , \"time\": 300}"
+                        sendMessage(cmd)
                     }
                 } else {  //no collision
-                    sendMessage("{\"robotmove\":\"moveForward\"}")
+                    var cmd = "{\"robotmove\":\"moveForward\" , \"time\": 600}"
+                    sendMessage(cmd)
                 }
             }
         }) //setObserver
         count = 1
-        sendMessage("{\"robotmove\":\"moveForward\"}")
+        sendMessage("{\"robotmove\":\"moveForward\", \"time\": 600}")
         println("ClientWebsockJavax | doJob ENDS ======================================= ")
     }
 

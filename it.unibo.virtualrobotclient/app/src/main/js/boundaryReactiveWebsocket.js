@@ -6,7 +6,7 @@ boundaryReactiveWebsocket.js
 ===============================================================
 */
 const WebSocketClient       = require('websocket').client;
-const { walkAlongBoundary } = require('./tripBoundaryBusinessLogicnode')
+const { walkAlongBoundary } = require('./tripBoundaryBusinessLogic')
 
 var client     = new WebSocketClient();
 var tripdone   = false
@@ -17,9 +17,11 @@ var tripdone   = false
      }
 
     function doMove(move, connection) {
-        const moveJson = '{"robotmove":"'+ move +'"}'
-        console.log("doMove moveJson:" + moveJson);
-        if (connection) { connection.send(moveJson) }
+        //const moveJson = '{"robotmove":"'+ move +'"}'
+        const moveJson = {robotmove : move, time : 600}
+        const moveStr  = JSON.stringify(moveJson)
+        console.log("doMove moveJson:" + moveStr);
+        if (connection) { connection.send(moveStr) }
     }
 
 

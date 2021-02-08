@@ -32,7 +32,8 @@ public class ClientUsingPost {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
 			System.out.println( move + " sendCmd "  );
-			String json         = "{\"robotmove\":\"" + move + "\"}";
+			//String json         = "{\"robotmove\":\"" + move + "\"}";
+			String json         = "{\"robotmove\":\"" + move + "\" , \"time\": 600}";
 			StringEntity entity = new StringEntity(json);
 			HttpUriRequest httppost = RequestBuilder.post()
 					.setUri(new URI(URL))

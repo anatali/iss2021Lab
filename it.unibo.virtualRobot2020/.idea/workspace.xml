@@ -20,16 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" beforeDir="false" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/wsnaive/websocket.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/MyWebSocketListener.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WssTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/WEnv/WebGLScene/js/SocketIO.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/WebGLScene/js/SocketIO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/jqutils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/jqutils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/webSocketUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/jscode/webSocketUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServerutils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/app/webguiServerutils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/backup/ClientUsingSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingSocketIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/backup/ClientUsingSocketIO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/UsingConnTcp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/backup/UsingConnTcp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/axiosClientToWenv.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/axiosClientToWenv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWebsocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWebsocket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWs.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/boundaryReactiveWs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/clientToWenvWebsocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/clientToWenvWebsocket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/clientToWenvControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/clientToWenvControl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/js/controlrelated/wsclientToWenvControl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/clientWenvTcpObj.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavaxUsingCoroutines.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/test/kotlin/it/unibo/virtualrobotclient/AppTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotcontrol/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

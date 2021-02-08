@@ -1,5 +1,9 @@
 /*
-clientToWenvControl
+clientToWenvControl.js
+===============================================================
+Use a socket on 3000 to send a command to webguiServer
+and then to work as an observer
+===============================================================
 */
 const WebSocketClient = require('websocket').client;
 

@@ -30,7 +30,7 @@ function terminate(){
 function domove(move, numOfSteps, callbackOk, callbackCollision)  {
     axios({
             url: URL,
-            data: { robotmove: move },
+            data: { robotmove: move, time: 600 },
             method: 'POST',
             timeout: 900,
             headers: { 'Content-Type': 'application/json' }

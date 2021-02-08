@@ -20,9 +20,11 @@ const connection = new WebSocket(url)
     }
 
     function doMove(move, connection) {
-        const moveJson = '{"robotmove":"'+ move +'"}'
-        console.log("doMove moveJson:" + moveJson);
-        if (connection) { connection.send(moveJson) }
+        //const moveJson = '{"robotmove":"'+ move +'"}'
+        const moveJson = {robotmove : move, time : 600}
+        const moveStr  = JSON.stringify(moveJson)
+        console.log("doMove moveJson:" + moveStr);
+        if (connection) { connection.send(moveStr) }
     }
 
 /*
@@ -37,7 +39,7 @@ connection.onopen = () => {
 connection.onmessage = (msg) => {
     if( tripdone ) {
         console.log("wsBoundaryReactive tripdone | BYE "    )
-        connection.close()
+        connection.close()  //send 'disconnect'
     }
     else   tripdone = walkAlongBoundary(msg.data, connection, doMove)
  }
