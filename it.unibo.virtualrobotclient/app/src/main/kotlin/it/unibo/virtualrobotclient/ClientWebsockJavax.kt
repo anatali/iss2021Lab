@@ -9,6 +9,7 @@ and then works as an observer
  */
 package it.unibo.virtualrobotclient
 
+import org.glassfish.tyrus.client.ClientManager
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.json.simple.parser.ParseException
@@ -28,17 +29,23 @@ class ClientWebsockJavax(addr: String) {
         fun handleMessage(message: String)
     }
 
-    protected fun init(addr: String) {
+    protected fun initConn(addr: String) {
         try {
             simpleparser = JSONParser()
-            val container = ContainerProvider.getWebSocketContainer()
-            container.connectToServer(this, URI("ws://$addr"))
+            //val container = ContainerProvider.getWebSocketContainer()
+            //container.connectToServer(this, URI("ws://$addr"))
+
+            val endpointURI = URI( "ws://$addr/" )
+            println("ClientWebsockJavaxUsingCoroutines | initClientConn $endpointURI")
+            val client = ClientManager.createClient()
+            client.connectToServer(this, endpointURI)
+
         } catch (ex: URISyntaxException) {
-            System.err.println("ClientWebsockJavax | URISyntaxException exception: " + ex.message)
-        } catch (e: DeploymentException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
+            println("ClientWebsockJavax | URISyntaxException exception: " + ex.message)
+        } catch (e1: DeploymentException) {
+            println("ClientWebsockJavaxUsingCoroutines | DeploymentException : " + e1.message)
+        } catch (e2: IOException) {
+            println("ClientWebsockJavaxUsingCoroutines | IOException : " + e2.message)
         }
     }
 
@@ -50,7 +57,7 @@ class ClientWebsockJavax(addr: String) {
     @OnOpen
     fun onOpen(userSession: Session?) {
         println("ClientWebsockJavax | opening websocket")
-        this.userSession = userSession
+             this.userSession = userSession
     }
 
     /**
@@ -96,7 +103,9 @@ class ClientWebsockJavax(addr: String) {
     fun sendMessage(message: String) {
         println("ClientWebsockJavax | sendMessage $message")
         //userSession!!.getAsyncRemote().sendText(message);
-        userSession!!.basicRemote.sendText(message) //synch: blocks until the message has been transmitted
+        if( userSession != null)
+            userSession!!.basicRemote.sendText(message) //synch: blocks until the message has been transmitted
+        else println("ClientWebsockJavax | sorry, no userSession")
     }
 
     /*
@@ -185,7 +194,9 @@ MAIN
     }
 
     init {
-        println("ClientWebsockJavax |  CREATING ...")
-        init(addr)
+        if( addr.length > 0){
+            println("ClientWebsockJavax |  CREATING ... $addr")
+            initConn(addr)
+        }
     }
 }

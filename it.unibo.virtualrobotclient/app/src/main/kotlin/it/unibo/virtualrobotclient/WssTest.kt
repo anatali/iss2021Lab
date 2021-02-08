@@ -66,7 +66,7 @@ public class WssTest() {
                 .url("ws://localhost:8091")
                 .build()
         println("WssTest | doJob ${request}"  )
-        val wsListener = MyWebSocketListener( scope )
+        val wsListener = WebSocketViaChannel( scope )
         webSocket8091  = client.newWebSocket(request, wsListener)  // this provide to make 'Open ws connection'
 
     }

@@ -2,7 +2,7 @@
  * WebSocketViaChannel
  * @author AN - DISI - Unibo
 ===============================================================
-Use a channel to send commands via a WebSocket
+Use a channel to send commands via a WebSocket (support=okhttp3)
 and to receive the answers sent form the WebSocket
 ===============================================================
  */
@@ -19,7 +19,7 @@ import okhttp3.*        //A non-blocking interface to a web socket
 
 val socketEventChannel: Channel<SocketUpdate> = Channel(10) //our channel buffer is 10 events
 
-class MyWebSocketListener(val scope : CoroutineScope) : WebSocketListener() {
+class WebSocketViaChannel(val scope : CoroutineScope) : WebSocketListener() {
     private val NORMAL_CLOSURE_STATUS = 1000
 
     override fun onOpen(webSocket: WebSocket, response: Response) {

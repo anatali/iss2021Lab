@@ -18,17 +18,13 @@ import java.net.URISyntaxException
 import javax.websocket.*
 
 @ClientEndpoint
-class VirtualrobotUsageSupport(addr: String) {
+class VirtualrobotUsageSupport( ) {
     var userSession: Session? = null
     private var messageHandler: MessageHandler? = null
     private var simpleparser: JSONParser?       = null
     private val sep                             = ";"
     private var outToServer : PrintWriter?      = null
 
-    init {
-        println("VirtualrobotUsageSupport |  CREATING ...")
-        init(addr)
-    }
     
     interface MessageHandler {
         @Throws(ParseException::class)
@@ -162,18 +158,7 @@ BUSINESS LOGIC
     }
 
 
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            try {
-                VirtualrobotUsageSupport("localhost:8091").doSomeMOve()
-                // wait  for messages from websocket
-                Thread.sleep(30000)
-            } catch (ex: Exception) {
-                System.err.println("VirtualrobotUsageSupport | InterruptedException exception: " + ex.message)
-            }
-        }
-    }
+
 
 
 }
