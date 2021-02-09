@@ -6,7 +6,7 @@
  * User Manual available at https://docs.gradle.org/6.7.1/userguide/building_java_projects.html
  */
 
-plugins {
+plugins{
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.3.72"
     java
@@ -21,12 +21,12 @@ repositories {
 
 version="1.0"
 
-/*
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 }
-*/
+
 dependencies {
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
