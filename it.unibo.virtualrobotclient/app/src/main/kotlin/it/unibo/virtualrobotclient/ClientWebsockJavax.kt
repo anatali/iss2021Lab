@@ -3,35 +3,46 @@
  * @author AN - DISI - Unibo
 ===============================================================
 Kotlin version of the Java version
-walks along the boundary of the room
-and then works as an observer
+walks along the boundary of the room and then works as an observer
 ===============================================================
  */
 package it.unibo.virtualrobotclient
 
 import org.glassfish.tyrus.client.ClientManager
-import org.json.simple.JSONObject
-import org.json.simple.parser.JSONParser
-import org.json.simple.parser.ParseException
+//import org.json.simple.JSONObject
+//import org.json.simple.parser.JSONParser
+//import org.json.simple.parser.ParseException
 import java.io.IOException
 import java.net.URI
 import java.net.URISyntaxException
 import javax.websocket.*
 
+interface IWalk {
+    @Throws(Exception::class)
+    fun nextStep(collision: Boolean)
+}
+
 @ClientEndpoint
 class ClientWebsockJavax(addr: String) {
     var userSession: Session? = null
     private var messageHandler: MessageHandler? = null
-    private var simpleparser: JSONParser? = null
+    //private var simpleparser: JSONParser? = null
 
     interface MessageHandler {
-        @Throws(ParseException::class)
+        @Throws(Exception::class)
         fun handleMessage(message: String)
+    }
+
+    init {
+        if( addr.length > 0){
+            println("ClientWebsockJavax |  CREATING ... $addr")
+            initConn(addr)
+        }
     }
 
     protected fun initConn(addr: String) {
         try {
-            simpleparser = JSONParser()
+            //simpleparser = JSONParser()
             //val container = ContainerProvider.getWebSocketContainer()
             //container.connectToServer(this, URI("ws://$addr"))
 
@@ -78,7 +89,7 @@ class ClientWebsockJavax(addr: String) {
      * @param message The text message
      */
     @OnMessage
-    @Throws(ParseException::class)
+    @Throws(Exception::class)
     fun onMessage(message: String) {
         if (messageHandler != null) {
             messageHandler!!.handleMessage(message)
@@ -108,33 +119,30 @@ class ClientWebsockJavax(addr: String) {
         else println("ClientWebsockJavax | sorry, no userSession")
     }
 
-    /*
+/*
 BUSINESS LOGIC
  */
-    interface IGoon {
-        @Throws(Exception::class)
-        fun nextStep(collision: Boolean)
-    }
 
-    protected fun setObserver(goon: IGoon) {
+
+    protected fun setObserver(walker : IWalk) {
         // add listener
         addMessageHandler(object : MessageHandler {
             override fun handleMessage(message: String) {
                 try {
                     //{"collision":"true ","move":"..."} or {"sonarName":"sonar2","distance":19,"axis":"x"}
                     println("ClientWebsockJavax | handleMessage:$message")
-                    val jsonObj = simpleparser!!.parse(message) as JSONObject
+                    //val jsonObj = simpleparser!!.parse(message) as JSONObject
+                    val jsonObj = org.json.JSONObject( message )
                     if (jsonObj["endmove"] != null) {
-                        val endmove = jsonObj["endmove"].toString() == "true"
-                        val move = jsonObj["move"].toString()
+                        val endmove = jsonObj.get("endmove") as Boolean //jsonObj["endmove"].toString() == "true"
+                        val move    = jsonObj["move"].toString()
                         println("ClientWebsockJavax | handleMessage $move endmove=$endmove")
-                        if (endmove) goon.nextStep(false)
-                    } else if (jsonObj["collision"] != null) {
-                        val collision = jsonObj["collision"].toString() == "true"
+                        walker.nextStep( !endmove )
+                    } else if (jsonObj.has("collision" ) ) {
+                        val collision = jsonObj.get("collision") as Boolean
                         val move = jsonObj["move"].toString()
                         println("ClientWebsockJavax | handleMessage collision=$collision move=$move")
-                        //if( ! move.equals("unknown") )
-                        goon.nextStep(collision)
+                        walker.nextStep(collision)
                     } else if (jsonObj["sonarName"] != null) {
                         val sonarNAme = jsonObj["sonarName"].toString()
                         val distance = jsonObj["distance"].toString()
@@ -147,56 +155,56 @@ BUSINESS LOGIC
     }
 
     //setObserver
-    private var count = 0
+    //private var count = 0
+
+
 
     @Throws(Exception::class)
     fun doJob() {
-        setObserver(object : IGoon {
-            @Throws(Exception::class)
-            override fun nextStep(collision: Boolean) {
-                //System.out.println(" %%% nextStep collision=" + collision + " count=" + count);
-                if (count > 4) {
-                    println("ClientWebsockJavax | BYE (from nextStep)")
-                    return
-                }
-                //Thread.sleep(500) ;   //interval before the next move
-                //System.in.read();
-                if (collision) {
-                    if (count++ <= 4) {
-                        var cmd = "{\"robotmove\":\"turnLeft\" , \"time\": 300}"
-                        sendMessage(cmd)
-                    }
-                } else {  //no collision
-                    var cmd = "{\"robotmove\":\"moveForward\" , \"time\": 600}"
-                    sendMessage(cmd)
-                }
-            }
-        }) //setObserver
-        count = 1
-        sendMessage("{\"robotmove\":\"moveForward\", \"time\": 600}")
+        setObserver( walkerLogic( ::sendMessage )  )
         println("ClientWebsockJavax | doJob ENDS ======================================= ")
+    }//doJob
+
+
+
+
+}//ClientWebsockJavax
+
+class walkerLogic( val sendMessage : (String)->Unit )  : IWalk {
+    private var count = 0
+
+    init{
+        count = 1
+        var cmd = "{\"robotmove\":\"moveForward\", \"time\": 600}"
+        sendMessage(cmd)
     }
 
-    companion object {
-/*
-MAIN
- */
-        @JvmStatic
-        fun main(args: Array<String>) {
-            try {
-                ClientWebsockJavax("localhost:8091").doJob()
-                // wait  for messages from websocket
-                Thread.sleep(30000)
-            } catch (ex: Exception) {
-                System.err.println("ClientWebsockJavax | InterruptedException exception: " + ex.message)
+    override fun nextStep(collision: Boolean) {
+        System.out.println(" %%% nextStep collision=" + collision + " count=" + count)
+        if (count > 4) {
+            println("ClientWebsockJavax | BYE (from nextStep)")
+            return
+        }
+        //Thread.sleep(500) ;   //interval before the next move
+        //System.in.read();
+        if (collision) {
+            if (count++ <= 4) {
+                var cmd = "{\"robotmove\":\"turnLeft\" , \"time\": 300}"
+                sendMessage(cmd)
             }
+        } else {  //no collision
+            var cmd = "{\"robotmove\":\"moveForward\" , \"time\": 600}"
+            sendMessage(cmd)
         }
     }
+}
 
-    init {
-        if( addr.length > 0){
-            println("ClientWebsockJavax |  CREATING ... $addr")
-            initConn(addr)
-        }
+fun main(args: Array<String>) {
+    try {
+        ClientWebsockJavax("localhost:8091").doJob()
+        // wait  for messages from websocket
+        Thread.sleep(15000)
+    } catch (ex: Exception) {
+        System.err.println("ClientWebsockJavax | InterruptedException exception: " + ex.message)
     }
 }
