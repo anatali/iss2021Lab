@@ -2,6 +2,14 @@
  * WEnvConnSupport
  * @author AN - DISI - Unibo
 ===============================================================
+cril  = concrete-robot interaction language
+hril  = highlevel robot interaction language
+Using the javax.websocket library:
+ sets a connection via websocket with the WENv working at the given hostAddr
+ provides a method (sendMessage) to send commands written in hril to a robot able to understand the the cril language
+ redirects the messages sent on the websocket by the WENv to a Kotlin channel
+ provides methods (activateReceiver, startReceiver) that calls a given callback
+    for each message received on the Kotlin channel
 
 ===============================================================
  */
@@ -12,7 +20,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import org.glassfish.tyrus.client.ClientManager
 import org.json.JSONObject
-import org.json.simple.parser.ParseException
+//import org.json.simple.parser.ParseException
 import java.io.IOException
 import java.net.URI
 import java.net.URISyntaxException
@@ -30,7 +38,7 @@ public class WEnvConnSupport(
     //TODO define socketEventChannel related to application messages and not to simple String
 
     interface MessageHandler {
-        @Throws(ParseException::class)
+        //@Throws(ParseException::class)
         fun handleMessage(message: String)
     }
     init{
@@ -84,10 +92,9 @@ public class WEnvConnSupport(
      * @param message The text message
      */
     @OnMessage
-    @Throws(ParseException::class)
+    //@Throws(ParseException::class)
     fun onMessage(message: String) {
         println("WEnvConnSupport | websocket receives: $message ")
-        //if (messageHandler != null) { messageHandler!!.handleMessage(message) }
         sendToChannel( message )
     }
 

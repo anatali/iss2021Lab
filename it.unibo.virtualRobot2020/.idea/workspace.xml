@@ -20,34 +20,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-reflect-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-reflect.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-stdlib-jdk7-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-stdlib-jdk7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-stdlib-jdk8-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-stdlib-jdk8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-stdlib-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-stdlib.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-test-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/lib/kotlin-test.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTry.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTryUsage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/it.unibo.actorfsm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/it.unibo.actorfsm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/src/utils/virtualRobotSupportApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/src/utils/virtualRobotSupportApp.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/timer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorAppMsg.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/koltinActorExample.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/Box.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/Direction.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/MainMapUsage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/RobotState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/RoomMap.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/mapUtil.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/consolegui/ConsoleGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/consolegui/ConsoleGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/AppMsg.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/AppMsg.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Fsm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Fsm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/demoDSL.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/demoDSL.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/stepper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/stepper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/worker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Worker.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/UseWEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvConnSupport.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WEnvConnSupportNoChannel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Worker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Worker.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/stepper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Stepper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvConnSupport.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTryUsage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTryUsage.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

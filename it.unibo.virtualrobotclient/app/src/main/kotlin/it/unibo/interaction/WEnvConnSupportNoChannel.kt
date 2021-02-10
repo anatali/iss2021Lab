@@ -2,7 +2,12 @@
  * WEnvConnSupportNoChannel
  * @author AN - DISI - Unibo
 ===============================================================
-
+cril  = concrete-robot interaction language
+hril  = highlevel robot interaction language
+Using the javax.websocket library:
+  sets a connection via websocket with the WENv working at the given hostAddr
+  provides a method (sendMessage) to send commands written in hril to a robot able to understand the the cril language
+  shows the messages sent on the websocket by the WENv
 ===============================================================
  */
 package it.unibo.interaction
@@ -10,7 +15,6 @@ package it.unibo.interaction
 import kotlinx.coroutines.channels.Channel
 import org.glassfish.tyrus.client.ClientManager
 import org.json.JSONObject
-import org.json.simple.parser.ParseException
 import java.io.IOException
 import java.net.URI
 import java.net.URISyntaxException
@@ -24,11 +28,11 @@ public class WEnvConnSupportNoChannel(val hostAddr  : String,
 
     var userSession: Session?                     = null
     private var messageHandler: MessageHandler?   = null
-    val socketEventChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
+    //val socketEventChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
     //TODO define socketEventChannel related to application messages and not to simple String
 
     interface MessageHandler {
-        @Throws(ParseException::class)
+        //@Throws(ParseException::class)
         fun handleMessage(message: String)
     }
     init{
@@ -36,9 +40,9 @@ public class WEnvConnSupportNoChannel(val hostAddr  : String,
     }
     public fun initConn(addr: String) {
         try {
+            //ALTERNATIVE WAY:
             //val container = ContainerProvider.getWebSocketContainer()
             //container.connectToServer(this, URI("ws://$addr"))
-
             val endpointURI = URI( "ws://$addr/" )
             println("WEnvConnSupportNoChannel | initClientConn $endpointURI")
             val client = ClientManager.createClient()
@@ -81,7 +85,7 @@ public class WEnvConnSupportNoChannel(val hostAddr  : String,
      * @param message The text message
      */
     @OnMessage
-    @Throws(ParseException::class)
+    //@Throws(ParseException::class)
     fun onMessage(message: String) {
         println("WEnvConnSupportNoChannel | websocket receives: $message ")
         //TODO: the message should be redirected to the application level

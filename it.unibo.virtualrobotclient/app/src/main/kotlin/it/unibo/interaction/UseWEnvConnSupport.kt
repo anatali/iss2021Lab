@@ -2,7 +2,8 @@
 UseWEnvConnSupport.kt
 ===============================================================
 See https://www.websocket.org/echo.html
-Uses the WEnvConnSupport to move a virtual robot along the room boundary
+Uses the WEnvConnSupport to move a virtual robot along the room boundary.
+The business logic is embedded in the callback given to the activateReceiver method
 ===============================================================
 */
 

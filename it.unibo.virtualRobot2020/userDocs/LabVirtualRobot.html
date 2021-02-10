@@ -531,15 +531,6 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 
 
 <tr>
-<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WEnvConnSupport.kt" target="code">
-WEnvConnSupport.kt</a>
-</td>
-<td> using the  
-<a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library . <br/> 
-</td>
-</tr>
-
-<tr>
 <td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WebSocketViaChannel.kt" target="code">
 WebSocketViaChannel.kt</a>
 </td>
@@ -548,11 +539,85 @@ WebSocketViaChannel.kt</a>
 </td>
 </tr>
 
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" target="code">
+WEnvConnSupportNoChannel.kt</a>
+</td>
+<td> 
+<pre>
+<ks>cril</ks>  = concrete-robot interaction language
+<ks>hril</ks>  = highlevel robot interaction language
+</pre>
+Using the  
+<a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library:
+<ul>
+    <li>sets a connection via websocket with the WENv working at the given hostAddr</li>
+    <li>provides a method (<tt>sendMessage</tt>) to send commands written in <ks>hril</ks>  to a robot able to understand the the <ks>cril</ks> language</li>
+	<li>shows the messages sent on the websocket by the WENv </li> 
+</ul>
+
+</td>
+</tr>
+
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" target="code">
+WEnvConnSupport.kt</a>
+<br/><br/>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvConnSupport.kt" target="code">
+UseWEnvConnSupport.kt</a>:
+<ul>
+<li>Uses the support to move a virtual robot along the room boundary.</li>
+<li>The business logic is embedded in the callback given to the <tt>activateReceiver</tt> method</li>
+</ul>
+
+
+</td>
+<td><pre>
+<ks>cril</ks>  = concrete-robot interaction language
+<ks>hril</ks>  = highlevel robot interaction language
+</pre>
+Using the  
+<a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library :
+
+<ul>
+ <li>sets a connection via websocket with the WENv working at the given hostAddr</li>
+ <li>provides a method (<tt>sendMessage</tt>) to send commands written in <ks>hril</ks>  to a robot able to understand the the <ks>cril</ks> language</li>
+ <li>redirects the messages sent on the websocket by the WENv to an internal <em>Kotlin channel</em></li>
+ <li>provides methods (<tt>activateReceiver, startReceiver</tt>) that calls a given callback 
+    for each message received on the <em>Kotlin channel</em></li>
+</ul>
+</td>
+</tr>
+
+
+
 
  
 </tbody>	
 </table></center>
 
+<h3>Clients as actors </h3>
+<center><table style="width:95%">
+<tbody>	
+
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTry.kt" target="code">
+robotActorTry.kt</a>
+
+<br/><br/>
+
+
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTryUsage.kt" target="code">
+robotActorTryUsage.kt</a>
+</td>
+<td>
+
+</td>
+</tr>
+
+
+</tbody>	
+</table></center>
 
 <h2>About <a href="https://en.wikipedia.org/wiki/WebSocket" target="web">websockets</a></h2>
 

@@ -1,3 +1,10 @@
+/*
+robotActorTryUSage.kt
+===============================================================
+Provides
+See /it.unibo.kotlinIntro/userDocs/FirstActorRobot.html
+===============================================================
+*/
 package it.unibo.interaction
 
 import kotlinx.coroutines.runBlocking
@@ -5,7 +12,7 @@ import kotlinx.coroutines.delay
 
 @kotlinx.coroutines.ObsoleteCoroutinesApi
 @kotlinx.coroutines.ExperimentalCoroutinesApi
-suspend fun sendCrilCommands(   ) {
+suspend fun sendCommands(   ) {
     //virtualRobotSupport.setRobotTarget( robotActorTry, appMsg = false ) //Configure - Inject
     robotActorTry.send("init")
     var jsonString  : String
@@ -28,6 +35,6 @@ fun main( ) = runBlocking {
     println("==============================================")
     println("PLEASE, ACTIVATE WENV ")
     println("==============================================")
-    sendCrilCommands(   )
+    sendCommands(   )
     println("BYE")
 }

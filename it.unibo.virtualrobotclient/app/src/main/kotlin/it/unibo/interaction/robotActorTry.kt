@@ -1,6 +1,8 @@
 /*
 robotActorTry.kt
 ===============================================================
+Provides
+See /it.unibo.kotlinIntro/userDocs/FirstActorRobot.html
 ===============================================================
 */
 
@@ -15,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.channels.Channel
+import org.json.JSONObject
 
 val showEvents  = { v : String ->  println("showWEnvEvents: $v ")  }//showWEnvEvents
 
@@ -37,7 +40,16 @@ val robotActorTry  : SendChannel<String>	= CoroutineScope( Dispatchers.Default )
 
     fun doMove(msgSplitted : List<String> ){
         val cmd = msgSplitted[1].replace(")","")
-        hh.sendMessage( cmd )
+        println("robotActorTry doMove cmd: $cmd ") //{ 'type': 'moveForward', 'arg': 2000 }
+        val jsonObject = JSONObject( cmd )
+        val move       = jsonObject.get("type").toString()
+        println("robotActorTry doMove cmd: ${move} ") //'moveForward'
+        //hh.sendMessage( jsonObject.get("type").toString()  )
+        when ( move ){
+            "moveForward" -> hh.sendMessage( "w"  )
+            "backForward" -> hh.sendMessage( "s"  )
+            "turnLeft"    -> hh.sendMessage( "l"  )
+        }
     }
 
     while( state == "working" ){

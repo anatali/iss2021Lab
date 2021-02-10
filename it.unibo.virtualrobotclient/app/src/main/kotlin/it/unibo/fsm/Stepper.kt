@@ -1,20 +1,25 @@
-
+/**
+ * Stepper.kt
+ * @author AN - DISI - Unibo
+===============================================================
+===============================================================
+ */
 package it.unibo.fsm
-//stepper
 
+import it.unibo.interaction.WEnvConnSupport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
- 
+import org.json.JSONObject
 
 var stepCounter = 0 //here for testing
 val ndnt ="   "			
 
 @kotlinx.coroutines.ObsoleteCoroutinesApi
 @kotlinx.coroutines.ExperimentalCoroutinesApi
-class stepper ( name: String, scope: CoroutineScope,
-				usemqtt:Boolean=false, val owner: Fsm?=null,
-				discardMessages:Boolean=true ) : Fsm( name, scope, discardMessages, usemqtt){
+class Stepper (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
+			   usemqtt:Boolean=false, val owner: Fsm?=null,
+			   discardMessages:Boolean=true ) : Fsm( name, scope, discardMessages, usemqtt){
 
 lateinit var timer : Fsm
 lateinit var robot : Fsm
@@ -28,7 +33,7 @@ lateinit var robot : Fsm
 		return{
 			state("init") {	
 				action {
-					//timer = timer("timer",    scope, usemqtt=false,        owner=myself  )
+					timer = timer("timer", scope, usemqtt=false,   owner=myself  )
 					//robot = basicrobot("basicrobot", scope, usemqtt=false, owner=myself  )
 					println("$ndnt stepper STARTED")
 				}
@@ -53,7 +58,8 @@ lateinit var robot : Fsm
 			state("dostep") {
 				action {
 					//println("$ndnt stepper dostep msg=${currentMsg} owner=${owner.name}")
-					forward(  "cmd", "w", robot )
+					//forward(  "cmd", "w", robot )
+					hh.sendMessage("w") //move the robot
  					forward( "gauge", "${currentMsg.CONTENT}", timer  )					
 					memoTime()
  				}
@@ -113,10 +119,26 @@ lateinit var robot : Fsm
 	
 }
 
+suspend fun handleWEnvEvents( jsonMsg : String ) { //called by startReceiver in WEnvConnSupport
+	println("handleWEnvEvent | receives: $jsonMsg ")
+	val jsonObject    = JSONObject( jsonMsg )
+	if( jsonObject.has("endmove") ) {
+		val endmove = jsonObject.getBoolean("endmove")
+		println("handleWEnvEvent | endmove:  ${endmove} ")
+		//if(endmove) Messages.forward("wenv","stepdone","ok", robot )
+		//else Messages.forward("wenv","stepfail","todo(Time)", robot )
+	}
+	//else if( jsonObject.has("collision") ) Messages.forward("wenv","stepfail","", walker )
+}//handleWEnvEvent
+
+
 @kotlinx.coroutines.ObsoleteCoroutinesApi
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 fun main() = runBlocking{
-	val  robot = stepper("stepper", this, usemqtt=true)
-	robot.waitTermination()
+	val hh      = WEnvConnSupport( this, "localhost:8091", "400" ) //blocking
+	val stepper = Stepper("stepper", this, hh )
+	hh.startReceiver( ::handleWEnvEvents  )
+
+	stepper.waitTermination()
 	println("stepper main ends")
 } 

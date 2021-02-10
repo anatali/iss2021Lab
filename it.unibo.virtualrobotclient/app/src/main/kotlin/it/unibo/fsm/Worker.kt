@@ -11,6 +11,7 @@ each step will cover a distance equal to the length of the robot.
 ===============================================================
  */
 package it.unibo.fsm
+
 import it.unibo.interaction.WEnvConnSupport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -20,8 +21,8 @@ import org.json.JSONObject
 lateinit var walker : worker
 //lateinit var hh : WEnvConnSupport
 
-class worker (  name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
-				discardMessages:Boolean=true ) : Fsm( name, scope, discardMessages ){
+class worker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
+			  discardMessages:Boolean=true ) : Fsm( name, scope, discardMessages ){
 	override fun getInitialState() : String{
 		return "init"
 	}
