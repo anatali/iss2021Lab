@@ -58,8 +58,8 @@ open class AppMsg private constructor(  val MSGID: String, val MSGTYPE: String,
 	  return "msg($MSGID,$MSGTYPE,$SENDER,$RECEIVER,$CONTENT,${SEQNUM})"
   }
 
-  fun isEvent(): Boolean{ return MSGTYPE == AppMsgType.event.toString()       }
+  fun isEvent(): Boolean{    return MSGTYPE == AppMsgType.event.toString()       }
   fun isDispatch(): Boolean{ return MSGTYPE == AppMsgType.dispatch.toString() }
-  fun isRequest(): Boolean{ return MSGTYPE == AppMsgType.request.toString()   }
-  fun isReply(): Boolean{ return MSGTYPE == AppMsgType.reply.toString()       }
+  fun isRequest(): Boolean{  return MSGTYPE == AppMsgType.request.toString()   }
+  fun isReply(): Boolean{    return MSGTYPE == AppMsgType.reply.toString()       }
 }//AppMessage

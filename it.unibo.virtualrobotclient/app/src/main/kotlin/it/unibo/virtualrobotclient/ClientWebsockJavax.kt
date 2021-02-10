@@ -161,7 +161,7 @@ BUSINESS LOGIC
 
     @Throws(Exception::class)
     fun doJob() {
-        setObserver( walkerLogic( ::sendMessage )  )
+        setObserver( walkLogic( ::sendMessage )  )
         println("ClientWebsockJavax | doJob ENDS ======================================= ")
     }//doJob
 
@@ -170,7 +170,7 @@ BUSINESS LOGIC
 
 }//ClientWebsockJavax
 
-class walkerLogic( val sendMessage : (String)->Unit )  : IWalk {
+class walkLogic( val sendMessage : (String)->Unit )  : IWalk {
     private var count = 0
 
     init{

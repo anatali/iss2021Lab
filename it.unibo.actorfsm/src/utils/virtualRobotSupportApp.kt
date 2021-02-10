@@ -92,7 +92,7 @@ object virtualRobotSupportApp {
         }
 	
 fun terminate(){
-	sensorObserver.cancel()
+	//sensorObserver.cancel()
 	trace("TERMINATES sensorObserver")
 }
 	

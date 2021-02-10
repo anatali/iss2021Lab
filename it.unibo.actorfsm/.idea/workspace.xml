@@ -19,7 +19,36 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72872339-a0d1-4086-b48a-f54a15f5d983" name="Default Changelist" comment="" />
+    <list default="true" id="72872339-a0d1-4086-b48a-f54a15f5d983" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-reflect-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-reflect.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-stdlib-jdk7-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-stdlib-jdk7.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-stdlib-jdk8-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-stdlib-jdk8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-stdlib-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-stdlib.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-test-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/kotlin-test.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTry.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTryUsage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it.unibo.actorfsm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/it.unibo.actorfsm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/virtualRobotSupportApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/virtualRobotSupportApp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/consolegui/ConsoleGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/consolegui/ConsoleGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/AppMsg.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/AppMsg.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Fsm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Fsm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/demoDSL.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/demoDSL.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/stepper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/stepper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/worker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Worker.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/UseWEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvConnSupport.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WEnvConnSupportNoChannel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +73,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585503112228" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backup" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -57,7 +86,7 @@
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.actorfsm" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.DemoDSLKt">
+  <component name="RunManager" selected="Application.BasicrobotKt">
     <configuration name="ConsoleGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="consolegui.ConsoleGui" />
       <module name="it.unibo.actorfsm" />
@@ -67,6 +96,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BasicrobotKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="it.unibo.actorfsm" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="robotAppl.BasicrobotKt" />
+      <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -84,9 +126,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainMapUsageKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="it.unibo.actorfsm" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="mapRoomKotlin.MainMapUsageKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.DemoDSLKt" />
+        <item itemvalue="Application.BasicrobotKt" />
+        <item itemvalue="Application.MainMapUsageKt" />
         <item itemvalue="Application.ConsoleGui" />
       </list>
     </recent_temporary>
@@ -118,6 +174,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1238" height="244" key="GridCell.Tab.0.bottom" timestamp="1612952980425">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1612952980425" />
+    <state width="1238" height="244" key="GridCell.Tab.0.center" timestamp="1612952980425">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1612952980425" />
+    <state width="1238" height="244" key="GridCell.Tab.0.left" timestamp="1612952980425">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1612952980425" />
+    <state width="1238" height="244" key="GridCell.Tab.0.right" timestamp="1612952980425">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1612952980425" />
     <state x="184" y="0" key="SettingsEditor" timestamp="1612625816957">
       <screen x="0" y="0" width="1536" height="920" />
     </state>

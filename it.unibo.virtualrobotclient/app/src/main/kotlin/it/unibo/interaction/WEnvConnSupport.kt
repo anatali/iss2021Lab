@@ -1,13 +1,15 @@
 /**
- * WEnvConnSupportNoChannel
+ * WEnvConnSupport
  * @author AN - DISI - Unibo
 ===============================================================
 
 ===============================================================
  */
-package it.unibo.virtualrobotclient
+package it.unibo.interaction
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.launch
 import org.glassfish.tyrus.client.ClientManager
 import org.json.JSONObject
 import org.json.simple.parser.ParseException
@@ -16,9 +18,12 @@ import java.net.URI
 import java.net.URISyntaxException
 import javax.websocket.*
 
-
 @ClientEndpoint
-public class WEnvConnSupportNoChannel() {
+public class WEnvConnSupport(
+        val scope : CoroutineScope,    //scope required for channel
+        val hostAddr  : String,
+        val moveDuration : String = "600"
+) {
     var userSession: Session?                     = null
     private var messageHandler: MessageHandler?   = null
     val socketEventChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
@@ -28,6 +33,9 @@ public class WEnvConnSupportNoChannel() {
         @Throws(ParseException::class)
         fun handleMessage(message: String)
     }
+    init{
+        initConn( hostAddr )
+    }
 
     public fun initConn(addr: String) {
         try {
@@ -35,15 +43,15 @@ public class WEnvConnSupportNoChannel() {
             //container.connectToServer(this, URI("ws://$addr"))
 
             val endpointURI = URI( "ws://$addr/" )
-            println("WEnvConnSupportNoChannel | initClientConn $endpointURI")
+            println("WEnvConnSupport | initClientConn $endpointURI")
             val client = ClientManager.createClient()
             client.connectToServer(this, endpointURI)
         } catch (ex: URISyntaxException) {
-            println("WEnvConnSupportNoChannel | URISyntaxException exception: " + ex.message)
+            println("WEnvConnSupport | URISyntaxException exception: " + ex.message)
         } catch (e1: DeploymentException) {
-            println("WEnvConnSupportNoChannel | DeploymentException : " + e1.message)
+            println("WEnvConnSupport | DeploymentException : " + e1.message)
         } catch (e2: IOException) {
-            println("WEnvConnSupportNoChannel | IOException : " + e2.message)
+            println("WEnvConnSupport | IOException : " + e2.message)
         }
     }
 
@@ -54,7 +62,7 @@ public class WEnvConnSupportNoChannel() {
      */
     @OnOpen
     fun onOpen(userSession: Session?) {
-        println("WEnvConnSupportNoChannel | opening websocket")
+        println("WEnvConnSupport | opening websocket")
              this.userSession = userSession
     }
 
@@ -66,7 +74,7 @@ public class WEnvConnSupportNoChannel() {
      */
     @OnClose
     fun onClose(userSession: Session?, reason: CloseReason?) {
-        println("WEnvConnSupportNoChannel | closing websocket")
+        println("WEnvConnSupport | closing websocket")
         this.userSession = null
     }
 
@@ -78,8 +86,9 @@ public class WEnvConnSupportNoChannel() {
     @OnMessage
     @Throws(ParseException::class)
     fun onMessage(message: String) {
-        println("WEnvConnSupportNoChannel | websocket receives: $message ")
-        //TODO: the message should be redirected to the application level
+        println("WEnvConnSupport | websocket receives: $message ")
+        //if (messageHandler != null) { messageHandler!!.handleMessage(message) }
+        sendToChannel( message )
     }
 
     /**
@@ -98,19 +107,19 @@ public class WEnvConnSupportNoChannel() {
      */
     @Throws(Exception::class)
     fun sendMessage(message: String) {
-        println("WEnvConnSupportNoChannel | sendMessage $message")
+        println("WEnvConnSupport | sendMessage $message")
         //userSession!!.getAsyncRemote().sendText(translate(message));
         if( userSession != null)
             userSession!!.basicRemote.sendText( translate(message) ) //synch: blocks until the message has been transmitted
-        else println("WEnvConnSupportNoChannel | sorry, no userSession")
+        else println("WEnvConnSupport | sorry, no userSession")
     }
 
 
     fun translate(cmd: String) : String{ //cmd is written in application-language
         var jsonMsg = "{\"robotmove\":\"MOVE\" , \"time\": DURATION}"  //"{ 'type': 'alarm', 'arg': -1 }"
         when( cmd ){
-            "msg(w)", "w" -> jsonMsg = jsonMsg.replace("MOVE","moveForward").replace("DURATION", "600")
-            "msg(s)", "s" -> jsonMsg = jsonMsg.replace("MOVE","moveBackward").replace("DURATION", "600")
+            "msg(w)", "w" -> jsonMsg = jsonMsg.replace("MOVE","moveForward").replace("DURATION", moveDuration)
+            "msg(s)", "s" -> jsonMsg = jsonMsg.replace("MOVE","moveBackward").replace("DURATION", moveDuration)
                     //"{ 'type': 'moveBackward', 'arg': -1 }"
             "msg(a)", "a", "l" -> jsonMsg = jsonMsg.replace("MOVE","turnLeft").replace("DURATION", "300")
                     //"{ 'type': 'turnLeft',  'arg': -1  }"
@@ -122,12 +131,49 @@ public class WEnvConnSupportNoChannel() {
             //"msg(x)", "x" -> jsonMsg = "{ 'type': 'turnRight', 'arg': -1  }"
             "msg(h)", "h" -> jsonMsg = jsonMsg.replace("MOVE","alarm").replace("DURATION", "100")
             //"{ 'type': 'alarm',     'arg': 100 }"
-            else -> println("WEnvConnSupportNoChannel command $cmd unknown")
+            else -> println("WEnvConnSupport command $cmd unknown")
         }
         val jsonObject = JSONObject( jsonMsg )
         val msg        =  jsonObject.toString()
-        //println("WEnvConnSupportNoChannel | translate output= $msg ")
+        //println("WEnvConnSupport | translate output= $msg ")
         return msg
     }
- 
+
+/*
+From socket to channel
+ */
+    fun sendToChannel(  msg : String ){
+        scope.launch {
+            socketEventChannel.send( msg )
+        }
+    }
+
+    suspend fun activateReceiver( cb:( String ) -> Unit ) {
+        println("WEnvConnSupport | activateReceiver  ")
+        val receiver = scope.launch {
+            while ( true ) {
+                val v = socketEventChannel.receive(  )
+                //println("RECEIVER | receives $v ")  //in ${curThread()}
+                cb( v )
+            }
+        }
+    }//activateReceiver
+
+    var doreceive = true
+
+    suspend fun startReceiver(  cb: suspend ( String ) -> Unit ) { //callback
+        println("WEnvConnSupport | startReceiver  ")
+        val receiver = scope.launch {
+            while ( doreceive ) {
+                val v = socketEventChannel.receive(  )
+                //println("RECEIVER | receives $v ")  //in ${curThread()}
+                cb( v )
+            }
+            println("WEnvConnSupport | receiver ends ")
+        }
+    }
+
+    suspend fun stopReceiver(   ) {
+        doreceive = false;
+    }
 }

@@ -1,17 +1,16 @@
 /*
 UseWEnvConnSupport.kt
 ===============================================================
-
 See https://www.websocket.org/echo.html
+Uses the WEnvConnSupport to move a virtual robot along the room boundary
 ===============================================================
 */
 
-package it.unibo.virtualrobotclient
+package it.unibo.interaction
 
 
-import kotlinx.coroutines.CoroutineScope
+import it.unibo.interaction.WEnvConnSupport
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 
@@ -20,11 +19,11 @@ interface IWalker {
     fun nextStep(collision: Boolean)
 }
 
-class Walker( val hh : WEnvConnSupport )  : IWalker {
+class Walker( val hh : WEnvConnSupport)  : IWalker {
     private var count = 1
 
     override fun nextStep(collision: Boolean) {
-        System.out.println(" %%% nextStep collision=" + collision + " count=" + count)
+        println(" %%% nextStep collision= $collision count=$count" )
         if (count > 4) {
             println("Walker | BYE (from nextStep)")
             return
@@ -94,8 +93,8 @@ fun main( ) = runBlocking {
     println("==============================================")
     println("PLEASE, ACTIVATE WENV ")
     println("==============================================")
-    val hh = WEnvConnSupport( this )
-    hh.initConn("localhost:8091")       //blocking
+    val hh = WEnvConnSupport( this, "localhost:8091" )
+    //hh.initConn("localhost:8091")       //blocking
     // hh.activateReceiver( showWEnvEvents )
     // hh.activateReceiver( ::handleWEnvEvent )
     //doSomeMove( hh )

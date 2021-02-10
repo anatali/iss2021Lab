@@ -2,7 +2,7 @@
  * demoDSL.kt
  * @author AN - DISI - Unibo
 ===============================================================
-The default of Fsm.kt is discardMessages=false, the unexpected messages are inserted in a local msgQueue.
+A Fsm that handles messages (dispatches) of the form msg(X)
 ===============================================================
  */
 package it.unibo.fsm
@@ -21,24 +21,25 @@ override fun getInitialState() : String{
 override fun getBody() : (Fsm.() -> Unit){
   return {
 	state("s0") {
-		action {   println("demoDSL | state s0 $currentMsg")  }
+		action {   println("demoDSL | state s0 currentMsg=$currentMsg")
+			println("demoDSL | .................... ") }
 		transition( edgeName="t0",
 			targetState="s1", cond=doswitch())	 //empty move		
 	}			
 	state("s1") {
-		action {   println("demoDSL | state s1 $currentMsg")  }
+		action {   println("demoDSL | state s1 currentMsg=$currentMsg")  }
 		transition( edgeName="t0",
 			targetState="s2",   cond=whenDispatch("msg1") )
 		transition( edgeName="t1",
 			targetState="s3", cond=whenDispatch("msg2") )
 	}
 	state("s2") {
-		action {   println("demoDSL | state s2 $currentMsg")  }
+		action {   println("demoDSL | state s2 currentMsg=$currentMsg")  }
 		transition( edgeName="t0",
 			targetState="s3", cond=whenDispatch("msg2") )
 	}
 	state("s3") {
-		action {   println("demoDSL | state s3 $currentMsg")  }
+		action {   println("demoDSL | state s3 currentMsg=$currentMsg")  }
 		transition( edgeName="t0",
 			targetState="s1", cond=doswitch())	 //empty move
 	}

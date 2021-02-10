@@ -3,6 +3,8 @@
  * @author AN - DISI - Unibo
 ===============================================================
 Custom DSL for Moore Finite State Machine behavior.
+When discardMessages=false, the unexpected messages are inserted in a local msgQueue;
+otherwise they are ignored.
 ===============================================================
  */
 

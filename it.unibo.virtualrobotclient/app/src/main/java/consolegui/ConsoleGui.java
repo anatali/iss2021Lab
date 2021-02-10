@@ -7,8 +7,7 @@ sent to the WEnv by using WEnvConnSupportNoChannel.sendMessage
 ===============================================================
  */
 package consolegui;
-import it.unibo.fsm.AppMsg;
-import it.unibo.virtualrobotclient.WEnvConnSupportNoChannel;
+import it.unibo.interaction.WEnvConnSupportNoChannel;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,8 +19,8 @@ private WEnvConnSupportNoChannel wenvConn ;
 		GuiUtils.showSystemInfo();
 		ButtonAsGui concreteButton = ButtonAsGui.createButtons( "", buttonLabels );
 		concreteButton.addObserver( this );
- 		wenvConn      = new WEnvConnSupportNoChannel();
-		wenvConn.initConn("localhost:8091" );
+ 		wenvConn      = new WEnvConnSupportNoChannel("localhost:8091", "600");
+		//wenvConn.initConn("localhost:8091" );
  	}
 
 	public void update( Observable o , Object arg ) {	//Observable deprecated WHY?
