@@ -51,15 +51,23 @@ open class AppMsg private constructor(  val MSGID: String, val MSGTYPE: String,
         return AppMsg(msgId, AppMsgType.request.toString(),
             actor, dest, "$content", "${n++}")
     }
+
+      fun isEvent( msg : AppMsg): Boolean{    return msg.MSGTYPE == AppMsgType.event.toString()    }
+      fun isDispatch(msg : AppMsg): Boolean{ return msg.MSGTYPE == AppMsgType.dispatch.toString() }
+      fun isRequest(msg : AppMsg): Boolean{  return msg.MSGTYPE == AppMsgType.request.toString()  }
+      fun isReply(msg : AppMsg): Boolean{    return msg.MSGTYPE == AppMsgType.reply.toString()    }
+
   
-  }
+  }//companion
+
+
   override fun toString(): String {
 	  //msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )	
 	  return "msg($MSGID,$MSGTYPE,$SENDER,$RECEIVER,$CONTENT,${SEQNUM})"
   }
+    fun isEvent( ): Boolean{    return  MSGTYPE == AppMsgType.event.toString()    }
+    fun isDispatch( ): Boolean{ return  MSGTYPE == AppMsgType.dispatch.toString() }
+    fun isRequest( ): Boolean{  return  MSGTYPE == AppMsgType.request.toString()  }
+    fun isReply( ): Boolean{    return  MSGTYPE == AppMsgType.reply.toString()    }
 
-  fun isEvent(): Boolean{    return MSGTYPE == AppMsgType.event.toString()       }
-  fun isDispatch(): Boolean{ return MSGTYPE == AppMsgType.dispatch.toString() }
-  fun isRequest(): Boolean{  return MSGTYPE == AppMsgType.request.toString()   }
-  fun isReply(): Boolean{    return MSGTYPE == AppMsgType.reply.toString()       }
 }//AppMessage

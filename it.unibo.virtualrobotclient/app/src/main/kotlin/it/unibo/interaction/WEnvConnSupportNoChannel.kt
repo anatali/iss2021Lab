@@ -25,11 +25,10 @@ import javax.websocket.*
 public class WEnvConnSupportNoChannel(val hostAddr  : String,
                                       val moveDuration : String = "600") {
 
-
+    val moveTime                                  = "600"
+    val turnTime                                  = "300"
     var userSession: Session?                     = null
     private var messageHandler: MessageHandler?   = null
-    //val socketEventChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
-    //TODO define socketEventChannel related to application messages and not to simple String
 
     interface MessageHandler {
         //@Throws(ParseException::class)
@@ -114,16 +113,24 @@ public class WEnvConnSupportNoChannel(val hostAddr  : String,
         else println("WEnvConnSupportNoChannel | sorry, no userSession")
     }
 
+    fun sendCrilMessage(message: String) {  //cril=concrete-robot interaction language
+        println("WEnvConnSupportNoChannel | sendMessage $message")
+        //"{ 'type': 'alarm', 'arg': -1 }"
+        //userSession!!.getAsyncRemote().sendText(translate(message));
+        if( userSession != null)
+            userSession!!.basicRemote.sendText(  message ) //synch: blocks until the message has been transmitted
+        else println("WEnvConnSupportNoChannel | sorry, no userSession")
+    }
 
     fun translate(cmd: String) : String{ //cmd is written in application-language
         var jsonMsg = "{\"robotmove\":\"MOVE\" , \"time\": DURATION}"  //"{ 'type': 'alarm', 'arg': -1 }"
         when( cmd ){
-            "msg(w)", "w" -> jsonMsg = jsonMsg.replace("MOVE","moveForward").replace("DURATION", "600")
-            "msg(s)", "s" -> jsonMsg = jsonMsg.replace("MOVE","moveBackward").replace("DURATION", "600")
+            "msg(w)", "w" -> jsonMsg = jsonMsg.replace("MOVE","moveForward").replace("DURATION", moveTime)
+            "msg(s)", "s" -> jsonMsg = jsonMsg.replace("MOVE","moveBackward").replace("DURATION", moveTime)
                     //"{ 'type': 'moveBackward', 'arg': -1 }"
-            "msg(a)", "a", "l" -> jsonMsg = jsonMsg.replace("MOVE","turnLeft").replace("DURATION", "300")
+            "msg(a)", "a", "l" -> jsonMsg = jsonMsg.replace("MOVE","turnLeft").replace("DURATION", turnTime)
                     //"{ 'type': 'turnLeft',  'arg': -1  }"
-            "msg(d)", "d", "r" -> jsonMsg = jsonMsg.replace("MOVE","turnRight").replace("DURATION", "300")
+            "msg(d)", "d", "r" -> jsonMsg = jsonMsg.replace("MOVE","turnRight").replace("DURATION", turnTime)
             //"{ 'type': 'turnRight', 'arg': -1  }"
             //"msg(l)", "l" -> jsonMsg = "{ 'type': 'turnLeft',  'arg': 300 }"
             //"msg(r)", "r" -> jsonMsg = "{ 'type': 'turnRight', 'arg': 300 }"
@@ -131,6 +138,7 @@ public class WEnvConnSupportNoChannel(val hostAddr  : String,
             //"msg(x)", "x" -> jsonMsg = "{ 'type': 'turnRight', 'arg': -1  }"
             "msg(h)", "h" -> jsonMsg = jsonMsg.replace("MOVE","alarm").replace("DURATION", "100")
             //"{ 'type': 'alarm',     'arg': 100 }"
+
             else -> println("WEnvConnSupportNoChannel command $cmd unknown")
         }
         val jsonObject = JSONObject( jsonMsg )

@@ -1,6 +1,8 @@
-package it.unibo.interaction
+package it.unibo.interaction.clientsFsmNaive
 
 import it.unibo.fsm.AppMsg
+import it.unibo.interaction.WEnvConnSupportNoChannel
+import it.unibo.interaction.handlerToWalk
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.CoroutineScope
@@ -10,7 +12,7 @@ import kotlinx.coroutines.delay
 //Actor that includes the business logic; the behavior is message-driven
 @kotlinx.coroutines.ObsoleteCoroutinesApi
 @kotlinx.coroutines.ExperimentalCoroutinesApi
-val robotActor  : SendChannel<String>	= CoroutineScope( Dispatchers.Default ).actor {
+val robotActorAppMsg  : SendChannel<AppMsg>	= CoroutineScope( Dispatchers.Default ).actor {
     var state    = "working"
     val hh       = WEnvConnSupportNoChannel( "localhost:8091", "400" )
     fun doInit() = { println("robotActorTry INIT" ) }
@@ -32,15 +34,15 @@ val robotActor  : SendChannel<String>	= CoroutineScope( Dispatchers.Default ).ac
     }
 
     while( state == "working" ){
-        var msg = channel.receive()
+        var msg = channel.receive() //AppMsg
         println("robotActor receives: $msg ")
-        val applMsg = AppMsg.create(msg)
+        //val applMsg = AppMsg.create(msg)
         //println("robotActor applMsg.MSGID=${applMsg.MSGID} ")
-        when( applMsg.MSGID ){
+        when( msg.MSGID ){
             "init"      -> doInit()
             "end"       -> doEnd()
-            "sensor"    -> doSensor(applMsg)
-            "move"      -> doMove(applMsg.CONTENT)
+            "sensor"    -> doSensor(msg)
+            "move"      -> doMove(msg.CONTENT)
             else        -> println("NO HANDLE for $msg")
         }
     }//while

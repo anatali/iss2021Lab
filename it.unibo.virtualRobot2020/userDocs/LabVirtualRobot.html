@@ -518,7 +518,7 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 <tr>
 <td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" target="code">
 ClientWebsockJavax.kt</a>
-<br/><br/>
+<br/> 
 <m>It is the Kotlin version of 
 <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientWebsockJavax.java" target="code">ClientWebsockJavax.java</a>
 </m></td>
@@ -529,7 +529,7 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 </td>
 </tr>
 
-
+<!--
 <tr>
 <td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WebSocketViaChannel.kt" target="code">
 WebSocketViaChannel.kt</a>
@@ -538,22 +538,22 @@ WebSocketViaChannel.kt</a>
 <a href="https://square.github.io/okhttp/" target="web">okhttp3</a>  library . <br/> 
 </td>
 </tr>
-
+-->
 <tr>
 <td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" target="code">
 WEnvConnSupportNoChannel.kt</a>
 </td>
 <td> 
 <pre>
-<ks>cril</ks>  = concrete-robot interaction language
-<ks>hril</ks>  = highlevel robot interaction language
+<ks>cril</ks>  = concrete-robot interaction language		<k>{ 'robotmove': 'MOVE', 'time': TIME }</k>	
+<ks>hril</ks>  = highlevel robot interaction language		<k>w | s | l | r | h</k>
 </pre>
 Using the  
 <a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library:
 <ul>
-    <li>sets a connection via websocket with the WENv working at the given hostAddr</li>
-    <li>provides a method (<tt>sendMessage</tt>) to send commands written in <ks>hril</ks>  to a robot able to understand the the <ks>cril</ks> language</li>
-	<li>shows the messages sent on the websocket by the WENv </li> 
+    <li>sets a connection with the <tt>WENv</tt> working at the given <tt>hostAddr</tt>, using websocket </li>
+    <li>provides a method (<tt>sendMessage</tt>) to send commands written in <ks>hril</ks>  to a robot that understands the <ks>cril</ks> language</li>
+	<li>shows the messages sent on the websocket by the <tt>WENv</tt> </li> 
 </ul>
 
 </td>
@@ -562,27 +562,27 @@ Using the
 <tr>
 <td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" target="code">
 WEnvConnSupport.kt</a>
-<br/><br/>
+<br/><br/><m>
 <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvConnSupport.kt" target="code">
 UseWEnvConnSupport.kt</a>:
 <ul>
 <li>Uses the support to move a virtual robot along the room boundary.</li>
 <li>The business logic is embedded in the callback given to the <tt>activateReceiver</tt> method</li>
 </ul>
-
+</m>
 
 </td>
 <td><pre>
-<ks>cril</ks>  = concrete-robot interaction language
-<ks>hril</ks>  = highlevel robot interaction language
+<ks>cril</ks>  = concrete-robot interaction language		<k>{ 'robotmove': 'MOVE', 'time': TIME }</k>
+<ks>hril</ks>  = highlevel robot interaction language		<k>w | s | l | r | h</k>
 </pre>
 Using the  
 <a href="http://losviluppatore.it/i-websocket-comunicazione-asincrona-full-duplex-per-il-web/" target="web">javax.websocket</a>  library :
 
 <ul>
- <li>sets a connection via websocket with the WENv working at the given hostAddr</li>
- <li>provides a method (<tt>sendMessage</tt>) to send commands written in <ks>hril</ks>  to a robot able to understand the the <ks>cril</ks> language</li>
- <li>redirects the messages sent on the websocket by the WENv to an internal <em>Kotlin channel</em></li>
+ <li>sets a connection with the <tt>WENv</tt> working at the given <tt>hostAddr</tt>, using websocket</li>
+ <li>provides a method (<tt>sendMessage</tt>) to send commands written in <ks>hril</ks>  to a robot that understands the <ks>cril</ks> language</li>
+ <li>redirects the messages sent on the websocket by the <tt>WENv</tt> to an internal <em>Kotlin channel</em></li>
  <li>provides methods (<tt>activateReceiver, startReceiver</tt>) that calls a given callback 
     for each message received on the <em>Kotlin channel</em></li>
 </ul>
@@ -590,31 +590,101 @@ Using the
 </tr>
 
 
-
-
- 
 </tbody>	
 </table></center>
 
 <h3>Clients as actors </h3>
+
 <center><table style="width:95%">
 <tbody>	
 
 <tr>
-<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTry.kt" target="code">
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorTry.kt" target="code">
 robotActorTry.kt</a>
 
 <br/><br/>
 
-
-<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/robotActorTryUsage.kt" target="code">
+<m>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorTryUsage.kt" target="code">
 robotActorTryUsage.kt</a>
+<ul>
+<li>Uses the FSM 
+to move a virtual robot forward and backward
+<li>The business logic is expressed by commands sent to the FSM </li>
+</ul>
+</m>
+<center><img src="./img/robotActorTry.png" alt="robotActorTry" width="100%"  ></center>
+
+<k>TODO</k>: rifare figura senza msgs da WEnv a robotActorTry
 </td>
 <td>
+The behavior of the 
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorTry.kt" target="code">
+robotActorTry.kt</a>
+can be modelled as a <a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="web">Finite State Machine</a>:<br/><br/>
+<center><img src="./img/robotActorFsm.png" alt="robotActorFsm" width="40%"  ></center>
+Each <bc>state</bc> is mapped into a <bc>function</bc> whose body specifies the <bc>actions</bc> to be executed in that state.
+
+ 
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActor.kt" target="code">
+robotActor.kt</a>
+
+<br/><br/>
+
+<m>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorUsage.kt" target="code">
+robotActorUsage.kt</a>
+<ul>
+<li>Uses the FSM 
+to move a virtual robot forward and backward
+<li>The business logic is expressed by commands sent to the FSM </li>
+</ul>
+</m>
+<center><img src="./img/robotActor.png" alt="robotActor" width="100%"  ></center>
+<k>TODO</k>: rifare figura senza msgs da WEnv a robotActor
+</td>
+
+<td>
+The class 
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/AppMsg.kt" target="code">
+AppMsg.kt</a> implements our idea of messages at application-level.
+
+The external representation is a String written in Prolog (JSON-compatible) syntax as a Prolog-Term with 5 arguments:
+<pre>
+msg( MSGID, MSGTYPE, SENDER, RECEIVER, CONTENT, SEQNUM )
+</pre>
+
+We distinguish among different application-message types:
+<pre>enum class AppMsgType{ event, dispatch, request, reply, invitation }</pre>
+
+<center><img src="./img/msgTypes.png" alt="msgTypes" width="30%"  ></center>
+
 
 </td>
 </tr>
 
+</tbody>	
+</table></center>
+
+<h3>Clients as FSM </h3>
+
+<center><table style="width:95%">
+<tbody>	
+
+<tr>
+<td style="width:30%">
+
+</td>
+
+<td>
+
+</td>
+</tr>
 
 </tbody>	
 </table></center>

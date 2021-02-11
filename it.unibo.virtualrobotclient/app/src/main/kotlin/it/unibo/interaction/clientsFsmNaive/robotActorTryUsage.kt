@@ -5,7 +5,7 @@ Provides
 See /it.unibo.kotlinIntro/userDocs/FirstActorRobot.html
 ===============================================================
 */
-package it.unibo.interaction
+package it.unibo.interaction.clientsFsmNaive
 
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.delay
@@ -14,19 +14,19 @@ import kotlinx.coroutines.delay
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 suspend fun sendCommands(   ) {
     //virtualRobotSupport.setRobotTarget( robotActorTry, appMsg = false ) //Configure - Inject
-    robotActorTry.send("init")
+    robotActorTry.send("init()")
     var jsonString  : String
-    val time = 2000L	//time = 1000 => collision
+    val time = 1000	//time = 1000 => collision
 //    for (i in 1..2) {
-    jsonString = "{ 'type': 'moveForward', 'arg': $time }"
+    jsonString = "{ \"robotmove\": \"moveForward\", \"time\": $time }"
     robotActorTry.send("move($jsonString)")
-    delay(time)
+    delay(1000)
 
-    jsonString = "{ 'type': 'moveBackward', 'arg': ${time} }"
+    jsonString = "{ \"robotmove\": \"moveBackward\", \"time\": $time }"
     robotActorTry.send("move($jsonString)")
     delay(1000)
 //    }
-    robotActorTry.send("end")
+    robotActorTry.send("end()")
 }
 
 @kotlinx.coroutines.ObsoleteCoroutinesApi

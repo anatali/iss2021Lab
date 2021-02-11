@@ -6,10 +6,11 @@ See /it.unibo.kotlinIntro/userDocs/FirstActorRobot.html
 ===============================================================
 */
 
-package it.unibo.interaction
+package it.unibo.interaction.clientsFsmNaive
 
 
 //import kotlinx.coroutines.runBlocking
+import it.unibo.interaction.WEnvConnSupportNoChannel
 import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +27,7 @@ val showEvents  = { v : String ->  println("showWEnvEvents: $v ")  }//showWEnvEv
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 val robotActorTry  : SendChannel<String>	= CoroutineScope( Dispatchers.Default ).actor {
     var state    = "working"
-    val hh       = WEnvConnSupportNoChannel( "localhost:8091", "400" )
+    val hh       = WEnvConnSupportNoChannel( "localhost:8091", "300" )
     fun doInit() = { println("robotActorTry INIT" ) }
     fun doEnd()  = { state = "end"  }
     fun doSensor(msg : String){ println("robotActorTry should handle: $msg") }
@@ -38,32 +39,24 @@ val robotActorTry  : SendChannel<String>	= CoroutineScope( Dispatchers.Default )
         delay(500)
     }
 
-    fun doMove(msgSplitted : List<String> ){
-        val cmd = msgSplitted[1].replace(")","")
-        println("robotActorTry doMove cmd: $cmd ") //{ 'type': 'moveForward', 'arg': 2000 }
-        val jsonObject = JSONObject( cmd )
-        val move       = jsonObject.get("type").toString()
-        println("robotActorTry doMove cmd: ${move} ") //'moveForward'
-        //hh.sendMessage( jsonObject.get("type").toString()  )
-        when ( move ){
-            "moveForward" -> hh.sendMessage( "w"  )
-            "backForward" -> hh.sendMessage( "s"  )
-            "turnLeft"    -> hh.sendMessage( "l"  )
-        }
+    fun doMove( move : String ){ //msgSplitted : List<String>
+         println("robotActorTry doMove cmd: $move ") //{ 'type': 'moveForward', 'arg': 2000 }
+        hh.sendCrilMessage( move )
     }
 
     while( state == "working" ){
         var msg = channel.receive()
-        println("robotActorTry receives: $msg ") //
+        println("robotActorTry receives: $msg ") // FUNCTOR( ... )
         val msgSplitted = msg.split('(')
         val msgFunctor  = msgSplitted[0]
+        val move        = msgSplitted[1].replace(")","")
         //println("robotActorTry msgFunctor $msgFunctor ")
         when( msgFunctor ){
             "init"      -> doInit()
             "end"       -> doEnd()
             "sensor"    -> doSensor(msg)
             "collision" -> doCollision(msg)
-            "move"      -> doMove(msgSplitted)
+            "move"      -> doMove(move) //
             else        -> println("NO HANDLE for $msg")
         }
     }
