@@ -25,11 +25,11 @@ class robotActorAppMsg(
     val myactor: SendChannel<AppMsg> = CoroutineScope(Dispatchers.Default).actor {
         var state = "working"
 
-        fun doStart() = {
+        fun doInit()  {
             println("myactor | INIT")
         }
 
-        fun doStop() = {
+        fun doEnd()  {
             println("myactor | END")
             state = "end"
         }
@@ -61,19 +61,15 @@ class robotActorAppMsg(
                 //val applMsg = AppMsg.create(msg)
                 //println("robotActor applMsg.MSGID=${applMsg.MSGID} ")
                 when (msg.MSGID) {
-                    "start" -> {
-                        println("myactor | INIT")
-                    }//doStart()
-                    "stop" -> {
-                        state = "end"
-                    } //doStop()
+                    "init"      -> { doInit() }
+                    "end"       -> { doEnd() }
                     "wenvevent" -> handleWEnvEvent(msg)
-                    "move" -> doMove(msg.CONTENT)
-                    else        -> println("myactor | NO HANDLE for $msg")
+                    "move"      -> doMove(msg.CONTENT)
+                    else        -> println("myactor |  $msg unknown")
                 }
             }//while
             println("myactor | ENDS state=$state")
-            this.channel.close()
+            //this.channel.close()
             hh.stopReceiver()
         //}
     }

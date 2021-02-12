@@ -11,8 +11,8 @@ import it.unibo.fsm.AppMsgType
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.delay
 
-val initMsg         = AppMsg.create("start","main","robotActorAppMsg")
-val endMsg          = AppMsg.create("stop", "main","robotActorAppMsg")
+val initMsg         = AppMsg.create("init","main","robotActorAppMsg")
+val endMsg          = AppMsg.create("end", "main","robotActorAppMsg")
 val moveForwardMsg  = AppMsg.create("move","main","robotActorAppMsg","w", AppMsgType.dispatch)
 val moveBackwardMsg = AppMsg.create("move","main","robotActorAppMsg","s")
 val haltRobotMsg    = AppMsg.create("move","main","robotActorAppMsg","h")
