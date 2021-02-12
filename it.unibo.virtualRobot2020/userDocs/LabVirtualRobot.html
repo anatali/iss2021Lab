@@ -540,7 +540,8 @@ WebSocketViaChannel.kt</a>
 </tr>
 -->
 <tr>
-<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" target="code">
+<td style="width:30%">
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" target="code">
 WEnvConnSupportNoChannel.kt</a>
 </td>
 <td> 
@@ -618,27 +619,29 @@ to move a virtual robot forward and backward
 <k>TODO</k>: rifare figura senza msgs da WEnv a robotActorTry
 </td>
 <td>
-The behavior of the 
 <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorTry.kt" target="code">
-robotActorTry.kt</a>
-can be modelled as a <a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="web">Finite State Machine</a>:<br/><br/>
+robotActorTry.kt</a> sends commands to <tt>WEnv</tt> by using as <em>virtualRobotSupport</em> the compoment
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" target="code">
+WEnvConnSupportNoChannel.kt</a>.
+<br/><br/>
+Its behavior can be modelled as a <a href="https://en.wikipedia.org/wiki/Finite-state_machine" target="web">Finite State Machine</a>
+where each <bc>state</bc> is mapped into a <bc>function</bc> whose body specifies the <bc>actions</bc> to be executed in that state
+:<br/><br/>
 <center><img src="./img/robotActorFsm.png" alt="robotActorFsm" width="40%"  ></center>
-Each <bc>state</bc> is mapped into a <bc>function</bc> whose body specifies the <bc>actions</bc> to be executed in that state.
 
- 
 </td>
 </tr>
 
 <tr>
 <td>
-<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActor.kt" target="code">
-robotActor.kt</a>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsg.kt" target="code">
+robotActorAppMsg.kt</a>
 
 <br/><br/>
 
 <m>
-<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorUsage.kt" target="code">
-robotActorUsage.kt</a>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsgUsage.kt" target="code">
+robotActorAppMsgUsage	.kt</a>
 <ul>
 <li>Uses the FSM 
 to move a virtual robot forward and backward
@@ -650,6 +653,11 @@ to move a virtual robot forward and backward
 </td>
 
 <td>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsg.kt" target="code">
+robotActorAppMsg.kt</a>  sends commands to <tt>WEnv</tt> by using as <em>virtualRobotSupport</em> the component
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" target="code">
+WEnvConnSupport.kt</a>
+<br/><br/>
 The class 
 <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/AppMsg.kt" target="code">
 AppMsg.kt</a> implements our idea of messages at application-level.

@@ -94,7 +94,7 @@ public class WEnvConnSupport(
     @OnMessage
     //@Throws(ParseException::class)
     fun onMessage(message: String) {
-        println("WEnvConnSupport | websocket receives: $message ")
+        //println("WEnvConnSupport | websocket receives: $message ")
         sendToChannel( message )
     }
 
@@ -114,7 +114,7 @@ public class WEnvConnSupport(
      */
     @Throws(Exception::class)
     fun sendMessage(message: String) {
-        println("WEnvConnSupport | sendMessage $message")
+        //println("WEnvConnSupport | sendMessage $message")
         //userSession!!.getAsyncRemote().sendText(translate(message));
         if( userSession != null)
             userSession!!.basicRemote.sendText( translate(message) ) //synch: blocks until the message has been transmitted
@@ -160,27 +160,32 @@ From socket to channel
         val receiver = scope.launch {
             while ( true ) {
                 val v = socketEventChannel.receive(  )
-                //println("RECEIVER | receives $v ")  //in ${curThread()}
-                cb( v )
+                println("RECEIVER | activateReceiver receives $v ")  //in ${curThread()}
+                if( v != "terminate")  cb( v )  else break
             }
         }
     }//activateReceiver
 
-    var doreceive = true
 
     suspend fun startReceiver(  cb: suspend ( String ) -> Unit ) { //callback
         println("WEnvConnSupport | startReceiver  ")
+
         val receiver = scope.launch {
-            while ( doreceive ) {
-                val v = socketEventChannel.receive(  )
-                //println("RECEIVER | receives $v ")  //in ${curThread()}
-                cb( v )
-            }
-            println("WEnvConnSupport | receiver ends ")
+                 while ( true ) {
+                     try {
+                            val v = socketEventChannel.receive(  )
+                            println("RECEIVER | startReceiver receives $v ")  //in ${curThread()}
+                            if( v != "terminate")  cb( v )   else break
+                     }catch( e : java.lang.Exception){
+                         println("WEnvConnSupport | startReceiver ERROR $e")
+                     }               }
+                println("WEnvConnSupport | receiver ends ")
         }
+
     }
 
     suspend fun stopReceiver(   ) {
-        doreceive = false;
+        println("WEnvConnSupport | stopReceiver ")
+        socketEventChannel.send("terminate")
     }
 }

@@ -9,9 +9,6 @@ walks along the boundary of the room and then works as an observer
 package it.unibo.virtualrobotclient
 
 import org.glassfish.tyrus.client.ClientManager
-//import org.json.simple.JSONObject
-//import org.json.simple.parser.JSONParser
-//import org.json.simple.parser.ParseException
 import java.io.IOException
 import java.net.URI
 import java.net.URISyntaxException
@@ -42,15 +39,13 @@ class ClientWebsockJavax(addr: String) {
 
     protected fun initConn(addr: String) {
         try {
-            //simpleparser = JSONParser()
+            //ALTERNATIVE
             //val container = ContainerProvider.getWebSocketContainer()
             //container.connectToServer(this, URI("ws://$addr"))
-
             val endpointURI = URI( "ws://$addr/" )
             println("ClientWebsockJavaxUsingCoroutines | initClientConn $endpointURI")
             val client = ClientManager.createClient()
             client.connectToServer(this, endpointURI)
-
         } catch (ex: URISyntaxException) {
             println("ClientWebsockJavax | URISyntaxException exception: " + ex.message)
         } catch (e1: DeploymentException) {
@@ -154,19 +149,11 @@ BUSINESS LOGIC
         })
     }
 
-    //setObserver
-    //private var count = 0
-
-
-
     @Throws(Exception::class)
     fun doJob() {
         setObserver( walkLogic( ::sendMessage )  )
         println("ClientWebsockJavax | doJob ENDS ======================================= ")
     }//doJob
-
-
-
 
 }//ClientWebsockJavax
 

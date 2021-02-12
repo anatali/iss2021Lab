@@ -1,50 +1,99 @@
+/*
+robotActorAppMsg.kt
+===============================================================
+A component that embeds an actor that works as a FSM
+The component provides a forward operation to send
+===============================================================
+*/
 package it.unibo.interaction.clientsFsmNaive
 
 import it.unibo.fsm.AppMsg
-import it.unibo.interaction.WEnvConnSupportNoChannel
-import it.unibo.interaction.handlerToWalk
-import kotlinx.coroutines.channels.actor
-import kotlinx.coroutines.channels.SendChannel
+import it.unibo.interaction.WEnvConnSupport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.launch
 
-//Actor that includes the business logic; the behavior is message-driven
-@kotlinx.coroutines.ObsoleteCoroutinesApi
-@kotlinx.coroutines.ExperimentalCoroutinesApi
-val robotActorAppMsg  : SendChannel<AppMsg>	= CoroutineScope( Dispatchers.Default ).actor {
-    var state    = "working"
-    val hh       = WEnvConnSupportNoChannel( "localhost:8091", "400" )
-    fun doInit() = { println("robotActorTry INIT" ) }
-    fun doEnd()  = { state = "end"  }
+class robotActorAppMsg(
+        val scope: CoroutineScope,    //scope required for channel
+        val hostAddr: String,
+        val moveDuration: String = "600") {
 
-    suspend fun doCollision(msg : AppMsg){
-        println("robotActor handles ${msg.CONTENT} by going back a little");
-        hh.sendMessage( "s"  )
-        delay(100)
-        hh.sendMessage( "h"  )
-    }
-    suspend fun doSensor(msg : AppMsg){
-        println("robotActor handles: ${msg.CONTENT}")
-        if( msg.CONTENT.startsWith("collision") ) doCollision(msg)
-    }
+    lateinit var hh     : WEnvConnSupport
 
-    suspend fun doMove( move: String ){
-        hh.sendMessage( move  )		//move in the application-language
-    }
+    val myactor: SendChannel<AppMsg> = CoroutineScope(Dispatchers.Default).actor {
+        var state = "working"
 
-    while( state == "working" ){
-        var msg = channel.receive() //AppMsg
-        println("robotActor receives: $msg ")
-        //val applMsg = AppMsg.create(msg)
-        //println("robotActor applMsg.MSGID=${applMsg.MSGID} ")
-        when( msg.MSGID ){
-            "init"      -> doInit()
-            "end"       -> doEnd()
-            "sensor"    -> doSensor(msg)
-            "move"      -> doMove(msg.CONTENT)
-            else        -> println("NO HANDLE for $msg")
+        fun doStart() = {
+            println("myactor | INIT")
         }
-    }//while
-    println("robotActor ENDS state=$state")
+
+        fun doStop() = {
+            println("myactor | END")
+            state = "end"
+        }
+
+        suspend fun doCollision(msg: AppMsg) {
+            //println("\u0007")  println(7.toChar())        //Ring the Terminal BELL ??
+            java.awt.Toolkit.getDefaultToolkit().beep();    //Ring the Terminal BELL
+            println("myactor | handles ${msg.CONTENT} by going back a little (if going ahead)");
+            //hh.sendMessage("s")
+            //delay(100)
+            //hh.sendMessage("h")
+        }
+
+        suspend fun handleWEnvEvent(msg: AppMsg) {
+            val v           = msg.CONTENT
+            val isCollision = v.contains("collision")
+            println("myactor | handleWEnvEvent: ${v} ${isCollision}")
+            if (isCollision) doCollision(msg)
+        }
+
+        fun doMove(move: String) {
+            println("myactor | move=$move")
+            hh.sendMessage(move)        //move in the application-language
+        }
+        //Behavior
+            while (state == "working") {
+                var msg = channel.receive() //AppMsg
+                println("myactor | receives: $msg ${msg.MSGID}")
+                //val applMsg = AppMsg.create(msg)
+                //println("robotActor applMsg.MSGID=${applMsg.MSGID} ")
+                when (msg.MSGID) {
+                    "start" -> {
+                        println("myactor | INIT")
+                    }//doStart()
+                    "stop" -> {
+                        state = "end"
+                    } //doStop()
+                    "wenvevent" -> handleWEnvEvent(msg)
+                    "move" -> doMove(msg.CONTENT)
+                    else        -> println("myactor | NO HANDLE for $msg")
+                }
+            }//while
+            println("myactor | ENDS state=$state")
+            this.channel.close()
+            hh.stopReceiver()
+        //}
+    }
+
+    fun forward(msg: AppMsg){
+        //println("forward myactor=$myactor msg=$msg"  )
+        scope.launch { myactor.send(msg) }
+    }
+
+
+    init{
+        hh = WEnvConnSupport(scope, hostAddr, "2500")
+        val handleWEnvEvents  = { v: String ->
+                //println("handleWEnvEvents: $v ")
+                //val wenvMsg = AppMsg.create("wenvevent","handleWEnvEvents","robotActorAppMsg")
+                forward(AppMsg.create("wenvevent", "handleWEnvEvents", "robotActorAppMsg", v))
+
+        }//handleWEnvEvents
+        scope.launch { hh.activateReceiver(handleWEnvEvents) }
+    }
+
+
 }

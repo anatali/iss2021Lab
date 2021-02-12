@@ -7,7 +7,7 @@ and to receive the answers sent form the WebSocket
 ===============================================================
  */
 
-package it.unibo.virtualrobotclient
+package it.unibo.temp
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope

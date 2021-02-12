@@ -32,11 +32,11 @@ val robotActorTry  : SendChannel<String>	= CoroutineScope( Dispatchers.Default )
     fun doEnd()  = { state = "end"  }
     fun doSensor(msg : String){ println("robotActorTry should handle: $msg") }
 
-    suspend fun doCollision(msg : String){
+    fun doCollision(msg : String){
         println("robotActorTry handles $msg going back a little");
         //val goback =  "{ 'type': 'moveBackward', 'arg': 100 }"
-        hh.sendMessage( "s"  )  // not for plasticBox : the business logic is more complex ...
-        delay(500)
+        hh.sendMessage( "s"  )
+        //delay(500)
     }
 
     fun doMove( move : String ){ //msgSplitted : List<String>
