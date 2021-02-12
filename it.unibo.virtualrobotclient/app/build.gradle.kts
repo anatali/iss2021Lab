@@ -55,17 +55,17 @@ dependencies {
 //JSON
 
     // https://mvnrepository.com/artifact/org.json/json
-    implementation("org.json:json:20190722" )
+    implementation("org.json:json:20201115" )
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     //implementation("com.fasterxml.jackson.core:jackson-core:2.12.1")
 
     // https://mvnrepository.com/artifact/javax.json/javax.json-api
-    implementation("javax.json:javax.json-api:1.1.4")
+    //implementation("javax.json:javax.json-api:1.1.4")
     //javax.json-api only contains the API (interfaces) and no implementation ==>
 
     // https://mvnrepository.com/artifact/org.glassfish/javax.json
-    implementation("org.glassfish:javax.json:1.1.4" )
+    //implementation("org.glassfish:javax.json:1.1.4" )
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     //implementation("com.google.code.gson:gson:2.8.6")

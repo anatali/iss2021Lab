@@ -22,6 +22,8 @@ suspend fun sendCommands(   ) {
     robotActorTry.send("move($jsonString)")
     delay(1000)
 
+    robotActorTry.send("sensor(sensor_simluation_data)")
+
     jsonString = "{ \"robotmove\": \"moveBackward\", \"time\": $time }"
     robotActorTry.send("move($jsonString)")
     delay(1000)

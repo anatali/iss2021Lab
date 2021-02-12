@@ -24,13 +24,13 @@ suspend fun sendMsgAppCommands( dest: robotActorAppMsg  ) {
     dest.forward(initMsg )
 
 //    for (i in 1..2) {
-    dest.forward(moveForwardMsg )
+    dest.forward(moveForwardMsg )       //dispatch and not request
     delay(2000)
     dest.forward(haltRobotMsg )
     delay(1000)
 
     dest.forward(moveBackwardMsg )
-    delay(1000)
+    delay(1500)
     dest.forward(haltRobotMsg )
     delay(500)
     dest.forward(endMsg )

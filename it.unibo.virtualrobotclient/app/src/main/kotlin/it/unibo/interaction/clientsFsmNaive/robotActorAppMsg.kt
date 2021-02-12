@@ -1,7 +1,7 @@
 /*
 robotActorAppMsg.kt
 ===============================================================
-A component that embeds an actor that works as a FSM
+A component that embeds an actor that works as a naive FSM
 The component provides a forward operation to send
 ===============================================================
 */
@@ -13,7 +13,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import mapRoomKotlin.mapUtil
+import org.json.JSONObject
 
 class robotActorAppMsg(
         val scope: CoroutineScope,    //scope required for channel
@@ -21,12 +24,21 @@ class robotActorAppMsg(
         val moveDuration: String = "600") {
 
     lateinit var hh     : WEnvConnSupport
+    var currentMove     = "h"
+
+
+    fun updateMap( move : String, showMap : Boolean = true ){
+        if( move == "obstacle")  mapUtil.setObstacle(  )
+        else mapUtil.doMove(move)
+        if(showMap) mapUtil.showMap()
+    }
 
     val myactor: SendChannel<AppMsg> = CoroutineScope(Dispatchers.Default).actor {
         var state = "working"
 
         fun doInit()  {
             println("myactor | INIT")
+            mapUtil.showMap()
         }
 
         fun doEnd()  {
@@ -38,9 +50,18 @@ class robotActorAppMsg(
             //println("\u0007")  println(7.toChar())        //Ring the Terminal BELL ??
             java.awt.Toolkit.getDefaultToolkit().beep();    //Ring the Terminal BELL
             println("myactor | handles ${msg.CONTENT} by going back a little (if going ahead)");
-            //hh.sendMessage("s")
-            //delay(100)
-            //hh.sendMessage("h")
+            hh.sendMessage("l")
+            delay(400)
+            hh.sendMessage("r")
+            delay(400)
+            if( currentMove  == "w"){
+                hh.sendMessage("s")
+                delay(100)
+                hh.sendMessage("h")
+                currentMove  = "h"
+                delay(500)
+            }
+            updateMap( "obstacle" )
         }
 
         suspend fun handleWEnvEvent(msg: AppMsg) {
@@ -50,9 +71,11 @@ class robotActorAppMsg(
             if (isCollision) doCollision(msg)
         }
 
-        fun doMove(move: String) {
+        fun doMove(move: String) {  //move w | s | ...
             println("myactor | move=$move")
+            currentMove = move
             hh.sendMessage(move)        //move in the application-language
+            updateMap( move )
         }
         //Behavior
             while (state == "working") {
@@ -83,10 +106,7 @@ class robotActorAppMsg(
     init{
         hh = WEnvConnSupport(scope, hostAddr, "2500")
         val handleWEnvEvents  = { v: String ->
-                //println("handleWEnvEvents: $v ")
-                //val wenvMsg = AppMsg.create("wenvevent","handleWEnvEvents","robotActorAppMsg")
                 forward(AppMsg.create("wenvevent", "handleWEnvEvents", "robotActorAppMsg", v))
-
         }//handleWEnvEvents
         scope.launch { hh.activateReceiver(handleWEnvEvents) }
     }

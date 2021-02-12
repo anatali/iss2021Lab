@@ -28,9 +28,9 @@ val showEvents  = { v : String ->  println("showWEnvEvents: $v ")  }//showWEnvEv
 val robotActorTry  : SendChannel<String>	= CoroutineScope( Dispatchers.Default ).actor {
     var state    = "working"
     val hh       = WEnvConnSupportNoChannel( "localhost:8091", "300" )
-    fun doInit() = { println("robotActorTry INIT" ) }
-    fun doEnd()  = { state = "end"  }
-    fun doSensor(msg : String){ println("robotActorTry should handle: $msg") }
+    fun doInit() = { println("robotActorTry |  INIT" ) }
+    fun doEnd()  = { state = "robotActorTry | end"  }
+    fun doSensor(msg : String){ println("robotActorTry | doSensor should handle: $msg") }
 
     fun doCollision(msg : String){
         println("robotActorTry handles $msg going back a little");
@@ -40,27 +40,27 @@ val robotActorTry  : SendChannel<String>	= CoroutineScope( Dispatchers.Default )
     }
 
     fun doMove( move : String ){ //msgSplitted : List<String>
-         println("robotActorTry doMove cmd: $move ") //{ 'type': 'moveForward', 'arg': 2000 }
+         println("robotActorTry | doMove cmd: $move ") //{ 'type': 'moveForward', 'arg': 2000 }
         hh.sendCrilMessage( move )
     }
 
     while( state == "working" ){
         var msg = channel.receive()
-        println("robotActorTry receives: $msg ") // FUNCTOR( ... )
+        println("robotActorTry | receives: $msg ") // FUNCTOR( ... )
         val msgSplitted = msg.split('(')
         val msgFunctor  = msgSplitted[0]
         val move        = msgSplitted[1].replace(")","")
-        //println("robotActorTry msgFunctor $msgFunctor ")
+        //println("robotActorTry | msgFunctor $msgFunctor ")
         when( msgFunctor ){
             "init"      -> doInit()
             "end"       -> doEnd()
-            "sensor"    -> doSensor(msg)
+            "sensor"    -> doSensor(msg)        //non active in this version
             "collision" -> doCollision(msg)
             "move"      -> doMove(move) //
             else        -> println("NO HANDLE for $msg")
         }
     }
-    println("robotActorTry ENDS state=$state")
+    println("robotActorTry | ENDS state=$state")
 }
 
 

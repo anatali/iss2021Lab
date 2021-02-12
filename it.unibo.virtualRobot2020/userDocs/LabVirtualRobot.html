@@ -489,11 +489,18 @@ It exploits the library
 <a href="https://www.vogella.com/tutorials/ApacheHttpClient/article.html" target="web">HttpClient - Tutorial</a>)
 to implement <em> HTTP</em>  requests.
 <br/><br/>
-The handling of <em>JSON</em> answers is done using the library 
+The handling of <em>JSON</em> answers is done using  the library <!--
 <a href="https://javaee.github.io/javaee-spec/javadocs/javax/json/stream/JsonParser.html" target="web">javax.json.stream.JsonParser</a>
-or the library 
+or the library  
+
+
 <a href="https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple" target="web">org.json.simple.parser</a>
-(see also <a href="https://www.tutorialspoint.com/json_simple/json_simple_quick_guide.htm" target="web">JSON.simple - Quick Guide</a>)
+(see also <a href="https://www.tutorialspoint.com/json_simple/json_simple_quick_guide.htm" target="web">JSON.simple - Quick Guide</a>) -->
+<a href="https://mvnrepository.com/artifact/org.json/json/20201115" target="web">org.json</a> 
+(see also <a href="https://www.baeldung.com/java-org-json" target="web">Introduction to JSON-Java</a>)
+
+
+
 </td>
 </tr>
 
@@ -515,6 +522,43 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 
  
 
+
+
+ 
+<tr>
+<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvHTTPSupport.kt" target="code">
+WEnvHTTPSupport.kt</a>
+<br/><br/><m>
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/UseWEnvHTTPSupport.kt" target="code">
+UseWEnvHTTPSupport</a>:
+<ul>
+<li>Uses the support to move a virtual robot along the room boundary.</li>
+<li>The business logic is embedded in the operation <tt>boundary</tt> </li>
+</ul>
+</m>
+
+
+</td>
+<td> 
+<pre>
+<ks>cril</ks>  = concrete-robot interaction language		<k>{ 'robotmove': 'MOVE', 'time': TIME }</k>	
+</pre>
+Using the  
+<a href="https://www.vogella.com/tutorials/ApacheHttpClient/article.html" target="web">org.apache.http</a>  library:
+<ul>
+    <li>sets a <tt>HTTP</tt> connection with the <tt>WENv</tt> working at the given <tt>hostAddr</tt> </li>
+    <li>provides methods (<tt>moveForward</tt>, <tt>turnLeft</tt>, etc. ) to send commands written in <ks>cril</ks> language</li>
+	<li>handles the answer to the command and updates a map of the room:
+	<m><pre>|r, 1, 1, 1, 
+|1, 0, 0, 1, 
+|1, 0, 0, 1, 
+|1, 1, 1, 1, </pre></m>
+	
+	</li> 
+</ul>
+</td>
+</tr>
+
 <tr>
 <td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/ClientWebsockJavax.kt" target="code">
 ClientWebsockJavax.kt</a>
@@ -529,16 +573,6 @@ The client interacts with the WEnv via <em>web-scokets</em>, by using the
 </td>
 </tr>
 
-<!--
-<tr>
-<td style="width:30%"><a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/WebSocketViaChannel.kt" target="code">
-WebSocketViaChannel.kt</a>
-</td>
-<td> using the  
-<a href="https://square.github.io/okhttp/" target="web">okhttp3</a>  library . <br/> 
-</td>
-</tr>
--->
 <tr>
 <td style="width:30%">
 <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupportNoChannel.kt" target="code">

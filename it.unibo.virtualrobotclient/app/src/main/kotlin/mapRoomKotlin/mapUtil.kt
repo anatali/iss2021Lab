@@ -9,7 +9,7 @@ object mapUtil{
 	
  	fun buildRefTestMap() : String{
 		val nr = 4
-		val nc = 5
+		val nc = 4
  			for( i in 1..nr ) mapUtil.doMove("w")
 			mapUtil.doMove("l")
 		    for( i in 1..nc ) mapUtil.doMove("w")
@@ -19,6 +19,7 @@ object mapUtil{
 		    for( i in 1..nc ) mapUtil.doMove("w")
 			mapUtil.doMove("l")
 			val res = mapUtil.map.toString()
+			showMap()
 			RoomMap.resetRoomMap()
  			//println( "buildRefTestMap DONE $res" )
 			return res
@@ -32,36 +33,36 @@ object mapUtil{
     fun doMove(move: String ) {
        val x = state.x
        val y = state.y
-//       println("doMove move=$move  dir=${state.direction} x=$x y=$y dimMapX=$map.dimX{} dimMapY=${map.dimY}")
+       //println("doMove move=$move  dir=${state.direction} x=$x y=$y dimMapX=$map.dimX{} dimMapY=${map.dimY}")
        try {
             when (move) {
-                "w" -> {
+                "moveForward","w" -> {
                      map.put(x, y, Box(false, false, false)) //clean the cell
 					 state = state.forward();
                      map.put(state.x, state.y, Box(false, false, true))
                 }
-                "s" -> {
+				"moveBackward","s" -> {
 	                 state = state.backward();
                      map.put(state.x, state.y, Box(false, false, true))
                 }
-                "a"  -> {
+				"a"  -> {
                      map.put(state.x, state.y, Box(false, false, true))
                 }
-                "l" -> {
+				"turnLeft","l" -> {
 					  state = state.turnLeft();
                       map.put(state.x, state.y, Box(false, false, true))
                 }
-                "d" -> {
+				"d" -> {
                      map.put(state.x, state.y, Box(false, false, true))
                 }
-                "r" -> {
+				"turnRight","r" -> {
  					state = state.turnRight();
                     map.put(state.x, state.y, Box(false, false, true))
                 }
  
 		   }//switch
 		   
-//		   println( "$map"  )
+		   //println( "$map"  )
         } catch (e: Exception) {
             println("mapUtil | doMove: ERROR:" + e.message)
 		    println("doMove move=$move  dir=${state.direction} x=$x y=$y dimMapX=$map.dimX{} dimMapY=${map.dimY}")
@@ -69,7 +70,11 @@ object mapUtil{
 	}
 	
 	fun showMap(){
-		println( "$map"  )
+		val dir= state.direction
+		println( "$map direction=$dir"  )
+		//println( "direction=$dir" )
 	}
-	
+
+
+
 }

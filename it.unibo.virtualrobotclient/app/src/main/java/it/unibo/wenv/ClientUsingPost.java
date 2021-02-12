@@ -13,9 +13,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import org.apache.http.util.EntityUtils;
-import org.json.simple.JSONObject;				//used to convert String in JSON obj
-import org.json.simple.parser.JSONParser;	    //used to convert String in JSON obj
-import javax.json.Json;
+import org.json.JSONObject;				//used to convert String in JSON obj
+//import org.json.simple.parser.JSONParser;	    //used to convert String in JSON obj
+//import javax.json.Json;
 import java.io.InputStreamReader;
 import java.net.URI;
 
@@ -43,7 +43,7 @@ public class ClientUsingPost {
 					.build();
 			CloseableHttpResponse response = httpclient.execute(httppost);
 			//System.out.println( "ClientUsingPost | sendCmd response= " + response );
-			boolean collision = checkCollision_simple(response);
+			boolean collision = checkCollision(response);
 			//boolean collision = checkCollision_javax(response);
 			return collision;
 		} catch(Exception e){
@@ -51,7 +51,7 @@ public class ClientUsingPost {
 			return true;
 		}
 	}
-
+/*
 	protected boolean checkCollision_javax(CloseableHttpResponse response) throws Exception {
 		//response.getEntity().getContent() is an InputStream
 		boolean collision = false;
@@ -68,15 +68,16 @@ public class ClientUsingPost {
 		System.out.println( "ClientUsingPost checkCollision | collision= " + collision );
 		return collision;
 	}
-
-	protected boolean checkCollision_simple(CloseableHttpResponse response) throws Exception {
+*/
+	protected boolean checkCollision(CloseableHttpResponse response) throws Exception {
 		try{
 			//response.getEntity().getContent() is an InputStream
 			String jsonStr = EntityUtils.toString( response.getEntity() );
 			System.out.println( "ClientUsingPost | checkCollision_simple jsonStr= " +  jsonStr );
 			//jsonStr = {"endmove":true,"move":"moveForward"}
-			org.json.simple.parser.JSONParser simpleparser = new JSONParser();
-			org.json.simple.JSONObject jsonObj              = (JSONObject) simpleparser.parse( jsonStr );
+			//org.json.simple.parser.JSONParser simpleparser = new JSONParser();
+			//org.json.simple.JSONObject jsonObj              = (JSONObject) simpleparser.parse( jsonStr );
+			JSONObject jsonObj = new JSONObject(jsonStr) ;
 			boolean collision = false;
 			if( jsonObj.get("endmove") != null ) {
 				collision = ! jsonObj.get("endmove").toString().equals("true");
