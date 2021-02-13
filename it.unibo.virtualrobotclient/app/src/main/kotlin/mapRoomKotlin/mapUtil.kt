@@ -26,8 +26,24 @@ object mapUtil{
   	}
 	
 	
-	fun setObstacle(){
-		map.put( state.x,  state.y, Box(true, false, false))
+	fun setObstacle( move : String ="w"){	//we could move w or s
+		var x   = state.x
+		var y   = state.y
+		var dir = state.direction
+		//println("mapUtil | setobstacleeeeeeeeeeeeeeee ${x},${y}  move=$move"  )
+		if( move == "w" ) { when( dir){
+			Direction.DOWN  -> y = y + 1
+			Direction.UP    -> if( y > 0 ) y = y - 1
+			Direction.LEFT  -> if( x > 0 ) x = x - 1
+			Direction.RIGHT -> x = x + 1
+		} }
+		if( move == "s"   ) { when( dir){
+			Direction.DOWN  -> if( y > 0 ) y = y - 1
+			Direction.UP    -> y = y + 1
+			Direction.LEFT  -> x = x + 1
+			Direction.RIGHT -> if( x > 0 ) x = x - 1
+		} }
+		map.put( x,  y, Box(true, false, false))
 	}
 	
     fun doMove(move: String ) {
@@ -60,11 +76,12 @@ object mapUtil{
  					state = state.turnRight();
                     map.put(state.x, state.y, Box(false, false, true))
                 }
-				"obstacle"-> {
-					//state = state.turnRight();
+				/*
+				"obstacle" -> {
+					println("mapUtil | obstacleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee "  )
 					map.put(state.x, state.y, Box(true, false, true))
 				}
-
+*/
 		   }//switch
 		   
 		   //println( "$map"  )
@@ -75,9 +92,7 @@ object mapUtil{
 	}
 	
 	fun showMap(){
-		val dir= state.direction
-		println( "$map direction=$dir"  )
-		//println( "direction=$dir" )
+		println( "$map direction=${state.direction}"  )
 	}
 
 

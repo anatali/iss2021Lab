@@ -79,6 +79,8 @@ function doMove(moveTodo, duration, res){
         updateObservers(answerJson)
     }, duration);
 }
+
+
 //Updates the mirrors
 function execMoveOnAllConnectedScenes(moveTodo, moveTime){
     console.log('$$$ WebpageServer doMove |  updates the mirrors'   );

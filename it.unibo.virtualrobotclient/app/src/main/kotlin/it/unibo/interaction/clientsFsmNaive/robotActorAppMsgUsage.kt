@@ -38,16 +38,16 @@ suspend fun sendMsgAppCommands( dest: robotActorAppMsg  ) {
 
 //    for (i in 1..2) {
     forward( "move" , "w", dest  )       //dispatch and not request
-    delay(2000)
-    forward( "move" , "h", dest  )
+    delay(2000) //the robot should hit the wall
+    forward( "move" , "h", dest  )  //this move succeeds even when the robot has hit an obstacle
     delay(500)
 
     forward( "move" , "s", dest  )
-    delay(2000)
+    delay(2200) //the robot should hit the wall
     forward( "move" , "h", dest  )
-    delay(500)
+    delay(200) //we should see some 'endmove' events discarded
     forward( "end" , "", dest  )
-    //delay(1500)
+
 }
 
 @kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -55,9 +55,12 @@ suspend fun sendMsgAppCommands( dest: robotActorAppMsg  ) {
 fun main( ) = runBlocking {
     println("==============================================")
     println("PLEASE, ACTIVATE WENV ")
+    println("The duration time of a move is $moveDurationTime msecs")
     println("==============================================")
-    sysScope = this
+    sysScope = this     //sysScope is used as global knowledge in forward
     val sysactor = robotActorAppMsg(this,"localhost:8091" )
     sendMsgAppCommands(  sysactor  )
     println("MAIN APPL BYE")
 }
+
+//TODO: use this behaviour scheme to walk along the boundary

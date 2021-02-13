@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import mapRoomKotlin.mapUtil
 import org.json.JSONObject
 
+val moveDurationTime = "3000"
 class robotActorAppMsg(
         val scope: CoroutineScope,    //scope required for channel
         val hostAddr: String,
@@ -29,8 +30,8 @@ class robotActorAppMsg(
     //var glued           = false
 
     fun updateMap( move : String, showMap : Boolean = true ){
-        if( move == "obstacle")  mapUtil.setObstacle(  )
-        else if( move != "h"){
+        if( move.startsWith("obstacle_") ) { mapUtil.setObstacle( move.replace("obstacle_","") )
+        }else if( move != "h"){
             mapUtil.doMove(move)
             if(showMap) mapUtil.showMap()
         }
@@ -55,7 +56,7 @@ class robotActorAppMsg(
 
         suspend fun doCollision(msgContent: String) {
             //println("\u0007")  println(7.toChar())        //Ring the Terminal BELL ??
-            //java.awt.Toolkit.getDefaultToolkit().beep();    //Ring the Terminal BELL
+            java.awt.Toolkit.getDefaultToolkit().beep();    //Ring the Terminal BELL
             hh.sendMessage("l")
             delay(400)
             hh.sendMessage("r")
@@ -63,16 +64,20 @@ class robotActorAppMsg(
             if( currentMove  == "w"){
                 println("myactor | handles ${msgContent} by going back a little ");
                 hh.sendMessage("s")
-                delay(100)
+                delay(250)
                 hh.sendMessage("h")
                 delay(500)
-                state = "working"
+                updateMap( "obstacle_w" )
             }else if( currentMove  == "s"){
                 //WARNING: the virtual robot is 'glued' to the obstacle
-                state = "glued"
+                hh.sendMessage("w")
+                delay(150)
+                hh.sendMessage("h")
+                println("WARNINNG: the virtual robot could be glued ...");
+                //state = "glued"
+                updateMap( "obstacle_s"  )
             }
             currentMove  = "h"
-            updateMap( "obstacle" )
 
         }
 
@@ -81,46 +86,25 @@ class robotActorAppMsg(
             println("myactor | move todo=$move")
             currentMove = move
             hh.sendMessage(move)        //move in the application-language
-            updateMap( move )
-        }
-
-
-        suspend fun endOdMove( msgId : String, msgContent : String ){
-            when (msgId) {
-                "endMoveOk"   ->  state = "working"
-                "endMoveFail" ->  doCollision( msgContent )
-                 else         -> println("myactor | endOdMove: $msgId unknown")
-            }
+            updateMap(move)
         }
 
         //Sate machine loop
         while (state != "end") {    //intially working
                 var msg = channel.receive() //AppMsg
-                println("myactor | receives: $msg ${msg.MSGID}")
+                // println("myactor | state=$state msg=$msg")
                  when( state ){
                      "working" -> {
                          when( msg.MSGID ){
                              "init"  -> doInit()
                              "end"   -> doEnd()
-                             "move"  -> { doMove(msg.CONTENT); state = "endOfMove"}
-                         }
-                     }
-                     //"end" -> doEnd()
-                    //"move"        -> doMove(msg.CONTENT)
-                     "endOfMove" -> {
-                         //endOdMove(msg.MSGID, msg.CONTENT)
-                         when (msg.MSGID) {
-                             "endMoveOk"   ->  state = "working"
+                             "move"  -> doMove(msg.CONTENT)
                              "endMoveFail" ->  doCollision( msg.CONTENT )
-                             else         -> println("myactor | endOdMove: ${msg.MSGID} unknown")
                          }
                      }
-                     "glued" -> {
-                         println("SORRY ..."); state = "end"
-                     }
+                     "glued" -> doEnd()     //perhaps no more necessary ....
                 }//when
         }//while
-        //println("myactor | ENDS state=$state")
         hh.stopReceiver()
 
     }
@@ -134,28 +118,26 @@ class robotActorAppMsg(
    Called when a new  WEnv-event is raised
     */
     fun handleWEnvEvent(msgContent: String) {
-        println("myactor | handleWEnvEvent: ${msgContent}  ")
-        //{"endmove":false,"move":"alarm"}
-        // {"sonarName":"sonar2","distance":19,"axis":"x"} {"collision":true,"move":"unknown"}
-        var endMove     = true
-        if( msgContent.contains("endmove") ) {
-            endMove = JSONObject( msgContent ).getBoolean("endmove")
-            if( endMove )  forward(AppMsg.create("endMoveOk", "handleWEnvEvent", "robotActorAppMsg", msgContent))
-            else forward(AppMsg.create("endMoveFail", "handleWEnvEvents", "robotActorAppMsg", msgContent))
+        println("           myactor | handleWEnvEvent ... : ${msgContent}  ")
+        if( msgContent.contains("collision") ){ //{"collision":true,"move":"unknown"}
+            forward(AppMsg.create("endMoveFail", "handleWEnvEvents", "robotActorAppMsg", msgContent))
         }
-        //val isCollision = msgContent.contains("collision")
-        //  println("myactor | handleWEnvEvent: ${msgContent} isCollision=${isCollision}")
-        //if (isCollision && !glued) doCollision(msgContent)
     }
 
     init{
-        hh = WEnvConnSupport(scope, hostAddr, "2500")
-        val WEnvEvent_Handler  = { v: String ->
-            handleWEnvEvent( v )
-                //forward(AppMsg.create("wenvevent", "handleWEnvEvents", "robotActorAppMsg", v))
-        }//handleWEnvEvents
+        hh = WEnvConnSupport(scope, hostAddr, moveDurationTime)
+        val WEnvEvent_Handler  = { v: String -> handleWEnvEvent( v ) }
         scope.launch { hh.activateReceiver( WEnvEvent_Handler ) }
     }
 
 
 }
+
+/*
+The duration of a move (moveDurationTime) is quite long
+The 'endmove' event sent by WEnv is discarded by handleWEnvEvent (or lost if the appl is terminates)
+The duration of a move is established by the interval between two move-commands, i.e.
+a move ends when the user sends another move command => the robot state remains 'working'
+
+A move can fail because a collision => the collision event is mapped into a 'endMoveFail' message
+ */
