@@ -94,6 +94,7 @@ class RoomMap private constructor()  { //: Serializable
 
     override fun toString(): String {
         val builder = StringBuilder()
+        if( roomMap.size == 0) return "| empty map |"
         for (a in roomMap) {  //row ArrayList
             builder.append("|")
             for (b in a) {  //column

@@ -155,26 +155,31 @@ From socket to channel
         }
     }
 
+    /*
+    A receiver with a 'conventional' callback
+     */
     suspend fun activateReceiver( cb:( String ) -> Unit ) {
         println("WEnvConnSupport | activateReceiver  ")
         val receiver = scope.launch {
             while ( true ) {
                 val v = socketEventChannel.receive(  )
-                println("RECEIVER | activateReceiver receives $v ")  //in ${curThread()}
+                //println("RECEIVER | activateReceiver receives $v ")  //in ${curThread()}
                 if( v != "terminate")  cb( v )  else break
             }
         }
     }//activateReceiver
 
 
+    /*
+    A receiver with a 'suspendable' callback
+     */
     suspend fun startReceiver(  cb: suspend ( String ) -> Unit ) { //callback
         println("WEnvConnSupport | startReceiver  ")
-
         val receiver = scope.launch {
                  while ( true ) {
                      try {
                             val v = socketEventChannel.receive(  )
-                            println("RECEIVER | startReceiver receives $v ")  //in ${curThread()}
+                            //println("WEnvConnSupport | RECEIVER receives $v ")  //in ${curThread()}
                             if( v != "terminate")  cb( v )   else break
                      }catch( e : java.lang.Exception){
                          println("WEnvConnSupport | startReceiver ERROR $e")

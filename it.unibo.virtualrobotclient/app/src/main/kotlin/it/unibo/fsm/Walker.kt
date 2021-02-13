@@ -1,5 +1,5 @@
 /**
- * Worker.kt
+ * Walker.kt
  * @author AN - DISI - Unibo
 ===============================================================
 A fsm that works as the control for the virtualrobot (walker).
@@ -18,10 +18,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 
-lateinit var walker : worker
+lateinit var walker : Walker
 //lateinit var hh : WEnvConnSupport
 
-class worker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
+class Walker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 			  discardMessages:Boolean=true ) : Fsm( name, scope, discardMessages ){
 	override fun getInitialState() : String{
 		return "init"
@@ -36,7 +36,7 @@ class worker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 		return{
 			state("init") {	
 				action {
-					println("worker | START $hh")
+					println("walker | START ")
 					hh.sendMessage("w")//move the robot
 				}
 			    transition( edgeName="t0",targetState="walk", cond=doswitch() )
@@ -45,41 +45,61 @@ class worker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 			state("walk"){
 				action {
 					nstep++
-					println("worker | walk nstep=$nstep")
-					delay(1000)
+					println("walker | walk nstep=$nstep")
+					delay(700)
 					hh.sendMessage("w")//move the robot
 				}
-				transition( edgeName="t0",targetState="walk",     cond=whenDispatch("stepdone") )
-				transition( edgeName="t0",targetState="walkdone", cond=whenDispatch("stepfail") )
+				transition( edgeName="t3",targetState="handleSonar",    cond=whenDispatch("sonar") )
+				transition( edgeName="t0",targetState="walk",           cond=whenDispatch("stepdone") )
+				transition( edgeName="t1",targetState="walkend",        cond=whenDispatch("stepfail") )
+				transition( edgeName="t2",targetState="handleObstacle", cond=whenDispatch("obstacle") )
 			}
 
- 			state("walkdone"){
+ 			state("walkend"){
 				action {
-					println( "worker |  walkdone: currentMsg=$currentMsg nstep=$nstep" )
+					println( "walker |  walkend: currentMsg=$currentMsg nstep=$nstep" )
+					//terminate()
+				}
+				transition( edgeName="t0",targetState="walk", cond=doswitch() )	//to handle sonar (if any)
+			}
+
+			state("handleObstacle"){
+				action {
+					println( "walker |  handleObstacle: currentMsg=$currentMsg nstep=$nstep" )
+					terminate()
+				}
+			}
+
+			state("handleSonar"){
+				action {
+					println( "walker |  handleSonar: currentMsg=$currentMsg nstep=$nstep" )
 					terminate()
 				}
 			}
 		}
 	}
 
-}//worker 
+}//walker 
 
 
-//TODO: trasnform messages sent from WEnv in stepdone, stepfail
-//var  walker : worker? = null
+//transform messages sent from WEnv in dispatches (stepdone, stepfail)
 
-suspend fun handleWEnvEvent( jsonMsg : String ) { //called by startReceiver in WEnvConnSupport
+suspend fun mapWEnvEventToDispatch( jsonMsg : String ) { //called by startReceiver in WEnvConnSupport
 	println("handleWEnvEvent | receives: $jsonMsg ")
 	val jsonObject    = JSONObject( jsonMsg )
 	if( jsonObject.has("endmove") ) {
 		val endmove = jsonObject.getBoolean("endmove")
-		println("handleWEnvEvent | endmove:  ${endmove} ")
+		//println("handleWEnvEvent | endmove:  ${endmove} ")
 		if(endmove) Messages.forward("wenv","stepdone","ok", walker )
 		else Messages.forward("wenv","stepfail","todo(Time)", walker )
 	}
-	//else if( jsonObject.has("collision") ) Messages.forward("wenv","stepfail","", walker )
+	else if( jsonObject.has("collision") ) Messages.forward("wenv","obstacle","obstacle", walker )
+	else if( jsonObject.has("sonarName") ){
+		val distance = jsonObject.getInt("distance").toString()
+		Messages.forward("wenv","sonar", distance, walker )
+	}
 
-}//handleWEnvEvent
+}//mapWEnvEventToDispatch
 
 
 
@@ -87,12 +107,12 @@ suspend fun handleWEnvEvent( jsonMsg : String ) { //called by startReceiver in W
 @kotlinx.coroutines.ExperimentalCoroutinesApi
 fun main() = runBlocking{
 	val hh = WEnvConnSupport( this, "localhost:8091", "400" ) //blocking
-	walker = worker("worker", this, hh )
-	hh.startReceiver( ::handleWEnvEvent  )
+	walker = Walker("walker", this, hh )
+	hh.startReceiver( ::mapWEnvEventToDispatch  )
 
 	//Messages.forward("main","msg","w", walker )
 	walker.waitTermination()
 	delay(1000)  //to see some sonar message, if it is the case
 	hh.stopReceiver()
-	println("worker main ends")
+	println("walker main ends")
 }

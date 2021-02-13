@@ -42,6 +42,7 @@ object mapUtil{
                      map.put(state.x, state.y, Box(false, false, true))
                 }
 				"moveBackward","s" -> {
+					 map.put(x, y, Box(false, false, false)) //clean the cell
 	                 state = state.backward();
                      map.put(state.x, state.y, Box(false, false, true))
                 }
@@ -59,7 +60,11 @@ object mapUtil{
  					state = state.turnRight();
                     map.put(state.x, state.y, Box(false, false, true))
                 }
- 
+				"obstacle"-> {
+					//state = state.turnRight();
+					map.put(state.x, state.y, Box(true, false, true))
+				}
+
 		   }//switch
 		   
 		   //println( "$map"  )
