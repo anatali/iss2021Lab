@@ -16,6 +16,7 @@ import it.unibo.interaction.WEnvConnSupport
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import mapRoomKotlin.mapUtil
 import org.json.JSONObject
 
 lateinit var walker : Walker
@@ -27,6 +28,11 @@ class Walker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 		return "init"
 	}
 
+	fun updateMap( move : String, showMap : Boolean = true ){
+		if( move == "obstacle")  mapUtil.setObstacle(  )
+		else mapUtil.doMove(move)
+		if(showMap) mapUtil.showMap()
+	}
 
 @kotlinx.coroutines.ObsoleteCoroutinesApi
 @kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,15 +56,23 @@ class Walker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 					hh.sendMessage("w")//move the robot
 				}
 				transition( edgeName="t3",targetState="handleSonar",    cond=whenDispatch("sonar") )
-				transition( edgeName="t0",targetState="walk",           cond=whenDispatch("stepdone") )
+				transition( edgeName="t0",targetState="endmoveok",      cond=whenDispatch("stepdone") )
 				transition( edgeName="t1",targetState="walkend",        cond=whenDispatch("stepfail") )
 				transition( edgeName="t2",targetState="handleObstacle", cond=whenDispatch("obstacle") )
 			}
 
+			state( "endmoveok" ){
+				action{
+					updateMap("w", true)
+				}
+				transition( edgeName="t0",targetState="walk", cond=doswitch() )
+			}
+
+
  			state("walkend"){
 				action {
 					println( "walker |  walkend: currentMsg=$currentMsg nstep=$nstep" )
-					//terminate()
+					terminate()
 				}
 				transition( edgeName="t0",targetState="walk", cond=doswitch() )	//to handle sonar (if any)
 			}
@@ -66,6 +80,7 @@ class Walker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 			state("handleObstacle"){
 				action {
 					println( "walker |  handleObstacle: currentMsg=$currentMsg nstep=$nstep" )
+					updateMap("obstacle")
 					terminate()
 				}
 			}
@@ -73,8 +88,9 @@ class Walker (name: String, scope: CoroutineScope, val hh : WEnvConnSupport,
 			state("handleSonar"){
 				action {
 					println( "walker |  handleSonar: currentMsg=$currentMsg nstep=$nstep" )
-					terminate()
+					//terminate()
 				}
+				transition( edgeName="t0",targetState="walk", cond=doswitch() )	//to handle other events (if any)
 			}
 		}
 	}
@@ -93,7 +109,9 @@ suspend fun mapWEnvEventToDispatch( jsonMsg : String ) { //called by startReceiv
 		if(endmove) Messages.forward("wenv","stepdone","ok", walker )
 		else Messages.forward("wenv","stepfail","todo(Time)", walker )
 	}
-	else if( jsonObject.has("collision") ) Messages.forward("wenv","obstacle","obstacle", walker )
+	else if( jsonObject.has("collision") ){
+		Messages.forward("wenv","obstacle","obstacle", walker )
+	}
 	else if( jsonObject.has("sonarName") ){
 		val distance = jsonObject.getInt("distance").toString()
 		Messages.forward("wenv","sonar", distance, walker )
@@ -112,7 +130,7 @@ fun main() = runBlocking{
 
 	//Messages.forward("main","msg","w", walker )
 	walker.waitTermination()
-	delay(1000)  //to see some sonar message, if it is the case
+	delay(3000)  //to see some sonar message, if it is the case
 	hh.stopReceiver()
 	println("walker main ends")
 }

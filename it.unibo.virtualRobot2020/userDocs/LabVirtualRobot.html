@@ -720,9 +720,55 @@ We distinguish among different application-message types:
 
 <tr>
 <td style="width:30%">
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/WalkerHttpCaller.kt" target="code">WalkerHttpCaller.kt</a> 
+</td>
+<td>
+<h4>Request-response</h4>
+The behavior of the <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/WalkerHttpCaller.kt" target="code">WalkerHttpCaller.kt</a> is
+structured as a <i>Finite State MAchine</i> (<em>FSM</em>) that moves the virtual robot ahead (by using the
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvHTTPSupport.kt" target="code"> WEnvHTTPSupport.kt</a>) 
+until an obstacle (a wall) is found.<br/>
+If the robot starts at its HOME cell <tt>(0,0)</tt>, the result could be the map created by the 
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvHTTPSupport.kt" target="code"> WEnvHTTPSupport.kt</a>:
+<m>
+<pre>
+|1, 
+|1, 
+|1, 
+|r, 
+|X, 
+ direction=DOWN
+</pre>
+</m>
+</td>
+</tr>
+
+<tr>
+<td style="width:30%">
 <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/walker.kt" target="code">walker.kt</a> 
 </td>
 
+<td>
+<h4>Event-based</h4>
+The behavior of the <a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/walker.kt" target="code">walker.kt</a> is
+structured as a <i>Finite State MAchine</i> (<em>FSM</em>) that moves the virtual robot ahead (by using the
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" target="code"> WEnvConnSupport.kt</a>) 
+until an obstacle (a wall) is found.<br/>
+The result of the computation could be the number of steps done. A room map can be built by the application.
+<br/><br/>
+The events raised from WEnv ( <tt>endmove, collision, sonarName</tt> ) are mapped into dispatches sent to walker.
+<br/><br/>
+We could set the step time so that (e.g. 400)
+each step will cover a distance equal to the length of the robot.
+
+</td>
+</tr>
+
+
+<tr>
+<td style="width:30%">
+<a href="../../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/stepper.kt" target="code">stepper.kt</a> 
+</td>
 <td>
 
 </td>

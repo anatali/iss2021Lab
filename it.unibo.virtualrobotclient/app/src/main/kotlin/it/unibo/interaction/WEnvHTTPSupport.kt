@@ -27,9 +27,10 @@ class WEnvHTTPSupport(hostAddr : String){
         if(showMap) mapUtil.showMap()
     }
 
+
     protected fun sendCmd( move: String,  time : Int ): Boolean {
          try {
-            println("sendCmd: $move ")
+            println("WEnvHTTPSupport | sendCmd: $move ")
             //String json         = "{\"robotmove\":\"" + move + "\"}";
             val json   = "{\"robotmove\":\"$move\" , \"time\": $time}"
             val entity = StringEntity(json)
@@ -40,10 +41,10 @@ class WEnvHTTPSupport(hostAddr : String){
                     .setEntity(entity)
                     .build()
             val response = httpclient.execute(httppost)
-            //println( "ClientUsingPost | sendCmd response= " + response );
+            println( "WEnvHTTPSupport | sendCmd response= " + response );
             return checkCollision(move, response)
         } catch (e: Exception) {
-            println("ERROR:" + e.message)
+            println("WEnvHTTPSupport | ERROR:" + e.message)
             throw e
         }
     }
@@ -52,22 +53,35 @@ class WEnvHTTPSupport(hostAddr : String){
         try {
             //response.getEntity().getContent() is an InputStream
             val jsonStr = EntityUtils.toString(response.entity)
-            println("ClientUsingPost | checkCollision jsonStr= $jsonStr")
+            println("WEnvHTTPSupport | checkCollision jsonStr= $jsonStr")
             //jsonStr = {"endmove":true,"move":"moveForward"}
             val jsonObj   = JSONObject(jsonStr)
             var collision = false
             if (jsonObj["endmove"] != null) {
                 collision = ! jsonObj.getBoolean("endmove" )
-                println("ClientUsingPost | checkCollision collision=$collision")
+                println("WEnvHTTPSupport | checkCollision collision=$collision")
             }
-            if( collision ) updateMap("obstacle") else updateMap(move )
+            if( collision ) updateMap("obstacle")
+            else updateMap(move )
             return collision
         } catch (e: Exception) {
-            println("ClientUsingPost | checkCollision ERROR:" + e.message)
+            println("WEnvHTTPSupport | checkCollision ERROR:" + e.message)
             throw e
         }
     }
 
+    //Method defined also in WEnvConnSupport
+
+    fun sendMessage( move: String ) : Boolean {
+        when( move ){
+            "w" ->  return moveForward()
+            "s" ->  return moveBackward()
+            "l" ->  return moveLeft()
+            "r" ->  return moveRight()
+            "h" ->  return moveStop()
+        }
+        return moveStop()
+    }
     fun moveForward(time:Int=400):  Boolean  {  return sendCmd("moveForward", time)  }
     fun moveBackward(time:Int=400): Boolean {  return sendCmd("moveBackward", time)  }
     fun moveLeft(): Boolean     {  return sendCmd("turnLeft", 300)      }

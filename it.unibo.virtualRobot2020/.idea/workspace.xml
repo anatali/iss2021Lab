@@ -20,11 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../it.unibo.demoqak20/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.demoqak20/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/WalkerHttpCaller.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.demoqak20/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.demoqak20/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.demoqak20/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.demoqak20/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsg.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsg.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsgUsage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/clientsFsmNaive/robotActorAppMsgUsage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/mapUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/mapRoomKotlin/mapUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/LabVirtualRobot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Walker.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/fsm/Walker.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvConnSupport.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvHTTPSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/interaction/WEnvHTTPSupport.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +60,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/userDocs/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../it.unibo.demoqak20" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -100,11 +105,11 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.690@0.0.1280.690" timestamp="1612383774430" />
-    <state x="506" y="116" key="FileChooserDialogImpl" timestamp="1612625205146">
+    <state x="506" y="116" key="FileChooserDialogImpl" timestamp="1613409127974">
       <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state x="422" y="87" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1612610110881" />
-    <state x="506" y="116" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1612625205146" />
+    <state x="506" y="116" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1613409127974" />
     <state x="93" y="93" width="1093" height="503" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1612603240817">
       <screen x="0" y="0" width="1280" height="690" />
     </state>

@@ -113,12 +113,16 @@ public class WEnvConnSupport(
      * @param message   w | s ...
      */
     @Throws(Exception::class)
-    fun sendMessage(message: String) {
+    fun sendMessage(message: String) : Boolean{
         //println("WEnvConnSupport | sendMessage $message")
         //userSession!!.getAsyncRemote().sendText(translate(message));
-        if( userSession != null)
-            userSession!!.basicRemote.sendText( translate(message) ) //synch: blocks until the message has been transmitted
-        else println("WEnvConnSupport | sorry, no userSession")
+        if( userSession != null) {
+            userSession!!.basicRemote.sendText(translate(message)) //synch: blocks until the message has been transmitted
+            return true
+        }else{
+            println("WEnvConnSupport | sorry, no userSession")
+            return false
+        }
     }
 
 
