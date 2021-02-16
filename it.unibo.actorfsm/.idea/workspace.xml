@@ -20,13 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72872339-a0d1-4086-b48a-f54a15f5d983" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/test/java/it/unibo/wenv/TestClientUsingPostJava.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/test/kotlin/it/unibo/wenv/TestClientUsingPost.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/VirtualrobotUsageSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/backup/VirtualrobotUsageSupport.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
