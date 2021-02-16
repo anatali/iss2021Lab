@@ -11,29 +11,27 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;				//used to convert String in JSON obj
-//import org.json.simple.parser.JSONParser;	    //used to convert String in JSON obj
-//import javax.json.Json;
-import java.io.InputStreamReader;
+import org.json.JSONObject;
 import java.net.URI;
 
 public class ClientUsingPost {
+
+
 	private  final String localHostName    = "localhost"; //"localhost"; 192.168.1.7
 	private  final int port                = 8090;
 	private  final String URL              = "http://"+localHostName+":"+port+"/api/move";
 	private  final String containerHostName= "wenv";
-	//private  String sep              =";";
- 
+
+	public static int finalNumOfSteps      = 0;
 	public ClientUsingPost() { }
 
-  	protected boolean sendCmd(String move)  {
+  	protected boolean sendCmd(String move, int time)  {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
 			System.out.println( move + " sendCmd "  );
 			//String json         = "{\"robotmove\":\"" + move + "\"}";
-			String json         = "{\"robotmove\":\"" + move + "\" , \"time\": 600}";
+			String json         = "{\"robotmove\":\"" + move + "\" , \"time\": " + time + "}";
 			StringEntity entity = new StringEntity(json);
 			HttpUriRequest httppost = RequestBuilder.post()
 					.setUri(new URI(URL))
@@ -90,45 +88,50 @@ public class ClientUsingPost {
 		}
 	}
 
-	public boolean moveForward()  { return sendCmd("moveForward");  }
-	public boolean moveBackward() { return sendCmd("moveBackward"); }
-	public boolean moveLeft()     { return sendCmd("turnLeft");     }
-	public boolean moveRight()    { return sendCmd("turnRight");    }
-	public boolean moveStop()     { return sendCmd("alarm");        }
+	public boolean moveForward(int duration)  { return sendCmd("moveForward", duration);  }
+	public boolean moveBackward(int duration) { return sendCmd("moveBackward", duration); }
+	public boolean moveLeft(int duration)     { return sendCmd("turnLeft", duration);     }
+	public boolean moveRight(int duration)    { return sendCmd("turnRight", duration);    }
+	public boolean moveStop(int duration)     { return sendCmd("alarm", duration);        }
 
-	protected void boundary(){
+	protected int boundary() {
+		int nStep = 0;
 		try {
 			System.out.println("STARTING boundary ... ");
 			for( int i = 1; i<=4 ; i++ ) {
 				boolean b = false;
 				while (!b ) {
-					b = moveForward();
+					b = moveForward(600);
 					Thread.sleep(300);
 				}
- 				moveLeft();
+				nStep++;
+ 				moveLeft(300);
 				Thread.sleep(300);
 			}
 			//Thread.sleep(3000);	//avoids premature termination (in docker-compose)
-			System.out.println("END");
+			System.out.println("END nStep=" + nStep );
+			return nStep;
 		} catch (Exception e) {
 			System.out.println( "ERROR " + e.getMessage());
+			return -1;
 		}
 
 	}
 
-	protected void testForwardBackward() {
+/*
+	protected void doForwardBackward() {
 		try {
 			System.out.println("STARTING testForwardBackward ... ");
 			boolean collision = false;
 			while( ! collision ) {
 				Thread.sleep(500);
-				collision = moveForward();
+				collision = moveForward(600);
 			}
 			//Return to home
 			Thread.sleep(1000);
 			collision = false;
 			while( ! collision ) {
-				collision = moveBackward();
+				collision = moveBackward(600);
 				Thread.sleep(500);
 			}
 			System.out.println("END testForwardBackward");
@@ -136,26 +139,26 @@ public class ClientUsingPost {
 			System.out.println( "ERROR " + e.getMessage());
 		}
 	}
-	protected void testMoveLeft() {
+	protected boolean doMoveLeft() {
 		try {
-			System.out.println("STARTING test ... ");
-			boolean b = moveLeft();
- 			System.out.println("END");
+			System.out.println("ClientUsingPost | STARTING doMoveLeft ... ");
+			boolean moveFailed = moveLeft(300);
+ 			System.out.println("ClientUsingPost | END moveFailed=" + moveFailed);
+ 			return moveFailed;
 		}catch (Exception e) {
-			System.out.println( "ERROR " + e.getMessage());
+			System.out.println( "ClientUsingPost | ERROR " + e.getMessage());
+			return false;
 		}
 	}
-
-
-
-
+*/
 /*
 MAIN
  */
 	public static void main(String[] args)   {
-		//new ClientUsingPost().testMoveLeft();
-		//new ClientUsingPost().testForwardBackward();
-		new ClientUsingPost().boundary();
+		//new ClientUsingPost().doMoveLeft();
+		//new ClientUsingPost().doForwardBackward();
+		finalNumOfSteps = new ClientUsingPost().boundary();
+		System.out.println("boundary finalNumOfSteps="+finalNumOfSteps);
 	}
 	
  }
