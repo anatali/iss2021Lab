@@ -4,6 +4,7 @@ bin/default
 .classpath
 .project
 build
+.idea
 
 #node
 nodeCode/frontend/node_modules/
