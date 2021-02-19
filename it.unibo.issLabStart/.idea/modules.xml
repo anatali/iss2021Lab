@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/it.unibo.actorfsm.iml" filepath="$PROJECT_DIR$/it.unibo.actorfsm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/it.unibo.issLabStart.iml" filepath="$PROJECT_DIR$/it.unibo.issLabStart.iml" />
     </modules>
   </component>
 </project>

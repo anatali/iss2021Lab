@@ -20,11 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/test/java/it/unibo/wenv/TestClientUsingPost.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userDocs/VirtualRobot2021.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/userDocs/img/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/it.unibo.actorfsm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/it.unibo.actorfsm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/Architectures.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/Architectures.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/kotlin/it/unibo/virtualrobotclient/VirtualrobotUsageSupport.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/backup/VirtualrobotUsageSupport.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

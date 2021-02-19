@@ -261,9 +261,66 @@ function myFunction() {
 <h1>LabIss2021 |  Introduction to Gradle<font size="5"></font> </h1>
 </div>  
 
+<h2>Index</h2>
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:33%" >
+<h3><a href="#intro">Introduction</a></h3>
+	<ul>
+	<li><a href="#basic">Basic concepts</a>  </li>
+	<li><a href="#wrapper">Gradle wrapper</a></li>
+	<li><a href="#execution">Gradle execution</a> &nbsp;&nbsp;	|  <a href="#deamon">Gradle deamon</a> </li>
+	<li><a href="#plugins">Gradle plugins</a>  &nbsp;&nbsp;	|  <a href="#javaplugin">The Java plugin</a> </li>
+	<li><a href="#config">Gradle Configurations</a></li>
+	<li><a href="#extends">Extending Gradle</a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	</ul>
+ 
+</td>
+<td style="width:33%" >
+<h3><a href="#handson">Hands on Gradle</a> </h3>
+	<ul>
+	<li><a href="#starting">Starting</a></li>
+	<li><a href="#buildrun">Build and run</a></li>
+	<li><a href="#properties">Properties</a></li>
+	<li><a href="#implconfig">Implementation configuration</a></li>
+	<li><a href="#confighierach">Configuration hierarchies</a></li>
+	<li><a href="#">About build, project, Tasks</a></li>
+		<ul>
+		<li><a href="#">Tasks as operations</a></li>
+		<li><a href="#">Task configuration vs. task execution</a></li>
+		<li><a href="#">Gradle’s tasks embeds code</a></li>
+		<li><a href="#">Task dependencies</a></li>
+		<li><a href="#">The clean task</a></li>
+		<li><a href="#">Dynamic Tasks</a></li>
+		<li><a href="#"></a></li>
+		<li><a href="#"></a></li>
+		</ul>
+	</ul>
+</td>
+<td style="width:33%" >
+<h3><a href="#handson">Advanced</a> </h3>
+	<ul>
+ 	<li><a href="#">Multi projects</a></li>
+	<li><a href="#">Custom task types</a></li>
+	<li><a href="#">Gradle buildSrc</a></li>
+	<li><a href="#">Custom plugins</a></li>
+	<li><a href="#">Continuos delivery</a></li>
+	<li><a href="#"></a></li>
+	<li><a href="#"></a></li>
+	</ul>
+</td>
+</tr>
+ </tbody>
+</table>
 
+
+ 
 <div class="body"> 
-<h2>Introduction</h2>
+<h2 id="intro">Introduction</h2>
 
  For an introduction, from the <a href="https://docs.gradle.org/current/userguide/userguide.html" target="web">Gradle User Manual</a>,
  
@@ -290,7 +347,7 @@ In our work, we will write <i>Gradle configuration scripts</i> in <k>Kotlin DSL<
 <a href="https://docs.gradle.org/current/dsl/index.html" target="web">Gradle Build Language Reference</a>
 </div>	
 
-	<h3>Gradle | Basic concepts</h3>
+	<h3 id="basic">Gradle | Basic concepts</h3>
 
 <li>
 <center><img src="./img/gradle-project-tasks.png" alt="gradle-project-tasks.png" width="80%" height="80%"></center>
@@ -320,7 +377,7 @@ and runtime classpath, with defaults that copy the Maven conventions:
 	</li>
 	
 	
-<h3>Gradle wrapper </h3>
+<h3 id="wrapper">Gradle wrapper </h3>
  
 	<li>		
 The <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html" target="web">Gradle wrapper</a>  is a core feature that 
@@ -344,7 +401,7 @@ stores the information about the Gradle distribution.</li>
 </li>
  
 
-<h3>Gradle execution</h3>
+<h3 id="execution">Gradle execution</h3>
 <li>
 Gradle uses two main directories to perform and manage its work: the Gradle <ks>user home</ks> directory 
 and the <ks>Project root</ks> directory.
@@ -355,7 +412,8 @@ See <a href="https://docs.gradle.org/current/userguide/directory_layout.html" ta
 Each time you initiate a build, the JVM has to be started, Gradle’s dependencies have to be loaded into the class
 loader, and the project object model has to be constructed. This procedure usually
 takes a couple of seconds. 
-<h4>Gradle deamon</h4>
+
+<h4 id="deamon">Gradle deamon</h4>
 The Gradle daemon runs Gradle as a background process. Once started, the gradle command
 will reuse the forked daemon process for subsequent builds, avoiding the
 startup costs altogether.
@@ -410,7 +468,7 @@ not <k>how</k> those steps should do the work. That’s a job for custom task ty
 </li> 
 
 <li>
-<h3>Gradle plugins</h3>
+<h3 id="plugins">Gradle plugins</h3>
 <div class="remark"> 
 All of the useful features of Gradle, like the ability to compile Java code, are added by <k>plugins</k>. 
 </div>
@@ -456,7 +514,8 @@ defined by the user, uts source code usually lives in the <ks>buildSrc</ks> dire
 </li>
 </ul>
 See <a href="https://docs.gradle.org/current/userguide/writing_build_scripts.html" target="web">Writing Build Scripts</a> 
-<h4>The Java plugin</h4> 
+
+<h4 id="javaplugin">The Java plugin</h4> 
  The Java plugin is a <i>small <k>opinionated</k> framework</i> that assumes sensible default values for many aspects of a Java project.
  <br/>
 In  <a href="https://docs.gradle.org/current/userguide/application_plugin.html" target="web">The Java Application Plugin</a> we can see
@@ -473,7 +532,7 @@ gives us a list of configurable standard and plugin properties, plus their defau
 
 </li>
 
-<li><h3>Gradle Configurations</h3>
+<li><h3 id="config">Gradle Configurations</h3>
 
 In Gradle, dependencies are grouped by configurations.
 A <a href="https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html" target="web"><ks>Configuration</ks></a>
@@ -524,7 +583,7 @@ that manages the corresponding configurations.
 
 </li>
 
-<li><h3>Extends Gradle </h3>
+<li><h3 id="extends">Extending Gradle </h3>
 Gradle provides several mechanisms that allow you to extend it: 
 <ul>
 <li><a href="https://docs.gradle.org/current/userguide/custom_tasks.html" target="web">Custom task types</a>
@@ -544,11 +603,14 @@ Gradle provides several mechanisms that allow you to extend it:
 
 </ol>
 
-<h1>Hands on Gradle</h1>
-<h2>Starting</h2>
-From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">Building Java Applications Sample</a>.<br/><br/>
-<ol>
+<h1 id="handson">Hands on Gradle</h1>
+
+<ul>
 <li>
+<h3 id="starting">Starting</h3>
+From <a href="https://docs.gradle.org/current/samples/sample_building_java_applications.html" target="web">
+Building Java Applications Sample</a>.<br/><br/>
+
 Start with some automatic code generation:
 <pre>
 <k>gradle init</k> (select 2, 3, 1, 2, 1, demo, demo)
@@ -617,6 +679,9 @@ You can change this in the <a href="../settings.gradle.kts" target="web">setting
 
 
 <li>
+
+<h3 id="buildrun">Build and run</h3>
+
 The <ks>Gradle wrapper</ks> is the correct way to use gradle.
 
  
@@ -847,7 +912,9 @@ It also adds the dependencies of the other project to the classpath.
 <hr/>
 
 </li>
-</ol>
+</ul>
+
+
 
 <h2>About build, project, <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Task.html" target="web">Tasks</a></h2>
 
@@ -1152,6 +1219,7 @@ findLibraries().forEach { todo(it) }
 -->
 
  
+<h1 id="">Advanced</h1>
 
 <h2 id="multiprojects">Multi projects</h2>
 One of the purposes of the <a href="../settings.gradle.kts" target="web">settings</a> object is to allow you 

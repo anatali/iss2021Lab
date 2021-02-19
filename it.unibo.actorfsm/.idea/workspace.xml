@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,7 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72872339-a0d1-4086-b48a-f54a15f5d983" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/userDocs/VirtualRobot2021.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/userDocs/img/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it.unibo.actorfsm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/it.unibo.actorfsm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/Architectures.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/Architectures.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +43,28 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="it.unibo.actorfsm" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -147,6 +183,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1613489675257">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1613489675257" />
     <state width="1238" height="141" key="GridCell.Tab.0.bottom" timestamp="1613461226952">
       <screen x="0" y="0" width="1280" height="690" />
     </state>

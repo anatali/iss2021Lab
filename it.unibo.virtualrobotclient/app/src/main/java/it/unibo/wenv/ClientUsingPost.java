@@ -16,8 +16,6 @@ import org.json.JSONObject;
 import java.net.URI;
 
 public class ClientUsingPost {
-
-
 	private  final String localHostName    = "localhost"; //"localhost"; 192.168.1.7
 	private  final int port                = 8090;
 	private  final String URL              = "http://"+localHostName+":"+port+"/api/move";
