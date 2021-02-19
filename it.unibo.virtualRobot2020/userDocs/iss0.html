@@ -336,49 +336,38 @@ reltive ai comandi  <a href="VirtualRobot2021.html #cril" target="web">cril</a>:
 
 <h4>Possibili strategie per il TestPlan: 'inferire conoscenza' dai comandi</h4>
 <ol>
-<li><ks>IPOTESI-PLAN 1</ks>: per ogni mossa eseguita con successo, aggiungiamo l'identificatore della mossa ad una stringa <kc>moves</kc> (inizialmente vuota).
+ 
+<li><ks>IPOTESI-TESTPLAN 1</ks>: per ogni mossa eseguita con successo, aggiungiamo l'identificatore della mossa ad una stringa <kc>moves</kc> (inizialmente vuota).
 <br/>
 Fissiamo il valore di <kc>time</kc> per le mosse <ks>w, s</ks> in modo da muovere il robot per 'piccoli passi', così da raggiungere un <ks>wall</ks> con <k>N>1</k> mosse.
 <br/>
 In tal caso, al termine della applicazione, la stringa deve assumere le forma che segue:
 <pre><kc>moves</kc>: <ks>"w*lw*lw*lw*l"</ks>     <kc><ks>*</ks> : ripetizione 0 o più volte</pre>
 </li>
-<li><ks>IPOTESI-PLAN 2</ks>: Fissiamo il valore di <kc>time</kc> per le mosse <ks>w, s</ks> in modo che il robot percorra una distanza pari alla sua lunghezza. 
+<li><ks>IPOTESI-TESTPLAN 2</ks>: Fissiamo il valore di <kc>time</kc> per le mosse <ks>w, s</ks> in modo che il robot percorra una distanza pari alla sua lunghezza. 
 <br/>
 In questo modo si potrebbe misurare la lunghezza di ogni lato in <k>'unità-robot'</k> e verificare al termine dalla applicazione che 
 la lunghezza del perimetro espresso in 'unità-robot' sia uguale alla distanza percorsa eseguendo l'algoritmo indicato.
 </li>
-<li>
-
-</li>
-
-<li>
-sapere dove il robot si trova dopo ogni comando, per poter verificare il percorso effettuato. (<ks>IPOTESI-PLAN 1</ks>)</li>
-<li>oppure occorre 'inferire conoscenza' dai comandi inviati e dalle risposte ottenute.
-</ol>
- 
-
-
-
-Ad sempio (<ks>IPOTESI-PLAN 2</ks>), prefigurando che la soluzione del problema consiste nel segunte algortimo:
+<li><ks>IPOTESI-TESTPLAN 3</ks>: impostando il <kc>time</kc> per le mosse <ks>w, s</ks> in modo da ottenere spostamenti di <k>unità-robot</k>, costruiamo in modo 
+incrementake una mappa del territorio dopo ogni mossa. In questo modo si potrebbe sapere dove si trova il robot  dopo ogni comando e quindi si potrebbe
+verificare al termine della applicazione il percorso effettuato:
 <pre>
-per 4 volte: 
-invio al robot comandi <kc>moveForward</kc> fino a che il robot colpisce il muro di fronte 
-e poi invio un comando di rotazione <kc>turnLeft</kc>
+|r, 1, 1, 1, 1, 
+|1, 0, 0, 0, 1, 
+|1, 0, 0, 0, 1, 
+|1, 0, 0, 0, 1, 
+|1, 1, 1, 1, 1, X, 
+|X, 
 </pre>
-si potrebbe controllare che il robot è ritornato alla cella HOME (ma ciò sembra ricondurci al caso precedente).
-<br/><br/>
-Oppure (
-
-<h2>Test plans</h2> 
-L'obiettivo è crivere un programma in <ks>JUnit</ks> che definicse in modo 'formale' il TestPlan, in modo da poterlo
-eseguire al termine dello sviluppo della applicazione, per verificarne gli effetti.
- <br/><br/>
- Ma come fare a impostare questo programma di testing se non si è nemmeno iniziata la progettazione della soluzione?
 
 </li>
+
  
 </ol>
+ 
+
+ 
  
 </div>
 
@@ -404,7 +393,7 @@ eseguire al termine dello sviluppo della applicazione, per verificarne gli effet
 <div >
 <hr/>
 By Antonio Natali 
-<img src="./img/teacher.gif" alt="teacher" width="8%" height="8%"> antonio.natali@unibo.it  
+<img src="./img/teacher.gif" alt="teacher" width="5%" height="5%"> antonio.natali@unibo.it  
 </div> 
 </body>
 </html>

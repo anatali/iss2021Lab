@@ -20,18 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userDocs/VirtualRobot2021.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/userDocs/img/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" beforeDir="false" afterPath="$PROJECT_DIR$/../GradleIntro/userdocs/Gradle.intro.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userDocs/img/teacher.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.actorfsm/it.unibo.actorfsm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.actorfsm/it.unibo.actorfsm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/Architectures.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/Architectures.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/ISSM2020Figs.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/ISSM2020Figs.pptx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/ClientUsingPost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iss0.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userDocs/img/wenvscene1.png" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/img/wenvscene1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userDocs/iss0.html" beforeDir="false" afterPath="$PROJECT_DIR$/userDocs/iss0.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +58,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../it.unibo.demoqak20" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../it.unibo.actorfsm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -107,11 +103,11 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.690@0.0.1280.690" timestamp="1612383774430" />
-    <state x="506" y="116" key="FileChooserDialogImpl" timestamp="1613409127974">
+    <state x="506" y="116" key="FileChooserDialogImpl" timestamp="1613743917400">
       <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state x="422" y="87" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1612610110881" />
-    <state x="506" y="116" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1613409127974" />
+    <state x="506" y="116" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1613743917400" />
     <state x="93" y="93" width="1093" height="503" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1612603240817">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
