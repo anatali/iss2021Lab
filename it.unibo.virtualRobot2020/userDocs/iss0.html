@@ -201,21 +201,23 @@ div.imagedesc{
  
 Tenendo conto che:
 <k>there is no code without a project, no project without problem analysis and no problem without requirements</k>
-si riporta qui un possibile primo deliverable per il progetto <ks>iss0_2021</ks>.
- 
+si riporta qui una possibile impostazioni dei primi passi di sviluppo per il progetto denominato <ks>iss0</ks>.
+<br/><br/>
+In questo lavoro riporteremo anche alcune considerazioni utili a comprendere alcuni aspetti fondamentali del lavoro
+dell'ingegnere del software.
  
 <h2>Requirements</h2>
 
  
 <div class="remark">
-Design and build a software system that makes a robot able to walk along the boundary of a rectangular, empty room.
+Design and build a software system that leads a robot to walk along the boundary of a empty, rectangular room.
 </div>
 
  
 
 <h2>Requirement analysis</h2>
  
-La interazione con il committente ha chiarito che egli associa ai sostantivi il seguente significato:
+La <b>interazione con il committente</b> ha chiarito che egli associa ai sostantivi il seguente significato:
 <ul>
 <li><ks>room</ks>: una stanza convenzionale, come si trova in tutti gli edifici</li>
 <li><ks>boundary</ks>: perimetro della stanza, fisicamente delimitata da pareti solide (<ks>walls</ks>)</li>
@@ -229,20 +231,44 @@ Per quanto riguarda le azioni (verbi):
 <li><ks>walk</ks>: il robot deve muoversi in avanti, rasente le pareti della room.</li>
 </ul>
 
-<h4>Verifica dei risultati attesi (Test plans)</h4> 
+<h3>Una prima <a href="https://en.wikipedia.org/wiki/User_story" target="web">user story</a></h3>
 
  <table style="width:98%">
 <tbody>	
 <tr>
 <td style="width:60%" >
-Come utente mi aspetto che, al termine della esecuzione della applicazione, il robot abbia affettuato (una volta sola)
-il percorso riportato in figura:
-<div class="remark">
-L'obiettivo è che la verifica del percorso sia effettuata dal software stesso, senza bisogno dell'intervento
-di un utente umano per controllare.
-</div>
+ 
+Come utente, posiziono il robot nella cella HOME (rivolto a sud) e poi attivo un sistema 
+che invia al robot (via rete wifi) comandi di movimento. 
+<br/>
+Come utente non posso interrompere la esecuzione: il sistema deve terminare in modo autonomo, una volta eseguito il compito.
+<br/><br/>
+Al termine della esecuzione del sistema, 
+mi aspetto che, il robot abbia effettuato (una volta sola) il percorso riportato nell figura a fianco.
+ 
 </td>
 <td><center><img src="./img/TestPlan0.png" alt="TestPlan0" width="60%" ></center>
+</td>
+</tr>
+ </tbody>
+</table>
+
+
+
+
+
+<h4>Verifica dei risultati attesi (Test plans)</h4> 
+
+ <table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:50%" >
+Occorre verificare che il percorso effettuato dal robot sia quello atteso.  
+</td>
+<td><div class="remark">
+La verifica della conguenza del percorso deve essere effettuata via software, senza bisogno dell'intervento
+di un utente umano.
+</div>
 </td>
 </tr>
  </tbody>
@@ -269,11 +295,16 @@ Si tratta di realizzare un <k>sistema distribuito</k> formato da due macro-compo
 </li>
 <li>
 Poichè esistono numerose librerie in molti linguaggi di programmazione che permettono l'invio di tali comandi,
-non si individua <ks>alcun abstraction-gap</ks> significativo.
+non si individua <ks>alcun abstraction-gap</ks> significativo sul piano operativo. 
+<div class="remark">
+Tuttavia esiste un <k>abstraction gap sul piano concettuale</k>: vi sono due possibili tecnologie per comunicare
+con il robot e ciascuna richiede opportuni supporti. Tuttavia concettualmente si tratta sempre di impostare uno
+ <ks>schema di interazione request-response </ks>.
+</div>
 </li>
 
 <li>
-Un primo prototipo della applicazione dovrebbe poter essere realizzato in una giornata lavorativa (al più).
+Stimiamo che un primo prototipo della applicazione dovrebbe poter essere realizzato in una giornata lavorativa (al più).
 </li>
 </ol>
 
@@ -285,21 +316,80 @@ Un primo prototipo della applicazione dovrebbe poter essere realizzato in una gi
 <tr>
 <td style="width:40%" >
  <center><img src="./img/iss0_logicArch0.png" alt="iss0_logicArch0" width="70%" ></center>
-</td>
-<td>The exact nature of the <ks>boundaryWalk</ks> component will be defined by the designer.
+ 
 
+</td>
+<td>L'esatta natura del componente <ks>boundaryWalk</ks> sarà definita nella fase di progetto.
 <br/><br/>
-Per quanto riguarda l'interazione possiamo dire l'uso del protocollo HTTP sembra del tutto adeguato. <br/>
-Tuttavia l'uso della websocket potrrebbe rivelarsi più flessibile (in quanto permette di ricevere anche
-informazioni emesee da WEnv) e più efficiente (in quanto riduce la gerarchia di protocolli).
+Per quanto riguarda l'interazione possiamo dire che:
+<ul>
+<li>l'uso del protocollo HTTP sembra del tutto adeguato, almeno in una prima fase; </li>
+<li>l'uso della websocket potrrebbe rivelarsi <i>più flessibile</i> (in quanto permette di ricevere anche
+<k>informazioni emesse da WEnv in modo 'spontaneo'</k>) e <i>più efficiente</i> (in quanto riduce la gerarchia di protocolli).</li></li>
+</ul>
 </td>
 </tr>
+
+<tr>
+<td> <div class="remark">
+ La figura qui sopra NON è il sistema. <br/>
+ E' la rappresentazione grafica (informale) di un modello del sistema.
+ </div>
+ Una lettura interessante: <br/>
+ <a href="https://bitbucket.org/blog/software-development-with-uml-and-modern-java" target="web">
+ Software development with UML and modern Java</a>
+ 
+ </td>
+<td><center><img src="./img/magritte.jpg" alt="magritte" width="30%" ></center>
+Si veda: 
+ <a href="https://www.repubblica.it/dossier/stazione-futuro-riccardo-luna/2020/11/24/news/l_intelligenza_artificiale_e_la_pipa_di_magritte-275531361/" target="web">
+ L'intelligenza artificiale e la pipa di Magritte</a>
+</td>
+</tr>
+
+<tr>
+<td><h4>Un altro modello (UML)</h4>
+
+ <center><img src="./img/WEnvUsage.png" alt="WEnvUsage" width="70%" ></center>
+</td>
+<td>Questo modello 'astrae' dai dettagli tecnologici della interazione.
+<ul>
+<li>Ma le entità sono oggetti?</li>
+<li>Quali sono le <k>informazioni essenziali</k> da catturare e discutere?</li>
+</ul>
+</td>
+</tr>
+
+
+<tr>
+<td><center><img src="./img/sic.png" alt="sic" width="70%" ></center>
+</td>
+
+<td><center><img src="./img/sic2.png" alt="sic2" width="70%" ></center></td>
+
+</tr>
+
  </tbody>
 </table>
 
-<h3>Problemi aperti</h3>
-L'obiettivo di definire un <tt>TestPlan automatizzabile</tt> introduce di fatto un <k>nuovo requisito</k>: rendere l'applicazione osservabile, o meglio
-renderne verificabili gli effetti, da parte di una macchina. 
+
+ 
+ 
+<h3>Problematiche individuate</h3>
+
+<ol>
+<li><h4>Astrazione di interazione</h4>
+Il sistema software dovrebbe essere reso il più possibile indipendente dal protcollo di comunicazione usato per la interazione con WEnv.
+<br/>
+Il progettista potrebbe utilizzare qualche <a href="https://it.wikipedia.org/wiki/Design_pattern" target="web"><ks>design pattern</ks></a> 
+per rendere il livello applicativo il più possibile <k>invariante</k> rispetto
+al protocollo di comunicazione, che potrebbe essere selezionato in una <k>fase di configurazione</k> del sistema.
+</li>
+
+<li><h4>Testing, ma non solo </h4>
+
+L'obiettivo di definire un <tt>TestPlan automatizzabile</tt> introduce di fatto un <k>nuovo requisito</k>: 
+rendere l'applicazione osservabile, o meglio renderne verificabili gli effetti, da parte di una macchina. 
 <br/>
 In particolare, non basta indurre il robot a muoversi; 
 in assenza di telecamere e/o di appositi sensori ambientali, un modo per procedere è quello di <ks><i>inferire conoscenza</i></ks> 
@@ -319,11 +409,17 @@ per 4 volte:
 	invio al robot comandi <kc>moveForward</kc> fino a che il robot colpisce il muro di fronte 
 	e poi invio un comando di rotazione <kc>turnLeft</kc>
 </pre>
+</li>
+
+
+</ol>
 
 
 
+<h4>Possibili strategie per il TestPlan: 'inferire conoscenza' dai comandi</h4>
 
-Sulla base di questa analisi, possiamo delineare alcune diverse strategie di testing. Per rendere la trattazione più semplice, introduciamo le seguenti abbreviazioni
+Sulla base di questa analisi, possiamo delineare alcune diverse strategie di testing. 
+Per rendere la trattazione più semplice, introduciamo le seguenti abbreviazioni
 reltive ai comandi  <a href="VirtualRobot2021.html #cril" target="web">cril</a>:
 <pre>
 <ks>w</ks> : esprime la mosssa <kc>{"robotmove":"moveForward", "time": 600}</kc>
@@ -333,8 +429,7 @@ reltive ai comandi  <a href="VirtualRobot2021.html #cril" target="web">cril</a>:
 <ks>r</ks> : esprime la mosssa <kc>{"robotmove":"turnRight",   "time ":300}</kc>
 </pre>
 
-
-<h4>Possibili strategie per il TestPlan: 'inferire conoscenza' dai comandi</h4>
+Le diverse strategie di testing possono essere riassunte come segue:
 <ol>
  
 <li><ks>IPOTESI-TESTPLAN 1</ks>: per ogni mossa eseguita con successo, aggiungiamo l'identificatore della mossa ad una stringa <kc>moves</kc> (inizialmente vuota).
@@ -350,8 +445,8 @@ In questo modo si potrebbe misurare la lunghezza di ogni lato in <k>'unità-robo
 la lunghezza del perimetro espresso in 'unità-robot' sia uguale alla distanza percorsa eseguendo l'algoritmo indicato.
 </li>
 <li><ks>IPOTESI-TESTPLAN 3</ks>: impostando il <kc>time</kc> per le mosse <ks>w, s</ks> in modo da ottenere spostamenti di <k>unità-robot</k>, costruiamo in modo 
-incrementake una mappa del territorio dopo ogni mossa. In questo modo si potrebbe sapere dove si trova il robot  dopo ogni comando e quindi si potrebbe
-verificare al termine della applicazione il percorso effettuato:
+incrementale una <k>mappa del territorio</k> dopo ogni mossa. In questo modo si potrebbe sapere dove si trova il robot  dopo ogni comando e quindi si potrebbe
+verificare al termine della applicazione il percorso effettuato; ad esempio (<kc>1</kc> rappresenta le 'celle' percorse dal robot):
 <pre>
 |r, 1, 1, 1, 1, 
 |1, 0, 0, 0, 1, 
