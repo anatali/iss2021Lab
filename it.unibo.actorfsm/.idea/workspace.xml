@@ -23,14 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72872339-a0d1-4086-b48a-f54a15f5d983" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/userDocs/img/teacher.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/ISSM2020Figs.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/ISSM2020Figs.pptx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/iss0.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/userDocs/img/wenvscene1.png" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/userDocs/img/wenvscene1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/userDocs/iss0.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.virtualRobot2020/userDocs/iss0.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +75,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585503112228" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backup" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Progetti/marfoglia/health-adapter-disi" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -183,10 +177,11 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1613489675257">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state x="505" y="133" key="FileChooserDialogImpl" timestamp="1614012818685">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1613489675257" />
+    <state x="505" y="133" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1614012818685" />
     <state width="1238" height="141" key="GridCell.Tab.0.bottom" timestamp="1613461226952">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
