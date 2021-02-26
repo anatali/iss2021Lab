@@ -103,6 +103,7 @@ public class ClientWebsockJavax {
     //Callback hook for Message Events. This method will be invoked when a client send a message.
     @OnMessage
     public void onMessage(String message)   {
+        System.out.println("        ClientWebsockJavax | onMessage message=" + message);
         if (this.sockObserver != null) {
             this.sockObserver.handleMessage(message);
         }

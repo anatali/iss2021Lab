@@ -1,5 +1,5 @@
 package it.unibo.interaction;
-
+import it.unibo.robotUtils.MsgRobotUtil;
 
 @IssProtocolSpec(
         protocol = IssProtocolSpec.issProtocol.HTTP,
@@ -18,10 +18,7 @@ public class UsageIssHttp {
     }
 
     protected void testuseSupport(){
-        String move  = "turnLeft"  ;
-        String time  = "600" ;
-        String jsonCmd   = "{\"robotmove\":\"" + move + "\" , \"time\": " + time + "}";
-        String answer = support.request(jsonCmd);
+        String answer = support.request(MsgRobotUtil.turnLeftMsg);
         System.out.println( "UsageIssHttp | answer=" + answer  );
     }
 
