@@ -123,15 +123,6 @@ public class IssWsSupport implements IssOperations{
         }catch( Exception e){ return "error"; }
     }
 
-    @Override
-    public void doRequest(String msg) {
-
-    }
-
-    @Override
-    public void doReply(String msg) {
-
-    }
 
     //===================================================================
 

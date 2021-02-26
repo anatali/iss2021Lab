@@ -15,7 +15,7 @@ class ProtocolInfo{
 public class IssCommunications {
 
     //Factory Method
-    public IssOperations create( Object obj){
+    public static IssOperations create( Object obj ){
         ProtocolInfo protocolInfo = getProtocol(  obj );
         switch( protocolInfo.protocol ){
             case HTTP  : {
@@ -29,7 +29,7 @@ public class IssCommunications {
     }
 
 //------------------------------------------------------------------------
-protected  ProtocolInfo getProtocol(Object element ){
+protected  static ProtocolInfo getProtocol(Object element ){
         Class<?> clazz = element.getClass();
         Annotation[] annotations = clazz.getAnnotations();
         for (Annotation annot : annotations) {

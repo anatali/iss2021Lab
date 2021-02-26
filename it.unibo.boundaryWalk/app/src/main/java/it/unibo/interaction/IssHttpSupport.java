@@ -24,6 +24,7 @@ public class IssHttpSupport implements IssOperations{
     @Override
     public void forward( String msg) throws Exception {
         System.out.println( "IssHttpSupport | forward:" + msg  );
+        performrequest(msg);
     }
 
     @Override
@@ -31,15 +32,6 @@ public class IssHttpSupport implements IssOperations{
         return performrequest(msg);
     }
 
-    @Override
-    public void doRequest( String msg) {
-
-    }
-
-    @Override
-    public void doReply( String msg) {
-
-    }
 
  //===================================================================
 

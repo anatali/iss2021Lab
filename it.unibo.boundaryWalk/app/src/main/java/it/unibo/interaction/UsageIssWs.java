@@ -8,8 +8,6 @@ import it.unibo.robotUtils.MsgRobotUtil;
 public class UsageIssWs {
     private IssOperations support;
 
-
-
     public UsageIssWs(){
         support = createCommSupport();
         testuseSupport();
@@ -47,5 +45,5 @@ public class UsageIssWs {
 
       public static void main(String args[]){
         new UsageIssWs();
-    }
+      }
 }
