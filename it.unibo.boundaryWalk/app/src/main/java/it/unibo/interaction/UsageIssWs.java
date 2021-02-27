@@ -3,21 +3,27 @@ import it.unibo.robotUtils.MsgRobotUtil;
 
 @IssProtocolSpec(
         protocol = IssProtocolSpec.issProtocol.WS,
-        url="localHost:8091"
+        url      ="localHost:8091"
 )
 public class UsageIssWs {
     private IssOperations support;
 
-    public UsageIssWs(){
-        support = createCommSupport();
-        testuseSupport();
+    //Factory method
+    public static UsageIssWs create(){
+        UsageIssWs obj        = new UsageIssWs();
+        IssOperations support = new IssCommunications().create( obj  );
+        obj.setCommSupport(support);
+        return obj;
     }
 
-    protected IssOperations createCommSupport(){
-        return new IssCommunications().create( this  );
+    private UsageIssWs(){
     }
 
-    protected void testuseSupport()  {
+    protected void setCommSupport(IssOperations support){
+        this.support = support;
+    }
+
+    public void testuseSupport()  {
         try {
             String answer = "message sent";
             support.forward(MsgRobotUtil.turnLeftMsg);
@@ -44,6 +50,7 @@ public class UsageIssWs {
     }
 
       public static void main(String args[]){
-        new UsageIssWs();
+          UsageIssWs appl = UsageIssWs.create();
+          appl.testuseSupport();
       }
 }
