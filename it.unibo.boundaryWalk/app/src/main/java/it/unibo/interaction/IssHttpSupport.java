@@ -23,12 +23,13 @@ public class IssHttpSupport implements IssOperations{
 
     @Override
     public void forward( String msg) throws Exception {
-        System.out.println( "IssHttpSupport | forward:" + msg  );
+        //System.out.println( "IssHttpSupport | forward:" + msg  );
         performrequest(msg);
     }
 
     @Override
     public String request( String msg) {
+        //System.out.println( "IssHttpSupport | request:" + msg  );
         return performrequest(msg);
     }
 

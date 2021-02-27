@@ -1,7 +1,14 @@
+/**
+ IssCommunications.java
+ ===============================================================
+ Use the virtual robot with a protocol set with an annotation
+ ===============================================================
+ */
 package it.unibo.interaction;
 
 import java.lang.annotation.Annotation;
 
+//Used to represent protocol-related information
 class ProtocolInfo{
     IssProtocolSpec.issProtocol protocol;
     String url;
@@ -9,26 +16,21 @@ class ProtocolInfo{
         this.protocol = protocol;
         this.url      = url;
     }
-
-
 }
-public class IssCommunications {
 
+public class IssCommunications {
     //Factory Method
     public static IssOperations create( Object obj ){
         ProtocolInfo protocolInfo = getProtocol(  obj );
         switch( protocolInfo.protocol ){
-            case HTTP  : {
-                return new IssHttpSupport( protocolInfo.url );
-            }
-            case WS  : {
-                return new IssWsSupport( protocolInfo.url );
-            }
+            case HTTP  : {  return new IssHttpSupport( protocolInfo.url );  }
+            case WS    : {  return new IssWsSupport( protocolInfo.url );    }
             default: return new IssHttpSupport( protocolInfo.url ); //TODO
         }
     }
 
 //------------------------------------------------------------------------
+//Java introspection
 protected  static ProtocolInfo getProtocol(Object element ){
         Class<?> clazz = element.getClass();
         Annotation[] annotations = clazz.getAnnotations();
@@ -41,19 +43,5 @@ protected  static ProtocolInfo getProtocol(Object element ){
         }
     return new ProtocolInfo( IssProtocolSpec.issProtocol.TCP, "unknown" );
 }
-/*
-    protected  ProtocolInfo  getProtocol(Object object)   {
-        //println("initializeObject object=" + object);
-        Class<?> clazz = object.getClass();
-        for (Method method : clazz.getDeclaredMethods()) {
-            //System.out.println("initializeObject method=" + method);
-            if (method.isAnnotationPresent(IssProtocolSpec.class)) {
-                IssProtocolSpec info = (IssProtocolSpec) method.getAnnotation(IssProtocolSpec.class);
-                //String url =  (String) method.getDeclaredAnnotations()[1];
-                return  new ProtocolInfo( info.protocol(), info.url() ) ;
-            }
-        };
-        return new ProtocolInfo( IssProtocolSpec.issProtocol.TCP, "unknown" );
-    }
-*/
+
 }

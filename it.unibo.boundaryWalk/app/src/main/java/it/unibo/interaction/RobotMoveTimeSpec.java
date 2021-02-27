@@ -1,7 +1,7 @@
 /**
- IssProtocolSpec.java
+ RobotMoveTimeSpec.java
  ===============================================================
- User-defined annotation related to communication protocols
+ User-defined annotation related to the robot-moves time
  ===============================================================
  */
 package it.unibo.interaction;
@@ -9,9 +9,12 @@ import java.lang.annotation.*;
 
 @Target(value = { ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.TYPE   })
 @Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface IssProtocolSpec {
-    public enum issProtocol {UDP,TCP,HTTP,MQTT,COAP,WS} ;
-    issProtocol protocol() default issProtocol.TCP;
-    String url() default "unknown";
+//@Inherited
+public @interface RobotMoveTimeSpec {
+    //public enum moves {w,s,l,r,h} ;
+    int ltime()  default 300;
+    int rtime()  default 300;
+    int wtime()  default 600;
+    int stime()  default 600;
+    int htime()  default 100;
 }
