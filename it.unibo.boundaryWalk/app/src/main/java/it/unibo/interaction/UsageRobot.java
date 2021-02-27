@@ -18,6 +18,7 @@ package it.unibo.interaction;
         protocol = IssProtocolSpec.issProtocol.HTTP,
         url="http://localHost:8090/api/move"
 )
+@RobotMoveTimeSpec( ltime = 1000 )  //if omitted, the move times are set by IssRobotSupport
 public class UsageRobot {
 private IssRobotSupport robotSupport;
 
@@ -25,7 +26,7 @@ private IssRobotSupport robotSupport;
     public static UsageRobot create(){
         UsageRobot obj               = new UsageRobot();  //appl-object
         IssOperations comms          = new IssCommunications().create( obj  );  //low-level support for appl-object
-        IssRobotSupport robotSupport = new IssRobotSupport( comms );    //high-level support for appl-object
+        IssRobotSupport robotSupport = new IssRobotSupport( obj, comms );    //high-level support for appl-object
         obj.robotSupport             = robotSupport; //'inject'
         return obj;  //return the created appl-object
     }

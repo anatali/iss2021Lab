@@ -14,23 +14,35 @@ import java.util.HashMap;
 @RobotMoveTimeSpec
 public class IssRobotSupport implements IssOperations{
     private IssOperations support;
-    private static final HashMap<String, Integer> timemap = getMoveTimes( );
-    private static final String forwardMsg   = "{\"robotmove\":\"moveForward\", \"time\": "+ timemap.get("w")+"}";
-    private static final String backwardMsg  = "{\"robotmove\":\"moveBackward\", \"time\": "+ timemap.get("s")+"}";
-    private static final String turnLeftMsg  = "{\"robotmove\":\"turnLeft\", \"time\": "+ timemap.get("l")   + "}";
-    private static final String turnRightMsg = "{\"robotmove\":\"turnRight\", \"time\":"+ timemap.get("r")   + "}";
-    private static final String haltMsg      = "{\"robotmove\":\"alarm\", \"time\": "+ timemap.get("h")+"}";
+    private Object supported;
+    private static HashMap<String, Integer> timemap = getMoveTimes( );  //set 'default' move-times
+    private   String forwardMsg   ;
+    private   String backwardMsg  ;
+    private   String turnLeftMsg  ;
+    private   String turnRightMsg ;
+    private   String haltMsg      ;
 
-    public IssRobotSupport(IssOperations support){
-        this.support = support;
+    public IssRobotSupport(Object supportedObj, IssOperations support){
+        this.support   = support;
+        this.supported = supported;
+        setMoveTimes( supportedObj, timemap );  //override the 'default' move-times
+        setCrilMsgs();
+    }
+
+    protected void setCrilMsgs(){
+        forwardMsg   = "{\"robotmove\":\"moveForward\", \"time\": "+ timemap.get("w")+"}";
+        backwardMsg  = "{\"robotmove\":\"moveBackward\", \"time\": "+ timemap.get("s")+"}";
+        turnLeftMsg  = "{\"robotmove\":\"turnLeft\", \"time\": "+ timemap.get("l")   + "}";
+        turnRightMsg = "{\"robotmove\":\"turnRight\", \"time\":"+ timemap.get("r")   + "}";
+        haltMsg      = "{\"robotmove\":\"alarm\", \"time\": "+ timemap.get("h")+"}";
     }
 
     @Override
     public void forward( String move ) throws Exception {
         switch( move ){
-            case "h" : support.forward(haltMsg);  break;
+            case "h" : support.forward(haltMsg);     break;
             case "w" : support.forward(forwardMsg);  break;
-            case "s" : support.forward(backwardMsg);  break;
+            case "s" : support.forward(backwardMsg); break;
             case "l" : support.forward(turnLeftMsg); break;
             case "r" : support.forward(turnRightMsg);break;
         }
@@ -51,31 +63,41 @@ public class IssRobotSupport implements IssOperations{
 /*
 Using Java reflection
  */
-    protected static HashMap<String, Integer> getMoveTimes(  ){
-        HashMap<String, Integer> mvtimeMap= new HashMap<String, Integer>();
+    protected static HashMap<String, Integer> getMoveTimes(  ) {
+        HashMap<String, Integer> mvtimeMap = new HashMap<String, Integer>();
         try {
-                Class element = Class.forName("it.unibo.interaction.IssRobotSupport");
-                Annotation[] annots = element.getAnnotations();
-                for (Annotation annotation : annots) {
-                    if (annotation instanceof RobotMoveTimeSpec) {
-                        RobotMoveTimeSpec info = (RobotMoveTimeSpec) annotation;
-                        mvtimeMap.put("w", info.wtime() ) ;
-                        mvtimeMap.put("s", info.stime() ) ;
-                        mvtimeMap.put("l", info.ltime() ) ;
-                        mvtimeMap.put("r", info.rtime() ) ;
-                        mvtimeMap.put("h", info.htime() ) ;
-                    }
-                }
-            } catch (Exception exception) {
-                //exception.printStackTrace();
-                System.out.println("IssRobotSupport | getMoveTimes ERROR:" + exception.getMessage());
-                mvtimeMap.put("w", 600 ) ;
-                mvtimeMap.put("s", 600 ) ;
-                mvtimeMap.put("l", 300 ) ;
-                mvtimeMap.put("r", 300 ) ;
-                mvtimeMap.put("h", 100 ) ;
-            }
+            Class element = Class.forName("it.unibo.interaction.IssRobotSupport");
+            Annotation[] annots = element.getAnnotations();
+            fillMap(mvtimeMap, annots);
             return mvtimeMap;
+        } catch (Exception exception) {
+            System.out.println("IssRobotSupport | mvtimeMap ERROR:" + exception.getMessage());
+            mvtimeMap.put("w", 600);
+            mvtimeMap.put("s", 600);
+            mvtimeMap.put("l", 300);
+            mvtimeMap.put("r", 300);
+            mvtimeMap.put("h", 100);
         }
+        return mvtimeMap;
+    }
+
+    protected static void fillMap(HashMap<String, Integer> mvtimeMap, Annotation[] annots) {
+         for (Annotation annotation : annots) {
+            if (annotation instanceof RobotMoveTimeSpec) {
+                RobotMoveTimeSpec info = (RobotMoveTimeSpec) annotation;
+                mvtimeMap.put("w", info.wtime());
+                mvtimeMap.put("s", info.stime());
+                mvtimeMap.put("l", info.ltime());
+                mvtimeMap.put("r", info.rtime());
+                mvtimeMap.put("h", info.htime());
+                System.out.println("IssRobotSupport | fillMap  ltime="  + info.ltime());
+            }
+        }
+    }
+    protected void setMoveTimes( Object obj, HashMap<String, Integer> mvtimeMap){
+            Class<?> clazz = obj.getClass();
+            Annotation[] annotations = clazz.getAnnotations();
+            fillMap(mvtimeMap, annotations);
+    }
 
 }

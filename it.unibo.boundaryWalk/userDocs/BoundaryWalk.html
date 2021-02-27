@@ -259,14 +259,14 @@ We highlight that:
 that the robot can receive move commands in two different ways:
 	<ul>
 	<li>by sending messages to the port <tt>8090</tt> using  <ks>HTTP POST</ks> </li>
-	<li>by sending messages to the port <tt>8091</tt> usando a <ks>websocket</ks> </li>
+	<li>by sending messages to the port <tt>8091</tt> using a <ks>websocket</ks> </li>
 	</ul>
 </li>
  
 <li> With respect to the technological level, there are many libraries in many programming languages that support the
 required protcols. <br/>
 However, the problem does introduce an <k>abstraction gap at the conceptual level</k>,
-since the required logical interaction is always a <em>request-response</em>, <b>regardless of the technology</b> used to implement
+since <kc>the required logical interaction</kc> is always a <em>request-response</em>, <b>regardless of the technology</b> used to implement
 the interaction with the robot.
 
 </li>
@@ -290,7 +290,7 @@ A first scheme of the logical architecture  of the systems can be defined as sho
 (for the meaning of the symbols, see the <a href="./img/legenda.png" target="web">legenda</a>)
 
 </td>
-<td>  <center><img src="./img/iss0_logicArch0.png" alt="iss0_logicArch0" width="100%" ></center>
+<td>  <center><img src="./img/logicArch0.png" alt="logicArch0" width="100%" ></center>
 </td>
 </tr>
 </tbody>
@@ -344,20 +344,53 @@ that can be easily checked with a TestUnit software:
 </li> 
  
 <h2>Project</h2>
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:60%">
+The <em>boundaryWalk</em> application is a conventional Java program, represented in the figure as an object with an internal thread.
+<br/>
+The code of the program is structured according to a conventional <em>layered architecture</em>,
+which is the simplest form of software architectural pattern, where the components are organized in horizontal layers.
 
- 
+<br/><br/>
+In our case we introduce the following layers:<br/><br/>
 <ol>
-<li><a href="../app/src/main/java/it/unibo/interaction/UsageRobot.java" target="web"><em>UsageRobot.java</em></a>: class annotated with information about the
-protocol to be used: <a href="../app/src/main/java/it/unibo/interaction/IssProtocolSpec.java" target="web"><em>IssProtocolSpec.java</em></a>
+<li><k>Application layer</k>:  this layer is representad by the class <a href="../app/src/main/java/it/unibo/interaction/UsageRobot.java" target="web"><em>UsageRobot.java</em></a>
+that is annotated with information about the protocol to be used.
+<br/>
+The application-specific annotation is defined in the interface: 
+<a href="../app/src/main/java/it/unibo/interaction/IssProtocolSpec.java" target="web"><em>IssProtocolSpec.java</em></a>
+<br/><br/>
 </li>
-<li><a href="../app/src/main/java/it/unibo/interaction/IssRobotSupport.java" target="web"><em>IssRobotSupport.java</em></a>:
+<li><k>RobotSupport layer</k>: this layer provides a support that helps the design and the implementation of robot-based applications. It
+is representad by the class <a href="../app/src/main/java/it/unibo/interaction/IssRobotSupport.java" target="web"><em>IssRobotSupport.java</em></a>
+that provides operations to interact with the robot using a aril (abstract robot interaction language):
+<br/><br/>
 
 </li>
-<li><a href="../app/src/main/java/it/unibo/interaction/IssCommunications.java" target="web"><em>IssCommunications.java</em></a></li>
+<li><k>Communication layer</k>: this layer provides a support for using the protocols required by the application.
+It is represented bt the class <a href="../app/src/main/java/it/unibo/interaction/IssCommunications.java" target="web"><em>IssCommunications.java</em></a>
+that 
+<br/><br/>
+</li>
 <li></lii>
 <li></lii>
 <li></lii>
 </ol>
+
+</td>
+<td>  <center><img src="./img/projectArch0.png" alt="projectArch0" width="100%" ></center>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+ 
+
  
  
 </div>
