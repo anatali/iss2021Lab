@@ -6,16 +6,13 @@
  ===============================================================
  */
 package it.unibo.interaction;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
 import java.util.HashMap;
 
 @RobotMoveTimeSpec
 public class IssRobotSupport implements IssOperations{
     private IssOperations support;
     private Object supported;
-    private static HashMap<String, Integer> timemap = getMoveTimes( );  //set 'default' move-times
+    private static HashMap<String, Integer> timemap ; //= IssAnnotationUtil.getMoveTimes( );  //set 'default' move-times
     private   String forwardMsg   ;
     private   String backwardMsg  ;
     private   String turnLeftMsg  ;
@@ -25,7 +22,7 @@ public class IssRobotSupport implements IssOperations{
     public IssRobotSupport(Object supportedObj, IssOperations support){
         this.support   = support;
         this.supported = supported;
-        setMoveTimes( supportedObj, timemap );  //override the 'default' move-times
+        IssAnnotationUtil.getMoveTimes( supportedObj, timemap );  //override the 'default' move-times
         setCrilMsgs();
     }
 
@@ -62,7 +59,7 @@ public class IssRobotSupport implements IssOperations{
     }
 /*
 Using Java reflection
- */
+
     protected static HashMap<String, Integer> getMoveTimes(  ) {
         HashMap<String, Integer> mvtimeMap = new HashMap<String, Integer>();
         try {
@@ -99,5 +96,5 @@ Using Java reflection
             Annotation[] annotations = clazz.getAnnotations();
             fillMap(mvtimeMap, annotations);
     }
-
+ */
 }

@@ -9,6 +9,7 @@ package it.unibo.interaction;
 import java.lang.annotation.Annotation;
 
 //Used to represent protocol-related information
+/*
 class ProtocolInfo{
     IssProtocolSpec.issProtocol protocol;
     String url;
@@ -17,20 +18,22 @@ class ProtocolInfo{
         this.url      = url;
     }
 }
-
+*/
 public class IssCommunications {
     //Factory Method
     public static IssOperations create( Object obj ){
-        ProtocolInfo protocolInfo = getProtocol(  obj );
+        ProtocolInfo protocolInfo = IssAnnotationUtil.getProtocol(  obj );
+        System.out.println("IssCommunications | create protocolInfo=" + protocolInfo.protocol + " " + protocolInfo.url );
         switch( protocolInfo.protocol ){
             case HTTP  : {  return new IssHttpSupport( protocolInfo.url );  }
             case WS    : {  return new IssWsSupport( protocolInfo.url );    }
             default: return new IssHttpSupport( protocolInfo.url ); //TODO
         }
     }
-
+}
 //------------------------------------------------------------------------
 //Java introspection
+    /*
 protected  static ProtocolInfo getProtocol(Object element ){
         Class<?> clazz = element.getClass();
         Annotation[] annotations = clazz.getAnnotations();
@@ -43,5 +46,5 @@ protected  static ProtocolInfo getProtocol(Object element ){
         }
     return new ProtocolInfo( IssProtocolSpec.issProtocol.TCP, "unknown" );
 }
+*/
 
-}

@@ -17,4 +17,5 @@ public @interface RobotMoveTimeSpec {
     int wtime()  default 600;
     int stime()  default 600;
     int htime()  default 100;
+    String configFile() default "IssRobotConfig.txt";
 }

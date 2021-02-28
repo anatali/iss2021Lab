@@ -16,7 +16,7 @@ package it.unibo.interaction;
 //Interaction based on HTTP
 @IssProtocolSpec(
         protocol = IssProtocolSpec.issProtocol.HTTP,
-        url="http://localHost:8090/api/move"
+        url      = "http://localHost:8090/api/move"
 )
 @RobotMoveTimeSpec( ltime = 1000 )  //if omitted, the move times are set by IssRobotSupport
 public class UsageRobot {
