@@ -2,23 +2,17 @@
  IssRobotSupport.java
  ===============================================================
  Implements interaction with the virtual robot using the aril
- and the given communication support
+ and the given communication support.
  Adapts the application to the cril
  ===============================================================
  */
 package it.unibo.interaction;
 import java.util.HashMap;
 
-//@RobotMoveTimeSpec
+//@RobotMoveTimeSpec  //could be useful?
 public class IssVirtualRobotSupport implements IssOperations{
     private IssOperations support;
     private static HashMap<String, Integer> timemap = new HashMap<String, Integer>( );
-    /*
-    private   String forwardMsg   ;
-    private   String backwardMsg  ;
-    private   String turnLeftMsg  ;
-    private   String turnRightMsg ;
-    private   String haltMsg      ;*/
 
     public IssVirtualRobotSupport(Object supportedObj, IssOperations support){
         this.support   = support;

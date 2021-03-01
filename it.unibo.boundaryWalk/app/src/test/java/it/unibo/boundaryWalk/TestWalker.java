@@ -12,7 +12,7 @@ public class TestWalker {
 
     @Before
     public void systemSetUp() {
-        System.out.println("TestClientUsingPost | setUp: robot should be at HOME-DOWN ");
+        System.out.println("TestWalker | setUp: robot should be at HOME-DOWN ");
         appl = new ClientWebsockJavax("localhost:8091");
     }
     @After

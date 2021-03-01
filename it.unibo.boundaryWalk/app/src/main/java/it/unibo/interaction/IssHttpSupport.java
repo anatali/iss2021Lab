@@ -56,7 +56,7 @@ public class IssHttpSupport implements IssOperations{
     protected String performrequest( String msg )  {
         boolean endmove = false;
         try {
-            System.out.println( "        IssHttpSupport | performrequest:" + msg + " URL=" + URL );
+            //System.out.println( "        IssHttpSupport | performrequest:" + msg + " URL=" + URL );
             StringEntity entity     = new StringEntity(msg);
             HttpUriRequest httppost = RequestBuilder.post()
                     .setUri(new URI(URL))

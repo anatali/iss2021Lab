@@ -12,32 +12,31 @@
 package it.unibo.interaction;
 
 
-//the move times can be also set by the file IssRobotConfig.txt
-
-/** //Interaction based on websocket
+/** //Interaction based on websocket */
 @IssProtocolSpec(
         protocol = IssProtocolSpec.issProtocol.WS,
         url="localHost:8091"
 )
-*/
 
-//Interaction based on HTTP
+
+/* //Interaction based on HTTP
 @IssProtocolSpec(
         protocol = IssProtocolSpec.issProtocol.HTTP,
         url      = "http://localHost:8090/api/move"
 )
+*/
 
-//the move times can be also set by the file IssRobotConfig.txt
-@RobotMoveTimeSpec( ltime = 1000 )
-public class UseVirtualRobot {
+@RobotMoveTimeSpec( ltime = 300, wtime=200 )
+public class UseRobotAril {
 
-    //private IssOperations commSupport;
-    private IssVirtualRobotSupport robotSupport;
+    private IssOperations robotSupport;
+
     //Factory method
-    public static UseVirtualRobot create(){
-        UseVirtualRobot obj       = new UseVirtualRobot();  //appl-object
-        IssOperations commSupport = new IssCommunications().create( obj  );
+    public static UseRobotAril create(){
+        UseRobotAril obj              = new UseRobotAril();  //appl-object
+        IssOperations commSupport = new IssCommsFactory().create( obj  );
         obj.robotSupport          = new IssVirtualRobotSupport( obj, commSupport ); //'inject'
+        //In the future we could use different robots and thus different robotSupport,
         return obj;  //return the created appl-object
     }
 
@@ -52,8 +51,26 @@ public class UseVirtualRobot {
         Thread.sleep(1000);      //required ONLY if we use websockets
     }
 
+
+
+    public String doBoundary( int stepNum, String journey){
+        //int stepNum = 1;
+        if (stepNum > 4) {
+             return journey;
+        }
+        String answer = robotSupport.requestSynch( "w" );
+        while( answer.equals("true") ){
+            journey = journey + "w";
+            answer = robotSupport.requestSynch( "w" );
+        }
+        //collision
+        robotSupport.requestSynch("l");
+        return doBoundary(stepNum + 1, journey + "l");
+    }
     public static void main(String args[]) throws Exception{
-        UseVirtualRobot appl = UseVirtualRobot.create();
+        UseRobotAril appl = UseRobotAril.create();
         appl.doJob();
+        //String journey = appl.doBoundary(1,"");
+        //System.out.println("UsageRobot | doBoundary BYE journey=" + journey);
     }
 }

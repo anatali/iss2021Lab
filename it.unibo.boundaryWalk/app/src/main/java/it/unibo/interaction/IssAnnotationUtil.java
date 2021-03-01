@@ -32,7 +32,11 @@ class ProtocolInfo{
 }
 
 public class IssAnnotationUtil {
-
+/*
+-------------------------------------------------------------------------------
+RELATED TO PROTOCOLS
+-------------------------------------------------------------------------------
+ */
     public  static ProtocolInfo getProtocol(Object element ){
         Class<?> clazz            = element.getClass();
         Annotation[] annotations  = clazz.getAnnotations();
@@ -50,6 +54,52 @@ public class IssAnnotationUtil {
         return  protocolInfo;
     }
 
+    protected static ProtocolInfo checkProtocolConfigFile(IssProtocolSpec info) {
+        try {
+            String configFileName = info.configFile(); //default=IssProtocolConfig.txt
+            //spec( protocol("HTTP"), url( "http://localHost:8090/api/move" ) ).
+            //System.out.println("IssAnnotationUtil | checkProtocolConfigFile configFileName=" + configFileName);
+            FileInputStream fis = new FileInputStream(configFileName);
+            Scanner sc = new Scanner(fis);
+            String line = sc.nextLine();
+            //System.out.println("IssAnnotationUtil | line=" + line);
+            String[] items = line.split(",");
+
+            String protocol = getProtocolConfigInfo("protocol", items[0]);
+            //System.out.println("IssAnnotationUtil | protocol=" + protocol);
+
+            String url = getProtocolConfigInfo("url", items[1]);
+            //System.out.println("IssAnnotationUtil | url=" + url);
+
+            ProtocolInfo protinfo = new ProtocolInfo(protocol, url);
+            return protinfo;
+        } catch (Exception e) {
+            System.out.println("IssAnnotationUtil | WARNING:" + e.getMessage());
+            return null;
+        }
+    }
+
+
+    //Quite bad: we will replace with Prolog parser
+    protected static String getProtocolConfigInfo(String functor, String line){
+        Pattern pattern = Pattern.compile(functor);
+        Matcher matcher = pattern.matcher(line);
+        String content = null;
+        if(matcher.find()) {
+            int end = matcher.end() ;
+            content = line.substring( end, line.indexOf(")") )
+                    .replace("\"","")
+                    .replace("(","").trim();
+        }
+        return content;
+    }
+
+
+    /*
+-------------------------------------------------------------------------------
+RELATED TO ROBOT MOVES
+-------------------------------------------------------------------------------
+ */
     public static void getMoveTimes( Object obj, HashMap<String, Integer> mvtimeMap){
         Class<?> clazz = obj.getClass();
         Annotation[] annotations = clazz.getAnnotations();
@@ -73,48 +123,6 @@ public class IssAnnotationUtil {
         }
     }
 
-
-
-    protected static ProtocolInfo checkProtocolConfigFile(IssProtocolSpec info) {
-        try {
-            String configFileName = info.configFile(); //default=IssProtocolConfig.txt
-            //spec( protocol("HTTP"), url( "http://localHost:8090/api/move" ) ).
-            //System.out.println("IssAnnotationUtil | checkProtocolConfigFile configFileName=" + configFileName);
-            FileInputStream fis = new FileInputStream(configFileName);
-            Scanner sc = new Scanner(fis);
-            String line = sc.nextLine();
-            //System.out.println("IssAnnotationUtil | line=" + line);
-            String[] items = line.split(",");
-
-            String protocol = getProtocolConfigInfo("protocol", items[0]);
-            //System.out.println("IssAnnotationUtil | protocol=" + protocol);
-
-            String url = getProtocolConfigInfo("url", items[1]);
-            //System.out.println("IssAnnotationUtil | url=" + url);
-
-            ProtocolInfo protinfo = new ProtocolInfo(protocol, url);
-            return protinfo;
-        } catch (Exception e) {
-            System.out.println("IssAnnotationUtil | ERROR=" + e.getMessage());
-            return null;
-        }
-    }
-
-
-    //Quite bad: we will replace with Prolog parser
-    protected static String getProtocolConfigInfo(String functor, String line){
-        Pattern pattern = Pattern.compile(functor);
-        Matcher matcher = pattern.matcher(line);
-        String content = null;
-        if(matcher.find()) {
-            int end = matcher.end() ;
-            content = line.substring( end, line.indexOf(")") )
-                    .replace("\"","")
-                    .replace("(","").trim();
-         }
-        return content;
-    }
-
     protected static boolean checkRobotConfigFile(
             RobotMoveTimeSpec info, HashMap<String, Integer> mvtimeMap){
         try{
@@ -134,7 +142,7 @@ public class IssAnnotationUtil {
             //System.out.println("IssAnnotationUtil | checkRobotConfigFile ltime=:" + mvtimeMap.get("l"));
             return true;
         } catch (Exception e) {
-            System.out.println("IssAnnotationUtil | checkRobotConfigFile ERROR=" + e.getMessage());
+            System.out.println("IssAnnotationUtil | checkRobotConfigFile WARNING:" + e.getMessage());
             return false;
         }
     }

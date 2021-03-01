@@ -97,7 +97,7 @@ public class IssWsSupport implements IssOperations{
     public void onMessage(String message)   {
         try {
              //{"collision":"true ","move":"..."} or {"sonarName":"sonar2","distance":19,"axis":"x"}
-            System.out.println("        IssWsSupport | onMessage:" + message);
+            //System.out.println("        IssWsSupport | onMessage:" + message);
             JSONObject jsonObj = new JSONObject(message) ;
             if (jsonObj.get("endmove") != null) {
                 //HANDLE THE ANSWER

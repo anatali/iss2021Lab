@@ -1,6 +1,5 @@
 package it.unibo.robotUtils;
 
-import it.unibo.interaction.IssCommunications;
 import it.unibo.interaction.IssProtocolSpec;
 
 public class MsgRobotUtil {

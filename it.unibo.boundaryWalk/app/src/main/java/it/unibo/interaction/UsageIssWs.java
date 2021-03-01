@@ -11,7 +11,7 @@ public class UsageIssWs {
     //Factory method
     public static UsageIssWs create(){
         UsageIssWs obj        = new UsageIssWs();
-        IssOperations support = new IssCommunications().create( obj  );
+        IssOperations support = new IssCommsFactory().create( obj  );
         obj.setCommSupport(support);
         return obj;
     }

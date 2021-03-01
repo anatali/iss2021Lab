@@ -8,7 +8,7 @@
  */
 package it.unibo.interaction;
 
-public class IssCommunications {
+public class IssCommsFactory {
     //Factory Method
     public static IssOperations create( Object obj ){
         ProtocolInfo protocolInfo = IssAnnotationUtil.getProtocol(  obj );
