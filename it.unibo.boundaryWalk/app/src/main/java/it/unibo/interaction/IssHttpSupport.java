@@ -22,7 +22,7 @@ public class IssHttpSupport implements IssOperations{
     }
 
     @Override
-    public void forward( String msg) throws Exception {
+    public void forward( String msg)  {
         //System.out.println( "IssHttpSupport | forward:" + msg  );
         performrequest(msg);
     }

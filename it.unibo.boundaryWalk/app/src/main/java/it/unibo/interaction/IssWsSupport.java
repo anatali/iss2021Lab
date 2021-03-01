@@ -103,12 +103,16 @@ public class IssWsSupport implements IssOperations{
     Fire and forget
      */
     @Override
-    public void forward(String msg) throws Exception{
-        //this.userSession.getAsyncRemote().sendText(message);
-        this.userSession.getBasicRemote().sendText(msg); //synch: blocks until the message has been transmitted
-        //The WEnv receiver sends always an answer. Thus, it does not handle message N+1 before the end of msg N
-        //Do we transform the forward in a request or assume that the user put an adeguate interval between messages?
-        System.out.println("        IssWsSupport | forward " + msg);
+    public void forward(String msg)  {
+        try {
+            //this.userSession.getAsyncRemote().sendText(message);
+            this.userSession.getBasicRemote().sendText(msg); //synch: blocks until the message has been transmitted
+            //The WEnv receiver sends always an answer. Thus, it does not handle message N+1 before the end of msg N
+            //Do we transform the forward in a request or assume that the user put an adeguate interval between messages?
+            System.out.println("        IssWsSupport | forward " + msg);
+        }catch( Exception e){
+            System.out.println("        IssWsSupport | forward ERROR " + e.getMessage());
+        }
     }
 
     @Override
@@ -120,13 +124,10 @@ public class IssWsSupport implements IssOperations{
             //wait for the answer received by onMessage
             answerSupport.engage();
             return answerSupport.get(); //blocking
-        }catch( Exception e){ return "error"; }
+        }catch( Exception e){
+            System.out.println("        IssWsSupport | request ERROR " + e.getMessage());
+            return "error";
+        }
     }
 
-
-    //===================================================================
-
-    protected String performrequest( String msg ) {
-        return "TODO";
-    }
 }

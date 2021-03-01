@@ -348,13 +348,21 @@ that can be easily checked with a TestUnit software:
 <tbody>	
 <tr>
 <td style="width:60%">
-The <em>boundaryWalk</em> application is a conventional Java program, represented in the figure as an object with an internal thread.
+The <em>boundaryWalk</em> application is a <k>conventional Java program</k>, represented in the figure as an object with an internal thread.
 <br/>
-The code of the program is structured according to a conventional <em>layered architecture</em>,
-which is the simplest form of software architectural pattern, where the components are organized in horizontal layers.
+</td>
+<td>  
+<center><img src="./img/projectArch0.png" alt="projectArch0" width="60%" ></center>
+</td>
+</tr>
 
-<br/><br/>
-In our case we introduce the following layers:<br/><br/>
+<tr>
+<td style="width:60%">
+
+The code of the program is structured according to a conventional <em>layered architecture</em>,
+which is the simplest form of software architectural pattern, where the components are organized in <i>horizontal layers</i>.
+<br/>
+We introduce the following layers:<br/><br/>
 <ol>
 <li><k>Application layer</k>:  this layer is representad by the class <a href="../app/src/main/java/it/unibo/interaction/UsageRobot.java" target="web"><em>UsageRobot.java</em></a>
 that is annotated with information about the protocol to be used.
@@ -365,7 +373,8 @@ The application-specific annotation is defined in the interface:
 </li>
 <li><k>RobotSupport layer</k>: this layer provides a support that helps the design and the implementation of robot-based applications. It
 is representad by the class <a href="../app/src/main/java/it/unibo/interaction/IssRobotSupport.java" target="web"><em>IssRobotSupport.java</em></a>
-that provides operations to interact with the robot using a aril (abstract robot interaction language):
+that provides operations to interact with the robot using a <ks>aril</ks> (abstract robot interaction language):
+
 <br/><br/>
 
 </li>
@@ -381,10 +390,16 @@ that
 
 </td>
 <td>  
-<h4>Zooming into the application component</h3>
-<center><img src="./img/projectArch0.png" alt="projectArch0" width="100%" ></center>
+
+
+<h3>Zooming into the application component</h3>
+<center><img src="./img/projectArch0Zoom.png" alt="projectArch0Zoom" width="100%" ></center>
 </td>
 </tr>
+
+
+
+
 </tbody>
 </table>
 

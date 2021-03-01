@@ -20,8 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssRobotSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssRobotSupport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/AppMsg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssRobot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssVirtualRobotSupport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/userDocs/img/projectArch0Zoom.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/IssRobotConfig.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/IssRobotConfig.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssAnnotationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssAnnotationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssCommunications.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssCommunications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssHttpSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssHttpSupport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssProtocolSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssProtocolSpec.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssRobotSupport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssWsSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssWsSupport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/UsageRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/UsageRobot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/userDocs/BoundaryWalk.html" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/userDocs/BoundaryWalk.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/userDocs/img/projectArch0.png" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/userDocs/img/projectArch0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/BoundaryProblem.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.issLabStart/userDocs/BoundaryProblem.pptx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
