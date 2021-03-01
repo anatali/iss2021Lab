@@ -1,3 +1,11 @@
+/**
+ IssHttpSupport.java
+ ===============================================================
+ Support for HTTP interaction with a remote server
+ The correct format of the arguments of operations forward/request
+ must be provided by the user
+ ===============================================================
+ */
 package it.unibo.interaction;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,7 +18,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import java.net.URI;
 
-
 public class IssHttpSupport implements IssOperations{
     private CloseableHttpClient httpclient;
     private  String URL  = "unknown";
@@ -18,28 +25,38 @@ public class IssHttpSupport implements IssOperations{
     public IssHttpSupport(String url ){
         httpclient = HttpClients.createDefault();
         URL        = url;
-        System.out.println( "IssHttpSupport | created IssHttpSupport url=" + url  );
+        System.out.println( "        IssHttpSupport | created IssHttpSupport url=" + url  );
     }
 
     @Override
     public void forward( String msg)  {
-        //System.out.println( "IssHttpSupport | forward:" + msg  );
+        System.out.println( "        IssHttpSupport | forward:" + msg  );
         performrequest(msg);
     }
 
     @Override
-    public String request( String msg) {
-        //System.out.println( "IssHttpSupport | request:" + msg  );
-        return performrequest(msg);
+    public void request( String msg) {
+        //System.out.println( "        IssHttpSupport | request:" + msg  );
+        performrequest(msg);    //the answer is lost
     }
 
+    @Override
+    public void reply(String msg) {
+        System.out.println( "        IssHttpSupport | WARNING: reply NOT IMPLEMENTED"  );
+    }
+
+    @Override
+    public String requestSynch( String msg) {
+        //System.out.println( "IssHttpSupport | requestSynch:" + msg  );
+        return performrequest(msg);    //the answer is lost
+    }
 
  //===================================================================
 
     protected String performrequest( String msg )  {
         boolean endmove = false;
         try {
-            System.out.println( "IssHttpSupport | request:" + msg + " URL=" + URL );
+            System.out.println( "        IssHttpSupport | performrequest:" + msg + " URL=" + URL );
             StringEntity entity     = new StringEntity(msg);
             HttpUriRequest httppost = RequestBuilder.post()
                     .setUri(new URI(URL))
@@ -56,7 +73,7 @@ public class IssHttpSupport implements IssOperations{
                 //System.out.println("IssHttpSupport | response=" + endmove);
             }
         } catch(Exception e){
-            System.out.println("IssHttpSupport | ERROR:" + e.getMessage());
+            System.out.println("        IssHttpSupport | ERROR:" + e.getMessage());
          }
         return ""+endmove;
     }

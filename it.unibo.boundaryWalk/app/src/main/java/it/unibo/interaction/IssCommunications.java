@@ -12,7 +12,7 @@ public class IssCommunications {
     //Factory Method
     public static IssOperations create( Object obj ){
         ProtocolInfo protocolInfo = IssAnnotationUtil.getProtocol(  obj );
-        //System.out.println("IssCommunications | create protocolInfo=" + protocolInfo.protocol + " " + protocolInfo.url );
+        System.out.println("IssCommunications | create protocolInfo=" + protocolInfo.protocol + " " + protocolInfo.url );
         switch( protocolInfo.protocol ){
             case HTTP  : {  return new IssHttpSupport( protocolInfo.url );  }
             case WS    : {  return new IssWsSupport( protocolInfo.url );    }

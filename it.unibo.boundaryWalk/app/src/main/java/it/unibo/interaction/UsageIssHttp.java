@@ -18,11 +18,12 @@ public class UsageIssHttp {
     }
 
     protected void testuseSupport(){
-        String answer = support.request(MsgRobotUtil.turnLeftMsg);
+        String answer = support.requestSynch(MsgRobotUtil.turnLeftMsg);
         System.out.println( "UsageIssHttp | answer=" + answer  );
     }
 
-      public static void main(String args[])   {
+
+    public static void main(String args[])   {
         new UsageIssHttp();
     }
 }

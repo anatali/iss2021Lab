@@ -1,3 +1,9 @@
+/**
+ IssWsSupport.java
+ ===============================================================
+        See below
+ ===============================================================
+ */
 package it.unibo.interaction;
 
 import org.json.JSONObject;
@@ -5,19 +11,27 @@ import javax.websocket.*;
 import java.net.URI;
 import java.security.Principal;
 
-
+/**
+ AnswerAvailable
+ ===============================================================
+ Utility class to capture information about the reply to a request
+ sent by the server over the ws connection.
+ The put operation is called by onMessage and works only if
+ the object has been engaged (by a requestSynch operation)
+ ===============================================================
+ */
 class AnswerAvailable{
     private String  answer  = null;
     private boolean engaged = false;
     public void engage(){
         engaged = true;
     }
-    public synchronized void put(String info) {
+    public synchronized void put(String info, String move) {
         if( engaged ){
             answer = info;
             notify();
         }else{
-            System.out.println("        AnswerAvailable | put not engaged: " + answer );
+            System.out.println("        AnswerAvailable | put not engaged for info=" + info + " move=" + move);
         }
     }
     public synchronized String get( ) {
@@ -33,6 +47,14 @@ class AnswerAvailable{
     }
 }
 
+/**
+ IssWsSupport.java
+ ===============================================================
+ Support for WS interaction with a remote server
+ The correct format of the arguments of operations forward/request
+ must be provided by the user
+ ===============================================================
+ */
 @ClientEndpoint     //javax.websocket annotation
 public class IssWsSupport implements IssOperations{
     private  String URL            = "unknown";
@@ -73,21 +95,22 @@ public class IssWsSupport implements IssOperations{
     //THe WENv system sends always an answer for any command sent to it
     @OnMessage
     public void onMessage(String message)   {
-        //if (this.sockObserver != null) { this.sockObserver.handleMessage(message); }
         try {
-            //{"collision":"true ","move":"..."} or {"sonarName":"sonar2","distance":19,"axis":"x"}
+             //{"collision":"true ","move":"..."} or {"sonarName":"sonar2","distance":19,"axis":"x"}
             System.out.println("        IssWsSupport | onMessage:" + message);
             JSONObject jsonObj = new JSONObject(message) ;
             if (jsonObj.get("endmove") != null) {
+                //HANDLE THE ANSWER
                 boolean endmove = jsonObj.getBoolean("endmove");
-                answerSupport.put(""+endmove);
+                String  move    = jsonObj.getString("move");
+                answerSupport.put(""+endmove, move);
                 //System.out.println("        IssWsSupport | onMessage endmove=" + endmove);
             } else if (jsonObj.get("collision") != null) {
                 boolean collision = jsonObj.getBoolean("collision");
                 //System.out.println("        IssWsSupport | onMessage collision=" + collision );
             } else if (jsonObj.get("sonarName") != null) {
                 String sonarName = jsonObj.getString( "sonarName");
-                String distance = jsonObj.getString("distance");
+                String distance  = jsonObj.getString("distance");
                 System.out.println("        IssWsSupport | onMessage sonarName=" + sonarName + " distance=" + distance);
             }
         } catch (Exception e) {}
@@ -116,18 +139,33 @@ public class IssWsSupport implements IssOperations{
     }
 
     @Override
-    public String request(String msg) {
+    public void request(String msg) {
         try{
-            System.out.println("        IssWsSupport | request " + msg);
+            //System.out.println("        IssWsSupport | request " + msg);
             //this.userSession.getAsyncRemote().sendText(message);
             this.userSession.getBasicRemote().sendText(msg);    //synch: blocks until the message has been transmitted
-            //wait for the answer received by onMessage
+            //DO NOT answerSupport.engage()
+        }catch( Exception e){
+            System.out.println("        IssWsSupport | request ERROR " + e.getMessage());
+        }
+    }
+    @Override
+    public String requestSynch(String msg) {
+        try{
+            //System.out.println("        IssWsSupport | requestSynch " + msg);
+            //this.userSession.getAsyncRemote().sendText(message);
+            this.userSession.getBasicRemote().sendText(msg);    //synch: blocks until the message has been transmitted
+            //WAIT for the answer (reply) received by onMessage
             answerSupport.engage();
-            return answerSupport.get(); //blocking
+            return answerSupport.get(); //wait for the answer
         }catch( Exception e){
             System.out.println("        IssWsSupport | request ERROR " + e.getMessage());
             return "error";
         }
     }
 
+    @Override
+    public void reply(String msg) {
+        //System.out.println( "         IssWsSupport | WARNING: reply NOT IMPLEMENTED"  );
+    }
 }

@@ -35,13 +35,13 @@ public class UsageIssWs {
 
             //Thread.sleep(1000);
 
-            answer = support.request(MsgRobotUtil.turnRightMsg);
+            answer = support.requestSynch(MsgRobotUtil.turnRightMsg);
             System.out.println("UsageIssWs | answer=" + answer);
 
-            answer = support.request(MsgRobotUtil.turnLeftMsg);
+            answer = support.requestSynch(MsgRobotUtil.turnLeftMsg);
             System.out.println("UsageIssWs | answer=" + answer);
 
-            answer = support.request(MsgRobotUtil.forwardMsg);
+            answer = support.requestSynch(MsgRobotUtil.forwardMsg);
             System.out.println("UsageIssWs | answer=" + answer);
 
         }catch( Exception e ){
