@@ -29,8 +29,6 @@ public class TestBoundary {
         try{
             String result = appl.doBoundary(1, "");
             System.out.println( "testBoundary result:" + result );
-            //testJourney(result);
-            //assertTrue( result.equals("wwwlwwwlwwwlwwwl")  );
             assertTrue( checkJourney(result) );
         }catch( Exception e){
             fail();
@@ -43,7 +41,6 @@ public class TestBoundary {
         int n = 0;
         while(matcher.find()) {
             n++;
-            //System.out.println("n=" + n);
         }
         return n==4;
     }

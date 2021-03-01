@@ -1,7 +1,7 @@
 /**
  UseVirtualRobot.java
  ===============================================================
- Use the virtual robot by exploiting Java annotation on the class
+ Use the (virtual) robot by exploiting Java annotation on the class
  to configure the protocol (HTTP or WS) and the move times.
 
  HOWEVER, the configuration can also be set (WITH PRIORITY over the class)
@@ -33,8 +33,8 @@ public class UseRobotAril {
 
     //Factory method
     public static UseRobotAril create(){
-        UseRobotAril obj              = new UseRobotAril();  //appl-object
-        IssOperations commSupport = new IssCommsFactory().create( obj  );
+        UseRobotAril obj          = new UseRobotAril();  //appl-object
+        IssOperations commSupport = IssCommsFactory.create( obj  );
         obj.robotSupport          = new IssVirtualRobotSupport( obj, commSupport ); //'inject'
         //In the future we could use different robots and thus different robotSupport,
         return obj;  //return the created appl-object
