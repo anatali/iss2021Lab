@@ -8,7 +8,5 @@ public class MsgRobotUtil {
     public static final String turnLeftMsg  = "{\"robotmove\":\"turnLeft\", \"time\": 300}";
     public static final String turnRightMsg = "{\"robotmove\":\"turnRight\", \"time\": 300}";
 
-    public void createSupport(IssProtocolSpec.issProtocol protocol){
-        //IssCommunications.create( );
-    }
+
 }

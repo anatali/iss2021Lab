@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -26,15 +29,19 @@ public class TestWalker {
         try{
             String result = appl.doBoundaryWalk();
             System.out.println( "Journay result:" + result );
-            assertTrue( result.equals("wwwlwwwlwwwlwwwl")  );
+            assertTrue(  checkJourney(result) );
         }catch( Exception e){
             fail();
         }
-
-        //try{ Thread.sleep(15000); }catch( Exception e){}
-
-        System.out.println("Journay at end:" + appl.getJourney());
-
+    }
+    protected boolean checkJourney(String result){
+        Pattern pattern = Pattern.compile("w*l");
+        Matcher matcher = pattern.matcher(result);
+        int n = 0;
+        while(matcher.find()) {
+            n++;
+        }
+        return n==4;
     }
 
 
