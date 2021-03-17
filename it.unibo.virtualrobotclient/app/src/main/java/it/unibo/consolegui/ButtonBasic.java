@@ -1,4 +1,4 @@
-package consolegui;
+package it.unibo.consolegui;
 
 import java.awt.*;
 import java.awt.event.ActionListener;

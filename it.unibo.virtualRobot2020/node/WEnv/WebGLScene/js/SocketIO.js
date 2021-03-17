@@ -4,7 +4,7 @@ import eventBusEvents from './eventBus/events.js'
 import { parseConfiguration, 
    updateSceneConstants, getinitialsceneConstants } from './utils/SceneConfigUtils.js' //DEC 2019
 import sceneConfiguration from '../sceneConfig.js'                                     //DEC 2019
-import SceneManager from './SceneManager.js'                                           //no more DEC 2019
+import SceneManager       from './SceneManager.js'                                     //no more DEC 2019
 
 export default (onKeyUp, onKeyDown, myonKeyDown) => {
     const socket = io()
@@ -16,10 +16,6 @@ export default (onKeyUp, onKeyDown, myonKeyDown) => {
     socket.on( 'turnLeft',     duration => turnLeft(duration) )
     socket.on( 'alarm',        stopMoving   )
     socket.on( 'remove',       name => remove( name )  )   //DEC 2019  See WebpageServer.js
-    
-	socket.on( 'xxx',        obj => console.log("SocketIO xxxxxxxxxxxxxxxxxxxxxxxx")   )
-		 
-	
     socket.on( 'disconnect', () => console.log("server disconnected") )
 
     eventBus.subscribe( eventBusEvents.sonarActivated, sonarId => socket.emit('sonarActivated', sonarId))

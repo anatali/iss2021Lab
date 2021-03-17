@@ -20,8 +20,8 @@ var alreadyConnected = false
 
 //let webpageReady = false
 //const moveTime   = 800
-const serverPort = 8090
-var target       = "notarget"   //the current virtual object that collides
+const serverPort   = 8090
+var target         = "notarget"   //the current virtual object that collides
 
     app.use(express.static('./../../WebGLScene'))
 

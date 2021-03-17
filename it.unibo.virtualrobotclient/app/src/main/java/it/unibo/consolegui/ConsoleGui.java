@@ -6,35 +6,35 @@ The user hoits a button and a message with the same name is
 sent to the WEnv by using WEnvConnSupportNoChannel.sendMessage
 ===============================================================
  */
-package consolegui;
-import it.unibo.interaction.WEnvConnSupportNoChannel;
+package it.unibo.consolegui;
+
+import it.unibo.interaction.IssObserver;
+import it.unibo.resumablebw.RobotApplInputController;
+
 import java.util.Observable;
 import java.util.Observer;
 
 public class ConsoleGui implements  Observer{	//Observer deprecated in 11 WHY?
-private String[] buttonLabels  = new String[] {"w", "s", "l", "r", "p", "h"};  //p means step
-private WEnvConnSupportNoChannel wenvConn ;
+private String[] buttonLabels  = new String[]  { "STOP", "RESUME" };
+private IssObserver controller ;
 
-	public ConsoleGui(  ) {
+	public ConsoleGui(IssObserver controller) {
 		GuiUtils.showSystemInfo();
 		ButtonAsGui concreteButton = ButtonAsGui.createButtons( "", buttonLabels );
 		concreteButton.addObserver( this );
- 		wenvConn      = new WEnvConnSupportNoChannel("localhost:8091", "600");
-		//wenvConn.initConn("localhost:8091" );
+		this.controller = controller;
  	}
 
 	public void update( Observable o , Object arg ) {	//Observable deprecated WHY?
 		String move = arg.toString();
-		System.out.println("GUI input move=" + move);
-		try {
-			wenvConn.sendMessage( move );
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		//System.out.println("GUI input move=" + move);
+		String robotCmd = (move == "STOP") ? "{\"robotcmd\":\"STOP\" }" : "{\"robotcmd\":\"RESUME\" }";
+		//System.out.println("GUI input robotCmd=" + robotCmd );
+		controller.handleInfo( robotCmd );
 	}
 	
 	public static void main( String[] args) {
-		new ConsoleGui(   );
+		new ConsoleGui(  new RobotApplInputController(null, true,true));
 	}
 }
 

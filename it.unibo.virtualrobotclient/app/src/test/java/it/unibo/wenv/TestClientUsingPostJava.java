@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 public class TestClientUsingPostJava {
+    /*
     private ClientUsingPost appl;
 
     @Before
@@ -47,5 +48,5 @@ public class TestClientUsingPostJava {
         moveFailed = appl.moveBackward(1600);       //back to home
         assertTrue( moveFailed  );
     }
-
+*/
 }

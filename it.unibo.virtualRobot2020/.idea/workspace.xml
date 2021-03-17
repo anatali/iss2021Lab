@@ -20,11 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4ff2fc9-b41a-43a4-bb7b-52f3ba3b6a73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssHttpSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssHttpSupport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssVirtualRobotSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/IssVirtualRobotSupport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/UsageRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.boundaryWalk/app/src/main/java/it/unibo/interaction/UseVirtualRobot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/WEnv/WebGLScene/js/SocketIO.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/WebGLScene/js/SocketIO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/WEnv/server/src/WebpageServer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,19 +98,20 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.690@0.0.1280.690" timestamp="1612383774430" />
-    <state x="506" y="116" key="FileChooserDialogImpl" timestamp="1614593501550">
+    <state x="506" y="116" key="FileChooserDialogImpl" timestamp="1615217111880">
       <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state x="422" y="87" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1612610110881" />
-    <state x="506" y="116" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1614593501550" />
+    <state x="506" y="116" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1615217111880" />
     <state x="93" y="93" width="1093" height="503" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1612603240817">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="93" y="93" width="1093" height="503" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.690@0.0.1280.690" timestamp="1612603240817" />
-    <state x="349" y="77" width="652" height="534" key="find.popup" timestamp="1612952422539">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state x="419" y="103" width="783" height="712" key="find.popup" timestamp="1615130492215">
+      <screen x="0" y="0" width="1536" height="920" />
     </state>
     <state x="349" y="77" width="652" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1612952422539" />
+    <state x="419" y="103" width="783" height="712" key="find.popup/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1615130492215" />
     <state x="419" y="103" width="698" height="712" key="find.popup/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1612536807759" />
   </component>
 </project>
