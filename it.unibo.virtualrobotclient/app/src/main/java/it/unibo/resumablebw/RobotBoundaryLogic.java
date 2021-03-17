@@ -11,13 +11,11 @@ import it.unibo.supports.IssCommSupport;
 
 
 public class RobotBoundaryLogic {
-    private IssCommSupport rs ;
-
+private IssCommSupport rs ;
 private int stepNum              = 1;
 private boolean boundaryWalkDone = false ;
 private boolean usearil          = false;
 private int moveInterval         = 500;
-
 private RobotMovesInfo robotInfo;
     //public enum robotLang {cril, aril}    //todo
 

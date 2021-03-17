@@ -17,11 +17,11 @@ import it.unibo.supports.RobotApplicationStarter;
 
 
 @ArilRobotSpec
-public class RobotBoundaryArilAsynch {
+public class ResumableRobotBoundary {
     private RobotApplInputController controller;
 
     //Constructor
-    public RobotBoundaryArilAsynch(IssOperations rs){
+    public ResumableRobotBoundary(IssOperations rs){
         IssCommSupport rsComm = (IssCommSupport)rs;
         controller = new RobotApplInputController(rsComm, true, true );
         rsComm.registerObserver( controller );
@@ -33,7 +33,7 @@ public class RobotBoundaryArilAsynch {
     public static void main(String args[]){
         try {
             System.out.println("RobotBoundaryArilAsynch | main start n_Threads=" + Thread.activeCount());
-            Object appl = RobotApplicationStarter.createInstance(RobotBoundaryArilAsynch.class);
+            Object appl = RobotApplicationStarter.createInstance(ResumableRobotBoundary.class);
             System.out.println("RobotBoundaryArilAsynch  | appl n_Threads=" + Thread.activeCount());
         } catch ( Exception e) {
             e.printStackTrace();
