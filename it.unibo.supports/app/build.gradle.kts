@@ -8,16 +8,22 @@
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.3.72"
+    id("org.jetbrains.kotlin.jvm") version "1.4.31"
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    jacoco
+
 }
 
 repositories {
     // Use JCenter for resolving dependencies.
     jcenter()
-    flatDir{ dirs("../unibolibs")   }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
@@ -35,21 +41,20 @@ dependencies {
 
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-//HTTP
-    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
-    implementation("org.apache.httpcomponents:httpclient:4.5.13")
+
+//COROUTINE
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
+
+//OkHttp library for websockets with Kotlin
+    implementation( "com.squareup.okhttp3:okhttp:4.9.0" )
 //JSON
     // https://mvnrepository.com/artifact/org.json/json
     implementation("org.json:json:20201115" )
 
-//SOCKET.IO
- // https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api
-    implementation("javax.websocket:javax.websocket-api:1.1")   //javax.websocket api is only the specification
-    implementation("org.glassfish.tyrus.bundles:tyrus-standalone-client:1.9")
 }
 
 application {
     // Define the main class for the application.
-    //mainClass.set("it.unibo.boundaryWalk.AppKt")
-    mainClass.set("it.unibo.boundaryWalk.ClientWebsockJavax")
+    mainClass.set("it.unibo.supports.WebSocketKotlinSupportUsageKt")
 }
