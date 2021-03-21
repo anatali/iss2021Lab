@@ -1,11 +1,8 @@
 package it.unibo.supports.usage
 
 import it.unibo.interaction.MsgRobotUtil
-import kotlinx.coroutines.runBlocking
 import it.unibo.supports.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 val workToDo : (CoroutineScope, WebSocketKotlinSupport) -> Unit =  fun(scope, support ) {
     println("WebSocketUtilUsage | workToDo ... ")
@@ -26,31 +23,39 @@ val workToDo : (CoroutineScope, WebSocketKotlinSupport) -> Unit =  fun(scope, su
      */
 }
 
-fun main() = runBlocking {
-    println("==============================================")
-    println("MainTestSupportJar | main start n_Threads=" + Thread.activeCount());
-    println("==============================================")
-    val support    = WebSocketKotlinSupport(this )
-    val ws         = support.connect( "localhost:8091", workToDo)
-/*
-    val obs1       = RobotObserver()
-    val obs2       = ActorRobotObserver()
-    support.registerObserver(obs1)
-    support.registerObserver(obs2)
- */
-    val controller = ControllerObserverOnChannel( this, support  )
+val cpus = Runtime.getRuntime().availableProcessors();
 
-    //val ws         = support.connect( "localhost:8091", WebSocketUtilUsage.workToDo)
-    //val ws8091    = WebSocket8091ObserverUtil.connectTows(observer,"localhost:8091")
-
-
-
-    //give time to see messages ...
-    //delay(15000)  //CREATE new threads  !!!
-    //support.disconnect(ws)
-
-    println("==============================================")
-    println("TestSupportJar | main END n_Threads=" + Thread.activeCount());
-    println("==============================================")
-
+fun curThread() : String {
+    return "thread=${Thread.currentThread().name} / nthreads=${Thread.activeCount()}"
 }
+
+fun main() {
+    lateinit var support : WebSocketKotlinSupport
+    runBlocking {
+        println("==============================================")
+        println("MainTestSupportJar | main START ${curThread()}" );
+        println("==============================================")
+        support    = WebSocketKotlinSupport(this )
+        support.connect( "localhost:8091", workToDo)
+
+        support.registerObserver( ActorlikeController( this, support  ) )
+        for( i in 1..3 ){ support.registerObserver( ActorlikeObserver(this, i) ) } //GlobalScope
+        //for( i in 1..5 ){ support.registerObserver( NaiveObserver(i) ) }
+
+
+        println("==============================================")
+        println("TestSupportJar | main BEFORE END ${curThread()}" );
+        println("==============================================")
+
+        //give time to see messages ... NOT NECESSARY if working in this scope, since runBlocking
+        //delay(30000)  //CREATE new threads  !!!
+        //support.disconnect()
+
+
+    }
+    println("==============================================")
+    println("TestSupportJar | main END ${curThread()}");
+    println("==============================================")
+    support.disconnect()
+}
+

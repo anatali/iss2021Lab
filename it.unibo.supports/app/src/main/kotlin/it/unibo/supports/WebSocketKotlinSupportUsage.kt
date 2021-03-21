@@ -35,11 +35,16 @@ fun main() = runBlocking {
     println("WebSocketUtilUsage | main start n_Threads=" + Thread.activeCount());
     println("==============================================")
     val support = WebSocketKotlinSupport(this )
-    val ws      = support.connect( "localhost:8091",
-            WebSocketKotlinSupportUsage.workToDo)
+    //val ws      =
+    support.connect( "localhost:8091", WebSocketKotlinSupportUsage.workToDo)
+
+    println("==============================================")
+    println("TestSupportJar | main BEFORE END n_Threads=" + Thread.activeCount());
+    println("==============================================")
+
     //give time to see messages ...
     delay(5000)  //CREATE new threads  !!!
-    support.disconnect(ws)
+    support.disconnect()
 
     println("==============================================")
     println("WebSocketUtilUsage | main END n_Threads=" + Thread.activeCount());

@@ -3,45 +3,31 @@ package it.unibo.supports.usage
 
 import it.unibo.supports.WebSocketKotlinSupport
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 
-class ControllerObserverOnChannel(val scope: CoroutineScope,
+class ControllerObserverOnChannel(val counter : Int,
+                                  val scope: CoroutineScope,
                                   val support: WebSocketKotlinSupport){
 
-    val robotBehaviorLogic = RobotBoundaryWalkLogic( scope, support )
-    val socketMsgChannel  = support.getInputChannel();
+    //lateinit var socketMsgChannel : Channel<String>
     
     init{
-        println("ControllerObserverOnChannel | STARTS  ")
-        scope.launch{
-            robotBehaviorLogic.doBoundaryInit()
-            msgLoop()
-        }
+        //socketMsgChannel  = support.getInputChannel();
+        //println("ControllerObserverOnChannel $counter | STARTS on $socketMsgChannel")
+        //scope.launch{ msgLoop() }
     }
-
+/*
     suspend fun msgLoop(){
         //scope.launch {
             while ( true ) {
                 val v = socketMsgChannel.receive()
                 val vJson  = JSONObject( v.toString() )
-                println("ControllerObserverOnChannel | receives $v ")  //in ${curThread()}
-                if( vJson.has("endmove")  ) handleEndMove( vJson )
+                println("ControllerObserverOnChannel $counter | receives $v ")  //in ${curThread()}
             }
         //}
-    }
-
-    suspend fun handleEndMove( endmove : JSONObject){
-        val answer = endmove["endmove"] as String
-        val move   = endmove["move"] as String
-        when( answer ){
-            "true" -> robotBehaviorLogic.boundaryStep(move, false)
-            "false"-> robotBehaviorLogic.boundaryStep(move, true)
-            "halted" -> println("ControllerObserverOnChannel | handleEndMove to do halt" )
-            "notallowed" ->  println("ControllerObserverOnChannel | handleEndMove to do notallowed" )
-            else -> println("ControllerObserverOnChannel | handleEndMove IMPOSSIBLE answer=$answer" )
-        }
-    }
+    }*/
 
 }

@@ -7,6 +7,8 @@ connect/disconnect with HTTP and a websocket by using the
 library okhttp3
 
 It provides also operations to sendHttp and sendOnWs
+
+Observer of the socket, it is observable in its turn
 ===============================================================
  */
 package it.unibo.supports
@@ -33,9 +35,9 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
     val okHttpClient    = OkHttpClient()
     val observers       = Vector<IssObserver>()
 
-    val socketMsgChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
+    //val socketMsgChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
 
-    fun getInputChannel() : Channel<String> { return socketMsgChannel }
+    //fun getInputChannel() : Channel<String> { return socketMsgChannel }
 //===============================================================================
     //After open => execute workTodo that has been set by connect
     override fun onOpen(webSocket: WebSocket, response: Response ) {
@@ -55,9 +57,7 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
     fun updateObservers( msg: String){
         //println("WebSocketKotlinSupport | updateObservers " + observers.size() );
         observers.forEach{ it.handleInfo(msg) } //loose control
-        scope.launch {
-            socketMsgChannel.send( msg )
-        }
+        //scope.launch { socketMsgChannel.send( msg ) }
     }
     override fun registerObserver(obs: IssObserver) { observers.add(obs) }
     override fun removeObserver(obs: IssObserver) { observers.remove(obs) }
@@ -85,10 +85,10 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
         return myWs
     }
 
-    fun disconnect( ws : WebSocket){ //WebSocketKotlinSupport.disconnect( myWs )
+    fun disconnect( ){ //WebSocketKotlinSupport.disconnect( myWs )
         //see https://square.github.io/okhttp/4.x/okhttp/okhttp3/-web-socket/close/
-        println("WebSocketKotlinSupport | disconnecting from $ws")
-        var gracefulShutdown = ws.close(1000, "appl_terminated")
+        println("WebSocketKotlinSupport | disconnecting from $myWs")
+        var gracefulShutdown = myWs.close(1000, "appl_terminated")
         println("WebSocketKotlinSupport | gracefulShutdown = $gracefulShutdown")
     }
 //-----------------------------------------------------------------
@@ -96,7 +96,7 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
     fun sendHttp(msgJson : String, httpaddr : String) : String {
         //val client = OkHttpClient()
         val body    = msgJson.toRequestBody(JSON_MediaType)
-        println("WebSocketKotlinSupport | sendHttp msgJson=$msgJson ")
+        //println("WebSocketKotlinSupport | sendHttp msgJson=$msgJson ")
         val request = Request.Builder()
             .url( "http://$httpaddr" )
             .post(body)
@@ -109,7 +109,7 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
     }
 
       fun sendWs( msgJson : String   ){
-          println("sendWs $msgJson")
+          //println("sendWs $msgJson")
         myWs.send(msgJson);
     }
 

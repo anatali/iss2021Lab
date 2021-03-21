@@ -19,7 +19,7 @@ class RobotBoundaryWalkLogic(val scope: CoroutineScope, private val rs: IssCommS
                              val usearil: Boolean = false, doMap: Boolean = true ) {
     private var stepNum          = 1
     private var boundaryWalkDone = false
-    private val moveInterval     = 1000L
+    private val moveInterval     = 500L
     private val robotInfo: RobotMovesInfo
  
     init {
@@ -46,6 +46,9 @@ class RobotBoundaryWalkLogic(val scope: CoroutineScope, private val rs: IssCommS
                 //showRobotMovesRepresentation();
                 if (stepNum == 4) {
                     boundaryWalkDone = true
+                    println(" +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ")
+                    delay(moveInterval)
+                    rs.request(if (usearil) MsgRobotUtil.hMsg else MsgRobotUtil.haltMsg)
                     return
                 }
                 stepNum++
