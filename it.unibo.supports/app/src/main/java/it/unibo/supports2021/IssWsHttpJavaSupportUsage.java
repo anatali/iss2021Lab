@@ -1,12 +1,12 @@
-package it.unibo.oksupports;
+package it.unibo.supports2021;
 
 import it.unibo.interaction.MsgRobotUtil;
 
-public class WebSocketJavaSupportUsage {
+public class IssWsHttpJavaSupportUsage {
 
     public void testHttp(){
         boolean wsconn = false;
-        WebSocketJavaSupport support = WebSocketJavaSupport.createForHttp( "localhost:8090" );
+        IssWsHttpJavaSupport support = IssWsHttpJavaSupport.createForHttp( "localhost:8090" );
 
         support.requestSynch( MsgRobotUtil.forwardMsg );
         support.requestSynch( MsgRobotUtil.backwardMsg );
@@ -17,7 +17,7 @@ public class WebSocketJavaSupportUsage {
     }
     public void testWs(){
         boolean wsconn = true;
-        WebSocketJavaSupport support = WebSocketJavaSupport.createForWs("localhost:8091" );
+        IssWsHttpJavaSupport support = IssWsHttpJavaSupport.createForWs("localhost:8091" );
 
         String answer = support.requestSynch( MsgRobotUtil.turnRightMsg );
         System.out.println("WebSocketJavaSupportUsage | testWs answer=" + answer);
@@ -34,7 +34,7 @@ public class WebSocketJavaSupportUsage {
 
     public static void main(String[] args) throws Exception{
         System.out.println("WebSocketJavaSupportUsage | BEGIN " + aboutThreads() );
-        WebSocketJavaSupportUsage appl = new WebSocketJavaSupportUsage();
+        IssWsHttpJavaSupportUsage appl = new IssWsHttpJavaSupportUsage();
         appl.testWs();
         appl.testHttp();
         System.out.println("WebSocketJavaSupportUsage | END " + aboutThreads() );

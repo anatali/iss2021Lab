@@ -1,4 +1,4 @@
-package it.unibo.oksupports;
+package it.unibo.supports2021;
 
 import it.unibo.interaction.IssCommSupport;
 import it.unibo.interaction.IssObserver;
@@ -7,21 +7,21 @@ import okhttp3.internal.http.RealResponseBody;
 import org.jetbrains.annotations.NotNull;
 import java.util.Vector;
 
-public class WebSocketJavaSupport extends WebSocketListener implements IssCommSupport {
+public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSupport {
     private boolean connectForWs           = true;
     private Vector<IssObserver> observers  = new Vector<IssObserver>();
     private WebSocket myWs;
     private OkHttpClient okHttpClient  = new OkHttpClient();
     final MediaType JSON_MediaType     = MediaType.get("application/json; charset=utf-8");
 
-    public static WebSocketJavaSupport createForHttp( String addr ){
-        return new WebSocketJavaSupport(addr, false);
+    public static IssWsHttpJavaSupport createForHttp(String addr ){
+        return new IssWsHttpJavaSupport(addr, false);
     }
-    public static WebSocketJavaSupport createForWs( String addr ){
-        return new WebSocketJavaSupport(addr, true);
+    public static IssWsHttpJavaSupport createForWs(String addr ){
+        return new IssWsHttpJavaSupport(addr, true);
     }
     //Constructor
-    private WebSocketJavaSupport(String addr, boolean wsconn ){  //localhost:8091
+    private IssWsHttpJavaSupport(String addr, boolean wsconn ){  //localhost:8091
         connectForWs = wsconn;
         if( wsconn ) wsconnect(addr);
         else httpconnect(addr);
