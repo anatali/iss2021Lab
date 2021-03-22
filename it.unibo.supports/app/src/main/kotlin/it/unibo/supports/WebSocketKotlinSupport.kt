@@ -61,7 +61,7 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
     }
     override fun registerObserver(obs: IssObserver) { observers.add(obs) }
     override fun removeObserver(obs: IssObserver) { observers.remove(obs) }
-    override fun close(){    }
+    override fun close(){  disconnect( )  }
 //===============================================================================
     override fun forward( msg: String)  {
         sendWs(msg)

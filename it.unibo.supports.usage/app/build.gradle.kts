@@ -48,7 +48,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.json/json
     implementation("org.json:json:20201115" )
 
-    implementation( "uniboSupport:webSocketKotlinSupport" )
+    implementation( "uniboSupport:issWsHttpSupport" )
 }
 
 application {
