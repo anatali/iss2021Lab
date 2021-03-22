@@ -48,7 +48,7 @@ private RobotMovesInfo robotInfo;
                 wait();
                 //System.out.println("RobotBoundaryLogic | RESUMES " );
                 rs.close();
-             } catch (InterruptedException e) {
+             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
