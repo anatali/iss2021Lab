@@ -23,7 +23,7 @@ public class ResumableRobotBoundary {
     //Constructor
     public ResumableRobotBoundary(IssOperations rs){
         IssCommSupport rsComm = (IssCommSupport)rs;
-        controller = new RobotApplInputController(rsComm, true, true );
+        controller            = new RobotApplInputController(rsComm, true, true );
         rsComm.registerObserver( controller );
         System.out.println("RobotBoundaryArilAsynch | CREATED with rsComm=" + rsComm);
         new ConsoleGui(  controller );

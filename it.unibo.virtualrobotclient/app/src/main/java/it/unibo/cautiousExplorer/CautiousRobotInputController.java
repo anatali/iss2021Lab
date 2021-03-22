@@ -7,7 +7,6 @@ on the cmdsocket-8091 or from the consoleGui
 */
 package it.unibo.cautiousExplorer;
 import it.unibo.interaction.IssObserver;
-import it.unibo.resumablebw.RobotBoundaryLogic;
 import it.unibo.supports.IssCommSupport;
 import org.json.JSONObject;
 
