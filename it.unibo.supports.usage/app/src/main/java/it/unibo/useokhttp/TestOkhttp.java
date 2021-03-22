@@ -1,7 +1,5 @@
 package it.unibo.useokhttp;
-
-
-import it.unibo.oksupports.WebSocketJavaSupport;
+import it.unibo.supports2021.*;
 import okhttp3.*;
 import it.unibo.interaction.MsgRobotUtil;
 import okhttp3.internal.http.RealResponseBody;
@@ -24,15 +22,15 @@ public class TestOkhttp {
     }
 
     public void testHttp(){
-        WebSocketJavaSupport support =
-                    WebSocketJavaSupport.createForHttp( "localhost:8090" );
+        IssWsHttpJavaSupport support =
+                    IssWsHttpJavaSupport.createForHttp( "localhost:8090" );
         support.requestSynch( MsgRobotUtil.turnLeftMsg );
         support.requestSynch( MsgRobotUtil.turnRightMsg );
         //support.close();
     }
     public void testWs(){
-        WebSocketJavaSupport support =
-                WebSocketJavaSupport.createForWs("localhost:8091" );
+        IssWsHttpJavaSupport support =
+                IssWsHttpJavaSupport.createForWs("localhost:8091" );
 
         String answer = support.requestSynch( MsgRobotUtil.turnRightMsg );
         System.out.println("WebSocketJavaSupportUsage | testWs answer=" + answer);
@@ -44,17 +42,15 @@ public class TestOkhttp {
     }
 
     public void TestWsWithObserver(){
-        WebSocketJavaSupport support    = WebSocketJavaSupport.createForWs("localhost:8091" );
+        IssWsHttpJavaSupport support    = IssWsHttpJavaSupport.createForWs("localhost:8091" );
         RobotInputController controller = new RobotInputController(support, false, true );
         support.registerObserver(controller);
 /*
         ActorObserverNaive actorObs1 = new ActorObserverNaive(1);
         support.registerObserver(actorObs1);
-
- */
-        ActorObserverNaive actorObs2 = new ActorObserverNaive(2);
+        ActorObserverNaive actorObs2 = new ActorObserverNaive(0);
         support.registerObserver(actorObs2);
-
+ */
         String trip = controller.doBoundary();
         System.out.println("TestWsWithObserver | trip=" + trip);
     }

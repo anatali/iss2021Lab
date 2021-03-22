@@ -47,8 +47,8 @@ dependencies {
 //JSON
     // https://mvnrepository.com/artifact/org.json/json
     implementation("org.json:json:20201115" )
-
-    implementation( "uniboSupport:issWsHttpSupport" )
+//UNIBO
+    implementation( "uniboSupport:IssWsHttpJavaSupport" )
 }
 
 application {

@@ -10,20 +10,20 @@ that is 'message-driven'
 */
 package it.unibo.resumableWalker;
 import it.unibo.consolegui.ConsoleGui;
-import it.unibo.oksupports.WebSocketJavaSupport;
 import it.unibo.useokhttp.ActorObserverNaive;
+import it.unibo.supports2021.*;
 
 public class MainResumableRobotBoundary {
     private RobotApplInputController controller;
 
     //Constructor
     public MainResumableRobotBoundary( ){
-        WebSocketJavaSupport support = WebSocketJavaSupport.createForWs("localhost:8091" );
+        IssWsHttpJavaSupport support = IssWsHttpJavaSupport.createForWs("localhost:8091" );
         controller = new RobotApplInputController(support, false, true );
         support.registerObserver( controller );
 
-        ActorObserverNaive actorObs1 = new ActorObserverNaive(3);
-        support.registerObserver(actorObs1);
+        //ActorObserverNaive actorObs1 = new ActorObserverNaive(0);
+        //support.registerObserver(actorObs1);
 
         System.out.println("MainResumableRobotBoundary | CREATED  n_Threads=" + Thread.activeCount());
         new ConsoleGui(  controller );

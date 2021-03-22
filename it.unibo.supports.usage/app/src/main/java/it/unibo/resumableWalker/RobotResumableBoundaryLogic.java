@@ -11,7 +11,7 @@ import it.unibo.interaction.MsgRobotUtil;
 
 
 
-public class RobotBoundaryLogic {
+public class RobotResumableBoundaryLogic {
 private IssCommSupport rs ;
 private int stepNum              = 1;
 private boolean boundaryWalkDone = false ;
@@ -20,7 +20,7 @@ private int moveInterval         = 500;
 private RobotMovesInfo robotInfo;
     //public enum robotLang {cril, aril}    //todo
 
-    public RobotBoundaryLogic(IssCommSupport support, boolean usearil, boolean doMap){
+    public RobotResumableBoundaryLogic(IssCommSupport support, boolean usearil, boolean doMap){
         rs           = support;
         this.usearil = usearil;
         robotInfo    = new RobotMovesInfo(doMap);
