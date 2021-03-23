@@ -50,7 +50,7 @@ public class MainTestWsHttpJavaSupport {
         support.registerObserver(actorObs1);
 */
         controller.doBoundary();
-        ActorObserverBasic.delay(10000);
+        //ActorObserverBasic.delay(60000);
 
 
     }

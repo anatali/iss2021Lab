@@ -45,6 +45,7 @@ private RobotMovesInfo robotInfo;
 
  //Business logic in RobotBoundaryLogic
     public synchronized void boundaryStep( String move, boolean obstacle, boolean journeyHalted ){
+        System.out.println("RobotBoundaryLogic | boundaryStep  " + move + " " + journeyHalted  );
          if (stepNum <= 4) {
             if( move.equals("turnLeft") ){
                 updateMovesRep("l");

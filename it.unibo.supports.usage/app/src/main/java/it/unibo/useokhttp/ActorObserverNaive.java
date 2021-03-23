@@ -1,6 +1,4 @@
 package it.unibo.useokhttp;
-
-import it.unibo.interaction.IssCommSupport;
 import org.json.JSONObject;
 
 public class ActorObserverNaive extends ActorObserverBasic{
@@ -12,11 +10,13 @@ public class ActorObserverNaive extends ActorObserverBasic{
 
     @Override
     protected void handleInput(String info){
-        //System.out.println("ActorObserverNaive " + counter + " | --- " + info + " " + aboutThreads());
+        //System.out.println("ActorObserverNaive " + counter + " | " + info );
         //delay( counter*500 );
         JSONObject jsonInfo = new JSONObject( info );
+        if( ! jsonInfo.has("sonarName"))
+            System.out.println("ActorObserverNaive " + counter + " | " + jsonInfo + " " + aboutThreads());
         if( jsonInfo.has("collision")) simulateUserCmd();
-        System.out.println("ActorObserverNaive " + counter + " | " + info + " " + aboutThreads());
+
     }
 
     protected void simulateUserCmd(){

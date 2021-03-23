@@ -9,12 +9,12 @@ public class GuiUtils {
 
 	public static void showSystemInfo(){
 		System.out.println(
-			"Utils  | COMPUTER memory="+ Runtime.getRuntime().totalMemory() +
+			"GuiUtils  | COMPUTER memory="+ Runtime.getRuntime().totalMemory() +
 					" num of processors=" +  Runtime.getRuntime().availableProcessors() +
 					" user.dir=" + System.getProperty ("user.dir")
 			);
 		System.out.println(
-			"Utils | AT START num of threads="+ Thread.activeCount() +" currentThread=" + Thread.currentThread() );
+			"GuiUtils | AT START num of threads="+ Thread.activeCount() +" currentThread=" + Thread.currentThread() );
 	}
 
 	public static Frame initFrame(int dx, int dy){

@@ -41,7 +41,7 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
     public void close() {
         if( myWs != null ){
             boolean gracefulShutdown = myWs.close(1000, "appl_terminated");
-            System.out.println("WebSocketJavaSupport | close gracefulShutdown=" + gracefulShutdown);
+            System.out.println("IssWsHttpJavaSupport | close gracefulShutdown=" + gracefulShutdown);
         }
     }
 
@@ -74,20 +74,20 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
 //----------------------------------------------------------------------
     @Override
     public void onOpen(WebSocket webSocket, Response response  ) {
-        System.out.println("WebSocketJavaSupport | onOpen ");
+        System.out.println("IssWsHttpJavaSupport | onOpen ");
     }
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason  ) {
-        System.out.println("WebSocketJavaSupport | onClosing ");
+        System.out.println("IssWsHttpJavaSupport | onClosing ");
     }
     @Override
     public void onMessage(WebSocket webSocket, String msg  ) {
-        System.out.println("WebSocketJavaSupport | onMessage " + msg );
+        //System.out.println("IssWsHttpJavaSupport | onMessage " + msg );
         updateObservers( msg );
     }
 
     protected void updateObservers( String msg ){
-        //System.out.println("WebSocketJavaSupport | updateObservers " + observers.size() );
+        //System.out.println("IssWsHttpJavaSupport | updateObservers " + observers.size() );
         observers.forEach( v -> v.handleInfo(msg));
     }
 
@@ -97,7 +97,7 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
                 .url( "ws://"+wsaddr )
                 .build() ;
         myWs = okHttpClient.newWebSocket(request, this);
-        System.out.println("WebSocketJavaSupport | wsconnect myWs=" + myWs);
+        System.out.println("IssWsHttpJavaSupport | wsconnect myWs=" + myWs);
     }
 
     public void httpconnect(String httpaddr){    //localhost:8090/api/move
@@ -105,7 +105,7 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
                 .url( "http://"+httpaddr )
                 .build() ;
         //myWs = okHttpClient.newWebSocket(request, this);
-        System.out.println("WebSocketJavaSupport | httpconnect myWs=" + myWs);
+        System.out.println("IssWsHttpJavaSupport | httpconnect myWs=" + myWs);
     }
 
     public String sendHttp( String msgJson){
@@ -117,7 +117,7 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
                     .build();
             Response response = okHttpClient.newCall(request).execute(); //a stream
             String answer     = ((RealResponseBody) response.body()).string();
-            //System.out.println("WebSocketJavaSupport | response body=" + answer);
+            //System.out.println("IssWsHttpJavaSupport | response body=" + answer);
             return answer;
         }catch(Exception e){
             return "";

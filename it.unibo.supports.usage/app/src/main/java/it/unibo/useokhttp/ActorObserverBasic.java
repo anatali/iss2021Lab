@@ -5,11 +5,8 @@
 
  */
 package it.unibo.useokhttp;
-import it.unibo.interaction.IssCommSupport;
 import it.unibo.interaction.IssObserver;
 import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.Vector;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -21,10 +18,10 @@ public abstract class ActorObserverBasic extends Thread implements IssObserver {
     protected int counter;
 
     public ActorObserverBasic(int counter ){
+        System.out.println("ActorObserverBasic " + this.getName() + " | STARTS "  );
         this.setName("threadobs_" + counter);
         this.counter = counter;
-        System.out.println("ActorObserverBasic " + this.getName() + " STARTS "  );
-        start();
+         start();
     }
 
     public static String aboutThreads(){
@@ -52,7 +49,7 @@ public abstract class ActorObserverBasic extends Thread implements IssObserver {
     protected  void waitInputAndElab(){
         try {
             String info = bqueue.take();
-            System.out.println("ActorObserverBasic | waitInputAndElab " + info  );
+            //System.out.println("ActorObserverBasic | waitInputAndElab " + info  );
             //try { System.in.read(); } catch (IOException e) { e.printStackTrace(); }
             if(  goon ) handleInput( info );
         } catch (InterruptedException e) {

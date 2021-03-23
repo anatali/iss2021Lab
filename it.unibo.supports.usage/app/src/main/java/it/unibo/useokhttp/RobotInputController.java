@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class RobotInputController implements IssObserver {
 private ResumableBoundaryLogic robotBehaviorLogic  ;
 private IssCommSupport     commSupport;  //IssArilRobotSupport
-private boolean journeyHalted  = true;
+private boolean journeyHalted  = false;
 
     public RobotInputController(IssCommSupport support, boolean usearil, boolean doMap){
         commSupport        = support;
@@ -66,7 +66,7 @@ Handler of the robotcmd (STOP/RESUME) messages sent by the consoleGui
         String answer = (String) endmove.get("endmove");
         String move   = (String) endmove.get("move");   //moveForward, ...
         System.out.println("RobotInputController | handleEndMove:" + move + " answer=" + answer);
-        System.out.println("RobotInputController | " + onThreads() );
+        //System.out.println("RobotInputController | " + onThreads() );
         switch( answer ){
             case "true"       : robotBehaviorLogic.boundaryStep( move, false, journeyHalted );
                                   break;
