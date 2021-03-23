@@ -10,7 +10,6 @@ that is 'message-driven'
 */
 package it.unibo.resumableWalker;
 import it.unibo.consolegui.ConsoleGui;
-import it.unibo.useokhttp.ActorObserverNaive;
 import it.unibo.supports2021.*;
 
 public class MainResumableRobotBoundary {

@@ -13,17 +13,19 @@ import it.unibo.interaction.IssObserver;
 import org.json.JSONObject;
 
 public class RobotInputController implements IssObserver {
-private RobotBoundaryLogic robotBehaviorLogic  ;
+private ResumableBoundaryLogic robotBehaviorLogic  ;
 private IssCommSupport     commSupport;  //IssArilRobotSupport
+private boolean journeyHalted  = true;
 
     public RobotInputController(IssCommSupport support, boolean usearil, boolean doMap){
-        commSupport = support;
-        robotBehaviorLogic = new RobotBoundaryLogic(support, usearil, doMap);
+        commSupport        = support;
+        robotBehaviorLogic = new ResumableBoundaryLogic(support, usearil, doMap);
      }
 
     //entry for the main program
     public String doBoundary(){
-        return robotBehaviorLogic.doBoundaryInit();
+         robotBehaviorLogic.doBoundaryGoon();
+         return "doBoundary_done";
     }
 
     @Override
@@ -37,6 +39,8 @@ Hhandler of the messages sent by WENv over the cmdsocket-8091 to notify:
 - the answer to a robot-command move {"endmove":"RESULT", "move":MOVE}
 - the information emitted by a sonar { "sonarName": "sonarName", "distance": 1, "axis": "x" }
 - a collision between the robot and an obstacle { "collision" : "false", "move": "moveForward"}
+
+Handler of the robotcmd (STOP/RESUME) messages sent by the consoleGui
      */
     @Override
     public synchronized void  handleInfo(JSONObject infoJson) {
@@ -44,6 +48,7 @@ Hhandler of the messages sent by WENv over the cmdsocket-8091 to notify:
         if( infoJson.has("endmove") )        handleEndMove(infoJson);
         else if( infoJson.has("sonarName") ) handleSonar(infoJson);
         else if( infoJson.has("collision") ) handleCollision(infoJson);
+        else if( infoJson.has("robotcmd") )  handleRobotCmd(infoJson);
     }
 
     protected void handleSonar( JSONObject sonarinfo ){
@@ -63,12 +68,27 @@ Hhandler of the messages sent by WENv over the cmdsocket-8091 to notify:
         System.out.println("RobotInputController | handleEndMove:" + move + " answer=" + answer);
         System.out.println("RobotInputController | " + onThreads() );
         switch( answer ){
-            case "true"       : robotBehaviorLogic.boundaryStep( move, false );
+            case "true"       : robotBehaviorLogic.boundaryStep( move, false, journeyHalted );
                                   break;
-            case "false"      : robotBehaviorLogic.boundaryStep( move, true  );break;
+            case "false"      : robotBehaviorLogic.boundaryStep( move, true, journeyHalted  );break;
             case "halted"     : System.out.println("RobotInputController | handleEndMove to do halt" );break;
             case "notallowed" : System.out.println("RobotInputController | handleEndMove to do notallowed" );break;
             default           : System.out.println("RobotInputController | handleEndMove IMPOSSIBLE answer for move=" + move);
+        }
+    }
+
+    protected void handleRobotCmd( JSONObject robotCmd ){
+        String cmd = (String)  robotCmd.get("robotcmd");
+        if( cmd.equals( "STOP" ) ){
+            journeyHalted = true;   //halt the robot, not the move
+            System.out.println("RobotApplInputController | handleRobotCmd: journeyHalted"    );
+        }
+        else if( cmd.equals( "RESUME" ) ){
+            if( journeyHalted ) {
+                journeyHalted = false;
+                robotBehaviorLogic.doBoundaryGoon(   );   //activate the robot
+            }else
+                System.out.println("RobotApplInputController | handleRobotCmd robot already running"    );
         }
     }
 
