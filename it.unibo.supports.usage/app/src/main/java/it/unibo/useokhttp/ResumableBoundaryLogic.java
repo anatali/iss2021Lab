@@ -11,7 +11,6 @@ import it.unibo.interaction.IssCommSupport;
 import it.unibo.interaction.MsgRobotUtil;
 
 
-
 public class ResumableBoundaryLogic {
 private IssCommActorSupport rs ;
 private int stepNum              = 1;

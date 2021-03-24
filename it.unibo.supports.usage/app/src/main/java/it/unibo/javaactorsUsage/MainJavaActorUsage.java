@@ -4,8 +4,6 @@ import it.unibo.supports2021.ActorBasicJava;
 
 public class MainJavaActorUsage {
 
-
-
     public void doTest( ){
         ActorBasicJava a0 = new Actor0("a0");
         a0.send("hello from doTest");

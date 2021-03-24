@@ -9,8 +9,6 @@ package it.unibo.resumableWalker;
 import it.unibo.interaction.IssCommActorSupport;
 import it.unibo.interaction.MsgRobotUtil;
 
-
-
 public class RobotResumableBoundaryLogic {
 private IssCommActorSupport rs ;
 private int stepNum              = 1;

@@ -1,4 +1,5 @@
-package it.unibo.useokhttp;
+package it.unibo.robotWithActorJava;
+
 import mapRoomKotlin.mapUtil;
 
 public class RobotMovesInfo {
@@ -7,7 +8,6 @@ public class RobotMovesInfo {
 
     public RobotMovesInfo(boolean doMap){
         this.doMap = doMap;
-
     }
     public void showRobotMovesRepresentation(  ){
         if( doMap ) mapUtil.showMap();
@@ -28,7 +28,7 @@ public class RobotMovesInfo {
         else return journey;
     }
 
-    public void updateRobotMovesRepresentation(String move ){
+    public void updateMovesRep(String move ){
         if( doMap )  mapUtil.doMove( move );
         else journey = journey + move;
     }

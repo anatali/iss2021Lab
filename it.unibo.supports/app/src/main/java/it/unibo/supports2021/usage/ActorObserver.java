@@ -1,6 +1,7 @@
 package it.unibo.supports2021.usage;
 
 import it.unibo.supports2021.ActorBasicJava;
+import org.jetbrains.annotations.NotNull;
 
 public class ActorObserver extends ActorBasicJava {
 
@@ -11,4 +12,5 @@ public class ActorObserver extends ActorBasicJava {
     protected void handleInput(String info) {
         System.out.println( name + " | " + info + " " + aboutThreads() );
     }
+
 }

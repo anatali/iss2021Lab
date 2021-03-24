@@ -1,13 +1,17 @@
 package it.unibo.supports2021;
 
 import it.unibo.interaction.IJavaActor;
+import it.unibo.interaction.IssObservable;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Vector;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public abstract class ActorBasicJava extends Thread implements IJavaActor {
+public abstract class ActorBasicJava extends Thread implements IJavaActor, IssObservable {
     private boolean goon = true;
-    private BlockingQueue<String> bqueue = new LinkedBlockingQueue<String>(10);
+    private Vector<IJavaActor> actorobservers      = new Vector<IJavaActor>();
+    private BlockingQueue<String> bqueue           = new LinkedBlockingQueue<String>(10);
     protected String name ;
     public ActorBasicJava(String name){
         this.name = name ;
@@ -55,6 +59,18 @@ public abstract class ActorBasicJava extends Thread implements IJavaActor {
     }
 
     protected abstract void handleInput(String info);
+
+//---------------------------------------------------------------------------
+    @Override
+    public void registerActor(@NotNull IJavaActor obs) { actorobservers.add(obs);  }
+
+    @Override
+    public void removeActor(@NotNull IJavaActor obs) { actorobservers.remove(obs);   }
+
+    protected void updateObservers(String info ){
+        actorobservers.forEach( v -> v.send(info));
+    }
+
 
 //-----------------------------------------------------
     public static String aboutThreads(){
