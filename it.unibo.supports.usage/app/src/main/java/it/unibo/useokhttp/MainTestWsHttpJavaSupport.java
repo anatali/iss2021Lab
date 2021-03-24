@@ -62,8 +62,8 @@ public class MainTestWsHttpJavaSupport {
         MainTestWsHttpJavaSupport appl = new MainTestWsHttpJavaSupport();
         //appl.testHttp();
         //appl.testWs();
-        //appl.TestWsWithObserver();
-        appl.TestWsWithConsoleSimulation();
+        appl.TestWsWithObserver();
+        //appl.TestWsWithConsoleSimulation();
         System.out.println("MainTestWsHttpJavaSupport | END " + ActorObserverBasic.aboutThreads() );
     }
 }
