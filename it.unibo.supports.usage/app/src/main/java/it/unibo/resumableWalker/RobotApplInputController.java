@@ -6,19 +6,19 @@ on the cmdsocket-8091 or from the consoleGui
 ===============================================================
 */
 package it.unibo.resumableWalker;
-import it.unibo.interaction.IssCommSupport;
+import it.unibo.interaction.IssCommActorSupport;
 import it.unibo.interaction.IssObserver;
 
 import org.json.JSONObject;
 
 public class RobotApplInputController implements IssObserver {
 private RobotResumableBoundaryLogic robotBehaviorLogic  ;
-private IssCommSupport commSupport;
+private IssCommActorSupport commSupport;
 
 private boolean robotStarted = false;
 private boolean robotHalted  = true;
 
-    public RobotApplInputController(IssCommSupport support, boolean usearil, boolean doMap){
+    public RobotApplInputController(IssCommActorSupport support, boolean usearil, boolean doMap){
         commSupport = support;
         robotBehaviorLogic = new RobotResumableBoundaryLogic(support, usearil, doMap);
      }

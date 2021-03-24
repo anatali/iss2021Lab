@@ -26,7 +26,7 @@ public class MainTestWsHttpJavaSupport {
     public void TestWsWithObserver(){
         IssWsHttpJavaSupport support    = IssWsHttpJavaSupport.createForWs("localhost:8091" );
         RobotInputController controller = new RobotInputController(support, false, true );
-        support.registerObserver(controller);
+        support.registerActor(controller);
 /*
         IssObserver actorObs0 = new ActorObserverNaive(0);
         support.registerObserver(actorObs0);
@@ -41,11 +41,11 @@ public class MainTestWsHttpJavaSupport {
     public void TestWsWithConsoleSimulation(){
         IssWsHttpJavaSupport support    = IssWsHttpJavaSupport.createForWs("localhost:8091" );
         RobotInputController controller = new RobotInputController(support, false, true );
-        support.registerObserver(controller);
-
-        IssObserver actorObs0 = new ActorObserverNaive(0, controller);
-        support.registerObserver(actorObs0);
+        support.registerActor(controller);
 /*
+        IssObserver actorObs0 = new ActorObserverNaive(0, controller);
+        support.registerActor(actorObs0);
+
         ActorObserverNaive actorObs1 = new ActorObserverNaive(1);   //delay counter*500
         support.registerObserver(actorObs1);
 */

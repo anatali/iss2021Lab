@@ -8,8 +8,8 @@ package it.unibo.interaction
 
 import it.unibo.supports2021.ActorBasicJava
 
-interface IssCommSupport : IssOperations {
-    fun registerObserver(obs: IssObserver)
-    fun removeObserver(obs: IssObserver)
+interface IssCommActorSupport : IssOperations {
+    fun registerActor( obs: ActorBasicJava)
+    fun removeActor( obs: ActorBasicJava)
     fun close()
 }

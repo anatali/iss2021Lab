@@ -1,5 +1,5 @@
 /**
- * ActorNaive.java
+ * ActorObserverBasic.java
  ===============================================================
  ===============================================================
 
@@ -13,7 +13,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public abstract class ActorObserverBasic extends Thread implements IssObserver {
     private boolean goon         = true;
-    private Vector<String> queue = new Vector<String>();
     private BlockingQueue<String>  bqueue = new LinkedBlockingQueue<String>(10);
     protected int counter;
 

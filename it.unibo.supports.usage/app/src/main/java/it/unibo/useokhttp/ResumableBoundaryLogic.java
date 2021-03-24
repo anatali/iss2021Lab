@@ -6,20 +6,21 @@ implements the business logic
 ===============================================================
 */
 package it.unibo.useokhttp;
+import it.unibo.interaction.IssCommActorSupport;
 import it.unibo.interaction.IssCommSupport;
 import it.unibo.interaction.MsgRobotUtil;
 
 
 
 public class ResumableBoundaryLogic {
-private IssCommSupport rs ;
+private IssCommActorSupport rs ;
 private int stepNum              = 1;
 private boolean boundaryWalkDone = false ;
 private boolean usearil          = false;
 private int moveInterval         = 1000;
 private RobotMovesInfo robotInfo;
 
-    public ResumableBoundaryLogic(IssCommSupport support, boolean usearil, boolean doMap){
+    public ResumableBoundaryLogic(IssCommActorSupport support, boolean usearil, boolean doMap){
         rs           = support;
         this.usearil = usearil;
         robotInfo    = new RobotMovesInfo(doMap);

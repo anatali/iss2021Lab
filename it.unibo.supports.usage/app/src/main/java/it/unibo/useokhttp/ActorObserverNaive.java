@@ -1,3 +1,9 @@
+/**
+ * ActorObserverNaive.java
+ ===============================================================
+ ===============================================================
+
+ */
 package it.unibo.useokhttp;
 import org.json.JSONObject;
 
@@ -21,6 +27,6 @@ public class ActorObserverNaive extends ActorObserverBasic{
 
     protected void simulateUserCmd(){
         System.out.println("ActorObserverNaive " + counter + " | --- simulateUserCmd   "  );
-        controller.handleInfo( "{\"robotcmd\":\"STOP\"}" );
+        //controller.handleInfo( "{\"robotcmd\":\"STOP\"}" );
     }
 }

@@ -1,15 +1,23 @@
+/*
+============================================================
+IssWsHttpJavaSupport.java
+Since it extends WebSocketListener, this class can be modelled
+as an actor that is able to interact with other actors
+registered as abservers
+============================================================
+ */
 package it.unibo.supports2021;
 
-import it.unibo.interaction.IssCommSupport;
-import it.unibo.interaction.IssObserver;
+import it.unibo.interaction.IssCommActorSupport;
 import okhttp3.*;
 import okhttp3.internal.http.RealResponseBody;
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Vector;
 
-public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSupport {
-    private boolean connectForWs           = true;
-    private Vector<IssObserver> observers  = new Vector<IssObserver>();
+public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommActorSupport {
+    private boolean connectForWs                    = true;
+    private Vector<ActorBasicJava> actorobservers  = new Vector<ActorBasicJava>();
     private WebSocket myWs;
     private OkHttpClient okHttpClient  = new OkHttpClient();
     final MediaType JSON_MediaType     = MediaType.get("application/json; charset=utf-8");
@@ -27,16 +35,15 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
         else httpconnect(addr);
     }
     //----------------------------------------------------------------------
-    @Override
-    public void registerObserver(@NotNull IssObserver obs) {
-        observers.add( obs );
-    }
 
     @Override
-    public void removeObserver(@NotNull IssObserver obs) {
-        observers.remove(obs);
+    public void registerActor(@NotNull ActorBasicJava actorObs) {
+        actorobservers.add(actorObs);
     }
-
+    @Override
+    public void removeActor(@NotNull ActorBasicJava actorObs) {
+        actorobservers.remove(actorObs);
+    }
     @Override
     public void close() {
         if( myWs != null ){
@@ -88,7 +95,7 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
 
     protected void updateObservers( String msg ){
         //System.out.println("IssWsHttpJavaSupport | updateObservers " + observers.size() );
-        observers.forEach( v -> v.handleInfo(msg));
+         actorobservers.forEach( v -> v.send( msg ) );
     }
 
 //----------------------------------------------------------------------
@@ -123,5 +130,6 @@ public class IssWsHttpJavaSupport extends WebSocketListener implements IssCommSu
             return "";
         }
     }
+
 
 }

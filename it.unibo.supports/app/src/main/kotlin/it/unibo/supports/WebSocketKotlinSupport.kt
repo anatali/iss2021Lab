@@ -12,8 +12,9 @@ Observer of the socket, it is observable in its turn
 ===============================================================
  */
 package it.unibo.supports
-import it.unibo.interaction.IssCommSupport
+import it.unibo.interaction.IssCommActorSupport
 import it.unibo.interaction.IssObserver
+import it.unibo.supports2021.ActorBasicJava
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -26,14 +27,15 @@ import org.json.JSONObject
 import java.util.*
 
 @ExperimentalCoroutinesApi
-class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), IssCommSupport {
+class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), IssCommActorSupport {
     lateinit var myWs: WebSocket
     lateinit var workTodo: (CoroutineScope, WebSocketKotlinSupport) -> Unit
     //lateinit var connetctedWs : WebSocket
 
     val  JSON_MediaType = "application/json; charset=utf-8".toMediaType()
     val okHttpClient    = OkHttpClient()
-    val observers       = Vector<IssObserver>()
+    //val observers       = Vector<IssObserver>()
+    val actorobservers  = Vector<ActorBasicJava>()
 
     //val socketMsgChannel: Channel<String> = Channel(10) //our channel buffer is 10 events
 
@@ -56,11 +58,15 @@ class WebSocketKotlinSupport(val scope: CoroutineScope) : WebSocketListener(), I
 //===============================================================================
     fun updateObservers( msg: String){
         //println("WebSocketKotlinSupport | updateObservers " + observers.size() );
-        observers.forEach{ it.handleInfo(msg) } //loose control
+        //observers.forEach{ it.handleInfo(msg) } //loose control
+        actorobservers.forEach{ it.send(msg) }
         //scope.launch { socketMsgChannel.send( msg ) }
     }
-    override fun registerObserver(obs: IssObserver) { observers.add(obs) }
-    override fun removeObserver(obs: IssObserver) { observers.remove(obs) }
+    //override fun registerObserver(obs: IssObserver) { observers.add(obs) }
+    //override fun removeObserver(obs: IssObserver)   { observers.remove(obs) }
+    override fun registerActor(obs: ActorBasicJava) { actorobservers.add(obs) }
+    override fun removeActor(obs: ActorBasicJava)   { actorobservers.remove(obs); }
+
     override fun close(){  disconnect( )  }
 //===============================================================================
     override fun forward( msg: String)  {
