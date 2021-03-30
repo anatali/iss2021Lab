@@ -10,6 +10,8 @@ public class CautiousExplorerActor extends AbstractRobotActor {
     private boolean tripStopped  = true;
     protected RobotMovesInfo moves = new RobotMovesInfo(false);
     protected RobotMovesInfo map   = new RobotMovesInfo(true);
+    protected boolean backToHome   = false;
+    protected String returnPath    = "";
 
     public CautiousExplorerActor(String name ) {
         super(name );
@@ -44,7 +46,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                     continueWalk();
                 } else if (move.equals("moveForward") && endmove.equals("false")) {
                     curState = State.obstacle;
-                    littleBack();
+                    turnLeft();
                 }
                 break;
             }//exploring
@@ -53,8 +55,10 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                 if (move.equals("resume")) {
                     curState = State.exploring;
                     doStep();
-                } else if (move.equals("moveBackward") && endmove.equals("true")) {
-
+                } else if (move.equals("turnLeft") && endmove.equals("true")) {
+                    turnLeft();
+                    backToHome = true;
+                    returnPath = moves.getMovesRepresentation();
                     System.out.println("back to home along the same path ...");
                     map.showRobotMovesRepresentation();
                     moves.showRobotMovesRepresentation();
@@ -76,19 +80,33 @@ public class CautiousExplorerActor extends AbstractRobotActor {
     @Override
     protected void msgDriven( JSONObject infoJson){
         System.out.println("CautiousExplorerActor | infoJson:" + infoJson);
+        if( backToHome ){
+             stepToHome();
+            return;
+        }
         if( infoJson.has("endmove") )        fsm(infoJson.getString("move"), infoJson.getString("endmove"));
         else if( infoJson.has("sonarName") ) handleSonar(infoJson);
         else if( infoJson.has("collision") ) handleCollision(infoJson);
         else if( infoJson.has("robotcmd") )  handleRobotCmd(infoJson);
     }
 
+    protected void stepToHome(){
+        if( returnPath.length() == 0 ){
+            System.out.println("CautiousExplorerActor | AT HOME AGAIN "  );
+            map.showRobotMovesRepresentation();
+        }else{
+            System.out.println("CautiousExplorerActor | going to home "  + returnPath  );
+            returnPath = returnPath.substring(1);
+            doStep();
+        }
+    }
     protected void handleSonar( JSONObject sonarinfo ){
         String sonarname = (String)  sonarinfo.get("sonarName");
         int distance     = (Integer) sonarinfo.get("distance");
         System.out.println("CautiousExplorerActor | handleSonar:" + sonarname + " distance=" + distance);
     }
     protected void handleCollision( JSONObject collisioninfo ){
-        //System.out.println("RobotApplication | handleCollision move=" + move  );
+        //System.out.println("CautiousExplorerActor | handleCollision move=" + move  );
     }
 
     protected void handleRobotCmd( JSONObject robotCmd ){

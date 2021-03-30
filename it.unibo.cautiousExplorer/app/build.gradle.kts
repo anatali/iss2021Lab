@@ -68,7 +68,7 @@ dependencies {
     implementation("javax.websocket:javax.websocket-api:1.1")   //javax.websocket api is only the specification
     implementation("org.glassfish.tyrus.bundles:tyrus-standalone-client:1.9")
 //UNIBO
-    implementation( "uniboIssSupport:IssWsHttpJavaSupport" )
+    implementation( "uniboIssSupport:IssWsHttpJavaSupport"  )
 }
 
 /*

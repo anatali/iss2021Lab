@@ -1,8 +1,7 @@
 package it.unibo.cautiousExplorer;
 
-import it.unibo.supports2021.ActorBasicJava;
-import it.unibo.supports2021.IssWsHttpJavaSupport;
 import org.json.JSONObject;
+import it.unibo.supports2021.*;
 
 public abstract class AbstractRobotActor extends ActorBasicJava {
     final String forwardMsg         = "{\"robotmove\":\"moveForward\", \"time\": 350}";
