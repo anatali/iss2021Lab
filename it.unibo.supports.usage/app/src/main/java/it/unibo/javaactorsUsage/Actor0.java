@@ -10,6 +10,6 @@ public class Actor0 extends ActorBasicJava {
      }
     @Override
     protected void handleInput(String info) {
-        System.out.println( name + " | " + info + " " + aboutThreads() );
+        System.out.println( myname + " | " + info + " " + aboutThreads() );
      }
 }

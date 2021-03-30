@@ -3,7 +3,6 @@ package it.unibo.supports2021;
 import it.unibo.interaction.IJavaActor;
 import it.unibo.interaction.IssObservable;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Vector;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;

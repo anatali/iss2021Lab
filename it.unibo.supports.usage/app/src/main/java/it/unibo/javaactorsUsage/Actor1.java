@@ -12,7 +12,7 @@ public class Actor1 extends ActorBasicJava {
     }
     @Override
     protected void handleInput(String info) {
-        System.out.println( name + " | " + info + " " + aboutThreads() );
-        this.forward("redirected_"+info, dest);
+        System.out.println( myname + " | " + info + " " + aboutThreads() );
+        forward("redirected_"+info, dest);
     }
 }

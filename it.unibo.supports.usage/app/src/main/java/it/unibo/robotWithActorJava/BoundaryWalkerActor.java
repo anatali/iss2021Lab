@@ -1,30 +1,32 @@
 package it.unibo.robotWithActorJava;
 
+
 import it.unibo.interaction.IssCommActorSupport;
 import it.unibo.supports2021.ActorBasicJava;
 import org.json.JSONObject;
 
-public class RobotApplication extends ActorBasicJava {
+public class BoundaryWalkerActor extends ActorBasicJava {
     final String forwardMsg = "{\"robotmove\":\"moveForward\", \"time\": 350}";
     final String backwardMsg = "{\"robotmove\":\"moveBackward\", \"time\": 350}";
     final String turnLeftMsg = "{\"robotmove\":\"turnLeft\", \"time\": 300}";
     final String turnRightMsg = "{\"robotmove\":\"turnRight\", \"time\": 300}";
     final String haltMsg = "{\"robotmove\":\"alarm\", \"time\": 100}";
 
-    private enum State {start, walk, obstacle, end };
+    private enum State {start, walking, obstacle, end };
     private IssCommActorSupport support;
     private State curState       =  State.start ;
     private int stepNum          = 1;
-    private RobotMovesInfo moves = new RobotMovesInfo(true);
+    private RobotMovesInfo moves = new RobotMovesInfo(false);
 
-    public RobotApplication(String name, IssCommActorSupport support) {
+    public BoundaryWalkerActor(String name, IssCommActorSupport support) {
         super(name);
         this.support = support;
     }
 
     public void startJob(){
+        moves.getMovesRepresentationAndClean();
         curState       =  State.start;
-        fsm("","");
+        //fsm("","");
     }
 
     public void reset(){
@@ -38,16 +40,15 @@ public class RobotApplication extends ActorBasicJava {
 
 
     protected void fsm(String move, String endmove){
-        System.out.println( name + " | fsm state=" + curState + " stepNum=" + stepNum + " move=" + move + " endmove=" + endmove);
+        System.out.println( myname + " | fsm state=" + curState + " stepNum=" + stepNum + " move=" + move + " endmove=" + endmove);
         switch( curState ) {
             case start: {
-                curState = State.walk;
-                //moves.getMovesRepresentationAndClean();
                 moves.showRobotMovesRepresentation();
                 doStep();
+                curState = State.walking;
                 break;
             }
-            case walk: {
+            case walking: {
                 if (move.equals("moveForward") && endmove.equals("true")) {
                     //curState = State.walk;
                     moves.updateMovesRep("w");
@@ -71,7 +72,7 @@ public class RobotApplication extends ActorBasicJava {
                     stepNum++;
                     moves.updateMovesRep("l");
                     moves.showRobotMovesRepresentation();
-                    curState = State.walk;
+                    curState = State.walking;
                     doStep();
                 } break;
 
