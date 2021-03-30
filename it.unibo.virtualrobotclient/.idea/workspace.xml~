@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6eaadf8b-1bf4-483a-ac60-1b975493a587" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/it/unibo/resumablebw/AnotherObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/it/unibo/resumablebw/ResumableRobotBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/it/unibo/resumablebw/ResumableRobotBoundary.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1nIKjIizkuq2DDxBbBEVAA1GVaO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/userDocs/img" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="mapRoomKotlin" />
+      <recent name="it.unibo.fsm" />
+      <recent name="it.unibo.virtualrobotclient" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="it.unibo.robotAppl" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.unibo.cautiousExplorer" />
+      <recent name="it.unibo.wenv" />
+      <recent name="consolegui" />
+      <recent name="it.unibo.interaction" />
+      <recent name="it.unibo.virtualrobotclient" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualrobotclient\userDocs\img" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualrobotclient\userDocs" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualrobotclient" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualrobotclient\app\src\main\java\it\unibo" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.virtualrobotclient\backup" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ResumableRobotBoundary">
+    <configuration name="ResumableRobotBoundary" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.resumablebw.ResumableRobotBoundary" />
+      <module name="it.unibo.virtualrobotclient.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.resumablebw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestClientUsingPostJava" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;it.unibo.wenv.TestClientUsingPostJava&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="UseWEnvHTTPSupportKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="it.unibo.virtualrobotclient.app.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="it.unibo.interaction.UseWEnvHTTPSupportKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WalkerHttpCallerKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="it.unibo.virtualrobotclient.app.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="it.unibo.fsm.WalkerHttpCallerKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WalkerKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="it.unibo.virtualrobotclient.app.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="it.unibo.fsm.WalkerKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ResumableRobotBoundary" />
+        <item itemvalue="Gradle.TestClientUsingPostJava" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6eaadf8b-1bf4-483a-ac60-1b975493a587" name="Default Changelist" comment="" />
+      <created>1611072298513</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611072298513</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="580" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1616500159525">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="580" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616500159525" />
+    <state x="498" y="149" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1616003250564">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="498" y="149" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616003250564" />
+    <state x="387" y="373" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1616003004423">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="387" y="373" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616003004423" />
+    <state x="541" y="327" width="554" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1616003251604">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="541" y="327" width="554" height="269" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616003251604" />
+    <state x="541" y="340" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1616002999185">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="541" y="340" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616002999185" />
+    <state x="502" y="205" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1616002896725">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="502" y="205" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616002896725" />
+    <state x="517" y="151" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1612627424938">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="517" y="151" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1612627424938" />
+    <state x="633" y="243" key="FileChooserDialogImpl" timestamp="1616337272683">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="633" y="243" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1612885635733" />
+    <state x="633" y="243" key="FileChooserDialogImpl/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1616337272683" />
+    <state width="936" height="306" key="GridCell.Tab.0.bottom" timestamp="1616512425094">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state width="936" height="306" key="GridCell.Tab.0.bottom/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616512425094" />
+    <state width="1374" height="222" key="GridCell.Tab.0.bottom/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1616433837962" />
+    <state width="1301" height="194" key="GridCell.Tab.0.bottom/0.0.1536.920@0.0.1536.920" timestamp="1611077067457" />
+    <state width="936" height="306" key="GridCell.Tab.0.center" timestamp="1616512425094">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state width="936" height="306" key="GridCell.Tab.0.center/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616512425094" />
+    <state width="1374" height="222" key="GridCell.Tab.0.center/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1616433837962" />
+    <state width="1301" height="194" key="GridCell.Tab.0.center/0.0.1536.920@0.0.1536.920" timestamp="1611077067457" />
+    <state width="936" height="306" key="GridCell.Tab.0.left" timestamp="1616512425094">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state width="936" height="306" key="GridCell.Tab.0.left/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616512425094" />
+    <state width="1374" height="222" key="GridCell.Tab.0.left/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1616433837962" />
+    <state width="1301" height="194" key="GridCell.Tab.0.left/0.0.1536.920@0.0.1536.920" timestamp="1611077067457" />
+    <state width="936" height="306" key="GridCell.Tab.0.right" timestamp="1616512425094">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state width="936" height="306" key="GridCell.Tab.0.right/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1616512425094" />
+    <state width="1374" height="222" key="GridCell.Tab.0.right/0.0.1536.920/3840.0.1280.984@0.0.1536.920" timestamp="1616433837962" />
+    <state width="1301" height="194" key="GridCell.Tab.0.right/0.0.1536.920@0.0.1536.920" timestamp="1611077067457" />
+    <state x="75" y="0" key="SettingsEditor" timestamp="1613749399798">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="75" y="0" key="SettingsEditor/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1613749399798" />
+    <state x="106" y="104" width="1157" height="582" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1611077061854">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="106" y="104" width="1157" height="582" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.920@0.0.1536.920" timestamp="1611077061854" />
+    <state x="476" y="141" width="584" height="534" key="find.popup" timestamp="1613148534534">
+      <screen x="0" y="0" width="1536" height="920" />
+    </state>
+    <state x="476" y="141" width="584" height="534" key="find.popup/0.0.1536.920/3840.0.1280.943@0.0.1536.920" timestamp="1613148534534" />
+  </component>
+</project>
