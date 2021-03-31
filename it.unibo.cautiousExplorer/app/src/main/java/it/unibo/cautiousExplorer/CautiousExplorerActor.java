@@ -1,17 +1,18 @@
 package it.unibo.cautiousExplorer;
 
 import it.unibo.interaction.IJavaActor;
+import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
 
 public class CautiousExplorerActor extends AbstractRobotActor {
 
-    private enum State {start, exploring, turning, obstacle, end };
+    private enum State {start, exploring, turning, obstacle, atHomeAgain, end };
 
     private State curState       = State.start ;
     private boolean tripStopped  = true;
     protected RobotMovesInfo moves = new RobotMovesInfo(false);
-    protected RobotMovesInfo map   = new RobotMovesInfo(true);
-    protected boolean backToHome   = false;
+    //protected RobotMovesInfo map   = new RobotMovesInfo(true);
+    protected boolean goingBackToHome   = false;
     protected String returnPath    = "";
 
     protected IJavaActor goBackActor ;
@@ -19,14 +20,16 @@ public class CautiousExplorerActor extends AbstractRobotActor {
     protected int maxNumStep       = 1;
     protected int numOfLeftTurn    = 0;
     protected int numOfSpiral      = 1;
+    protected int maxnumOfSpiral   = 5;
     public CautiousExplorerActor(String name ) {
         super(name );
     }
 
-
     protected void resetStateVars(){
+        goingBackToHome    = false;
         numStep       = 0;
         numOfLeftTurn = 0;
+        moves.cleanMovesRepresentation();
     }
     protected void continueWalk(){
         if( ! tripStopped   )  doStep();
@@ -35,7 +38,14 @@ public class CautiousExplorerActor extends AbstractRobotActor {
 
     protected void updateTripInfo(String move){
         moves.updateMovesRep(move);
-        map.updateMovesRep(move);
+        mapUtil.doMove(move);
+        //map.updateMovesRep(move);
+    }
+
+    protected void setObstacleOnMap(){  //trick!!
+        mapUtil.doMove("w");
+        mapUtil.setObstacle();
+        mapUtil.doMove("s");
     }
 
     protected void fsmSpiral(String move, String endmove  ) {
@@ -44,8 +54,10 @@ public class CautiousExplorerActor extends AbstractRobotActor {
         switch (curState) {
             case start: {
                 if( move.equals("resume") ){
-                    map.showRobotMovesRepresentation();
+                    //map.showRobotMovesRepresentation();
+                    mapUtil.showMap();
                     resetStateVars();
+                    //waitUser();
                     doStep();
                     curState = State.exploring;
                 };
@@ -63,18 +75,21 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                         curState = State.turning;
                     }
                 } else if (move.equals("moveForward") && endmove.equals("false")) {
+                    setObstacleOnMap();
                     curState = State.obstacle;
-                    turnLeft();
+                    //turnLeft();
+                    microStep(); //just to continue ...
                 }
                 break;
             }//exploring
 
             case turning : {
+                /*
                 if (move.equals("resume")) { //???
                     curState = State.turning;
                     doStep();
                     return;
-                }
+                }*/
                 if (move.equals("turnLeft") && endmove.equals("true")) {
                     numOfLeftTurn++;
                     updateTripInfo("l");
@@ -82,46 +97,54 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                         numStep = 0;
                         doStep();
                         curState = State.exploring;
-                    }else{
-                        System.out.println(myname + "SPIRAL DONE:" + numOfSpiral);
-                        numOfSpiral++;
-                        map.showRobotMovesRepresentation();
-                        moves.showRobotMovesRepresentation();
-                        delay(1000);
-                        System.out.println(myname + "ANOTHER SPIRAL: " + numOfSpiral);
-                        if( numOfSpiral < 3 ) {
-                            resetStateVars();
-                            maxNumStep++;
-                            curState = State.exploring;
-                            doStep();
-                        }
+                    }else{  //back to home either ok or runaway
+                        curState = State.atHomeAgain;
+                        this.microStep(); //just to continue ...
                     }
                 }
                 break;
             }//turning
 
-            case obstacle : {
-                if (move.equals("resume")) { //???
+            case atHomeAgain:{
+                System.out.println(myname + "SPIRALDONE:" + numOfSpiral);
+                numOfSpiral++;
+                mapUtil.showMap();
+                moves.showRobotMovesRepresentation();
+                delay(1000);
+                System.out.println(myname + "ANOTHERSPIRAL: " + numOfSpiral);
+                if( numOfSpiral < maxnumOfSpiral ) {
+                    resetStateVars();
+                    maxNumStep++; //equal numOfSpiral?
                     curState = State.exploring;
                     doStep();
-                } else if (move.equals("turnLeft") && endmove.equals("true")) {
-                    updateTripInfo("l");
-                    turnLeft();
-                    updateTripInfo("l"); //do not handle endmove
+                }
+                break;
+            }//atHomeAgain
+
+            case obstacle : {   //here with a microstep
+                //if (move.equals("turnLeft") ) { //&& endmove.equals("true")
+                    //updateTripInfo("l");
+
+                    //if( moves.getMovesRepresentation().    .turnLeft();
+                    //updateTripInfo("l"); //do not handle endmove
                     returnPath = moves.getMovesRepresentation();
-                    System.out.println("back to home along the same path ...");
-                    map.showRobotMovesRepresentation();
+                    System.out.println(myname + " | back to home along the same path ...");
+                    //map.showRobotMovesRepresentation();
+                    mapUtil.showMap();
                     moves.showRobotMovesRepresentation();
 
-                    backToHome = true;
-                    goBackActor = new RunawayActor("runAway",moves.getMovesRepresentation(), map);
+                    //waitUser();
+
+
+                    goingBackToHome = true;
+                    goBackActor = new RunawayActor("runAway", moves.getMovesRepresentation(), this);
                     goBackActor.send(goBackMsg);
-                }
+               // }
                 break;
             }//obstacle
 
             default: {
-                System.out.println("error - curState = " + curState);
+                System.out.println(myname + " | error - curState = " + curState);
             }
         }
 
@@ -165,7 +188,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                     map.showRobotMovesRepresentation();
                     moves.showRobotMovesRepresentation();
 
-                    backToHome = true;
+                    goingBackToHome = true;
                     goBackActor = new RunawayActor("runAway",moves.getMovesRepresentation(), map);
                     goBackActor.send(goBackMsg);
                 }
@@ -185,10 +208,14 @@ public class CautiousExplorerActor extends AbstractRobotActor {
  */
     @Override
     protected void msgDriven( JSONObject infoJson){
-        if( backToHome ){   //does nothing
-             return;
+        if( infoJson.has("resume") ) {
+            curState = State.atHomeAgain;
+            fsmSpiral("resume","");
         }
-        System.out.println("CautiousExplorerActor | infoJson:" + infoJson);
+        if( goingBackToHome ){   //does nothing (avoid to handle messages sent by WEnv
+            return;
+        }
+        System.out.println(myname + "  | infoJson:" + infoJson);
         if( infoJson.has("endmove") )
             fsmSpiral(infoJson.getString("move"), infoJson.getString("endmove") );
         else if( infoJson.has("sonarName") ) handleSonar(infoJson);
@@ -210,7 +237,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
     protected void handleSonar( JSONObject sonarinfo ){
         String sonarname = (String)  sonarinfo.get("sonarName");
         int distance     = (Integer) sonarinfo.get("distance");
-        System.out.println("CautiousExplorerActor | handleSonar:" + sonarname + " distance=" + distance);
+        System.out.println( myname + " | handleSonar:" + sonarname + " distance=" + distance);
     }
     protected void handleCollision( JSONObject collisioninfo ){
         //System.out.println("CautiousExplorerActor | handleCollision move=" + move  );
@@ -219,7 +246,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
     protected void handleRobotCmd( JSONObject robotCmd ){
         String cmd = (String)  robotCmd.get("robotcmd");
         System.out.println("===================================================="    );
-        System.out.println("CautiousExplorerActor | handleRobotCmd cmd=" + cmd  );
+        System.out.println(myname + " | handleRobotCmd cmd=" + cmd  );
         System.out.println("===================================================="    );
         if( cmd.equals("STOP") ) {
             tripStopped = true;

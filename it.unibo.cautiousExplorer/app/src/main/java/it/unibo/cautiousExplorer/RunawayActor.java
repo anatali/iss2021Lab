@@ -1,6 +1,11 @@
 package it.unibo.cautiousExplorer;
 
+import it.unibo.interaction.IJavaActor;
+import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
 /*
 The robot cannot be stopped.
 The returnPath is obstacle-free
@@ -10,24 +15,34 @@ public class RunawayActor extends AbstractRobotActor {
     private enum State {start, moving, end };
 
     private State curState       = State.start ;
-
-    //protected RobotMovesInfo moves = new RobotMovesInfo(false);
-    protected RobotMovesInfo map   ;
-
+    //protected RobotMovesInfo map   ;
+    protected IJavaActor mainActor ;
     protected String returnPath    = "";
 
-    public RunawayActor(String name, String returnPath, RobotMovesInfo map ) {
+    public RunawayActor(String name, String path, IJavaActor mainActor ) {
         super(name );
-        this.returnPath = returnPath;
-        this.map        = map;
+        //returnPath = returnPath.replace("l","r");
+        returnPath = reverse( path.replace("l","r")  );
+        //this.map        = map;
+        this.mainActor  = mainActor;
     }
-
+    protected String reverse( String s  ){
+        if( s.length() <= 1 )  return s;
+        else return reverse( s.substring(1) ) + s.charAt(0) ;
+    }
     protected void updateTripInfo(String move){
-        map.updateMovesRep(move);
+        //map.updateMovesRep(move);
+        mapUtil.doMove(move);
+    }
+    protected void trun180(){
+        doMove('l');
+        mapUtil.doMove("l");
+        doMove('l');
+        mapUtil.doMove("l");
     }
 
     protected void doMove(char moveStep){
-        System.out.println("RunawayActor | doMove ............... " + moveStep);
+        System.out.println("RunawayActor | doMove ... " + moveStep + " returnPath="+returnPath);
         if( moveStep == 'w') doStep();
         else if( moveStep == 'l') turnLeft();
         else if( moveStep == 'r') turnRight();
@@ -40,40 +55,55 @@ public class RunawayActor extends AbstractRobotActor {
         switch (curState) {
             case start: {
                 //if( move.equals("goback") && returnPath.length() > 0){
-                System.out.println("===============================================");
+                System.out.println("=%=%==%=%=%==%=%=%==%=%=%==%=%=%==%=%=%==%=%=%==%=%=%==% ");
+
                 if( returnPath.length() > 0){
                     //map.showRobotMovesRepresentation();
+                    trun180();
+                    mapUtil.showMap();
+                    waitUser();
                     doMove( returnPath.charAt(0) );
                     curState = State.moving;
                  }else curState = State.end;
+
                 break;
             }
             case moving: {
                 String moveInfo = MoveStep.get(move);
-                if ( endmove.equals("true")) {
-                    returnPath = returnPath.substring(1);
-                    System.out.println("RunawayActor | moveInfo " + moveInfo + " returnPath="+ returnPath);
-                    updateTripInfo(moveInfo);
-                    map.showRobotMovesRepresentation();
-                    if( returnPath.length() > 0){
+
+                //if ( endmove.equals("false")) { //ignore the obstacle
+                //    System.out.println("RunawayActor |  OUT OF HYPOTHESIS in " + curState);
+                //}
+                //if ( endmove.equals("true")) {
+
+                updateTripInfo(moveInfo);
+                mapUtil.showMap();
+                    //map.showRobotMovesRepresentation();
+                //}
+
+                returnPath = returnPath.substring(1);   //a back-move has been done
+                System.out.println(myname + " | moveInfo " + moveInfo + " returnPath=" + returnPath);
+                if( returnPath.length() > 0){
                         //map.showRobotMovesRepresentation();
                         doMove( returnPath.charAt(0) );
                         curState = State.moving;
                     }else{ //returnPath.length() == 0
-                        //Here does not arrive, since no more moves
+                        //It does not arrive in end, since no more moves
+                        microStep();
                         curState = State.end;
                     }
-                } else if ( endmove.equals("false")) {
-                    System.out.println("RunawayActor | fatal error - OUT OF HYPOTHESIS in " + curState);
-                }
+                //}
                 break;
             }//moving
             case end: {
-                System.out.println("RunawayActor | END ---------------- "  );
-                map.showRobotMovesRepresentation();
+                System.out.println(myname + " | END ---------------- "  );
+                //map.showRobotMovesRepresentation();
+                reactivate(mainActor);
+                terminate();
+                break;
             }//end
             default: {
-                System.out.println("RunawayActor | error - curState = " + curState);
+                System.out.println(myname + " | error - curState = " + curState);
             }
         }
 
