@@ -23,6 +23,11 @@ public class CautiousExplorerActor extends AbstractRobotActor {
         super(name );
     }
 
+
+    protected void resetStateVars(){
+        numStep       = 0;
+        numOfLeftTurn = 0;
+    }
     protected void continueWalk(){
         if( ! tripStopped   )  doStep();
         else{ System.out.println("please resume ..."); }
@@ -40,7 +45,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
             case start: {
                 if( move.equals("resume") ){
                     map.showRobotMovesRepresentation();
-                    numStep = 0;
+                    resetStateVars();
                     doStep();
                     curState = State.exploring;
                 };
@@ -85,7 +90,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                         delay(1000);
                         System.out.println(myname + "ANOTHER SPIRAL: " + numOfSpiral);
                         if( numOfSpiral < 3 ) {
-                            numStep = 0;
+                            resetStateVars();
                             maxNumStep++;
                             curState = State.exploring;
                             doStep();
