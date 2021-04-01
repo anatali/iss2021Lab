@@ -4,8 +4,6 @@ import it.unibo.interaction.IJavaActor;
 import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 /*
 The robot cannot be stopped.
 The returnPath is obstacle-free
@@ -69,7 +67,7 @@ public class RunawayActor extends AbstractRobotActor {
                 break;
             }
             case moving: {
-                String moveInfo = MoveStep.get(move);
+                String moveInfo = MoveNameShort.get(move);
 
                 //if ( endmove.equals("false")) { //ignore the obstacle
                 //    System.out.println("RunawayActor |  OUT OF HYPOTHESIS in " + curState);

@@ -42,11 +42,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
         //map.updateMovesRep(move);
     }
 
-    protected void setObstacleOnMap(){  //trick!!
-        mapUtil.doMove("w");
-        mapUtil.setObstacle();
-        mapUtil.doMove("s");
-    }
+
 
     protected void fsmSpiral(String move, String endmove  ) {
         System.out.println(myname + " | fsmSpiral state=" +
@@ -75,7 +71,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
                         curState = State.turning;
                     }
                 } else if (move.equals("moveForward") && endmove.equals("false")) {
-                    setObstacleOnMap();
+                    mapUtil.setObstacle();
                     curState = State.obstacle;
                     //turnLeft();
                     microStep(); //just to continue ...
@@ -138,7 +134,7 @@ public class CautiousExplorerActor extends AbstractRobotActor {
 
                     goingBackToHome = true;
                     goBackActor = new RunawayActor("runAway", moves.getMovesRepresentation(), this);
-                    goBackActor.send(goBackMsg);
+                    goBackActor.send(ApplMsgs.goBackMsg);
                // }
                 break;
             }//obstacle
