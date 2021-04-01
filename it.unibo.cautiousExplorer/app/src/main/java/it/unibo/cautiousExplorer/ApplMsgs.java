@@ -11,6 +11,8 @@ public class ApplMsgs {
     final static String goBackMsg          = "{\"goBack\":\"goBack\" }";
     final static String resumeMsg          = "{\"resume\":\"resume\" }";
 
+    final static String forwardLongTimeMsg = "{\"robotmove\":\"moveForward\", \"time\": 10000}";
+
     final static String activateId         = "activate";
     final static String activateMsg        = "{\"ID\":\"ARGS\" }".replace("ID", activateId);
     final static String executorStartId    = "executorstart";

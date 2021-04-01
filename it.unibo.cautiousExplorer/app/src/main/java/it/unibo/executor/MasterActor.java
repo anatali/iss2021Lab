@@ -7,13 +7,10 @@ import org.json.JSONObject;
 
 public class MasterActor extends AbstractRobotActor {
 
-    private IJavaActor executor;
-    private IJavaActor runaway;
-    private int numSpiral   = 1;
-    private boolean working = false;
+
+    private int numSpiral   = 0;
+    private boolean engaged = false;
     String curPathTodo = "";
-    String path0       =  "wwlr";
-    String path1       =  "wwlwwl";
 
     private String getSpiralPath( int n){
         String path  = "";
@@ -27,57 +24,72 @@ public class MasterActor extends AbstractRobotActor {
 
     public MasterActor(String name) {
         super(name);
-        executor = new ExecutorActor("executor", this);
     }
 
-    @Override
-    protected void msgDriven(JSONObject mJson) {
-        if( mJson.has(ApplMsgs.activateId) && ! working){  //while working no more
-            working = true;
-            System.out.println(myname + " | mJson=" + mJson );
-            //String pathTodo = mJson.getString(ApplMsgs.activateId);
-            curPathTodo     = getSpiralPath(numSpiral);
-            String msg      = ApplMsgs.executorstartMsg.replace("PATHTODO", curPathTodo);
-            System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral );
-            if( executor != null ) executor.send(msg);
-        }//if not working, the message is lost. We could store it in a local queue
-        else if( mJson.has(ApplMsgs.runawyEndId)){
-            //Back to home
-            System.out.println(myname + " | Back to home" +  " numSpiral=" + numSpiral );
-            numSpiral++;
-            curPathTodo = getSpiralPath(numSpiral);
-            String msg  = ApplMsgs.executorstartMsg.replace("PATHTODO", curPathTodo);
-            System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
-            //this.waitUser();
-            executor.send(msg);
+
+    protected void startNewJourney(){
+        numSpiral++;
+        System.out.println(myname + " | startNewJourney" +  " numSpiral=" + numSpiral );
+        if( numSpiral >= 5 ) {
+            terminate();
         }
-        else if( mJson.has(ApplMsgs.executorEndId)){
-            System.out.println(myname + " | mJson=" + mJson );
-            String result        = mJson.getString(ApplMsgs.executorEndId);
-             System.out.println(myname + " | result of execution=" + result );
-             if( result.equals("ok")){
-                 numSpiral++;
-                 curPathTodo = getSpiralPath(numSpiral);
-                 String msg  = ApplMsgs.executorstartMsg.replace("PATHTODO", curPathTodo);
-                 System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
-                 //this.waitUser();
-                 executor.send(msg);
-             }
-             else{
-                 String pathStillTodo = curPathTodo.replaceFirst(result,"");
-                 System.out.println(myname + " | pathStillTodo=" + pathStillTodo + " over:"+curPathTodo);
-                 //working = false;
-                 curPathTodo = reverse( result  ) +"ll"; //.replace("l","r")
-                 String msg  = ApplMsgs.runawyStartMsg.replace("PATHTODO", curPathTodo);
-                 System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
-                 this.waitUser();
-                 executor.send(msg);
-             }
-        }
-    }//msgdriven
+        curPathTodo = getSpiralPath(numSpiral);
+        String msg  = ApplMsgs.executorstartMsg.replace("PATHTODO", curPathTodo);
+        System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
+        IJavaActor executor = new ExecutorActor("executor", this);
+        waitUser("start new journay");
+        executor.send(msg);
+    }
+
+    protected void returnToDen( String result){
+        String pathStillTodo = curPathTodo.replaceFirst(result,"");
+        System.out.println(myname + " | pathStillTodo=" + pathStillTodo + " over:"+curPathTodo);
+        String pathTodo = reverse( result  ).replace("l","r") +"ll"; //
+        String msg      = ApplMsgs.runawyStartMsg.replace("PATHTODO", pathTodo);
+        System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
+        turn180();
+        //if( pathTodo.startsWith("l") )
+        mapUtil.showMap();
+        waitUser("return to den");
+        IJavaActor runaway = new RunawayActor("runaway", this);
+        runaway.send(msg);
+    }
+    protected void turn180(){
+        turnLeft();
+        mapUtil.doMove("l");
+        turnLeft();
+        mapUtil.doMove("l");
+    }
+
 
     protected String reverse( String s  ){
         if( s.length() <= 1 )  return s;
         else return reverse( s.substring(1) ) + s.charAt(0) ;
     }
+/*
+-----------------------------------------------------------------------------
+ */
+    @Override
+    protected void msgDriven(JSONObject mJson) {
+        if( mJson.has(ApplMsgs.activateId) && !engaged){  //while working no more
+            engaged = true; //if engaged, the message is lost. We could store it in a local queue
+            startNewJourney();
+        }
+        else if( mJson.has(ApplMsgs.executorEndId)){
+             String result        = mJson.getString(ApplMsgs.executorEndId);
+            System.out.println(myname + " | result of journey=" + result );
+             if( result.equals("ok")){ //Executor has done a spiral
+                 startNewJourney();
+             }
+             else{ //Executor has found an obstacle
+                 returnToDen(  result );
+             }
+        }
+        else if( mJson.has(ApplMsgs.runawyEndId)){
+            startNewJourney();
+        }
+
+    }//msgdriven
+
+
 }

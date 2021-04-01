@@ -5,24 +5,17 @@ import it.unibo.cautiousExplorer.RobotMovesInfo;
 import it.unibo.interaction.IJavaActor;
 import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
+
 import static it.unibo.executor.ApplMsgs.*;
 
 /*
 The map is a singleton object, managed by mapUtil
  */
-public class ExecutorActor extends AbstractRobotActor {
-
-    protected enum State {start, moving, endok, endfail};
-
-    protected State curState        = State.start ;
-    protected RobotMovesInfo moves  = new RobotMovesInfo(false);
-    protected IJavaActor ownerActor ;
-    protected String todoPath       = "";
+public class RunawayActor extends ExecutorActor {
 
 
-    public ExecutorActor(String name, IJavaActor ownerActor ) {
-        super(name );
-        this.ownerActor  = ownerActor;
+    public RunawayActor(String name, IJavaActor ownerActor ) {
+        super(name, ownerActor );
     }
     protected void updateTripInfo(String move){
         moves.updateMovesRep(move);
@@ -42,13 +35,13 @@ public class ExecutorActor extends AbstractRobotActor {
         else if( moveStep == 's') doBackStep();
     }
 
-    protected void fsm(String move, String endmove) {
+    protected void fsmrunaway(String move, String endmove) {
         System.out.println(myname + " | state=" +
                 curState +  " move=" + move + " endmove=" + endmove + " totPath="+todoPath );
         switch (curState) {
             case start: {
-                if( move.equals(executorStartId)) {
-                    System.out.println("=&=&=&=&=ExecutorActor&=&=&=&=&=&=&=&=&=&=& ");
+                if( move.equals(runawyStartId)) {
+                    System.out.println("=&=&=&=&=RunawayActor runaway&=&=&=&=&=&=&=&=&=&=& ");
                 }
                 if (todoPath.length() > 0) {
                     mapUtil.showMap();
@@ -60,6 +53,7 @@ public class ExecutorActor extends AbstractRobotActor {
             }
             case moving: {
                 String moveShort = MoveNameShort.get(move);
+
                 if (endmove.equals("true")){
                     updateTripInfo(moveShort);
                     mapUtil.showMap();
@@ -73,38 +67,25 @@ public class ExecutorActor extends AbstractRobotActor {
                         curState = State.endok;
                     }
                 }else{  //endmove=false (obstacle)
-                    microBackStep();
-                    curState = State.endfail;
-                }
+                        System.out.println(myname + "|  FATAL ERROR: OUT OF HYPOTHESIS"  );
+
+                        support.removeActor(this);
+                        terminate();
+                 }
                 break;
             }//moving
-
             case endok: {
                 System.out.println(myname + " | END OK ---------------- "  );
-                 ownerActor.send(ApplMsgs.executorendokMsg);
-                mapUtil.showMap();
+                ownerActor.send(runawyEndMsg);
+
                 support.removeActor(this);
                 terminate();
+                //mapUtil.showMap();
                 //resetStateVars();
                 break;
             }//end
 
-            case endfail: {
-                System.out.println(myname + " | END KO ---------------- "  );
-                    try {
-                        mapUtil.setObstacle();
-                    } catch (Exception e) { //wall
-                        System.out.println(myname + " | outside the map " + e.getMessage());
-                    }
-                    mapUtil.showMap();
-                    ownerActor.send(
-                            ApplMsgs.executorendkoMsg.replace("PATHDONE", moves.getMovesRepresentation()));
 
-                    support.removeActor(this);
-                    terminate();
-                    //resetStateVars();
-                break;
-            }
             default: {
                 System.out.println(myname + " | error - curState = " + curState);
             }
@@ -118,17 +99,13 @@ public class ExecutorActor extends AbstractRobotActor {
  */
     @Override
     protected void msgDriven( JSONObject msgJson){
-         if( msgJson.has(executorStartId) ) {
-             System.out.println("ExecutorActor | infoJson:" + msgJson);
-             this.todoPath = msgJson.getString(executorStartId);
-             fsm(executorStartId, "");
-        }else if( msgJson.has(runawyStartId) ) {
-             System.out.println("ExecutorActor | runaway infoJson:" + msgJson);
+         if( msgJson.has(runawyStartId) ) {
+             System.out.println("RunawayActor | runaway infoJson:" + msgJson);
              this.todoPath = msgJson.getString(runawyStartId);
-             fsm( runawyStartId, "");
+             fsmrunaway( runawyStartId, "");
          }else if( msgJson.has(endMoveId) ) {
-                 System.out.println("ExecutorActor | infoJson:" + msgJson);
-                 fsm(msgJson.getString("move"), msgJson.getString("endmove"));
+             System.out.println("RunawayActor | infoJson:" + msgJson);
+             fsmrunaway(msgJson.getString("move"), msgJson.getString("endmove"));
 
          }
     }

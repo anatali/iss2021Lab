@@ -59,7 +59,7 @@ public class RunawayActor extends AbstractRobotActor {
                     //map.showRobotMovesRepresentation();
                     trun180();
                     mapUtil.showMap();
-                    waitUser();
+                    waitUser("start ");
                     doMove( returnPath.charAt(0) );
                     curState = State.moving;
                  }else curState = State.end;

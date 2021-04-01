@@ -12,6 +12,7 @@ public class ApplMsgs {
     final static String haltMsg            = "{\"robotmove\":\"alarm\", \"time\": 100}";
     final static String goBackMsg          = "{\"goBack\":\"goBack\" }";
     final static String resumeMsg          = "{\"resume\":\"resume\" }";
+    final static String forwardLongTimeMsg = "{\"robotmove\":\"moveForward\", \"time\": 10000}";
 
     final static String activateId         = "activate";
     final static String activateMsg        = "{\"ID\":\"ARGS\" }".replace("ID", activateId);
@@ -26,4 +27,14 @@ public class ApplMsgs {
     final static String runawyEndMsg      = "{\"ID\":\"RESULT\" }".replace("ID", runawyEndId);
     final static String runawyStartId     = "runawaystart";
     final static String runawyStartMsg    = "{\"ID\":\"PATHTODO\" }".replace("ID", runawyStartId);
+
+    final static String stepId            = "step";
+    final static String stepMsg           = "{\"ID\":\"TIME\" }".replace("ID", stepId);
+    final static String stepDone          = "stepDone";
+    final static String stepDoneMsg       = "{\"ID\":\"ok\" }".replace("ID", stepDone);
+    final static String stepFail          = "stepFail";
+    final static String stepFailMsg       = "{\"ID\":\"TIME\" }".replace("ID", stepFail);
+
+
+
 }

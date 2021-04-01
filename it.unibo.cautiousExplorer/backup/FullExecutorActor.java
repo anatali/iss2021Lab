@@ -5,12 +5,13 @@ import it.unibo.cautiousExplorer.RobotMovesInfo;
 import it.unibo.interaction.IJavaActor;
 import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
+
 import static it.unibo.executor.ApplMsgs.*;
 
 /*
 The map is a singleton object, managed by mapUtil
  */
-public class ExecutorActor extends AbstractRobotActor {
+public class FullExecutorActor extends AbstractRobotActor {
 
     protected enum State {start, moving, endok, endfail};
 
@@ -18,9 +19,9 @@ public class ExecutorActor extends AbstractRobotActor {
     protected RobotMovesInfo moves  = new RobotMovesInfo(false);
     protected IJavaActor ownerActor ;
     protected String todoPath       = "";
+    protected boolean runaway       = false;
 
-
-    public ExecutorActor(String name, IJavaActor ownerActor ) {
+    public FullExecutorActor(String name, IJavaActor ownerActor ) {
         super(name );
         this.ownerActor  = ownerActor;
     }
@@ -49,6 +50,10 @@ public class ExecutorActor extends AbstractRobotActor {
             case start: {
                 if( move.equals(executorStartId)) {
                     System.out.println("=&=&=&=&=ExecutorActor&=&=&=&=&=&=&=&=&=&=& ");
+                    runaway = false;
+                }else if( move.equals(runawyStartId)) {
+                    System.out.println("=&=&=&=&=ExecutorActor runaway&=&=&=&=&=&=&=&=&=&=& ");
+                    runaway = true;
                 }
                 if (todoPath.length() > 0) {
                     mapUtil.showMap();
@@ -60,6 +65,7 @@ public class ExecutorActor extends AbstractRobotActor {
             }
             case moving: {
                 String moveShort = MoveNameShort.get(move);
+
                 if (endmove.equals("true")){
                     updateTripInfo(moveShort);
                     mapUtil.showMap();
@@ -73,24 +79,27 @@ public class ExecutorActor extends AbstractRobotActor {
                         curState = State.endok;
                     }
                 }else{  //endmove=false (obstacle)
+                    if( runaway ){
+                        System.out.println(myname + "|  FATAL ERROR: OUT OF HYPOTHESIS"  );
+                    }
                     microBackStep();
                     curState = State.endfail;
                 }
                 break;
             }//moving
-
             case endok: {
                 System.out.println(myname + " | END OK ---------------- "  );
-                 ownerActor.send(ApplMsgs.executorendokMsg);
+                if( runaway ) ownerActor.send(runawyEndMsg);
+                else ownerActor.send(ApplMsgs.executorendokMsg);
+                //terminate();
                 mapUtil.showMap();
-                support.removeActor(this);
-                terminate();
-                //resetStateVars();
+                resetStateVars();
                 break;
             }//end
 
             case endfail: {
                 System.out.println(myname + " | END KO ---------------- "  );
+                if( ! runaway ) {
                     try {
                         mapUtil.setObstacle();
                     } catch (Exception e) { //wall
@@ -99,10 +108,10 @@ public class ExecutorActor extends AbstractRobotActor {
                     mapUtil.showMap();
                     ownerActor.send(
                             ApplMsgs.executorendkoMsg.replace("PATHDONE", moves.getMovesRepresentation()));
-
-                    support.removeActor(this);
+                    this.support.removeActor(this);
                     terminate();
                     //resetStateVars();
+                }
                 break;
             }
             default: {
