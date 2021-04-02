@@ -37,6 +37,7 @@
       <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executors/SpiralExplorerActor.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executors/StepRobotActor.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ActorBasicKotlin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ActorBasicKotlin.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,17 +77,17 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/kotlin/it/unibo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.kotlinSupports\app\src\main\kotlin\it\unibo\actor0" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.kotlinSupports\app\src\main\kotlin\it\unibo\supports" />
       <recent name="C:\Didattica2018Work\iss2021Lab\it.unibo.kotlinSupports\app\src\main\kotlin\it\unibo" />
       <recent name="C:\Didattica2021\issLab2021\it.unibo.kotlinSupports\app\src\main\kotlin\it\unibo\usage" />
       <recent name="C:\Didattica2021\issLab2021\it.unibo.kotlinSupports\userDocs" />
-      <recent name="C:\Didattica2021\issLab2021\it.unibo.kotlinSupports\app\src\main\kotlin" />
-      <recent name="C:\Didattica2021\issLab2021\it.unibo.kotlinSupports\app\src\main\kotlin\it\unibo" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="it.unibo.executors" />
