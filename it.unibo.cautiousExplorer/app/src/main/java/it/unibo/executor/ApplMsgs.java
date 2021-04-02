@@ -9,10 +9,10 @@ public class ApplMsgs {
     final static String littleBackwardMsg  = "{\"robotmove\":\"moveBackward\", \"time\": 10}";
     final static String turnLeftMsg        = "{\"robotmove\":\"turnLeft\", \"time\": 300}";
     final static String turnRightMsg       = "{\"robotmove\":\"turnRight\", \"time\": 300}";
-    final static String haltMsg            = "{\"robotmove\":\"alarm\", \"time\": 100}";
+    final static String haltMsg            = "{\"robotmove\":\"alarm\", \"time\": 20}";
     final static String goBackMsg          = "{\"goBack\":\"goBack\" }";
     final static String resumeMsg          = "{\"resume\":\"resume\" }";
-    final static String forwardLongTimeMsg = "{\"robotmove\":\"moveForward\", \"time\": 10000}";
+    final static String forwardstepMsg     = "{\"robotmove\":\"moveForward\", \"time\": 350}";
 
     final static String activateId         = "activate";
     final static String activateMsg        = "{\"ID\":\"ARGS\" }".replace("ID", activateId);
@@ -30,10 +30,10 @@ public class ApplMsgs {
 
     final static String stepId            = "step";
     final static String stepMsg           = "{\"ID\":\"TIME\" }".replace("ID", stepId);
-    final static String stepDone          = "stepDone";
-    final static String stepDoneMsg       = "{\"ID\":\"ok\" }".replace("ID", stepDone);
-    final static String stepFail          = "stepFail";
-    final static String stepFailMsg       = "{\"ID\":\"TIME\" }".replace("ID", stepFail);
+    final static String stepDoneId        = "stepDone";
+    final static String stepDoneMsg       = "{\"ID\":\"ok\" }".replace("ID", stepDoneId);
+    final static String stepFailId        = "stepFail";
+    final static String stepFailMsg       = "{\"ID\":\"TIME\" }".replace("ID", stepFailId);
 
 
 

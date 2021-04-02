@@ -2,7 +2,8 @@ package it.unibo.executor;
 
 import it.unibo.interaction.IJavaActor;
 import it.unibo.supports2021.ActorBasicJava;
-import it.unibo.supports2021.usage.prodCons.ActorNaiveObserver;
+
+
 
 public class MainStepRobotActor {
 
@@ -11,8 +12,8 @@ public class MainStepRobotActor {
         System.out.println("MainStepRobotActor | main " + ActorBasicJava.aboutThreads() );
         System.out.println("================================================================");
     //Configure the system
-        ActorNaiveObserver obs = new ActorNaiveObserver("obs");
-        IJavaActor stepper     = new StepRobotActor("stepper", obs );
+        NaiveObserver obs  = new NaiveObserver("obs",0);
+        IJavaActor stepper = new StepRobotActor("stepper", obs );
     //Activate the system
         ActorBasicJava.delay(1000);
         stepper.send(ApplMsgs.stepMsg.replace("TIME", "350")  );

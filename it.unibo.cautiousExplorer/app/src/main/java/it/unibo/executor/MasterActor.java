@@ -51,6 +51,7 @@ public class MasterActor extends AbstractRobotActor {
         //if( pathTodo.startsWith("l") )
         mapUtil.showMap();
         waitUser("return to den");
+        support.removeActor(this);
         IJavaActor runaway = new RunawayActor("runaway", this);
         runaway.send(msg);
     }
@@ -77,7 +78,7 @@ public class MasterActor extends AbstractRobotActor {
         }
         else if( mJson.has(ApplMsgs.executorEndId)){
              String result        = mJson.getString(ApplMsgs.executorEndId);
-            System.out.println(myname + " | result of journey=" + result );
+             System.out.println(myname + " | result of journey=" + result );
              if( result.equals("ok")){ //Executor has done a spiral
                  startNewJourney();
              }
@@ -86,6 +87,7 @@ public class MasterActor extends AbstractRobotActor {
              }
         }
         else if( mJson.has(ApplMsgs.runawyEndId)){
+            support.registerActor(this);
             startNewJourney();
         }
 
