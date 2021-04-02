@@ -31,13 +31,15 @@ public class MasterActor extends AbstractRobotActor {
         numSpiral++;
         System.out.println(myname + " | startNewJourney" +  " numSpiral=" + numSpiral );
         if( numSpiral >= 5 ) {
+            System.out.println(myname + " | TERMINATES"   );
             terminate();
+            return;
         }
         curPathTodo = getSpiralPath(numSpiral);
         String msg  = ApplMsgs.executorstartMsg.replace("PATHTODO", curPathTodo);
         System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
         IJavaActor executor = new ExecutorActor("executor", this);
-        waitUser("start new journay");
+        waitUser("start new journey");
         executor.send(msg);
     }
 
