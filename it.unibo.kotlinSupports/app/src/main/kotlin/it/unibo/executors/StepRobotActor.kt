@@ -49,8 +49,8 @@ class StepRobotActor(name: String, val ownerActor: IJavaActor, scope: CoroutineS
                         StartTime = this.currentTime
                         timer = TimerActor("t0", this)
                         //timer.send(ActorMsgs.startTimerMsg.replace("TIME", arg))
-                        val
-                        timer.send()
+                        //val
+                        //timer.send()
                         scope.launch {
                             MsgUtil.sendMsg(name, ActorMsgs.startTimerId,
                                 ActorMsgs.startTimerMsg.replace("TIME", arg), timer)
