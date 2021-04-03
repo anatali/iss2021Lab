@@ -23,18 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cbd9079-1790-4dea-993b-eff79403b4ba" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/it.unibo.kotlinSupports.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executors/StepRobotActor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executors/StepRobotActor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/kotlin/it/unibo/kotlinSupports/AppTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +63,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../iss2020LabBo/it.unibo.qakactor" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
@@ -149,23 +138,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1238" height="172" key="GridCell.Tab.0.bottom" timestamp="1617094010650">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state width="1238" height="172" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1617094010650" />
-    <state width="1238" height="172" key="GridCell.Tab.0.center" timestamp="1617094010650">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state width="1238" height="172" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1617094010650" />
-    <state width="1238" height="172" key="GridCell.Tab.0.left" timestamp="1617094010650">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state width="1238" height="172" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1617094010650" />
-    <state width="1238" height="172" key="GridCell.Tab.0.right" timestamp="1617094010650">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state width="1238" height="172" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1617094010650" />
   </component>
 </project>
