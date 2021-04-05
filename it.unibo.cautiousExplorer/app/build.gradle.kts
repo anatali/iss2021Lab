@@ -44,7 +44,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0")
 
     //OkHttp library for websockets with Kotlin
-    implementation( "com.squareup.okhttp3:okhttp:4.9.0" )
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
     //Ktor is a framework for quickly creating web applications in Kotlin with minimal effort.
     implementation("io.ktor:ktor:1.5.1")
 
@@ -59,7 +59,7 @@ dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
 //JSON
     // https://mvnrepository.com/artifact/org.json/json
-    implementation("org.json:json:20201115" )
+    implementation("org.json:json:20201115")
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     //implementation("com.googlecode.json-simple:json-simple:1.1.1")
 //SOCKET.IO
@@ -68,11 +68,10 @@ dependencies {
     implementation("javax.websocket:javax.websocket-api:1.1")   //javax.websocket api is only the specification
     implementation("org.glassfish.tyrus.bundles:tyrus-standalone-client:1.9")
 //UNIBO
-    implementation( "uniboIssSupport:IssWsHttpJavaSupport"  )
-    implementation( "uniboIssSupport:IssActorKotlinRobotSupport"  )
-    implementation( "uniboInterfaces:uniboInterfaces"  )
-    implementation( "uniboProtocolSupport:unibonoawtsupports"  )
-
+    implementation("uniboIssSupport:IssWsHttpJavaSupport")
+    implementation("uniboIssSupport:IssActorKotlinRobotSupport")
+    implementation("uniboInterfaces:uniboInterfaces")
+    implementation("uniboProtocolSupport:unibonoawtsupports")
 }
 
 /*
@@ -85,10 +84,10 @@ jacocoTestReport {
 }
 */
 
-application {
-    // Define the main class for the application.
-    mainClass.set("it.unibo.virtualrobotclient.wenv.UsingConnTcpKt")
-}
+    application {
+        // Define the main class for the application.
+        mainClass.set("it.unibo.virtualrobotclient.wenv.UsingConnTcpKt")
+    }
 
 
 //gradle test jacocoTestReport

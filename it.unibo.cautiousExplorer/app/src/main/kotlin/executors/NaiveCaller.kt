@@ -15,14 +15,14 @@ class NaiveCaller(name: String, scope: CoroutineScope) :
     }
 
     fun doTCPWalkercall(){
-        val conn = factoryProtocol.createClientProtocolSupport("localhost",ActorContextNaive.portNum)
+        val conn = factoryProtocol.createClientProtocolSupport("localhost",ActorBasicContextKb.portNum)
         println( "$name  | doTCPWalkercall $conn ${infoThreads()}" )
         conn.sendALine( getWalkerCmd() )
     }
     fun doTCPStepcall() {
         val stepperName = "stepper"
         val startmsg = MsgUtil.buildDispatch("main", "start", "ok", stepperName).toString()
-        val conn = factoryProtocol.createClientProtocolSupport("localhost",ActorContextNaive.portNum)
+        val conn = factoryProtocol.createClientProtocolSupport("localhost",ActorBasicContextKb.portNum)
         println( "$name  | doTCPStepcall $conn ${infoThreads()}" )
         conn.sendALine( startmsg )
 
