@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SPLITTER_PROPORTION" value="0.2512178" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b296e77b-30f0-44be-a337-dfa88ea0bd68" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../it.unibo.cautiousExplorer/userDocs/cautiousExplorerActors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.cautiousExplorer/userDocs/img/cautiousExplorer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.cautiousExplorer/userDocs/img/teacher.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.students/app/src/main/java/it/unibo/students/DiFiore/CautiousExplorerActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.students/app/src/main/java/it/unibo/students/DiFiore/MainExplorerActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../it.unibo.students/app/src/main/java/it/unibo/students/DiFiore/cautiousExplorerActors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ActorBasicContextKb.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ActorBasicKotlin.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ActorContextTcpServer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ActorContextWsServer.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ApplMessage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/ConnectionReader.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/MsgUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0/sysUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/AbstractRobotActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/ApplMsgs.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/ExecutorActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/MainStepRobotService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/MainStepper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/MainWalkerPath.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/NaiveObserver.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/RemoteRobotCaller.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/RobotMovesInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/RunawayActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/SpiralExplorerActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/StepRobotActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/Stepper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/actor0robot/WalkerPath.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/cautiousExplorer/AbstractRobotActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/cautiousExplorer/ApplMsgs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/cautiousExplorer/CautiousExplorerActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/cautiousExplorer/MainCautiosExplorer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/cautiousExplorer/RobotMovesInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/cautiousExplorer/RunawayActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/ApplMsgs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/ExecutorActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/MainExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/MainStepRobotActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/MasterActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/NaiveObserver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/RunawayActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/executor/StepRobotActor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/fsm/FsmBasic.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/fsm/FsmBasicUsage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/fsm/basicrobot.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/fsm/demoactor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IJavaActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IJavaKotlinActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IssActorObservable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IssCommActorSupport.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IssCommSupport.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IssObservable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IssObserver.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/IssOperations.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/interaction/MsgRobotUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/supports/ActorMsgs.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/supports/IssWsHttpKotlinSupport.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/supports/IssWsHttpKotlinSupportUsage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/supports/NaiveActorKotlinObserver.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/it/unibo/supports/TimerActor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/kotlinTest/App.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/Box.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/Direction.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/MainMapUsage.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/RobotState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/RoomMap.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/mapUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/mapRoomKotlin/testMap.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.cautiousExplorer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.cautiousExplorer/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.students/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.students/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../it.unibo.students/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../it.unibo.students/.idea/misc.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.4\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1qnuLJ1frJOQxcK444WPPIHJ7LG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/kotlin" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Didattica2018Work\iss2021Lab\kotlinTest\app\src\main\kotlin" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\kotlinTest\app\src\main\kotlin\it\unibo" />
+      <recent name="C:\Didattica2018Work\iss2021Lab\kotlinTest\app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MainStepperKt">
+    <configuration name="MainCautiosExplorer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cautiousExplorer.MainCautiosExplorer" />
+      <module name="kotlinTest.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cautiousExplorer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainExecutor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.executor.MainExecutor" />
+      <module name="kotlinTest.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.executor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainStepRobotActor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.executor.MainStepRobotActor" />
+      <module name="kotlinTest.app.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.executor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="kotlinTest.app.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="kotlinTest.AppKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainStepperKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <module name="kotlinTest.app.main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="it.unibo.actor0robot.MainStepperKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainStepperKt" />
+        <item itemvalue="Application.AppKt" />
+        <item itemvalue="Application.MainExecutor" />
+        <item itemvalue="Application.MainStepRobotActor" />
+        <item itemvalue="Application.MainCautiosExplorer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b296e77b-30f0-44be-a337-dfa88ea0bd68" name="Default Changelist" comment="" />
+      <created>1617727617966</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617727617966</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
