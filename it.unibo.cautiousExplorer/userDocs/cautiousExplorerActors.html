@@ -240,7 +240,7 @@ and a reference to a <i>first working prototype</i> (even with limited capabilit
 <h2>Requirement analysis</h2>
  
 
-</div>
+
 
 <h2>Problem analysis (divide et impera)</h2>
 
@@ -250,30 +250,118 @@ and a reference to a <i>first working prototype</i> (even with limited capabilit
 <td style="width:60%" >
 <div class="remark">
 <ul>
-<li>Exploration requires movement</li>
-<li>Movement must be precise, in order to keep a correct position in the map</li>
+<li>1) Exploration requires movements that must be <k>precise</k>, in order to keep a correct position in the map.</li>
 </ul></div> 
 
-Let us introuduce a 'service' 
-<a href="../app/src/main/java/it/unibo/executor/StepRobotActor.java" target="web"><ks>StepRobotActor.java</ks></a> that:
+Let us introuduce a 'service'  that:
+ <m>
 <ul>
 <li>Accepts a  command <k>{"step":"350"}</k> to move ahead the robot for a given time.</li>
-<li>Returns <k>,{"stepDone":"ok"},</k> if the move is done with success.</li>
+<li>Returns <k>{"stepDone":"ok"},</k> if the move is done with success.</li>
 <li>Returns <k>{"stepFail":"<ks>DT</ks>"},</k> if the move is interrupted by an obstacle after time <ks>DT</ks>. 
 In this case it moves back the robot for time <ks>DT</ks>.
 </li>
 </ul>
+</m>
+ 
+</td>
+<td> 
+<center><img src="./img/StepRobotActor.png" alt="StepRobotActor" width="100%" ></center>
+</td>
+</tr>
+
+
+<tr>
+<td>
+<div class="remark">
+<ul>
+<li>2) Return phase : <i>turn180</i> and reverse the path </li>
+
+</ul></div>  
+
+</td>
+<td>
+ 
+
+</td>
+</tr>
+
+<tr>
+<td>
+<div class="remark">
+<ul>
+<li>3) Explore strategy:  i) spiral with 'holes' -  ii) spiral with obstacles  iii) ...</li>
+
+</ul></div>  
+
+</td>
+<td>
+<!-- <a href="../app/src/main/java/it/unibo/executor/RunawayActor.java" target="web"><ks>RunawayActor.java</ks></a> -->
+
+</td>
+</tr>
+
+
+<tr> 
+<td>
+<div class="remark">
+<ul>
+<li>4) Handling the sonar : similar to stop/resume user command</li>
+</ul></div>  
+
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+ 
+
+ 
+
+<h2>Test plans</h2> 
+
+
+<h2>Project</h2> 
+ 
+ <table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:60%" >
+<div class="remark">
+<ul>
+<li>1) Exploration requires movements that must be <k>precise</k>, in order to keep a correct position in the map.</li>
+</ul></div> 
+
+Let us introuduce a 'service' 
+<a href="../app/src/main/java/it/unibo/executor/StepRobotActor.java" target="web"><ks>StepRobotActor.java</ks></a> that:<br/><br/>
+<m>
+<ul>
+<li>Accepts a  command <k>{"step":"350"}</k> to move ahead the robot for a given time.</li>
+<li>Returns <k>{"stepDone":"ok"},</k> if the move is done with success.</li>
+<li>Returns <k>{"stepFail":"<ks>DT</ks>"},</k> if the move is interrupted by an obstacle after time <ks>DT</ks>. 
+In this case it moves back the robot for time <ks>DT</ks>.
+</li>
+</ul>
+</m>
 
 In order to implement such a behavior, we introduce a 
-<a href="../app/src/main/kotlin/executors/TimerActor.kt" target="web"><ks>TimerActor.kt</ks></a> that:
+<a href="../app/src/main/kotlin/executors/TimerActor.kt" target="web"><ks>TimerActor.kt</ks></a> that:<br/><br/>
+<m>
 
 <ul>
-<li>Accepts a  command <k>"{\"startTimer\":\"INTERVAL\" }"</k> to send to its owner actor the answer
+<li>Accepts a  command <k>"{\"startTimer\":\"INTERVAL\" }"</k>.</li>
+<li>Sends to its 'owner' actor the answer
 <k>{"endTimer":"ok" } </k> after <ks>INTERVAL</ks> msecs if not killed before</li>
-<li>If the timer is killed before the given <ks>INTERVAL</ks>, it does not send any message to its owner.  </li>
+<li>It does not send any message to its owner if the timer is killed 
+(by the owner) before the given <ks>INTERVAL</ks> expires.  </li>
 </ul>
+</m>
 </td>
-<td> <a href="../app/src/main/kotlion/it/unibo/executor/StepRobotActor.java" target="web">StepRobotActor.java</a>
+<td>  
+
+<a href="../app/src/main/java/it/unibo/executor/StepRobotActor.java" target="web"><ks>StepRobotActor.java</ks></a>
+
 <br/><br/>
 <center><img src="./img/StepRobotActor.png" alt="StepRobotActor" width="100%" ></center>
 
@@ -283,12 +371,75 @@ In order to implement such a behavior, we introduce a
 
 <tr>
 <td>
-<h3>Embedding into a service</h3>
+<h3>Embedding 
+<a href="../../it.unibo.kotlinSupports/app/src/main/kotlin/it/unibo/actor0robot/StepRobotActor.kt" target="web">
+<ks>StepRobotActor.kt</ks></a>
+into a service</h3>
+In project <a href="../../it.unibo.kotlinSupports" target="web">it.unibo.kotlinSupports</a>:
+<ul>
+<li>
+<a href="../../it.unibo.kotlinSupports/app/src/main/kotlin/it/unibo/actor0/ActorContextTcpServer.kt" target="web">
+<ks>ActorContextTcpServer.kt</ks></a><br/>
+<m>
+<ul>
+<li>Uses a <tt>FactoryProtocol</tt> utilty that returns an object that implements the interface <tt>IConnInteraction</tt>.
+</li>
+</ul>
 
+
+<h4>The <tt>unibonoawtsupports</tt> </h4>
  
+The unibo library <bc>unibonoawtsupports.jar</bc> provides a support for communications based on connection-based, 
+two-way protocols such as <tt>TCP, UDP</tt>, etc. or a serial line (the case of <tt>Arduino</tt>).  
+
+<center><img src="./img/noawtsupport.png" alt="noawtsupport" width="50%" height="40%"></center>
+
+The library is a first step towards a  
+<a href="#infras" target="code">custom infrastructure</a> and includes:
+<ul>
+<li>a set of specialized factories (<tt>FactoryTcpProtocol</tt>, <tt>FactoryUdpProtocol</tt>, etc.) that 
+provide protocol-specific supports (sockets, datagrams etc);  </li>
+<li> the factory <bc>FactoryProtocol</bc> that hides  details related to the specific protocol.
+Each operation of the factory returns an object that implements the interface <bc>IConnInteraction</bc> 
+(defined in the custom library <bc>uniboInterfaces.jar</bc>) 
+that can be used to send/receive information on the connection.
+
+<pre>
+public interface IConnInteraction {
+    void sendALine(String s) throws Exception;
+    String receiveALine() throws Exception;
+    void closeConnection() throws Exception;
+}
+</pre>
+</m>
 </td>
 <td>
  <center><img src="./img/StepRobotServiceZooming.png" alt="StepRobotServiceZooming" width="100%" ></center>
+  <br/><br/>
+ In project <a href="../../it.unibo.kotlinSupports" target="web">it.unibo.kotlinSupports</a>:
+ 
+
+<ul>
+<li><a href="../../it.unibo.kotlinSupports/app/src/main/kotlin/it/unibo/actor0/ActorBasicContextKb.kt" target="web">
+<ks>ActorBasicContextKb.kt</ks></a>
+<m>
+<ul>
+<li>Stores knowledge about actors ruuning in the local node</li>
+</ul></m>
+</li>
+
+<li>
+<a href="../../it.unibo.kotlinSupports/app/src/main/kotlin/it/unibo/supports/IssWsHttpKotlinSupport.kt" target="web">
+<ks>IssWsHttpKotlinSupport.kt</ks></a><br/>
+<m><ul>
+<li>The kotlin version of the support introduced in
+
+<a href="../../it.unibo.boundaryWalk/app/src/main/java/it/unibo/robotSupports/IssWsSupport.java" target="web">
+IssWsSupport.java</a><br/>
+
+</li>
+
+</ul>
 
 
 </td>
@@ -297,9 +448,24 @@ In order to implement such a behavior, we introduce a
 <tr>
 <td><h3>WalkerPath</h3>
  <center><img src="./img/WalkerPathArch.png" alt="WalkerPathArch" width="100%" ></center> 
-
+ <br/>
+<a href="../app/src/main/java/it/unibo/stepServiceCaller/WalkerPath.java" target="web"><ks>WalkerPath.java</ks></a>:<br/>
+<ul>
+<li>attempts to execute a given sequence of moves (<k>pathTodo</k>)</li>
+<li>if it fails, executes the Return phase</li>
+</ul>
 </td>
 <td>
+In project <a href="../../it.unibo.kotlinSupports" target="web">it.unibo.kotlinSupports</a>:
+<ul>
+<li>
+<a href="../../it.unibo.kotlinSupports/app/src/main/kotlin/it/unibo/actor0/ApplMessage.kt" target="web"><ks>ApplMessage.kt</ks></a>
+</li>
+<li>
+<a href="../../it.unibo.kotlinSupports/app/src/main/kotlin/it/unibo/actor0/ConnectionReader.kt" target="web"><ks>ConnectionReader.kt</ks></a>
+</li>
+</ul>
+
 </td>
 </tr>
 
@@ -307,10 +473,10 @@ In order to implement such a behavior, we introduce a
 <td>
 <div class="remark">
 <ul>
-<li>Return phase : turn180 and reversePath( pathTodo )+ "ll"</li>
+<li>2) Return phase : <i>turn180</i> and reverse the <k>pathTodo</k> (+ "ll")</li>
 
 </ul></div>  
-<a href="../app/src/main/java/it/unibo/executor/RunawayActor.java" target="web"><ks>RunawayActor.java</ks></a>
+
 </td>
 <td>
 <a href="../app/src/main/java/it/unibo/executor/RunawayActor.java" target="web"><ks>RunawayActor.java</ks></a>
@@ -318,33 +484,35 @@ In order to implement such a behavior, we introduce a
 </td>
 </tr>
 
-tr>
+<tr>
 <td>
 <div class="remark">
 <ul>
-<li>Handling the sonar : later</li>
+<li>3) Explore strategy :  </li>
+
+</ul></div>  
+
+</td>
+<td>
+<!-- <a href="../app/src/main/java/it/unibo/executor/RunawayActor.java" target="web"><ks>RunawayActor.java</ks></a> -->
+
+</td>
+</tr>
+
+
+<tr> 
+<td>
+<div class="remark">
+<ul>
+<li>4) Handling the sonar : later</li>
 </ul></div>  
 
 </td>
 <td>
 </td>
 </tr>
-
-
-
- </tbody>
+</tbody>
 </table>
-
-<a href="../app/java/it/unibo/stepServiceCaller/WalkerPath.java" target="web">WalkerPath.java</a>
-
- 
-
-<h2>Test plans</h2> 
-
-
-<h2>Project</h2> 
- 
-</div>
 
 <h2>Testing</h2> 
  
