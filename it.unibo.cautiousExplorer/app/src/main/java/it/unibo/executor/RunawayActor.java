@@ -1,7 +1,5 @@
 package it.unibo.executor;
 
-import it.unibo.cautiousExplorer.AbstractRobotActor;
-import it.unibo.cautiousExplorer.RobotMovesInfo;
 import it.unibo.interaction.IJavaActor;
 import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
@@ -11,7 +9,7 @@ import static it.unibo.executor.ApplMsgs.*;
 /*
 The map is a singleton object, managed by mapUtil
  */
-public class RunawayActor extends ExecutorActor {
+public class RunawayActor extends PathExecutorActor {
 
 
     public RunawayActor(String name, IJavaActor ownerActor ) {

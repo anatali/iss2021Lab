@@ -5,7 +5,7 @@ import it.unibo.interaction.IJavaActor;
 import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
 
-public class MasterActor extends AbstractRobotActor {
+public class WalkStrategyActor extends AbstractRobotActor {
 
 
     private int numSpiral   = 0;
@@ -22,7 +22,7 @@ public class MasterActor extends AbstractRobotActor {
         return path;
     }
 
-    public MasterActor(String name) {
+    public WalkStrategyActor(String name) {
         super(name);
     }
 
@@ -38,7 +38,7 @@ public class MasterActor extends AbstractRobotActor {
         curPathTodo = getSpiralPath(numSpiral);
         String msg  = ApplMsgs.executorstartMsg.replace("PATHTODO", curPathTodo);
         System.out.println(myname + " | msg=" + msg + " numSpiral=" + numSpiral);
-        IJavaActor executor = new ExecutorActor("executor", this);
+        IJavaActor executor = new PathExecutorActor("executor", this);
         waitUser("start new journey");
         executor.send(msg);
     }

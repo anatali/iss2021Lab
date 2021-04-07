@@ -1,11 +1,11 @@
-package it.unibo.executor;
+package it.unibo.supports2021.usage;
 
 import it.unibo.supports2021.ActorBasicJava;
 
 
-public class NaiveObserver extends ActorBasicJava {
+public class NaiveActorObserver extends ActorBasicJava {
 private int count;
-    public NaiveObserver(String name, int i){
+    public NaiveActorObserver(String name, int i){
         super(name);
         count = i;
     }
@@ -13,8 +13,6 @@ private int count;
     protected void handleInput(String info) {
         //ActorBasicJava.delay(count*1000);
         System.out.println( myname + " | " + info + " " + aboutThreads() );
-
-        this.terminate();
      }
 
 }

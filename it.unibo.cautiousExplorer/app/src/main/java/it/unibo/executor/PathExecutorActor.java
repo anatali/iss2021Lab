@@ -1,3 +1,4 @@
+
 package it.unibo.executor;
 
 import it.unibo.cautiousExplorer.AbstractRobotActor;
@@ -7,14 +8,12 @@ import it.unibo.supports2021.ActorBasicJava;
 import mapRoomKotlin.mapUtil;
 import org.json.JSONObject;
 
-import java.util.Scanner;
-
 import static it.unibo.executor.ApplMsgs.*;
 
 /*
 The map is a singleton object, managed by mapUtil
  */
-public class ExecutorActor extends AbstractRobotActor {
+public class PathExecutorActor extends AbstractRobotActor {
 
     protected enum State {start, nextMove, moving, turning, endok, endfail};
 
@@ -23,10 +22,12 @@ public class ExecutorActor extends AbstractRobotActor {
     protected IJavaActor ownerActor ;
     protected String todoPath       = "";
     protected String stepMsg        = "{\"ID\":\"350\" }".replace("ID", stepId);
+    protected IJavaActor stepper;
 
-    public ExecutorActor(String name, IJavaActor ownerActor ) {
+    public PathExecutorActor(String name, IJavaActor ownerActor ) {
         super(name );
         this.ownerActor  = ownerActor;
+        //stepper          = new StepRobotActor("stepper", this );
     }
 
     protected void updateTripInfo(String move){
@@ -55,7 +56,7 @@ public class ExecutorActor extends AbstractRobotActor {
             todoPath       = todoPath.substring(1);
             if( firstMove == 'w' ){
                 support.removeActor(this);  //avoid to receive info form WEnv
-                IJavaActor stepper = new StepRobotActor("stepper", this );
+                //IJavaActor stepper = new StepRobotActor("stepper", this );
                 ActorBasicJava.delay(300);  //give time to open ws
                 stepper.send(stepMsg);
                 curState = State.moving;
@@ -93,6 +94,7 @@ public class ExecutorActor extends AbstractRobotActor {
         switch (curState) {
             case start: {
                 if( move.equals(executorStartId)) {
+                    stepper = new StepRobotActor("stepper", this );
                     System.out.println("=&=&=&=&=ExecutorActor&=&=&=&=&=&=&=&=&=&=& ");
                 }
                 nextMove();

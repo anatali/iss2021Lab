@@ -8,7 +8,7 @@
 
 plugins{
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.3.72"
+    id("org.jetbrains.kotlin.jvm") version "1.4.32"
     jacoco
     java
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -23,10 +23,17 @@ repositories {
 
 version="1.0"
 
-
+/*
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+*/
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 }
 
 dependencies {
@@ -46,7 +53,7 @@ dependencies {
     //OkHttp library for websockets with Kotlin
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
     //Ktor is a framework for quickly creating web applications in Kotlin with minimal effort.
-    implementation("io.ktor:ktor:1.5.1")
+    //implementation("io.ktor:ktor:1.5.1")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
@@ -68,8 +75,9 @@ dependencies {
     implementation("javax.websocket:javax.websocket-api:1.1")   //javax.websocket api is only the specification
     implementation("org.glassfish.tyrus.bundles:tyrus-standalone-client:1.9")
 //UNIBO
-    implementation("uniboIssSupport:IssWsHttpJavaSupport")
-    implementation("uniboIssSupport:IssActorKotlinRobotSupport")
+    //implementation("uniboIssSupport:IssWsHttpJavaSupport")
+    implementation("uniboIssSupport:IssActorKotlinRobotSupport:1.0")
+    implementation("uniboIssSupport:IssWsHttpJavaSupport-1.0")
     implementation("uniboInterfaces:uniboInterfaces")
     implementation("uniboProtocolSupport:unibonoawtsupports")
 }
