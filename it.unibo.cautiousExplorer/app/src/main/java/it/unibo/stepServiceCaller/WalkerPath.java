@@ -1,3 +1,9 @@
+/*
+============================================================
+WalkerPath
+Sends commands over TCP-8010
+============================================================
+ */
 package it.unibo.stepServiceCaller;
 
 import it.unibo.actor0.*;
@@ -44,7 +50,7 @@ public class WalkerPath extends ActorBasicJava {
         String msg = //MsgUtil.buildDispatch("walker", "step", stepCmd, destStepperName).toString();
                 ApplMessage.Companion.create("msg(step,dispatch,walker,DEST,CMD,1)").toString()
                 .replace("DEST", destStepperName).replace("CMD",stepCmd);
-        System.out.println("WalkerPath | msg:" + msg);
+        System.out.println("WalkerPath | doStep msg:" + msg);
         conn.sendALine(msg);
     }
 
@@ -78,7 +84,9 @@ public class WalkerPath extends ActorBasicJava {
                 startConn();
                 mapUtil.showMap();
                 doStep();
-            }else if(msgId.equals("stepAnswer")){ nextMove(msg.getMsgContent()); }
+            }else if(msgId.equals("stepAnswer")){
+                nextMove(msg.getMsgContent());
+            }
             /*
                 updateTripInfo("w");
                 mapUtil.showMap();

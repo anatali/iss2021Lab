@@ -242,20 +242,102 @@ and a reference to a <i>first working prototype</i> (even with limited capabilit
 
 </div>
 
-<h2>Problem analysis</h2>
+<h2>Problem analysis (divide et impera)</h2>
+
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:60%" >
+<div class="remark">
+<ul>
+<li>Exploration requires movement</li>
+<li>Movement must be precise, in order to keep a correct position in the map</li>
+</ul></div> 
+
+Let us introuduce a 'service' 
+<a href="../app/src/main/java/it/unibo/executor/StepRobotActor.java" target="web"><ks>StepRobotActor.java</ks></a> that:
+<ul>
+<li>Accepts a  command <k>{"step":"350"}</k> to move ahead the robot for a given time.</li>
+<li>Returns <k>,{"stepDone":"ok"},</k> if the move is done with success.</li>
+<li>Returns <k>{"stepFail":"<ks>DT</ks>"},</k> if the move is interrupted by an obstacle after time <ks>DT</ks>. 
+In this case it moves back the robot for time <ks>DT</ks>.
+</li>
+</ul>
+
+In order to implement such a behavior, we introduce a 
+<a href="../app/src/main/kotlin/executors/TimerActor.kt" target="web"><ks>TimerActor.kt</ks></a> that:
+
+<ul>
+<li>Accepts a  command <k>"{\"startTimer\":\"INTERVAL\" }"</k> to send to its owner actor the answer
+<k>{"endTimer":"ok" } </k> after <ks>INTERVAL</ks> msecs if not killed before</li>
+<li>If the timer is killed before the given <ks>INTERVAL</ks>, it does not send any message to its owner.  </li>
+</ul>
+</td>
+<td> <a href="../app/src/main/kotlion/it/unibo/executor/StepRobotActor.java" target="web">StepRobotActor.java</a>
+<br/><br/>
+<center><img src="./img/StepRobotActor.png" alt="StepRobotActor" width="100%" ></center>
 
 
-<ol>
-<li>Exploration phase with a precise map :  WalkerPath , ExecutorActor   </li>
-<li>Obstacle => no precision :  StepRobotActor that moves with proper back  </li>
+</td>
+</tr>
+
+<tr>
+<td>
+<h3>Embedding into a service</h3>
+
+ 
+</td>
+<td>
+ <center><img src="./img/StepRobotServiceZooming.png" alt="StepRobotServiceZooming" width="100%" ></center>
+
+
+</td>
+</tr>
+
+<tr>
+<td><h3>WalkerPath</h3>
+ <center><img src="./img/WalkerPathArch.png" alt="WalkerPathArch" width="100%" ></center> 
+
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td>
+<div class="remark">
+<ul>
 <li>Return phase : turn180 and reversePath( pathTodo )+ "ll"</li>
+
+</ul></div>  
+<a href="../app/src/main/java/it/unibo/executor/RunawayActor.java" target="web"><ks>RunawayActor.java</ks></a>
+</td>
+<td>
+<a href="../app/src/main/java/it/unibo/executor/RunawayActor.java" target="web"><ks>RunawayActor.java</ks></a>
+
+</td>
+</tr>
+
+tr>
+<td>
+<div class="remark">
+<ul>
 <li>Handling the sonar : later</li>
-</ol>
+</ul></div>  
 
-<center><img src="./img/cautiousExplorer.png" alt="cautiousExplorer" width="20%" ></cen
+</td>
+<td>
+</td>
+</tr>
 
 
-According to the motto 'divide et impera' we introduce a set of actors, each with a precise responsibility
+
+ </tbody>
+</table>
+
+<a href="../app/java/it/unibo/stepServiceCaller/WalkerPath.java" target="web">WalkerPath.java</a>
+
+ 
 
 <h2>Test plans</h2> 
 
@@ -300,6 +382,18 @@ pone in evidenza le parti di funzionamento proattivo e quelle di funzionamento r
 ECCEDE nelle dimensioni del file (al momento > 1600Kb)
 
 
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:50%" >
+ 
+
+</td>
+<td>
+</td>
+</tr>
+ </tbody>
+</table>
 -->
 	      	
 <br/><br/> 	
