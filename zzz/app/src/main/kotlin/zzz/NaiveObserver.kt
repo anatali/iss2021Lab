@@ -5,6 +5,7 @@ import it.unibo.actor0.ApplMessage
 import it.unibo.actor0.sysUtil
 import it.unibo.robotService.ApplMsgs
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
 class NaiveObserver(name: String, scope: CoroutineScope)
@@ -23,7 +24,8 @@ fun main( ) {
     println("BEGINS CPU=${sysUtil.cpus} ${sysUtil.curThread()}")
     runBlocking {
         val obs = NaiveObserver("obs", this)
-        obs.send( ApplMsgs.startMsgStr )
+        obs.send( ApplMsgs.stepRobot_l("main").toString() )
+        delay(1000)
         println("ENDS runBlocking ${sysUtil.curThread()}")
         obs.terminate()
     }
