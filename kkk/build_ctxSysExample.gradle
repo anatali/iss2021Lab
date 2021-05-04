@@ -59,6 +59,12 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-web
     implementation group: 'org.springframework', name:'spring-web', version:'5.3.6'
 
+//HTTP CLIENT
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation ("org.apache.httpcomponents:httpclient:4.5")
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation ("commons-io:commons-io:2.6")
+
 //UNIBO
     compile name: 'uniboInterfaces'
     compile name: '2p301'
