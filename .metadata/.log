@@ -639,3 +639,18 @@ java.lang.ArrayIndexOutOfBoundsException
 
 !ENTRY org.jetbrains.kotlin.core 2 0 2021-05-04 17:31:48.150
 !MESSAGE Could not check for update (Could not obtain update site)
+
+!ENTRY org.jetbrains.kotlin.core 4 0 2021-05-04 18:23:19.611
+!MESSAGE Failed to retrieve IFile from editor org.jetbrains.kotlin.ui.editors.KotlinFileEditor@6d61aa74
+
+!ENTRY org.jetbrains.kotlin.core 4 0 2021-05-04 18:24:12.317
+!MESSAGE Failed to retrieve IFile from editor org.jetbrains.kotlin.ui.editors.KotlinFileEditor@240d413e
+
+!ENTRY org.jetbrains.kotlin.core 2 0 2021-05-04 18:24:35.159
+!MESSAGE Could not check for update (Could not obtain update site)
+
+!ENTRY org.jetbrains.kotlin.core 2 0 2021-05-04 18:29:32.808
+!MESSAGE Could not check for update (Could not obtain update site)
+
+!ENTRY org.jetbrains.kotlin.core 2 0 2021-05-04 18:30:17.359
+!MESSAGE Could not check for update (Could not obtain update site)
